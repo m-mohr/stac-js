@@ -1,0 +1,34 @@
+{
+  "name": "stac-js",
+  "version": "0.1.0",
+  "description": "Utility functionality build on top of STAC",
+  "author": "Matthias Mohr",
+  "license": "Apache-2.0",
+  "keywords": [
+    "STAC"
+  ],
+  "homepage": "https://github.com/m-mohr/stac-js",
+	"repository": {
+		"type": "git",
+		"url": "git+https://github.com/m-mohr/stac-js.git"
+	},
+	"bugs": {
+		"url": "https://github.com/m-mohr/stac-js/issues"
+	},
+  "type": "module",
+  "main": "src/index.js",
+	"files": [
+		"src/"
+	],
+  "scripts": {
+		"test": " jest"
+  },
+	"devDependencies": {
+		"jest": "^29.0.0",
+		"jest-html-reporter": "^3.3.0"
+	},
+  "dependencies": {
+    "@radiantearth/stac-migrate": "^1.3.0",
+    "urijs": "^1.19.11"
+  }
+}
