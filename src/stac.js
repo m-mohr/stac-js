@@ -107,7 +107,7 @@ class STAC {
    * 
    * @param {boolean} browserOnly - Return only images that can be shown in a browser natively (PNG/JPG/GIF/WEBP).
    * @param {?string} prefer - If not `null` (default), prefers a role over the other. Either `thumbnail` or `overview`.
-   * @returns 
+   * @returns {Array.<object>}
    */
   getThumbnails(browserOnly = false, prefer = null) { // prefer can be either 
     let thumbnails = this.getAssetsWithRoles(['thumbnail', 'overview']);

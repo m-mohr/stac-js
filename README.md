@@ -8,7 +8,7 @@ This library won't help you if you want to create or update a STAC catalog (like
 
 - **Package version:** 0.1.0
 - **STAC versions:** >= 0.6.0 (through [stac-migrate](https://github.com/stac-utils/stac-migrate)).
-- **Documentation:** tbd
+- **Documentation:** <https://m-mohr.github.io/stac-js/latest/>
 
 ## Usage
 

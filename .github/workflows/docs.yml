@@ -1,0 +1,19 @@
+name: docs (versioned)
+on:
+  release:
+    types: [published]
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/setup-node@v3
+      - uses: actions/checkout@v2
+      - run: npm install
+      - run: npm run docs
+      - uses: peaceiris/actions-gh-pages@v3
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: docs/stac-js
+          keep_files: true
+          user_name: 'stac-js CI'
+          user_email: stac-js-ci@mamo-net.de

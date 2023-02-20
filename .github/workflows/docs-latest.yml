@@ -1,0 +1,24 @@
+name: docs (latest)
+on:
+  push:
+    branches:
+      - main
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/setup-node@v3
+      - uses: actions/checkout@v3
+      - run: npm install
+      - run: npm run docs
+      - name: get-npm-version
+        id: package-version
+        uses: martinbeentjes/npm-get-version-action@master
+      - uses: peaceiris/actions-gh-pages@v3
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: docs/stac-js/${{ steps.package-version.outputs.current-version }}
+          destination_dir: latest
+          keep_files: true
+          user_name: 'stac-js CI'
+          user_email: stac-js-ci@mamo-net.de

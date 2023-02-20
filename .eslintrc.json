@@ -9,6 +9,9 @@
     "ecmaVersion": "latest",
     "sourceType": "module"
   },
+  "plugins": [
+      "jsdoc"
+  ],
   "rules": {
     "curly": [1, "all"],
     "semi": [1, "always"]
