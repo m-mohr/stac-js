@@ -28,6 +28,6 @@ class CatalogLike extends STAC {
     return this.getStacLinkWithRel('items');
   }
 
-};
+}
 
 export default CatalogLike;

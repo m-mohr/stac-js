@@ -119,7 +119,7 @@ class STAC {
       thumbnails = this.getLinksWithRels(['preview']);
     }
     // Some old catalogs use just an asset key
-    if (thumbnails.length === 0 && Utils.isObject(this.assets) && Utils.isObject(this.assets.thumbnail)) {
+    if (thumbnails.length === 0 && isObject(this.assets) && isObject(this.assets.thumbnail)) {
       thumbnails = [this.assets.thumbnail];
     }
     if (browserOnly) {
@@ -170,7 +170,7 @@ class STAC {
   }
 
   equals(other) {
-    if (!Utils.isObject(other)) {
+    if (!isObject(other)) {
       return false;
     }
     if (this === other) {
