@@ -1,16 +1,15 @@
 import Migrate from '@radiantearth/stac-migrate';
-import { isGdalVfsUri } from './http';
+import { toAbsolute } from './http';
 import { canBrowserDisplayImage, isMediaType, stacMediaTypes } from './mediatypes';
-import { hasText, isObject, mergeObjectArrays } from './utils';
+import { hasText, isObject, mergeArraysOfObjects } from './utils';
 import Asset from './asset';
-import URI from 'urijs';
 
 class STAC {
 
-  constructor(data, absoluteUrl = null, migrate = true) {
+  constructor(data, absoluteUrl = null, migrate = true, updateVersionNumber = false) {
     // Update to the latest version
     if (migrate) {
-      data = Migrate.stac(data);
+      data = Migrate.stac(data, updateVersionNumber);
     }
 
     // Set or detect the URL of the STAC entity
@@ -58,7 +57,7 @@ class STAC {
     return this._url;
   }
 
-  getGeoJSON() {
+  toGeoJSON() {
     return null;
   }
 
@@ -71,7 +70,11 @@ class STAC {
   }
 
   getTemporalExtent() {
-    return null;
+    return this.getTemporalExtents()[0] || null;
+  }
+
+  getTemporalExtents() {
+    return [];
   }
 
   getSelfLink() {
@@ -83,37 +86,14 @@ class STAC {
   }
 
   getBands() {
-    return mergeObjectArrays([
+    return mergeArraysOfObjects([
       this.getMetadata('eo:bands'),
       this.getMetadata('raster:bands')
     ]);
   }
 
   toAbsolute(obj, stringify = true) {
-    let 
-    // Convert vsicurl URLs to normal URLs
-    if (typeof href === 'string' && href.startsWith('/vsicurl/')) {
-      href = href.replace(/^\/vsicurl\//, '');
-    }
-    // Parse URL and make absolute, if required
-    let uri = URI(href);
-    if (this._url && uri.is("relative") && !isGdalVfsUri(href)) { // Don't convert GDAL VFS URIs: https://github.com/radiantearth/stac-browser/issues/116
-      // Avoid that baseUrls that have a . in the last parth part will be removed (e.g. https://example.com/api/v1.0 )
-      let baseUri = URI(this._url);
-      let baseUriPath = baseUri.path();
-      if (!baseUriPath.endsWith('/') && !baseUriPath.endsWith('.json')) {
-        baseUri.path(baseUriPath + '/');
-      }
-      uri = uri.absoluteTo(baseUri);
-    }
-    // Normalize URL and remove trailing slash from path
-    // to avoid handling the same resource twice
-    uri.normalize();
-    if (noParams) {
-      uri.query("");
-      uri.fragment("");
-    }
-    return stringify ? uri.toString() : uri;
+    return toAbsolute(obj, this._url, stringify);
   }
 
   getIcons(allowEmpty = true) {
@@ -200,6 +180,23 @@ class STAC {
       return true;
     }
     return false;
+  }
+
+  toJSON() {
+    let obj = {};
+    Object.keys(this).forEach(key => {
+      if (typeof this[key] === 'function' || key === '_url') {
+        return;
+      }
+      let v = this[key];
+      if (key === 'assets') {
+        let assets = {};
+        Object.keys(v).forEach(key => assets[key] = v[key].toJSON());
+        v = assets;
+      }
+      obj[key] = v;
+    });
+    return obj;
   }
 
   static isStacMediaType(type, allowEmpty = false) {

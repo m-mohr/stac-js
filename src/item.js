@@ -4,16 +4,16 @@ import { hasText } from './utils';
 
 class Item extends STAC {
   
-  constructor(data, migrate = true) {
+  constructor(data, absoluteUrl = null, migrate = true, updateVersionNumber = false) {
     if (migrate) {
-      data = Migrate.catalog(data);
+      data = Migrate.item(data, null, updateVersionNumber);
     }
 
-    super(data, false);
+    super(data, absoluteUrl, false);
   }
 
-  getGeoJSON() {
-    return this;
+  toGeoJSON() {
+    return this.toJSON();
   }
 
   getBoundingBox() {
@@ -24,14 +24,14 @@ class Item extends STAC {
     return [this.bbox];
   }
 
-  getTemporalExtent() {
-    if (hasText(this.start_datetime) || hasText(this.end_datetime)) {
-      return [this.start_datetime, this.end_datetime];
+  getTemporalExtents() {
+    if (hasText(this.properties.start_datetime) || hasText(this.properties.end_datetime)) {
+      return [[this.properties.start_datetime || null, this.properties.end_datetime || null]];
     }
-    else if (hasText(this.datetime)) {
-      return this.datetime;
+    else if (hasText(this.properties.datetime)) {
+      return [[this.properties.datetime, this.properties.datetime]];
     }
-    return null;
+    return [];
   }
 
   getMetadata(field) {

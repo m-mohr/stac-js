@@ -1,10 +1,10 @@
 import { cogMediaTypes, geotiffMediaTypes, isMediaType } from "./mediatypes";
-import { hasText, mergeObjectArrays } from "./utils";
+import { hasText, mergeArraysOfObjects } from "./utils";
 
 class Asset {
 
   constructor(data, parent) {
-    this.parent = parent;
+    this._parent = parent;
 
     for (let key in data) {
       if (typeof this[key] === 'undefined') {
@@ -17,11 +17,11 @@ class Asset {
     if (typeof this[field] !== 'undefined') {
       return this[field];
     }
-    return this.parent.getMetadata(field);
+    return this._parent.getMetadata(field);
   }
 
   getBands() {
-    return mergeObjectArrays([
+    return mergeArraysOfObjects([
       this['eo:bands'],
       this['raster:bands']
     ]);
@@ -37,6 +37,17 @@ class Asset {
 
   isCOG() {
     return this.isGeoTiff(cogMediaTypes);
+  }
+
+  toJSON() {
+    let obj = {};
+    Object.keys(this).forEach(key => {
+      if (typeof this[key] === 'function' || key === '_parent') {
+        return;
+      }
+      obj[key] = this[key];
+    });
+    return obj;
   }
 
 }

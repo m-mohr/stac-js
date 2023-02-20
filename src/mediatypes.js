@@ -1,4 +1,8 @@
-export const geojsonMediaType = "application/geo+json";
+import URI from 'urijs';
+import { hasText, isObject } from './utils';
+import { browserProtocols } from './http';
+
+export const geojsonMediaType = 'application/geo+json';
 
 export const stacMediaTypes = [
   'application/json',
@@ -8,7 +12,6 @@ export const stacMediaTypes = [
 
 export const browserImageTypes = [
   'image/gif',
-  'image/jpg',
   'image/jpeg',
   'image/apng',
   'image/png',
@@ -16,23 +19,23 @@ export const browserImageTypes = [
 ];
 
 export const cogMediaTypes = [
-  "image/tiff; application=geotiff; profile=cloud-optimized",
-  "image/vnd.stac.geotiff; cloud-optimized=true"
+  'image/tiff; application=geotiff; profile=cloud-optimized',
+  'image/vnd.stac.geotiff; cloud-optimized=true'
 ];
 
 export const geotiffMediaTypes = [
-  "application/geotiff",
-  "image/tiff; application=geotiff",
-  "image/vnd.stac.geotiff",
+  'application/geotiff',
+  'image/tiff; application=geotiff',
+  'image/vnd.stac.geotiff',
 ].concat(cogMediaTypes);
 
 export const imageMediaTypes = browserImageTypes.concat(geotiffMediaTypes);
 
-export function isMediaType(type, allowedTypes, allowEmpty = false) {
+export function isMediaType(type, allowedTypes, allowUndefined = false) {
   if (!Array.isArray(allowedTypes)) {
     allowedTypes = [allowedTypes];
   }
-  if (allowEmpty && !type) {
+  if (allowUndefined && typeof type === 'undefined') {
     return true;
   }
   else if (typeof type !== 'string') {
@@ -44,22 +47,23 @@ export function isMediaType(type, allowedTypes, allowEmpty = false) {
   }
 }
 
-export function canBrowserDisplayImage(img, allowEmpty = false) {
+export function canBrowserDisplayImage(img, allowUndefined = false) {
   if (!isObject(img) || typeof img.href !== 'string') {
     return false;
   }
-  else if (typeof img.type === 'undefined') {
-    return allowEmpty;
+  else if (!allowUndefined && typeof img.type === 'undefined') {
+    return false;
   }
   let uri = new URI(img.href);
   let protocol = uri.protocol().toLowerCase();
-  if (protocol && !browserProtocols.includes(protocol)) {
+  let extension = uri.suffix().toLowerCase();
+  if (hasText(protocol) && !browserProtocols.includes(protocol)) {
     return false;
   }
-  else if (browserImageTypes.includes(img.type)) {
+  else if (hasText(img.type) && browserImageTypes.includes(img.type.toLowerCase())) {
     return true;
   }
-  else if (browserImageTypes.includes('image/' + uri.suffix().toLowerCase())) {
+  else if (typeof img.type === 'undefined' && hasText(extension) && (extension === 'jpg' || browserImageTypes.includes('image/' + extension))) {
     return true;
   }
   else {

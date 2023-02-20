@@ -4,15 +4,15 @@ import { hasText } from './utils';
 
 class Collection extends CatalogLike {
 
-  constructor(data, migrate = true) {
+  constructor(data, absoluteUrl = null, migrate = true, updateVersionNumber = false) {
     if (migrate) {
       data = Migrate.collection(data, updateVersionNumber);
     }
 
-    super(data);
+    super(data, absoluteUrl);
   }
 
-  getGeoJSON() {
+  toGeoJSON() {
     throw new Error("Not implemented yet");
   }
 
@@ -28,15 +28,12 @@ class Collection extends CatalogLike {
     return [];
   }
 
-  getTemporalExtent() {
+  getTemporalExtents() {
     let extents = this.extent?.temporal?.interval;
     if (Array.isArray(extents) && extents.length > 0) {
-      let extent = extents[0];
-      if (Array.isArray(extent) && (hasText(extent[0]) || hasText(extent[1]))) {
-        return extent;
-      }
+      return extents.filter(extent => Array.isArray(extent) && (hasText(extent[0]) || hasText(extent[1])));
     }
-    return null;
+    return [];
   }
   
 }

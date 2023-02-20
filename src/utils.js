@@ -27,7 +27,7 @@ export function isObject(obj) {
  * @param  {...Array<Object>} bands 
  * @returns {Array<Object>}
  */
-export function mergeObjectArrays(...bands) {
+export function mergeArraysOfObjects(...bands) {
   bands = bands.filter(arr => Array.isArray(arr));
   if (bands.length > 1) {
     let length = Math.max(...bands.map(arr => arr.length));

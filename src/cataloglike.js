@@ -1,7 +1,9 @@
+import STAC from './stac';
+
 class CatalogLike extends STAC {
 
-  constructor(data) {
-    super(data, false);
+  constructor(data, absoluteUrl = null) {
+    super(data, absoluteUrl, false);
   }
 
   getMetadata(field) {
