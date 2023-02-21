@@ -1,29 +1,70 @@
-import Migrate from '@radiantearth/stac-migrate';
 import CatalogLike from './cataloglike';
+import isBoundingBox from './geo';
 import { hasText } from './utils';
 
 class Collection extends CatalogLike {
 
-  constructor(data, absoluteUrl = null, migrate = true, updateVersionNumber = false) {
-    if (migrate) {
-      data = Migrate.collection(data, updateVersionNumber);
-    }
-
+  constructor(data, absoluteUrl = null) {
     super(data, absoluteUrl);
   }
 
   toGeoJSON() {
-    throw new Error("Not implemented yet");
+    let coordinates = this.getBoundingBoxes().map(bbox => {
+      let hasZ = bbox.length > 4;
+      let west = bbox[0];
+      let east = bbox[hasZ ? 3 : 2];
+      let south = bbox[1];
+      let north = bbox[hasZ ? 4 : 3];
+      return [
+        [
+          [west, north],
+          [west, south],
+          [east, south],
+          [east, north],
+          [west, north]
+        ]
+      ];
+    });
+    if (coordinates.length === 0) {
+      return null;
+    }
+    else if (coordinates.length === 1) {
+      return {
+        type: "Polygon",
+        coordinates: coordinates[0]
+      };
+    }
+    else {
+      return {
+        type: "MultiPolygon",
+        coordinates
+      };
+    }
   }
 
   getBoundingBox() {
-    return this.getBoundingBoxes()[0] || null;
+    let bboxes = this.getRawBoundingBoxes();
+    if (bboxes.length > 0 && isBoundingBox(bboxes[0])) {
+      return bboxes[0];
+    }
+    return null;
   }
 
   getBoundingBoxes() {
+    let bboxes = this.getRawBoundingBoxes();
+    if (bboxes.length === 1 && isBoundingBox(bboxes[0])) {
+      return bboxes;
+    }
+    else if (bboxes.length > 1) {
+      return bboxes.filter((bbox, i) => i > 0 && isBoundingBox(bbox));
+    }
+    return [];
+  }
+
+  getRawBoundingBoxes() {
     let extents = this.extent?.spatial?.bbox;
     if (Array.isArray(extents) && extents.length > 0) {
-      return extents.filter(extent => Array.isArray(extent) && extent.length >= 4);
+      return extents;
     }
     return [];
   }

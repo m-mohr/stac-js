@@ -47,6 +47,10 @@ export function isMediaType(type, allowedTypes, allowUndefined = false) {
   }
 }
 
+export function isStacMediaType(type, allowUndefined = false) {
+  return isMediaType(type, stacMediaTypes, allowUndefined);
+}
+
 export function canBrowserDisplayImage(img, allowUndefined = false) {
   if (!isObject(img) || typeof img.href !== 'string') {
     return false;

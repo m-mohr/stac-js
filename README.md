@@ -22,7 +22,7 @@ const stac = {
   id: "example",
   // ...
 };
-const obj = create(stac);
+const obj = create(stac); // Migrates data to the latest version
 ```
 
 Directly instantiate through the class constructors:
@@ -35,7 +35,7 @@ const stac = {
   id: "example",
   // ...
 };
-const obj = new Collection(stac);
+const obj = new Collection(stac); // Does NOT migrate to the latest version
 ```
 
 You can then use the object, check whether it's STAC and call some methods, for example:

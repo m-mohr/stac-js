@@ -1,17 +1,11 @@
-import Migrate from '@radiantearth/stac-migrate';
 import { toAbsolute } from './http';
-import { canBrowserDisplayImage, isMediaType, stacMediaTypes } from './mediatypes';
+import { canBrowserDisplayImage, geotiffMediaTypes, isMediaType, isStacMediaType } from './mediatypes';
 import { hasText, isObject, mergeArraysOfObjects } from './utils';
 import Asset from './asset';
 
 class STAC {
 
-  constructor(data, absoluteUrl = null, migrate = true, updateVersionNumber = false) {
-    // Update to the latest version
-    if (migrate) {
-      data = Migrate.stac(data, updateVersionNumber);
-    }
-
+  constructor(data, absoluteUrl = null) {
     // Set or detect the URL of the STAC entity
     this._url = absoluteUrl;
     if (!this._url) {
@@ -24,10 +18,10 @@ class STAC {
     // Assign the data to the object
     for (let key in data) {
       if (typeof this[key] === 'undefined') {
-        if (key === 'assets') {
-          this.assets = {};
-          for(let key2 in data.assets) {
-            this.assets[key2] = new Asset(data.assets[key2], this);
+        if (key === 'assets' || key === 'item_assets') {
+          this[key] = {};
+          for(let key2 in data[key]) {
+            this[key][key2] = new Asset(data[key][key2], key2, this);
           }
         }
         else {
@@ -109,18 +103,14 @@ class STAC {
    * @param {?string} prefer - If not `null` (default), prefers a role over the other. Either `thumbnail` or `overview`.
    * @returns {Array.<object>}
    */
-  getThumbnails(browserOnly = false, prefer = null) { // prefer can be either 
-    let thumbnails = this.getAssetsWithRoles(['thumbnail', 'overview']);
+  getThumbnails(browserOnly = true, prefer = null) {
+    let thumbnails = this.getAssetsWithRoles(['thumbnail', 'overview'], true);
     if (prefer && thumbnails.length > 1) {
       thumbnails.sort(a => a.roles.includes(prefer) ? -1 : 1);
     }
     // Get from links only if no assets are available as they should usually be the same as in assets
     if (thumbnails.length === 0) {
       thumbnails = this.getLinksWithRels(['preview']);
-    }
-    // Some old catalogs use just an asset key
-    if (thumbnails.length === 0 && isObject(this.assets) && isObject(this.assets.thumbnail)) {
-      thumbnails = [this.assets.thumbnail];
     }
     if (browserOnly) {
       // Remove all images that can't be displayed in a browser
@@ -129,13 +119,54 @@ class STAC {
     return thumbnails.map(img => this.toAbsolute(img));
   }
 
-  getStacLinksWithRel(rel, allowEmpty = true) {
-    return this.getLinksWithRels(this.links, [rel])
-      .filter(link => STAC.isStacMediaType(link.type, allowEmpty));
+  /**
+   * Determines the default GeoTiff asset for visualization.
+   * 
+   * @returns {Asset}
+   */
+  getDefaultGeoTiff() {
+    let scores = this.rankGeoTiffs();
+    return scores[0]?.asset;
   }
 
-  getStacLinkWithRel(rel, allowEmpty = true) {
-    const links = this.getStacLinksWithRel(rel, allowEmpty);
+  rankGeoTiffs() {
+    // Score calculation:
+    // 
+    // Roles:
+    // - overview => 3
+    // - thumbnail => 2
+    // - visual => 1
+    // - data => 0
+    // - none of the above => -1
+    // 
+    // Media Type => COG: +2
+    // Has RGB bands => +1
+
+    let scores = [];
+    let assets = this.getAssetsByTypes(geotiffMediaTypes).map(asset => this.toAbsolute(asset));
+    let rolePrio = ["data", "visual", "thumbnail", "overview"]; // low to high
+    for(let asset of assets) {
+      let score = rolePrio.findIndex(role => asset.roles.includes(role));
+      if (asset.isCOG()) {
+        score += 2;
+      }
+      if (asset.findVisualBands()) {
+        score += 1;
+      }
+      scores.push({asset, score});
+    }
+    scores.sort((a,b) => a.score - b.score);
+    return scores;
+  }
+
+  getStacLinksWithRel(rel, allowUndefined = true, absolute = true) {
+    return this.getLinksWithRels([rel], absolute)
+      .filter(link => isStacMediaType(link.type, allowUndefined))
+      .map(link => absolute ? this.toAbsolute(link) : link);
+  }
+
+  getStacLinkWithRel(rel, allowUndefined = true, absolute = true) {
+    const links = this.getStacLinksWithRel(rel, allowUndefined, absolute);
     if (links.length > 0) {
       return links[0];
     }
@@ -144,29 +175,35 @@ class STAC {
     }
   }
 
+  getLinks() {
+    return Array.isArray(this.links) ? this.links.filter(link => isObject(link) && hasText(link.href)) : [];
+  }
+
   getLinkWithRel(rel) {
-    return Array.isArray(this.links) ? this.links.find(link => isObject(link) && hasText(link.href) && link.rel === rel) : null;
+    return this.getLinks().find(link => link.rel === rel) || null;
   }
 
   getLinksWithRels(rels) {
-    return Array.isArray(this.links) ? this.links.filter(link => isObject(link) && hasText(link.href) && rels.includes(link.rel)) : [];
+    return this.getLinks().filter(link => rels.includes(link.rel));
   }
 
   getLinksWithOtherRels(rels) {
-    return Array.isArray(this.links) ? this.links.filter(link => isObject(link) && hasText(link.href) && !rels.includes(link.rel)) : [];
+    return this.getLinks().filter(link => !rels.includes(link.rel));
   }
 
-  getAssetsWithRoles(roles) {
-    let matches = [];
-    if (isObject(this.assets)) {
-      for (let key in this.assets) {
-        let asset = this.assets[key];
-        if (isObject(asset) && hasText(asset.href) && Array.isArray(asset.roles) && asset.roles.find(role => roles.includes(role))) {
-          matches.push(asset);
-        }
-      }
+  getAssets() {
+    if (!isObject(this.assets)) {
+      return [];
     }
-    return matches;
+    return Object.values(this.assets);
+  }
+
+  getAssetsWithRoles(roles, includeKey = false) {
+    return this.getAssets().filter(asset => asset.hasRole(roles) || (includeKey && roles.includes(asset.getKey())));
+  }
+
+  getAssetsByTypes(types) {
+    return this.getAssets().filter(asset => isMediaType(asset.type, types));
   }
 
   equals(other) {
@@ -189,7 +226,7 @@ class STAC {
         return;
       }
       let v = this[key];
-      if (key === 'assets') {
+      if (key === 'assets' || key === 'item_assets') {
         let assets = {};
         Object.keys(v).forEach(key => assets[key] = v[key].toJSON());
         v = assets;
@@ -197,10 +234,6 @@ class STAC {
       obj[key] = v;
     });
     return obj;
-  }
-
-  static isStacMediaType(type, allowEmpty = false) {
-    return isMediaType(type, stacMediaTypes, allowEmpty);
   }
 
 }

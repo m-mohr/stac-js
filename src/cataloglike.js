@@ -3,7 +3,7 @@ import STAC from './stac';
 class CatalogLike extends STAC {
 
   constructor(data, absoluteUrl = null) {
-    super(data, absoluteUrl, false);
+    super(data, absoluteUrl);
   }
 
   getMetadata(field) {
@@ -26,6 +26,14 @@ class CatalogLike extends STAC {
 
   getApiItemsLink() {
     return this.getStacLinkWithRel('items');
+  }
+
+  getChildLinks() {
+    return this.getStacLinksWithRel('child');
+  }
+
+  getItemLinks() {
+    return this.getStacLinksWithRel('item');
   }
 
 }

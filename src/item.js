@@ -1,15 +1,11 @@
-import Migrate from '@radiantearth/stac-migrate';
+import isBoundingBox from './geo';
 import STAC from './stac';
 import { hasText } from './utils';
 
 class Item extends STAC {
   
-  constructor(data, absoluteUrl = null, migrate = true, updateVersionNumber = false) {
-    if (migrate) {
-      data = Migrate.item(data, null, updateVersionNumber);
-    }
-
-    super(data, absoluteUrl, false);
+  constructor(data, absoluteUrl = null) {
+    super(data, absoluteUrl);
   }
 
   toGeoJSON() {
@@ -17,11 +13,11 @@ class Item extends STAC {
   }
 
   getBoundingBox() {
-    return this.bbox || null;
+    return isBoundingBox(this.bbox) ? this.bbox : null;
   }
 
   getBoundingBoxes() {
-    return [this.bbox];
+    return isBoundingBox(this.bbox) ? [this.bbox] : [];
   }
 
   getTemporalExtents() {
