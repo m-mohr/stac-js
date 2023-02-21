@@ -1,4 +1,5 @@
 import Migrate from '@radiantearth/stac-migrate';
+import Asset from './asset';
 import Catalog from './catalog';
 import Collection from './collection';
 import Item from './item';
@@ -20,6 +21,7 @@ export default function create(data, migrate = true, updateVersionNumber = false
 }
 
 export {
+  Asset,
   Catalog,
   Collection,
   Item,

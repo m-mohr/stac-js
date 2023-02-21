@@ -83,6 +83,11 @@
   "collection": "simple-collection",
   "links": [
     {
+      "rel": "self",
+      "href": "https://example.com/20201211_223832_CS2/item.json",
+      "type": "application/geo+json"
+    },
+    {
       "rel": "collection",
       "href": "./collection.json",
       "type": "application/json",
@@ -99,17 +104,11 @@
       "href": "./collection.json",
       "type": "application/json",
       "title": "Simple Example Collection"
-    },
-    {
-      "rel": "alternate",
-      "type": "text/html",
-      "href": "http://remotedata.io/catalog/20201211_223832_CS2/index.html",
-      "title": "HTML version of this STAC Item"
     }
   ],
   "assets": {
     "analytic": {
-      "href": "https://storage.googleapis.com/open-cogs/stac-examples/20201211_223832_CS2_analytic.tif",
+      "href": "./20201211_223832_CS2_analytic.tif",
       "type": "image/tiff; application=geotiff; profile=cloud-optimized",
       "title": "4-Band Analytic",
       "roles": [
@@ -143,7 +142,7 @@
       ]
     },
     "thumbnail": {
-      "href": "https://storage.googleapis.com/open-cogs/stac-examples/20201211_223832_CS2.jpg",
+      "href": "./20201211_223832_CS2.jpg",
       "title": "Thumbnail",
       "type": "image/png",
       "roles": [
@@ -151,7 +150,7 @@
       ]
     },
     "visual": {
-      "href": "https://storage.googleapis.com/open-cogs/stac-examples/20201211_223832_CS2.tif",
+      "href": "./20201211_223832_CS2.tif",
       "type": "image/tiff; application=geotiff; profile=cloud-optimized",
       "title": "3-Band Visual",
       "roles": [
@@ -179,12 +178,12 @@
       ]
     },
     "udm": {
-      "href": "https://storage.googleapis.com/open-cogs/stac-examples/20201211_223832_CS2_analytic_udm.tif",
+      "href": "./20201211_223832_CS2_analytic_udm.tif",
       "title": "Unusable Data Mask",
-      "type": "image/tiff; application=geotiff;"
+      "type": "image/tiff; application=geotiff"
     },
     "json-metadata": {
-      "href": "http://remotedata.io/catalog/20201211_223832_CS2/extended-metadata.json",
+      "href": "./extended-metadata.json",
       "title": "Extended Metadata",
       "type": "application/json",
       "roles": [
@@ -192,7 +191,7 @@
       ]
     },
     "ephemeris": {
-      "href": "http://cool-sat.com/catalog/20201211_223832_CS2/20201211_223832_CS2.EPH",
+      "href": "./20201211_223832_CS2.EPH",
       "title": "Satellite Ephemeris Metadata"
     }
   }

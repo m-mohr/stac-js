@@ -13,10 +13,10 @@ class CatalogLike extends STAC {
   getSearchLink(method = null) {
     let links = this.getStacLinksWithRel('search');
     if (!method) {
-      return links.find(link => link.method === method || (!method && !link.method));
+      return links.find(link => link.method === method || (!method && !link.method)) || null;
     }
     else {
-      return links[0];
+      return links[0] || null;
     }
   }
 

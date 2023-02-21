@@ -1,4 +1,4 @@
-import isBoundingBox from './geo';
+import { isBoundingBox } from './geo';
 import STAC from './stac';
 import { hasText } from './utils';
 

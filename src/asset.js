@@ -1,12 +1,29 @@
 import { browserProtocols } from "./http";
 import { cogMediaTypes, geotiffMediaTypes, isMediaType } from "./mediatypes";
-import { hasText, mergeArraysOfObjects } from "./utils";
+import { hasText, isObject, mergeArraysOfObjects } from "./utils";
 
 class Asset {
 
   constructor(data, key, parent) {
-    this._parent = parent;
-    this._key = key;
+    if (data instanceof Asset) {
+      this._parent = data._parent;
+      this._key = data._key;
+      data = data.toJSON();
+    }
+    else {
+      this._parent = parent;
+      this._key = key;
+    }
+
+    if (!isObject(data)) {
+      throw new Error("Asset is not an object");
+    }
+    if (!this._parent) {
+      throw new Error("No parent specified");
+    }
+    if (typeof this._key !== 'string') {
+      throw new Error("No valid key specified");
+    }
 
     for (let key in data) {
       if (typeof this[key] === 'undefined') {
@@ -26,6 +43,10 @@ class Asset {
     return this._key;
   }
 
+  getParent() {
+    return this._parent;
+  }
+
   getMetadata(field) {
     if (typeof this[field] !== 'undefined') {
       return this[field];
@@ -34,10 +55,7 @@ class Asset {
   }
 
   getBands() {
-    return mergeArraysOfObjects([
-      this['eo:bands'],
-      this['raster:bands']
-    ]);
+    return mergeArraysOfObjects(this['eo:bands'], this['raster:bands']);
   }
 
   findVisualBands() { // Find the RGB bands
@@ -48,8 +66,9 @@ class Asset {
     };
     let bands = this.getBands();
     for(let index in bands) {
+      index = parseInt(index, 10); // findIndex returns number, for loop uses strings?!
       let band = bands[index];
-      if (hasText(band.common_name) && band.common_name in rgb) {
+      if (isObject(band) && hasText(band.common_name) && band.common_name in rgb) {
         rgb[band.common_name] = { index, band };
       }
     }
@@ -62,7 +81,7 @@ class Asset {
   }
 
   isType(types) { // string or array of strings
-    return hasText(this.type) && isMediaType(types);
+    return hasText(this.type) && isMediaType(this.type, types);
   }
 
   isGeoTIFF() {
@@ -86,7 +105,7 @@ class Asset {
     if (!Array.isArray(roles)) {
       roles = [roles];
     }
-    return Array.isArray(this.roles) && this.roles.find(role => roles.includes(role));
+    return Array.isArray(this.roles) && Boolean(this.roles.find(role => roles.includes(role)));
   }
 
   toJSON() {

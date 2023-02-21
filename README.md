@@ -1,6 +1,6 @@
 # stac-js
 
-Simple JavaScript classes with utilities for working with data from STAC objects in a read-only manner.
+Simple drop-in JavaScript classes with utilities for working with data from STAC objects in a read-only manner.
 It is basically just a wrapper/facade on top of a single STAC object deserialized from JSON.
 It doesn't handle relationships between files, actually this library is completely unaware of any files and doesn't even handle loading them from HTTP or a file system.
 As such the library works in principle both in the browser and in NodeJS.
@@ -47,10 +47,15 @@ if (obj instanceof STAC) {
   obj.getBoundingBox();
   obj.getTemporalExtent();
   obj.getThumbnails();
-  obj.getStacLinksWithRel('item');
-  obj.getStacLinksWithRel('child');
+  obj.getItemLinks();
+  obj.getDefaultGeoTIFF();
   // ...
 }
+```
+
+The classes are drop-in replacements, which means you can still access the objects as before:
+```js
+console.log(stac.id === obj.id);
 ```
 
 **Note:** This library is purely written based on ES6 classes and doesn't do any transpiling etc.

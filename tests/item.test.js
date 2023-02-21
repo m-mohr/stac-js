@@ -6,6 +6,19 @@ let item = new Item(json);
 let bbox = [172.91,1.34,172.95,1.36];
 let dt = "2020-12-14T18:02:31Z";
 
+test('Basics', () => {
+  expect(item.id).toBe("20201211_223832_CS2");
+  expect(item.getMetadata("id")).toBeUndefined();
+  expect(item.getAbsoluteUrl()).toBe("https://example.com/20201211_223832_CS2/item.json");
+});
+
+test('is...', () => {
+  expect(item.isItem()).toBeTruthy();
+  expect(item.isCatalog()).toBeFalsy();
+  expect(item.isCatalogLike()).toBeFalsy();
+  expect(item.isCollection()).toBeFalsy();
+});
+
 test('toJSON', () => {
   expect(item.toJSON()).toEqual(json);
 });
@@ -34,6 +47,17 @@ test('getTemporalExtent', () => {
   expect(item.getTemporalExtent()).toEqual([dt, dt]);
 });
 
-test('getTemporalExtents', () => {
-  expect(item.getTemporalExtents()).toEqual([[dt, dt]]);
+test('rankGeoTIFFs', () => {
+  let ranks = item.rankGeoTIFFs();
+  expect(ranks.length).toBe(3);
+  expect(ranks.map(r => r.asset.getKey())).toEqual(["visual", "analytic", "udm"]);
+  expect(ranks.map(r => r.score)).toEqual([4, 3, -1]);
+});
+
+test('getDefaultGeoTIFF', () => {
+  let asset = item.getDefaultGeoTIFF();
+  expect(asset).not.toBeNull();
+  expect(asset.getKey()).toEqual("visual");
+  expect(asset.href).toEqual("./20201211_223832_CS2.tif");
+  expect(asset.getAbsoluteUrl()).toEqual("https://example.com/20201211_223832_CS2/20201211_223832_CS2.tif");
 });

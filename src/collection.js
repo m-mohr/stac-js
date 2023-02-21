@@ -1,5 +1,5 @@
 import CatalogLike from './cataloglike';
-import isBoundingBox from './geo';
+import { isBoundingBox } from './geo';
 import { hasText } from './utils';
 
 class Collection extends CatalogLike {

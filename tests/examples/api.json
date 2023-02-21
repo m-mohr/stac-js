@@ -1,0 +1,170 @@
+{
+  "stac_version": "1.0.0",
+  "type": "Catalog",
+  "id": "api",
+  "title": "Example STAC API",
+  "description": "This is an example",
+  "links": [
+    {
+      "rel": "self",
+      "href": "https://example.com",
+      "type": "application/json",
+      "title": "This document"
+    },
+    {
+      "rel": "search",
+      "href": "https://example.com/api?httpAccept=application/opensearchdescription%2Bxml",
+      "type": "application/opensearchdescription+xml",
+      "title": "OpenSearch Description Document"
+    },
+    {
+      "rel": "http://www.opengis.net/def/rel/ogc/1.0/queryables",
+      "href": "https://example.com/queryables",
+      "type": "application/schema+json",
+      "title": "Queryables for datasets"
+    },
+    {
+      "rel": "service-desc",
+      "href": "https://example.com/api?httpAccept=application/openapi%2Bjson;version=3.0",
+      "type": "application/openapi+json;version=3.0",
+      "title": "OpenAPI definition in JSON format"
+    },
+    {
+      "rel": "service-desc",
+      "href": "https://example.com/api?httpAccept=application/json;profile=http://explain.z3950.org/dtd/2.0/",
+      "type": "application/json;profile=\"http://explain.z3950.org/dtd/2.0/\"",
+      "title": "Explain Document"
+    },
+    {
+      "rel": "service-desc",
+      "href": "https://example.com/api?httpAccept=application/sru%2Bxml",
+      "type": "application/sru+xml",
+      "title": "Explain Document"
+    },
+    {
+      "rel": "data",
+      "href": "https://example.com/collections",
+      "type": "application/json",
+      "title": "Metadata about the feature collections"
+    },
+    {
+      "rel": "data",
+      "href": "https://example.com/collections",
+      "type": "application/ld+json",
+      "title": "Metadata about the feature collections"
+    },
+    {
+      "rel": "data",
+      "href": "https://example.com/collections",
+      "type": "application/rdf+xml",
+      "title": "Metadata about the feature collections"
+    },
+    {
+      "rel": "data",
+      "href": "https://example.com/collections",
+      "type": "text/turtle",
+      "title": "Metadata about the feature collections"
+    },
+    {
+      "rel": "conformance",
+      "href": "https://example.com/conformance",
+      "type": "application/json",
+      "title": "OGC conformance classes implemented by this API"
+    },
+    {
+      "rel": "service-doc",
+      "href": "https://example.com/readme.html",
+      "type": "text/html",
+      "title": "API Documentation"
+    },
+    {
+      "rel": "service-doc",
+      "href": "https://redocly.github.io/redoc/?url=https://example.com/api&nocors",
+      "type": "text/html",
+      "title": "API documentation in ReDoc format"
+    },
+    {
+      "rel": "service-doc",
+      "href": "http://petstore.swagger.io/?url=https://example.com/api",
+      "type": "text/html",
+      "title": "API documentation in Swagger.io format"
+    },
+    {
+      "rel": "alternate",
+      "href": "https://example.com?httpAccept=text/html",
+      "type": "text/html",
+      "title": "Landing Page in HTML media type."
+    },
+    {
+      "rel": "alternate",
+      "href": "https://example.com?httpAccept=application/ld%2Bjson",
+      "type": "application/ld+json",
+      "title": "Landing Page in JSON-LD media type."
+    },
+    {
+      "rel": "search",
+      "href": "https://example.com/search",
+      "type": "application/geo+json",
+      "title": "STAC Search"
+    },
+    {
+      "rel": "child",
+      "href": "https://example.com/series/eo:platform",
+      "type": "application/json",
+      "title": "platform"
+    },
+    {
+      "rel": "child",
+      "href": "https://example.com/concepts/instruments",
+      "type": "application/json",
+      "title": "ESA Instruments"
+    },
+    {
+      "rel": "child",
+      "href": "https://example.com/concepts/platforms",
+      "type": "application/json",
+      "title": "ESA Platforms"
+    },
+    {
+      "rel": "child",
+      "href": "https://example.com/concepts/earthtopics",
+      "type": "application/json",
+      "title": "Earth Topics"
+    },
+    {
+      "rel": "child",
+      "href": "https://example.com/concepts/sciencekeyword",
+      "type": "application/json",
+      "title": "GCMD Science Keywords"
+    },
+    {
+      "rel": "child",
+      "href": "https://example.com/series/eo:organisationName",
+      "type": "application/json",
+      "title": "organisation"
+    },
+    {
+      "rel": "root",
+      "href": "https://example.com",
+      "type": "application/json"
+    }
+  ],
+  "conformsTo": [
+    "http://www.opengis.net/spec/ogcapi-features-1/1.0/conf/core",
+    "http://www.opengis.net/spec/ogcapi-features-1/1.0/conf/oas30",
+    "http://www.opengis.net/spec/ogcapi-features-1/1.0/conf/geojson",
+    "http://www.opengis.net/spec/ogcapi_common-2/1.0/conf/collections",
+    "http://www.opengis.net/spec/ogcapi-common-2/1.0/req/simple-query",
+    "http://www.opengis.net/spec/ogcapi-records-1/1.0/req/cql-filter",
+    "http://www.opengis.net/spec/ogcapi-features-1/1.0/conf/geojson",
+    "http://www.opengis.net/spec/ogcapi-features-3/1.0/conf/features-filter",
+    "https://api.stacspec.org/v1.0.0-rc.2/core",
+    "https://api.stacspec.org/v1.0.0-rc.2/stac-search",
+    "https://api.stacspec.org/v1.0.0-rc.2/stac-response",
+    "https://api.stacspec.org/v1.0.0-rc.2/collection-search",
+    "https://api.stacspec.org/v1.0.0-rc.2/collection-search#filter",
+    "https://api.stacspec.org/v1.0.0-rc.2/item-search",
+    "https://api.stacspec.org/v1.0.0-rc.2/item-search#filter",
+    "http://www.opengis.net/spec/cql2/1.0/conf/cql2-text"
+  ]
+}

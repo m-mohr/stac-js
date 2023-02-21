@@ -6,13 +6,9 @@ import Asset from './asset';
 class STAC {
 
   constructor(data, absoluteUrl = null) {
-    // Set or detect the URL of the STAC entity
-    this._url = absoluteUrl;
-    if (!this._url) {
-      let self = this.getSelfLink();
-      if (self) {
-        this._url = self.href;
-      }
+    if (data instanceof STAC) {
+      this._url = data._url;
+      data = data.toJSON();
     }
 
     // Assign the data to the object
@@ -26,6 +22,17 @@ class STAC {
         }
         else {
           this[key] = data[key];
+        }
+      }
+    }
+
+    // Set or detect the URL of the STAC entity
+    if (!this._url) {
+      this._url = absoluteUrl;
+      if (!this._url) {
+        let self = this.getSelfLink();
+        if (self) {
+          this._url = self.href;
         }
       }
     }
@@ -80,14 +87,19 @@ class STAC {
   }
 
   getBands() {
-    return mergeArraysOfObjects([
-      this.getMetadata('eo:bands'),
-      this.getMetadata('raster:bands')
-    ]);
+    return mergeArraysOfObjects(this.getMetadata('eo:bands'), this.getMetadata('raster:bands'));
   }
 
   toAbsolute(obj, stringify = true) {
-    return toAbsolute(obj, this._url, stringify);
+    if (obj instanceof Asset) {
+      // Clone so that we don't alter the href in the original object
+      obj = new Asset(obj);
+    }
+    else {
+      obj = Object.assign({}, obj);
+    }
+    obj.href = toAbsolute(obj.href, this._url, stringify);
+    return obj;
   }
 
   getIcons(allowEmpty = true) {
@@ -99,7 +111,7 @@ class STAC {
   /**
    * Get the thumbnails from the assets and links in a STAC entity.
    * 
-   * @param {boolean} browserOnly - Return only images that can be shown in a browser natively (PNG/JPG/GIF/WEBP).
+   * @param {boolean} browserOnly - Return only images that can be shown in a browser natively (PNG/JPG/GIF/WEBP + HTTP/S).
    * @param {?string} prefer - If not `null` (default), prefers a role over the other. Either `thumbnail` or `overview`.
    * @returns {Array.<object>}
    */
@@ -124,12 +136,12 @@ class STAC {
    * 
    * @returns {Asset}
    */
-  getDefaultGeoTiff() {
-    let scores = this.rankGeoTiffs();
+  getDefaultGeoTIFF(httpOnly = true) {
+    let scores = this.rankGeoTIFFs(httpOnly);
     return scores[0]?.asset;
   }
 
-  rankGeoTiffs() {
+  rankGeoTIFFs(httpOnly = true) {
     // Score calculation:
     // 
     // Roles:
@@ -143,10 +155,13 @@ class STAC {
     // Has RGB bands => +1
 
     let scores = [];
-    let assets = this.getAssetsByTypes(geotiffMediaTypes).map(asset => this.toAbsolute(asset));
+    let assets = this.getAssetsByTypes(geotiffMediaTypes);
+    if (httpOnly) {
+      assets = assets.filter(asset => asset.isHTTP());
+    }
     let rolePrio = ["data", "visual", "thumbnail", "overview"]; // low to high
     for(let asset of assets) {
-      let score = rolePrio.findIndex(role => asset.roles.includes(role));
+      let score = rolePrio.findIndex(role => Array.isArray(asset.roles) && asset.roles.includes(role));
       if (asset.isCOG()) {
         score += 2;
       }
@@ -155,18 +170,17 @@ class STAC {
       }
       scores.push({asset, score});
     }
-    scores.sort((a,b) => a.score - b.score);
+    scores.sort((a,b) => b.score - a.score);
     return scores;
   }
 
-  getStacLinksWithRel(rel, allowUndefined = true, absolute = true) {
-    return this.getLinksWithRels([rel], absolute)
-      .filter(link => isStacMediaType(link.type, allowUndefined))
-      .map(link => absolute ? this.toAbsolute(link) : link);
+  getStacLinksWithRel(rel, allowUndefined = true) {
+    return this.getLinksWithRels([rel])
+      .filter(link => isStacMediaType(link.type, allowUndefined));
   }
 
-  getStacLinkWithRel(rel, allowUndefined = true, absolute = true) {
-    const links = this.getStacLinksWithRel(rel, allowUndefined, absolute);
+  getStacLinkWithRel(rel, allowUndefined = true) {
+    const links = this.getStacLinksWithRel(rel, allowUndefined);
     if (links.length > 0) {
       return links[0];
     }
