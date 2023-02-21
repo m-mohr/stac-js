@@ -1,120 +1,2873 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 <head>
-    <meta charset="utf-8">
-    <title>JSDoc: Home</title>
-
-    <script src="scripts/prettify/prettify.js"> </script>
-    <script src="scripts/prettify/lang-css.js"> </script>
-    <!--[if lt IE 9]>
-      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
-    <![endif]-->
-    <link type="text/css" rel="stylesheet" href="styles/prettify-tomorrow.css">
-    <link type="text/css" rel="stylesheet" href="styles/jsdoc-default.css">
+  <meta charset='utf-8'>
+  <title>stac-js 0.1.0 | Documentation</title>
+  <meta name='description' content='JS drop-in classes with utilities for STAC'>
+  <meta name='viewport' content='width=device-width,initial-scale=1'>
+  <link href='assets/bass.css' rel='stylesheet'>
+  <link href='assets/style.css' rel='stylesheet'>
+  <link href='assets/github.css' rel='stylesheet'>
+  <link href='assets/split.css' rel='stylesheet'>
 </head>
+<body class='documentation m0'>
+    <div class='flex'>
+      <div id='split-left' class='overflow-auto fs0 height-viewport-100'>
+        <div class='py1 px2'>
+          <h3 class='mb0 no-anchor'>stac-js</h3>
+          <div class='mb1'><code>0.1.0</code></div>
+          <input
+            placeholder='Filter'
+            id='filter-input'
+            class='col12 block input'
+            spellcheck='false'
+            autocapitalize='off'
+            autocorrect='off'
+            type='text' />
+          <div id='toc'>
+            <ul class='list-reset h5 py1-ul'>
+              
+                
+                <li><a
+                  href='#asset'
+                  class="">
+                  Asset
+                  
+                </a>
+                
+                </li>
+              
+                
+                <li><a
+                  href='#catalog'
+                  class="">
+                  Catalog
+                  
+                </a>
+                
+                </li>
+              
+                
+                <li><a
+                  href='#cataloglike'
+                  class="">
+                  CatalogLike
+                  
+                </a>
+                
+                </li>
+              
+                
+                <li><a
+                  href='#collection'
+                  class="">
+                  Collection
+                  
+                </a>
+                
+                </li>
+              
+                
+                <li><a
+                  href='#item'
+                  class="">
+                  Item
+                  
+                </a>
+                
+                </li>
+              
+                
+                <li><a
+                  href='#stac'
+                  class=" toggle-sibling">
+                  STAC
+                  <span class='icon'>▸</span>
+                </a>
+                
+                <div class='toggle-target display-none'>
+                  
+                  
+                    <ul class='list-reset py1-ul pl1'>
+                      <li class='h5'><span>Instance members</span></li>
+                      
+                      <li><a
+                        href='#stacisitem'
+                        class='regular pre-open'>
+                        #isItem
+                      </a></li>
+                      
+                      <li><a
+                        href='#staciscatalog'
+                        class='regular pre-open'>
+                        #isCatalog
+                      </a></li>
+                      
+                      <li><a
+                        href='#staciscataloglike'
+                        class='regular pre-open'>
+                        #isCatalogLike
+                      </a></li>
+                      
+                      <li><a
+                        href='#staciscollection'
+                        class='regular pre-open'>
+                        #isCollection
+                      </a></li>
+                      
+                      <li><a
+                        href='#stacgetabsoluteurl'
+                        class='regular pre-open'>
+                        #getAbsoluteUrl
+                      </a></li>
+                      
+                      <li><a
+                        href='#stacgetselflink'
+                        class='regular pre-open'>
+                        #getSelfLink
+                      </a></li>
+                      
+                      <li><a
+                        href='#stacgetthumbnails'
+                        class='regular pre-open'>
+                        #getThumbnails
+                      </a></li>
+                      
+                      <li><a
+                        href='#stacgetdefaultgeotiff'
+                        class='regular pre-open'>
+                        #getDefaultGeoTIFF
+                      </a></li>
+                      
+                      <li><a
+                        href='#stacrankgeotiffs'
+                        class='regular pre-open'>
+                        #rankGeoTIFFs
+                      </a></li>
+                      
+                    </ul>
+                  
+                  
+                  
+                </div>
+                
+                </li>
+              
+                
+                <li><a
+                  href='#geojsonmediatype'
+                  class="">
+                  geojsonMediaType
+                  
+                </a>
+                
+                </li>
+              
+                
+                <li><a
+                  href='#stacmediatypes'
+                  class="">
+                  stacMediaTypes
+                  
+                </a>
+                
+                </li>
+              
+                
+                <li><a
+                  href='#browserimagetypes'
+                  class="">
+                  browserImageTypes
+                  
+                </a>
+                
+                </li>
+              
+                
+                <li><a
+                  href='#cogmediatypes'
+                  class="">
+                  cogMediaTypes
+                  
+                </a>
+                
+                </li>
+              
+                
+                <li><a
+                  href='#geotiffmediatypes'
+                  class="">
+                  geotiffMediaTypes
+                  
+                </a>
+                
+                </li>
+              
+                
+                <li><a
+                  href='#imagemediatypes'
+                  class="">
+                  imageMediaTypes
+                  
+                </a>
+                
+                </li>
+              
+                
+                <li><a
+                  href='#isboundingbox'
+                  class="">
+                  isBoundingBox
+                  
+                </a>
+                
+                </li>
+              
+                
+                <li><a
+                  href='#isgdalvfsuri'
+                  class="">
+                  isGdalVfsUri
+                  
+                </a>
+                
+                </li>
+              
+                
+                <li><a
+                  href='#hastext'
+                  class="">
+                  hasText
+                  
+                </a>
+                
+                </li>
+              
+                
+                <li><a
+                  href='#isobject'
+                  class="">
+                  isObject
+                  
+                </a>
+                
+                </li>
+              
+                
+                <li><a
+                  href='#mergearraysofobjects'
+                  class="">
+                  mergeArraysOfObjects
+                  
+                </a>
+                
+                </li>
+              
+                
+                <li><a
+                  href='#create'
+                  class="">
+                  create
+                  
+                </a>
+                
+                </li>
+              
+                
+                <li><a
+                  href='#ismediatype'
+                  class="">
+                  isMediaType
+                  
+                </a>
+                
+                </li>
+              
+                
+                <li><a
+                  href='#isstacmediatype'
+                  class="">
+                  isStacMediaType
+                  
+                </a>
+                
+                </li>
+              
+                
+                <li><a
+                  href='#canbrowserdisplayimage'
+                  class="">
+                  canBrowserDisplayImage
+                  
+                </a>
+                
+                </li>
+              
+                
+                <li><a
+                  href='#link'
+                  class="">
+                  Link
+                  
+                </a>
+                
+                </li>
+              
+                
+                <li><a
+                  href='#assetscore'
+                  class="">
+                  AssetScore
+                  
+                </a>
+                
+                </li>
+              
+            </ul>
+          </div>
+          <div class='mt1 h6 quiet'>
+            <a href='https://documentation.js.org/reading-documentation.html'>Need help reading this?</a>
+          </div>
+        </div>
+      </div>
+      <div id='split-right' class='relative overflow-auto height-viewport-100'>
+        
+          
+          <section class='p2 mb2 clearfix bg-white minishadow'>
 
-<body>
-
-<div id="main">
-
-    <h1 class="page-title">Home</h1>
-
+  
+  <div class='clearfix'>
     
-
-
-
+    <h3 class='fl m0' id='asset'>
+      Asset
+    </h3>
     
-
-
-    <h3>stac-js 0.1.0</h3>
-
-
-
-
-
-
-
-
-
-
     
+      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/m-mohr/stac-js/blob/ea034827fdcca69aa5b9a478910a7d720f429ef9/src/asset.js#L15-L132'>
+      <span>src/asset.js</span>
+      </a>
+    
+  </div>
+  
 
+  <p>A STAC Asset or Item Asset Definition.</p>
+<p>You can access all properties of the given STAC Asset object directly, e.g. <code>asset.href</code>.</p>
 
+    <div class='pre p1 fill-light mt0'>new Asset(data: <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object">Object</a>, key: <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">string</a>, parent: (<a href="#collection">Collection</a> | <a href="#item">Item</a>))</div>
+  
+  
 
+  
+  
+  
+  
+  
+  
 
-    <section>
-        <article><h1>stac-js</h1>
-<p>Simple drop-in JavaScript classes with utilities for working with data from STAC objects in a read-only manner.
-It is basically just a wrapper/facade on top of a single STAC object deserialized from JSON.
-It doesn't handle relationships between files, actually this library is completely unaware of any files and doesn't even handle loading them from HTTP or a file system.
-As such the library works in principle both in the browser and in NodeJS.
-This library won't help you if you want to create or update a STAC catalog (like PySTAC would).</p>
+  
+    <div class='py1 quiet mt1 prose-big'>Parameters</div>
+    <div class='prose'>
+      
+        <div class='space-bottom0'>
+          <div>
+            <span class='code bold'>data</span> <code class='quiet'>(<a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object">Object</a>)</code>
+	    The STAC Asset object
+
+          </div>
+          
+        </div>
+      
+        <div class='space-bottom0'>
+          <div>
+            <span class='code bold'>key</span> <code class='quiet'>(<a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">string</a>)</code>
+	    The asset key
+
+          </div>
+          
+        </div>
+      
+        <div class='space-bottom0'>
+          <div>
+            <span class='code bold'>parent</span> <code class='quiet'>((<a href="#collection">Collection</a> | <a href="#item">Item</a>))</code>
+	    The parent object of the asset
+
+          </div>
+          
+        </div>
+      
+    </div>
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+</section>
+
+          
+        
+          
+          <section class='p2 mb2 clearfix bg-white minishadow'>
+
+  
+  <div class='clearfix'>
+    
+    <h3 class='fl m0' id='catalog'>
+      Catalog
+    </h3>
+    
+    
+      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/m-mohr/stac-js/blob/ea034827fdcca69aa5b9a478910a7d720f429ef9/src/catalog.js#L12-L18'>
+      <span>src/catalog.js</span>
+      </a>
+    
+  </div>
+  
+
+  <p>A STAC Catalog.</p>
+<p>You can access all properties of the given STAC Catalog object directly, e.g. <code>catalog.title</code>.</p>
+
+    <div class='pre p1 fill-light mt0'>new Catalog(data: <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object">Object</a>, absoluteUrl: <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">string</a>?)</div>
+  
+  
+    <p>
+      Extends
+      
+        <a href="#cataloglike">CatalogLike</a>
+      
+    </p>
+  
+
+  
+  
+  
+  
+  
+  
+
+  
+    <div class='py1 quiet mt1 prose-big'>Parameters</div>
+    <div class='prose'>
+      
+        <div class='space-bottom0'>
+          <div>
+            <span class='code bold'>data</span> <code class='quiet'>(<a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object">Object</a>)</code>
+	    The STAC Catalog object
+
+          </div>
+          
+        </div>
+      
+        <div class='space-bottom0'>
+          <div>
+            <span class='code bold'>absoluteUrl</span> <code class='quiet'>(<a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">string</a>?
+            = <code>null</code>)</code>
+	    Absolute URL of the STAC Catalog
+
+          </div>
+          
+        </div>
+      
+    </div>
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+</section>
+
+          
+        
+          
+          <section class='p2 mb2 clearfix bg-white minishadow'>
+
+  
+  <div class='clearfix'>
+    
+    <h3 class='fl m0' id='cataloglike'>
+      CatalogLike
+    </h3>
+    
+    
+      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/m-mohr/stac-js/blob/ea034827fdcca69aa5b9a478910a7d720f429ef9/src/cataloglike.js#L13-L49'>
+      <span>src/cataloglike.js</span>
+      </a>
+    
+  </div>
+  
+
+  <p>Class for common parts of Catalogs and Collections.</p>
+<p>Don't instantiate this class!</p>
+
+    <div class='pre p1 fill-light mt0'>new CatalogLike(data: <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object">Object</a>, absoluteUrl: <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">string</a>?)</div>
+  
+  
+    <p>
+      Extends
+      
+        <a href="#stac">STAC</a>
+      
+    </p>
+  
+
+  
+  
+  
+  
+  
+  
+
+  
+    <div class='py1 quiet mt1 prose-big'>Parameters</div>
+    <div class='prose'>
+      
+        <div class='space-bottom0'>
+          <div>
+            <span class='code bold'>data</span> <code class='quiet'>(<a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object">Object</a>)</code>
+	    The STAC Catalog or Collection object
+
+          </div>
+          
+        </div>
+      
+        <div class='space-bottom0'>
+          <div>
+            <span class='code bold'>absoluteUrl</span> <code class='quiet'>(<a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">string</a>?
+            = <code>null</code>)</code>
+	    Absolute URL of the STAC Catalog or Collection
+
+          </div>
+          
+        </div>
+      
+    </div>
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+</section>
+
+          
+        
+          
+          <section class='p2 mb2 clearfix bg-white minishadow'>
+
+  
+  <div class='clearfix'>
+    
+    <h3 class='fl m0' id='collection'>
+      Collection
+    </h3>
+    
+    
+      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/m-mohr/stac-js/blob/ea034827fdcca69aa5b9a478910a7d720f429ef9/src/collection.js#L14-L89'>
+      <span>src/collection.js</span>
+      </a>
+    
+  </div>
+  
+
+  <p>A STAC Collection.</p>
+<p>You can access all properties of the given STAC Collection object directly, e.g. <code>collection.title</code>.</p>
+
+    <div class='pre p1 fill-light mt0'>new Collection(data: <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object">Object</a>, absoluteUrl: <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">string</a>?)</div>
+  
+  
+    <p>
+      Extends
+      
+        <a href="#cataloglike">CatalogLike</a>
+      
+    </p>
+  
+
+  
+  
+  
+  
+  
+  
+
+  
+    <div class='py1 quiet mt1 prose-big'>Parameters</div>
+    <div class='prose'>
+      
+        <div class='space-bottom0'>
+          <div>
+            <span class='code bold'>data</span> <code class='quiet'>(<a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object">Object</a>)</code>
+	    The STAC Collection object
+
+          </div>
+          
+        </div>
+      
+        <div class='space-bottom0'>
+          <div>
+            <span class='code bold'>absoluteUrl</span> <code class='quiet'>(<a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">string</a>?
+            = <code>null</code>)</code>
+	    Absolute URL of the STAC Collection
+
+          </div>
+          
+        </div>
+      
+    </div>
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+</section>
+
+          
+        
+          
+          <section class='p2 mb2 clearfix bg-white minishadow'>
+
+  
+  <div class='clearfix'>
+    
+    <h3 class='fl m0' id='item'>
+      Item
+    </h3>
+    
+    
+      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/m-mohr/stac-js/blob/ea034827fdcca69aa5b9a478910a7d720f429ef9/src/item.js#L14-L46'>
+      <span>src/item.js</span>
+      </a>
+    
+  </div>
+  
+
+  <p>A STAC Item.</p>
+<p>You can access all properties of the given STAC Item object directly, e.g. <code>item.id</code> or <code>item.properties.datetime</code>.</p>
+
+    <div class='pre p1 fill-light mt0'>new Item(data: <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object">Object</a>, absoluteUrl: <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">string</a>?)</div>
+  
+  
+    <p>
+      Extends
+      
+        <a href="#stac">STAC</a>
+      
+    </p>
+  
+
+  
+  
+  
+  
+  
+  
+
+  
+    <div class='py1 quiet mt1 prose-big'>Parameters</div>
+    <div class='prose'>
+      
+        <div class='space-bottom0'>
+          <div>
+            <span class='code bold'>data</span> <code class='quiet'>(<a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object">Object</a>)</code>
+	    The STAC Item object
+
+          </div>
+          
+        </div>
+      
+        <div class='space-bottom0'>
+          <div>
+            <span class='code bold'>absoluteUrl</span> <code class='quiet'>(<a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">string</a>?
+            = <code>null</code>)</code>
+	    Absolute URL of the STAC Item
+
+          </div>
+          
+        </div>
+      
+    </div>
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+</section>
+
+          
+        
+          
+          <section class='p2 mb2 clearfix bg-white minishadow'>
+
+  
+  <div class='clearfix'>
+    
+    <h3 class='fl m0' id='stac'>
+      STAC
+    </h3>
+    
+    
+      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/m-mohr/stac-js/blob/ea034827fdcca69aa5b9a478910a7d720f429ef9/src/stac.js#L15-L307'>
+      <span>src/stac.js</span>
+      </a>
+    
+  </div>
+  
+
+  <p>Base class for STAC entities.</p>
+<p>Don't instantiate this class!</p>
+
+    <div class='pre p1 fill-light mt0'>new STAC(data: <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object">Object</a>, absoluteUrl: <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">string</a>?)</div>
+  
+  
+
+  
+  
+  
+  
+  
+  
+
+  
+    <div class='py1 quiet mt1 prose-big'>Parameters</div>
+    <div class='prose'>
+      
+        <div class='space-bottom0'>
+          <div>
+            <span class='code bold'>data</span> <code class='quiet'>(<a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object">Object</a>)</code>
+	    The STAC object
+
+          </div>
+          
+        </div>
+      
+        <div class='space-bottom0'>
+          <div>
+            <span class='code bold'>absoluteUrl</span> <code class='quiet'>(<a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">string</a>?)</code>
+	    Absolute URL of the STAC object
+
+          </div>
+          
+        </div>
+      
+    </div>
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    <div class='py1 quiet mt1 prose-big'>Instance Members</div>
+    <div class="clearfix">
+  
+    <div class='border-bottom' id='stacisitem'>
+      <div class="clearfix small pointer toggle-sibling">
+        <div class="py1 contain">
+            <a class='icon pin-right py1 dark-link caret-right'>▸</a>
+            <span class='code strong strong truncate'>isItem()</span>
+        </div>
+      </div>
+      <div class="clearfix display-none toggle-target">
+        <section class='p2 mb2 clearfix bg-white minishadow'>
+
+  
+  <div class='clearfix'>
+    
+    
+      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/m-mohr/stac-js/blob/ea034827fdcca69aa5b9a478910a7d720f429ef9/src/stac.js#L55-L57'>
+      <span>src/stac.js</span>
+      </a>
+    
+  </div>
+  
+
+  <p>Check whether this given object is a STAC Item.</p>
+
+    <div class='pre p1 fill-light mt0'>isItem(): <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Boolean">boolean</a></div>
+  
+  
+
+  
+  
+  
+  
+  
+  
+
+  
+
+  
+
+  
+    
+      <div class='py1 quiet mt1 prose-big'>Returns</div>
+      <code><a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Boolean">boolean</a></code>:
+        <code>true</code>
+ if the object is a STAC Item, 
+<code>false</code>
+ otherwise.
+
+      
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+</section>
+
+      </div>
+    </div>
+  
+    <div class='border-bottom' id='staciscatalog'>
+      <div class="clearfix small pointer toggle-sibling">
+        <div class="py1 contain">
+            <a class='icon pin-right py1 dark-link caret-right'>▸</a>
+            <span class='code strong strong truncate'>isCatalog()</span>
+        </div>
+      </div>
+      <div class="clearfix display-none toggle-target">
+        <section class='p2 mb2 clearfix bg-white minishadow'>
+
+  
+  <div class='clearfix'>
+    
+    
+      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/m-mohr/stac-js/blob/ea034827fdcca69aa5b9a478910a7d720f429ef9/src/stac.js#L64-L66'>
+      <span>src/stac.js</span>
+      </a>
+    
+  </div>
+  
+
+  <p>Check whether this given object is a STAC Catalog.</p>
+
+    <div class='pre p1 fill-light mt0'>isCatalog(): <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Boolean">boolean</a></div>
+  
+  
+
+  
+  
+  
+  
+  
+  
+
+  
+
+  
+
+  
+    
+      <div class='py1 quiet mt1 prose-big'>Returns</div>
+      <code><a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Boolean">boolean</a></code>:
+        <code>true</code>
+ if the object is a STAC Catalog, 
+<code>false</code>
+ otherwise.
+
+      
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+</section>
+
+      </div>
+    </div>
+  
+    <div class='border-bottom' id='staciscataloglike'>
+      <div class="clearfix small pointer toggle-sibling">
+        <div class="py1 contain">
+            <a class='icon pin-right py1 dark-link caret-right'>▸</a>
+            <span class='code strong strong truncate'>isCatalogLike()</span>
+        </div>
+      </div>
+      <div class="clearfix display-none toggle-target">
+        <section class='p2 mb2 clearfix bg-white minishadow'>
+
+  
+  <div class='clearfix'>
+    
+    
+      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/m-mohr/stac-js/blob/ea034827fdcca69aa5b9a478910a7d720f429ef9/src/stac.js#L73-L75'>
+      <span>src/stac.js</span>
+      </a>
+    
+  </div>
+  
+
+  <p>Check whether this given object is "catalog-like", i.e. a Catalog or Collection.</p>
+
+    <div class='pre p1 fill-light mt0'>isCatalogLike(): <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Boolean">boolean</a></div>
+  
+  
+
+  
+  
+  
+  
+  
+  
+
+  
+
+  
+
+  
+    
+      <div class='py1 quiet mt1 prose-big'>Returns</div>
+      <code><a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Boolean">boolean</a></code>:
+        <code>true</code>
+ if the object is a "catalog-like", 
+<code>false</code>
+ otherwise.
+
+      
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+</section>
+
+      </div>
+    </div>
+  
+    <div class='border-bottom' id='staciscollection'>
+      <div class="clearfix small pointer toggle-sibling">
+        <div class="py1 contain">
+            <a class='icon pin-right py1 dark-link caret-right'>▸</a>
+            <span class='code strong strong truncate'>isCollection()</span>
+        </div>
+      </div>
+      <div class="clearfix display-none toggle-target">
+        <section class='p2 mb2 clearfix bg-white minishadow'>
+
+  
+  <div class='clearfix'>
+    
+    
+      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/m-mohr/stac-js/blob/ea034827fdcca69aa5b9a478910a7d720f429ef9/src/stac.js#L82-L84'>
+      <span>src/stac.js</span>
+      </a>
+    
+  </div>
+  
+
+  <p>Check whether this given object is a STAC Collection.</p>
+
+    <div class='pre p1 fill-light mt0'>isCollection(): <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Boolean">boolean</a></div>
+  
+  
+
+  
+  
+  
+  
+  
+  
+
+  
+
+  
+
+  
+    
+      <div class='py1 quiet mt1 prose-big'>Returns</div>
+      <code><a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Boolean">boolean</a></code>:
+        <code>true</code>
+ if the object is a STAC Collection, 
+<code>false</code>
+ otherwise.
+
+      
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+</section>
+
+      </div>
+    </div>
+  
+    <div class='border-bottom' id='stacgetabsoluteurl'>
+      <div class="clearfix small pointer toggle-sibling">
+        <div class="py1 contain">
+            <a class='icon pin-right py1 dark-link caret-right'>▸</a>
+            <span class='code strong strong truncate'>getAbsoluteUrl()</span>
+        </div>
+      </div>
+      <div class="clearfix display-none toggle-target">
+        <section class='p2 mb2 clearfix bg-white minishadow'>
+
+  
+  <div class='clearfix'>
+    
+    
+      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/m-mohr/stac-js/blob/ea034827fdcca69aa5b9a478910a7d720f429ef9/src/stac.js#L91-L93'>
+      <span>src/stac.js</span>
+      </a>
+    
+  </div>
+  
+
+  <p>Gets the absolute URL of the STAC entity (if provided explicitly or available from the self link).</p>
+
+    <div class='pre p1 fill-light mt0'>getAbsoluteUrl(): <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">string</a>?</div>
+  
+  
+
+  
+  
+  
+  
+  
+  
+
+  
+
+  
+
+  
+    
+      <div class='py1 quiet mt1 prose-big'>Returns</div>
+      <code><a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">string</a>?</code>:
+        Absolute URL
+
+      
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+</section>
+
+      </div>
+    </div>
+  
+    <div class='border-bottom' id='stacgetselflink'>
+      <div class="clearfix small pointer toggle-sibling">
+        <div class="py1 contain">
+            <a class='icon pin-right py1 dark-link caret-right'>▸</a>
+            <span class='code strong strong truncate'>getSelfLink()</span>
+        </div>
+      </div>
+      <div class="clearfix display-none toggle-target">
+        <section class='p2 mb2 clearfix bg-white minishadow'>
+
+  
+  <div class='clearfix'>
+    
+    
+      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/m-mohr/stac-js/blob/ea034827fdcca69aa5b9a478910a7d720f429ef9/src/stac.js#L120-L122'>
+      <span>src/stac.js</span>
+      </a>
+    
+  </div>
+  
+
+  <p>Returns the self link, if present.</p>
+
+    <div class='pre p1 fill-light mt0'>getSelfLink(): <a href="#link">Link</a>?</div>
+  
+  
+
+  
+  
+  
+  
+  
+  
+
+  
+
+  
+
+  
+    
+      <div class='py1 quiet mt1 prose-big'>Returns</div>
+      <code><a href="#link">Link</a>?</code>:
+        The self link
+
+      
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+</section>
+
+      </div>
+    </div>
+  
+    <div class='border-bottom' id='stacgetthumbnails'>
+      <div class="clearfix small pointer toggle-sibling">
+        <div class="py1 contain">
+            <a class='icon pin-right py1 dark-link caret-right'>▸</a>
+            <span class='code strong strong truncate'>getThumbnails(browserOnly, prefer)</span>
+        </div>
+      </div>
+      <div class="clearfix display-none toggle-target">
+        <section class='p2 mb2 clearfix bg-white minishadow'>
+
+  
+  <div class='clearfix'>
+    
+    
+      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/m-mohr/stac-js/blob/ea034827fdcca69aa5b9a478910a7d720f429ef9/src/stac.js#L159-L173'>
+      <span>src/stac.js</span>
+      </a>
+    
+  </div>
+  
+
+  <p>Get the thumbnails from the assets and links in a STAC entity.</p>
+<p>All URIs are converted to be absolute.</p>
+
+    <div class='pre p1 fill-light mt0'>getThumbnails(browserOnly: <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Boolean">boolean</a>, prefer: <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">string</a>?): <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Array">Array</a>&#x3C;<a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object">Object</a>></div>
+  
+  
+
+  
+  
+  
+  
+  
+  
+
+  
+    <div class='py1 quiet mt1 prose-big'>Parameters</div>
+    <div class='prose'>
+      
+        <div class='space-bottom0'>
+          <div>
+            <span class='code bold'>browserOnly</span> <code class='quiet'>(<a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Boolean">boolean</a>
+            = <code>true</code>)</code>
+	    Return only images that can be shown in a browser natively (PNG/JPG/GIF/WEBP + HTTP/S).
+
+          </div>
+          
+        </div>
+      
+        <div class='space-bottom0'>
+          <div>
+            <span class='code bold'>prefer</span> <code class='quiet'>(<a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">string</a>?
+            = <code>null</code>)</code>
+	    If not 
+<code>null</code>
+ (default), prefers a role over the other. Either 
+<code>thumbnail</code>
+ or 
+<code>overview</code>
+.
+
+          </div>
+          
+        </div>
+      
+    </div>
+  
+
+  
+
+  
+    
+      <div class='py1 quiet mt1 prose-big'>Returns</div>
+      <code><a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Array">Array</a>&#x3C;<a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object">Object</a>></code>:
+        
+      
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+</section>
+
+      </div>
+    </div>
+  
+    <div class='border-bottom' id='stacgetdefaultgeotiff'>
+      <div class="clearfix small pointer toggle-sibling">
+        <div class="py1 contain">
+            <a class='icon pin-right py1 dark-link caret-right'>▸</a>
+            <span class='code strong strong truncate'>getDefaultGeoTIFF(httpOnly)</span>
+        </div>
+      </div>
+      <div class="clearfix display-none toggle-target">
+        <section class='p2 mb2 clearfix bg-white minishadow'>
+
+  
+  <div class='clearfix'>
+    
+    
+      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/m-mohr/stac-js/blob/ea034827fdcca69aa5b9a478910a7d720f429ef9/src/stac.js#L181-L184'>
+      <span>src/stac.js</span>
+      </a>
+    
+  </div>
+  
+
+  <p>Determines the default GeoTiff asset for visualization.</p>
+
+    <div class='pre p1 fill-light mt0'>getDefaultGeoTIFF(httpOnly: any): <a href="#asset">Asset</a></div>
+  
+  
+
+  
+  
+  
+  
+  
+  
+
+  
+    <div class='py1 quiet mt1 prose-big'>Parameters</div>
+    <div class='prose'>
+      
+        <div class='space-bottom0'>
+          <div>
+            <span class='code bold'>httpOnly</span> <code class='quiet'>(any
+            = <code>true</code>)</code>
+	    
+          </div>
+          
+        </div>
+      
+    </div>
+  
+
+  
+
+  
+    
+      <div class='py1 quiet mt1 prose-big'>Returns</div>
+      <code><a href="#asset">Asset</a></code>:
+        Default GeoTiff asset
+
+      
+    
+  
+
+  
+    <div class='py1 quiet mt1 prose-big'>Related</div>
+    
+      
+        {rankGeoTIFFs}
+
+      
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+</section>
+
+      </div>
+    </div>
+  
+    <div class='border-bottom' id='stacrankgeotiffs'>
+      <div class="clearfix small pointer toggle-sibling">
+        <div class="py1 contain">
+            <a class='icon pin-right py1 dark-link caret-right'>▸</a>
+            <span class='code strong strong truncate'>rankGeoTIFFs(httpOnly)</span>
+        </div>
+      </div>
+      <div class="clearfix display-none toggle-target">
+        <section class='p2 mb2 clearfix bg-white minishadow'>
+
+  
+  <div class='clearfix'>
+    
+    
+      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/m-mohr/stac-js/blob/ea034827fdcca69aa5b9a478910a7d720f429ef9/src/stac.js#L210-L229'>
+      <span>src/stac.js</span>
+      </a>
+    
+  </div>
+  
+
+  <p>Ranks the GeoTiff assets for visualization purposes.</p>
+<p>The score factors can be found below:</p>
 <ul>
-<li><strong>Package version:</strong> 0.1.0</li>
-<li><strong>STAC versions:</strong> &gt;= 0.6.0 (through <a href="https://github.com/stac-utils/stac-migrate">stac-migrate</a>).</li>
-<li><strong>Documentation:</strong> <a href="https:%5C/%5C/m-mohr.github.io/stac-js/latest/">https://m-mohr.github.io/stac-js/latest/</a></li>
+<li>Roles:
+<ul>
+<li>overview => 3</li>
+<li>thumbnail => 2</li>
+<li>visual => 1</li>
+<li>data => 0</li>
+<li>none of the above => -1</li>
 </ul>
-<h2>Usage</h2>
-<p>Automatically instantiate the right class through the factory:</p>
-<pre class="prettyprint source lang-js"><code>import create from 'stac-js';
+</li>
+<li>Other factors:
+<ul>
+<li>media type is COG: +2</li>
+<li>has RGB bands: +1</li>
+</ul>
+</li>
+</ul>
 
-const stac = {
-  stac_version: &quot;1.0.0&quot;,
-  type: &quot;Collection&quot;,
-  id: &quot;example&quot;,
-  // ...
-};
-const obj = create(stac); // Migrates data to the latest version
-</code></pre>
-<p>Directly instantiate through the class constructors:</p>
-<pre class="prettyprint source lang-js"><code>import { Collection } from 'stac-js'; // or Catalog or Item
+    <div class='pre p1 fill-light mt0'>rankGeoTIFFs(httpOnly: <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Boolean">boolean</a>): <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Array">Array</a>&#x3C;<a href="#assetscore">AssetScore</a>></div>
+  
+  
 
-const stac = {
-  stac_version: &quot;1.0.0&quot;,
-  type: &quot;Collection&quot;,
-  id: &quot;example&quot;,
-  // ...
-};
-const obj = new Collection(stac); // Does NOT migrate to the latest version
-</code></pre>
-<p>You can then use the object, check whether it's STAC and call some methods, for example:</p>
-<pre class="prettyprint source lang-js"><code>import { STAC } from 'stac-js';
+  
+  
+  
+  
+  
+  
 
-if (obj instanceof STAC) {
-  obj.isCollection();
-  obj.getBoundingBox();
-  obj.getTemporalExtent();
-  obj.getThumbnails();
-  obj.getItemLinks();
-  obj.getDefaultGeoTIFF();
-  // ...
-}
-</code></pre>
-<p>The classes are drop-in replacements, which means you can still access the objects as before:</p>
-<pre class="prettyprint source lang-js"><code>console.log(stac.id === obj.id);
-</code></pre>
-<p><strong>Note:</strong> This library is purely written based on ES6 classes and doesn't do any transpiling etc.
-If you use this library, your environment either needs to support ES6 classes or you need to take measures yourself to transpile back to whatever is supported by your environment (e.g. through Babel for the browser).</p></article>
-    </section>
+  
+    <div class='py1 quiet mt1 prose-big'>Parameters</div>
+    <div class='prose'>
+      
+        <div class='space-bottom0'>
+          <div>
+            <span class='code bold'>httpOnly</span> <code class='quiet'>(<a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Boolean">boolean</a>
+            = <code>true</code>)</code>
+	    Return only GeoTiffs that can be accessed via HTTP(S)
 
+          </div>
+          
+        </div>
+      
+    </div>
+  
 
+  
 
+  
+    
+      <div class='py1 quiet mt1 prose-big'>Returns</div>
+      <code><a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Array">Array</a>&#x3C;<a href="#assetscore">AssetScore</a>></code>:
+        GeoTiff assets sorted by score in descending order.
 
+      
+    
+  
 
+  
 
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+</section>
+
+      </div>
+    </div>
+  
 </div>
 
-<nav>
-    <h2><a href="index.html">Home</a></h2><h3>Global</h3><ul><li><a href="global.html#hasText">hasText</a></li><li><a href="global.html#isObject">isObject</a></li><li><a href="global.html#mergeArraysOfObjects">mergeArraysOfObjects</a></li></ul>
-</nav>
+  
 
-<br class="clear">
+  
 
-<footer>
-    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 4.0.2</a> on Tue Feb 21 2023 17:01:57 GMT+0000 (Coordinated Universal Time)
-</footer>
+  
+</section>
 
-<script> prettyPrint(); </script>
-<script src="scripts/linenumber.js"> </script>
+          
+        
+          
+          <section class='p2 mb2 clearfix bg-white minishadow'>
+
+  
+  <div class='clearfix'>
+    
+    <h3 class='fl m0' id='geojsonmediatype'>
+      geojsonMediaType
+    </h3>
+    
+    
+      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/m-mohr/stac-js/blob/ea034827fdcca69aa5b9a478910a7d720f429ef9/src/mediatypes.js#L10-L10'>
+      <span>src/mediatypes.js</span>
+      </a>
+    
+  </div>
+  
+
+  <p>The GeoJSON media type.</p>
+
+    <div class='pre p1 fill-light mt0'>geojsonMediaType</div>
+  
+    <p>
+      Type:
+      <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">string</a>
+    </p>
+  
+  
+
+  
+  
+  
+  
+  
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+</section>
+
+          
+        
+          
+          <section class='p2 mb2 clearfix bg-white minishadow'>
+
+  
+  <div class='clearfix'>
+    
+    <h3 class='fl m0' id='stacmediatypes'>
+      stacMediaTypes
+    </h3>
+    
+    
+      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/m-mohr/stac-js/blob/ea034827fdcca69aa5b9a478910a7d720f429ef9/src/mediatypes.js#L17-L21'>
+      <span>src/mediatypes.js</span>
+      </a>
+    
+  </div>
+  
+
+  <p>All STAC media types (JSON + GeoJSON).</p>
+
+    <div class='pre p1 fill-light mt0'>stacMediaTypes</div>
+  
+    <p>
+      Type:
+      <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Array">Array</a>&#x3C;<a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">string</a>>
+    </p>
+  
+  
+
+  
+  
+  
+  
+  
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+</section>
+
+          
+        
+          
+          <section class='p2 mb2 clearfix bg-white minishadow'>
+
+  
+  <div class='clearfix'>
+    
+    <h3 class='fl m0' id='browserimagetypes'>
+      browserImageTypes
+    </h3>
+    
+    
+      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/m-mohr/stac-js/blob/ea034827fdcca69aa5b9a478910a7d720f429ef9/src/mediatypes.js#L28-L34'>
+      <span>src/mediatypes.js</span>
+      </a>
+    
+  </div>
+  
+
+  <p>All image media types that Web Browsers can show (GIF, JPEG, PNG, WebP).</p>
+
+    <div class='pre p1 fill-light mt0'>browserImageTypes</div>
+  
+    <p>
+      Type:
+      <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Array">Array</a>&#x3C;<a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">string</a>>
+    </p>
+  
+  
+
+  
+  
+  
+  
+  
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+</section>
+
+          
+        
+          
+          <section class='p2 mb2 clearfix bg-white minishadow'>
+
+  
+  <div class='clearfix'>
+    
+    <h3 class='fl m0' id='cogmediatypes'>
+      cogMediaTypes
+    </h3>
+    
+    
+      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/m-mohr/stac-js/blob/ea034827fdcca69aa5b9a478910a7d720f429ef9/src/mediatypes.js#L41-L44'>
+      <span>src/mediatypes.js</span>
+      </a>
+    
+  </div>
+  
+
+  <p>All Cloud Optimized GeoTiff media types.</p>
+
+    <div class='pre p1 fill-light mt0'>cogMediaTypes</div>
+  
+    <p>
+      Type:
+      <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Array">Array</a>&#x3C;<a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">string</a>>
+    </p>
+  
+  
+
+  
+  
+  
+  
+  
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+</section>
+
+          
+        
+          
+          <section class='p2 mb2 clearfix bg-white minishadow'>
+
+  
+  <div class='clearfix'>
+    
+    <h3 class='fl m0' id='geotiffmediatypes'>
+      geotiffMediaTypes
+    </h3>
+    
+    
+      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/m-mohr/stac-js/blob/ea034827fdcca69aa5b9a478910a7d720f429ef9/src/mediatypes.js#L51-L55'>
+      <span>src/mediatypes.js</span>
+      </a>
+    
+  </div>
+  
+
+  <p>All GeoTiff media types (including COG media types).</p>
+
+    <div class='pre p1 fill-light mt0'>geotiffMediaTypes</div>
+  
+    <p>
+      Type:
+      <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Array">Array</a>&#x3C;<a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">string</a>>
+    </p>
+  
+  
+
+  
+  
+  
+  
+  
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+</section>
+
+          
+        
+          
+          <section class='p2 mb2 clearfix bg-white minishadow'>
+
+  
+  <div class='clearfix'>
+    
+    <h3 class='fl m0' id='imagemediatypes'>
+      imageMediaTypes
+    </h3>
+    
+    
+      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/m-mohr/stac-js/blob/ea034827fdcca69aa5b9a478910a7d720f429ef9/src/mediatypes.js#L62-L62'>
+      <span>src/mediatypes.js</span>
+      </a>
+    
+  </div>
+  
+
+  <p>All image media types combined (Web Browser + GeoTiff).</p>
+
+    <div class='pre p1 fill-light mt0'>imageMediaTypes</div>
+  
+    <p>
+      Type:
+      <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Array">Array</a>&#x3C;<a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">string</a>>
+    </p>
+  
+  
+
+  
+  
+  
+  
+  
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+</section>
+
+          
+        
+          
+          <section class='p2 mb2 clearfix bg-white minishadow'>
+
+  
+  <div class='clearfix'>
+    
+    <h3 class='fl m0' id='isboundingbox'>
+      isBoundingBox
+    </h3>
+    
+    
+      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/m-mohr/stac-js/blob/ea034827fdcca69aa5b9a478910a7d720f429ef9/src/geo.js#L10-L22'>
+      <span>src/geo.js</span>
+      </a>
+    
+  </div>
+  
+
+  <p>Checks whether the given thing is a valid bounding box.</p>
+<p>A valid bounding box is an array with 4 or 6 numbers that are valid WGS84 coordinates and span a rectangle.
+See the STAC specification for details.</p>
+
+    <div class='pre p1 fill-light mt0'>isBoundingBox(bbox: <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Array">Array</a>&#x3C;<a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Number">number</a>>): <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Boolean">boolean</a></div>
+  
+  
+
+  
+  
+  
+  
+  
+  
+
+  
+    <div class='py1 quiet mt1 prose-big'>Parameters</div>
+    <div class='prose'>
+      
+        <div class='space-bottom0'>
+          <div>
+            <span class='code bold'>bbox</span> <code class='quiet'>(<a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Array">Array</a>&#x3C;<a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Number">number</a>>)</code>
+	    A potential bounding box.
+
+          </div>
+          
+        </div>
+      
+    </div>
+  
+
+  
+
+  
+    
+      <div class='py1 quiet mt1 prose-big'>Returns</div>
+      <code><a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Boolean">boolean</a></code>:
+        <code>true</code>
+ if valid, 
+<code>false</code>
+ otherwise
+
+      
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+</section>
+
+          
+        
+          
+          <section class='p2 mb2 clearfix bg-white minishadow'>
+
+  
+  <div class='clearfix'>
+    
+    <h3 class='fl m0' id='isgdalvfsuri'>
+      isGdalVfsUri
+    </h3>
+    
+    
+      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/m-mohr/stac-js/blob/ea034827fdcca69aa5b9a478910a7d720f429ef9/src/http.js#L16-L18'>
+      <span>src/http.js</span>
+      </a>
+    
+  </div>
+  
+
+  <p>Checks whether a URI is a GDAL Virtual Filesystem URI.</p>
+<p>Such an URI usually starts with <code>/vsi</code> (except for <code>/vsicurl/</code>).</p>
+
+    <div class='pre p1 fill-light mt0'>isGdalVfsUri(href: sring): <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Boolean">boolean</a></div>
+  
+  
+
+  
+  
+  
+  
+  
+  
+
+  
+    <div class='py1 quiet mt1 prose-big'>Parameters</div>
+    <div class='prose'>
+      
+        <div class='space-bottom0'>
+          <div>
+            <span class='code bold'>href</span> <code class='quiet'>(sring)</code>
+	    
+          </div>
+          
+        </div>
+      
+    </div>
+  
+
+  
+
+  
+    
+      <div class='py1 quiet mt1 prose-big'>Returns</div>
+      <code><a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Boolean">boolean</a></code>:
+        <code>true</code>
+ if an GDAL Virtual Filesystem URI, 
+<code>false</code>
+ otherwise.
+
+      
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+</section>
+
+          
+        
+          
+          <section class='p2 mb2 clearfix bg-white minishadow'>
+
+  
+  <div class='clearfix'>
+    
+    <h3 class='fl m0' id='hastext'>
+      hasText
+    </h3>
+    
+    
+      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/m-mohr/stac-js/blob/ea034827fdcca69aa5b9a478910a7d720f429ef9/src/utils.js#L7-L9'>
+      <span>src/utils.js</span>
+      </a>
+    
+  </div>
+  
+
+  <p>Checks whether a variable is a string and contains at least one character.</p>
+
+    <div class='pre p1 fill-light mt0'>hasText(string: any): <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Boolean">boolean</a></div>
+  
+  
+
+  
+  
+  
+  
+  
+  
+
+  
+    <div class='py1 quiet mt1 prose-big'>Parameters</div>
+    <div class='prose'>
+      
+        <div class='space-bottom0'>
+          <div>
+            <span class='code bold'>string</span> <code class='quiet'>(any)</code>
+	    A variable to check.
+
+          </div>
+          
+        </div>
+      
+    </div>
+  
+
+  
+
+  
+    
+      <div class='py1 quiet mt1 prose-big'>Returns</div>
+      <code><a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Boolean">boolean</a></code>:
+        <code>true</code>
+ is the given variable is an string with length > 0, 
+<code>false</code>
+ otherwise.
+
+      
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+</section>
+
+          
+        
+          
+          <section class='p2 mb2 clearfix bg-white minishadow'>
+
+  
+  <div class='clearfix'>
+    
+    <h3 class='fl m0' id='isobject'>
+      isObject
+    </h3>
+    
+    
+      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/m-mohr/stac-js/blob/ea034827fdcca69aa5b9a478910a7d720f429ef9/src/utils.js#L20-L22'>
+      <span>src/utils.js</span>
+      </a>
+    
+  </div>
+  
+
+  <p>Checks whether a variable is a real object or not.</p>
+<p>This is a more strict version of <code>typeof x === 'object'</code> as this example would also succeeds for arrays and <code>null</code>.
+This function only returns <code>true</code> for real objects and not for arrays, <code>null</code> or any other data types.</p>
+
+    <div class='pre p1 fill-light mt0'>isObject(obj: any): <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Boolean">boolean</a></div>
+  
+  
+
+  
+  
+  
+  
+  
+  
+
+  
+    <div class='py1 quiet mt1 prose-big'>Parameters</div>
+    <div class='prose'>
+      
+        <div class='space-bottom0'>
+          <div>
+            <span class='code bold'>obj</span> <code class='quiet'>(any)</code>
+	    A variable to check.
+
+          </div>
+          
+        </div>
+      
+    </div>
+  
+
+  
+
+  
+    
+      <div class='py1 quiet mt1 prose-big'>Returns</div>
+      <code><a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Boolean">boolean</a></code>:
+        <code>true</code>
+ is the given variable is an object, 
+<code>false</code>
+ otherwise.
+
+      
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+</section>
+
+          
+        
+          
+          <section class='p2 mb2 clearfix bg-white minishadow'>
+
+  
+  <div class='clearfix'>
+    
+    <h3 class='fl m0' id='mergearraysofobjects'>
+      mergeArraysOfObjects
+    </h3>
+    
+    
+      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/m-mohr/stac-js/blob/ea034827fdcca69aa5b9a478910a7d720f429ef9/src/utils.js#L30-L44'>
+      <span>src/utils.js</span>
+      </a>
+    
+  </div>
+  
+
+  <p>Merges any number of arrays of objects.</p>
+
+    <div class='pre p1 fill-light mt0'>mergeArraysOfObjects(bands: ...<a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Array">Array</a>&#x3C;<a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object">Object</a>>): <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Array">Array</a>&#x3C;<a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object">Object</a>></div>
+  
+  
+
+  
+  
+  
+  
+  
+  
+
+  
+    <div class='py1 quiet mt1 prose-big'>Parameters</div>
+    <div class='prose'>
+      
+        <div class='space-bottom0'>
+          <div>
+            <span class='code bold'>bands</span> <code class='quiet'>(...<a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Array">Array</a>&#x3C;<a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object">Object</a>>)</code>
+	    
+          </div>
+          
+        </div>
+      
+    </div>
+  
+
+  
+
+  
+    
+      <div class='py1 quiet mt1 prose-big'>Returns</div>
+      <code><a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Array">Array</a>&#x3C;<a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object">Object</a>></code>:
+        
+      
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+</section>
+
+          
+        
+          
+          <section class='p2 mb2 clearfix bg-white minishadow'>
+
+  
+  <div class='clearfix'>
+    
+    <h3 class='fl m0' id='create'>
+      create
+    </h3>
+    
+    
+      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/m-mohr/stac-js/blob/ea034827fdcca69aa5b9a478910a7d720f429ef9/src/index.js#L19-L32'>
+      <span>src/index.js</span>
+      </a>
+    
+  </div>
+  
+
+  <p>Creates the corresponding object for a object that conforms to the STAC specification.</p>
+<p>This creates either a Catalog, a Collection or an Item instance.
+By default it migrates the data to the latest STAC version, but doesn't update the version number.</p>
+
+    <div class='pre p1 fill-light mt0'>create(data: <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object">Object</a>, migrate: <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Boolean">boolean</a>, updateVersionNumber: <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Boolean">boolean</a>): (<a href="#catalog">Catalog</a> | <a href="#collection">Collection</a> | <a href="#item">Item</a>)</div>
+  
+  
+
+  
+  
+  
+  
+  
+  
+
+  
+    <div class='py1 quiet mt1 prose-big'>Parameters</div>
+    <div class='prose'>
+      
+        <div class='space-bottom0'>
+          <div>
+            <span class='code bold'>data</span> <code class='quiet'>(<a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object">Object</a>)</code>
+	    The STAC object
+
+          </div>
+          
+        </div>
+      
+        <div class='space-bottom0'>
+          <div>
+            <span class='code bold'>migrate</span> <code class='quiet'>(<a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Boolean">boolean</a>
+            = <code>true</code>)</code>
+	    <code>true</code>
+ to migrate to the latest version, 
+<code>false</code>
+ otherwise
+
+          </div>
+          
+        </div>
+      
+        <div class='space-bottom0'>
+          <div>
+            <span class='code bold'>updateVersionNumber</span> <code class='quiet'>(<a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Boolean">boolean</a>
+            = <code>false</code>)</code>
+	    <code>true</code>
+ to update the version number (to the latest version), 
+<code>false</code>
+ otherwise. Only applies if 
+<code>migrate</code>
+ is set to 
+<code>true</code>
+.
+
+          </div>
+          
+        </div>
+      
+    </div>
+  
+
+  
+
+  
+    
+      <div class='py1 quiet mt1 prose-big'>Returns</div>
+      <code>(<a href="#catalog">Catalog</a> | <a href="#collection">Collection</a> | <a href="#item">Item</a>)</code>:
+        The created object instance.
+
+      
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+</section>
+
+          
+        
+          
+          <section class='p2 mb2 clearfix bg-white minishadow'>
+
+  
+  <div class='clearfix'>
+    
+    <h3 class='fl m0' id='ismediatype'>
+      isMediaType
+    </h3>
+    
+    
+      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/m-mohr/stac-js/blob/ea034827fdcca69aa5b9a478910a7d720f429ef9/src/mediatypes.js#L72-L86'>
+      <span>src/mediatypes.js</span>
+      </a>
+    
+  </div>
+  
+
+  <p>Checks whether a given media type is in the list of media types.</p>
+
+    <div class='pre p1 fill-light mt0'>isMediaType(type: (<a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">string</a> | <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/undefined">undefined</a>), allowedTypes: (<a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">string</a> | <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Array">Array</a>&#x3C;<a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">string</a>>), allowUndefined: <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Boolean">boolean</a>): <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Boolean">boolean</a></div>
+  
+  
+
+  
+  
+  
+  
+  
+  
+
+  
+    <div class='py1 quiet mt1 prose-big'>Parameters</div>
+    <div class='prose'>
+      
+        <div class='space-bottom0'>
+          <div>
+            <span class='code bold'>type</span> <code class='quiet'>((<a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">string</a> | <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/undefined">undefined</a>))</code>
+	    The potential media type.
+
+          </div>
+          
+        </div>
+      
+        <div class='space-bottom0'>
+          <div>
+            <span class='code bold'>allowedTypes</span> <code class='quiet'>((<a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">string</a> | <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Array">Array</a>&#x3C;<a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">string</a>>))</code>
+	    A list of allowed media types (or a single media type as string).
+
+          </div>
+          
+        </div>
+      
+        <div class='space-bottom0'>
+          <div>
+            <span class='code bold'>allowUndefined</span> <code class='quiet'>(<a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Boolean">boolean</a>
+            = <code>false</code>)</code>
+	    If set to 
+<code>true</code>
+, returns 
+<code>true</code>
+ if 
+<code>undefined</code>
+ is passed as 
+<code>type</code>
+.
+
+          </div>
+          
+        </div>
+      
+    </div>
+  
+
+  
+
+  
+    
+      <div class='py1 quiet mt1 prose-big'>Returns</div>
+      <code><a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Boolean">boolean</a></code>:
+        <code>true</code>
+ if the media type is allowed, 
+<code>false</code>
+ otherwise.
+
+      
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+</section>
+
+          
+        
+          
+          <section class='p2 mb2 clearfix bg-white minishadow'>
+
+  
+  <div class='clearfix'>
+    
+    <h3 class='fl m0' id='isstacmediatype'>
+      isStacMediaType
+    </h3>
+    
+    
+      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/m-mohr/stac-js/blob/ea034827fdcca69aa5b9a478910a7d720f429ef9/src/mediatypes.js#L95-L97'>
+      <span>src/mediatypes.js</span>
+      </a>
+    
+  </div>
+  
+
+  <p>Checks whether the given media type is a STAC media type (JSON or GeoJSON).</p>
+
+    <div class='pre p1 fill-light mt0'>isStacMediaType(type: (<a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">string</a> | <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/undefined">undefined</a>), allowUndefined: <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Boolean">boolean</a>): <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Boolean">boolean</a></div>
+  
+  
+
+  
+  
+  
+  
+  
+  
+
+  
+    <div class='py1 quiet mt1 prose-big'>Parameters</div>
+    <div class='prose'>
+      
+        <div class='space-bottom0'>
+          <div>
+            <span class='code bold'>type</span> <code class='quiet'>((<a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">string</a> | <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/undefined">undefined</a>))</code>
+	    The potential media type.
+
+          </div>
+          
+        </div>
+      
+        <div class='space-bottom0'>
+          <div>
+            <span class='code bold'>allowUndefined</span> <code class='quiet'>(<a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Boolean">boolean</a>
+            = <code>false</code>)</code>
+	    If set to 
+<code>true</code>
+, returns 
+<code>true</code>
+ if 
+<code>undefined</code>
+ is passed as 
+<code>type</code>
+.
+
+          </div>
+          
+        </div>
+      
+    </div>
+  
+
+  
+
+  
+    
+      <div class='py1 quiet mt1 prose-big'>Returns</div>
+      <code><a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Boolean">boolean</a></code>:
+        <code>true</code>
+ if the media type is a STAC media type, 
+<code>false</code>
+ otherwise.
+
+      
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+</section>
+
+          
+        
+          
+          <section class='p2 mb2 clearfix bg-white minishadow'>
+
+  
+  <div class='clearfix'>
+    
+    <h3 class='fl m0' id='canbrowserdisplayimage'>
+      canBrowserDisplayImage
+    </h3>
+    
+    
+      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/m-mohr/stac-js/blob/ea034827fdcca69aa5b9a478910a7d720f429ef9/src/mediatypes.js#L108-L130'>
+      <span>src/mediatypes.js</span>
+      </a>
+    
+  </div>
+  
+
+  <p>Checks whether a given Link or Asset object can be displayed by a browser.</p>
+<p>A browser can usually display an image if it is a specific file format (e.g. JPEG, PNG, ...) and is served over HTTP(S).</p>
+
+    <div class='pre p1 fill-light mt0'>canBrowserDisplayImage(img: (<a href="#link">Link</a> | <a href="#asset">Asset</a>), allowUndefined: <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Boolean">boolean</a>): <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Boolean">boolean</a></div>
+  
+  
+
+  
+  
+  
+  
+  
+  
+
+  
+    <div class='py1 quiet mt1 prose-big'>Parameters</div>
+    <div class='prose'>
+      
+        <div class='space-bottom0'>
+          <div>
+            <span class='code bold'>img</span> <code class='quiet'>((<a href="#link">Link</a> | <a href="#asset">Asset</a>))</code>
+	    The potential image as Link or Asset object.
+
+          </div>
+          
+        </div>
+      
+        <div class='space-bottom0'>
+          <div>
+            <span class='code bold'>allowUndefined</span> <code class='quiet'>(<a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Boolean">boolean</a>
+            = <code>false</code>)</code>
+	    If set to 
+<code>true</code>
+, returns 
+<code>true</code>
+ if 
+<code>undefined</code>
+ is passed as 
+<code>type</code>
+.
+
+          </div>
+          
+        </div>
+      
+    </div>
+  
+
+  
+
+  
+    
+      <div class='py1 quiet mt1 prose-big'>Returns</div>
+      <code><a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Boolean">boolean</a></code>:
+        <code>true</code>
+ if a browser can display the given thing, 
+<code>false</code>
+ otherwise.
+
+      
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+</section>
+
+          
+        
+          
+          <section class='p2 mb2 clearfix bg-white minishadow'>
+
+  
+  <div class='clearfix'>
+    
+    <h3 class='fl m0' id='link'>
+      Link
+    </h3>
+    
+    
+      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/m-mohr/stac-js/blob/ea034827fdcca69aa5b9a478910a7d720f429ef9/src/types.js#L1-L9'>
+      <span>src/types.js</span>
+      </a>
+    
+  </div>
+  
+
+  <p>A STAC Link object.</p>
+
+    <div class='pre p1 fill-light mt0'>Link</div>
+  
+    <p>
+      Type:
+      <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object">Object</a>
+    </p>
+  
+  
+
+  
+  
+  
+  
+  
+  
+
+  
+
+  
+    <div class='py1 quiet mt1 prose-big'>Properties</div>
+    <div>
+      
+        <div class='space-bottom0'>
+          <span class='code bold'>href</span> <code class='quiet'>(<a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">string</a>)</code>
+          : The URI
+
+          
+        </div>
+      
+        <div class='space-bottom0'>
+          <span class='code bold'>rel</span> <code class='quiet'>(<a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">string</a>)</code>
+          : The relation type of the link
+
+          
+        </div>
+      
+        <div class='space-bottom0'>
+          <span class='code bold'>type</span> <code class='quiet'>(<a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">string</a>?)</code>
+          : Mediy type of the link
+
+          
+        </div>
+      
+        <div class='space-bottom0'>
+          <span class='code bold'>title</span> <code class='quiet'>(<a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">string</a>?)</code>
+          : Title of the link
+
+          
+        </div>
+      
+    </div>
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+</section>
+
+          
+        
+          
+          <section class='p2 mb2 clearfix bg-white minishadow'>
+
+  
+  <div class='clearfix'>
+    
+    <h3 class='fl m0' id='assetscore'>
+      AssetScore
+    </h3>
+    
+    
+      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/m-mohr/stac-js/blob/ea034827fdcca69aa5b9a478910a7d720f429ef9/src/stac.js#L186-L192'>
+      <span>src/stac.js</span>
+      </a>
+    
+  </div>
+  
+
+  <p>Object with an asset and the corresponding score.</p>
+
+    <div class='pre p1 fill-light mt0'>AssetScore</div>
+  
+    <p>
+      Type:
+      <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object">Object</a>
+    </p>
+  
+  
+
+  
+  
+  
+  
+  
+  
+
+  
+
+  
+    <div class='py1 quiet mt1 prose-big'>Properties</div>
+    <div>
+      
+        <div class='space-bottom0'>
+          <span class='code bold'>asset</span> <code class='quiet'>(<a href="#asset">Asset</a>)</code>
+          
+          
+        </div>
+      
+        <div class='space-bottom0'>
+          <span class='code bold'>score</span> <code class='quiet'>(integer)</code>
+          
+          
+        </div>
+      
+    </div>
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+</section>
+
+          
+        
+      </div>
+    </div>
+  <script src='assets/anchor.js'></script>
+  <script src='assets/split.js'></script>
+  <script src='assets/site.js'></script>
 </body>
 </html>
