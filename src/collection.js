@@ -2,6 +2,15 @@ import CatalogLike from './cataloglike';
 import { isBoundingBox } from './geo';
 import { hasText } from './utils';
 
+/**
+ * A STAC Collection.
+ * 
+ * You can access all properties of the given STAC Collection object directly, e.g. `collection.title`.
+ * 
+ * @class
+ * @param {Object} data The STAC Collection object
+ * @param {?string} absoluteUrl Absolute URL of the STAC Collection
+ */
 class Collection extends CatalogLike {
 
   constructor(data, absoluteUrl = null) {

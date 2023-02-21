@@ -5,6 +5,14 @@ export const browserProtocols = [
   'https'
 ];
 
+/**
+ * Checks whether a URI is a GDAL Virtual Filesystem URI.
+ * 
+ * Such an URI usually starts with `/vsi` (except for `/vsicurl/`).
+ * 
+ * @param {sring} href 
+ * @returns {boolean} `true` if an GDAL Virtual Filesystem URI, `false` otherwise.
+ */
 export function isGdalVfsUri(href) {
   return typeof href === 'string' && href.startsWith('/vsi') && !href.startsWith('/vsicurl/');
 }

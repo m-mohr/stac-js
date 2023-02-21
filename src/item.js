@@ -2,6 +2,15 @@ import { isBoundingBox } from './geo';
 import STAC from './stac';
 import { hasText } from './utils';
 
+/**
+ * A STAC Item.
+ * 
+ * You can access all properties of the given STAC Item object directly, e.g. `item.id` or `item.properties.datetime`.
+ * 
+ * @class
+ * @param {Object} data The STAC Item object
+ * @param {?string} absoluteUrl Absolute URL of the STAC Item
+ */
 class Item extends STAC {
   
   constructor(data, absoluteUrl = null) {

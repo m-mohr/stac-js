@@ -10,10 +10,13 @@ jobs:
       - uses: actions/checkout@v2
       - run: npm install
       - run: npm run docs
+      - name: get-npm-version
+        id: package-version
+        uses: martinbeentjes/npm-get-version-action@master
       - uses: peaceiris/actions-gh-pages@v3
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
-          publish_dir: docs/stac-js
-          keep_files: true
+          publish_dir: docs
+          destination_dir: v${{ steps.package-version.outputs.current-version }}
           user_name: 'stac-js CI'
           user_email: stac-js-ci@mamo-net.de

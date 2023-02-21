@@ -1,3 +1,12 @@
+/**
+ * Checks whether the given thing is a valid bounding box.
+ * 
+ * A valid bounding box is an array with 4 or 6 numbers that are valid WGS84 coordinates and span a rectangle.
+ * See the STAC specification for details.
+ * 
+ * @param {Array.<number>} bbox A potential bounding box.
+ * @returns {boolean} `true` if valid, `false` otherwise
+ */
 export function isBoundingBox(bbox) {
   return (
     Array.isArray(bbox) &&

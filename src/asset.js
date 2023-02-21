@@ -2,6 +2,16 @@ import { browserProtocols } from "./http";
 import { cogMediaTypes, geotiffMediaTypes, isMediaType } from "./mediatypes";
 import { hasText, isObject, mergeArraysOfObjects } from "./utils";
 
+/**
+ * A STAC Asset or Item Asset Definition.
+ * 
+ * You can access all properties of the given STAC Asset object directly, e.g. `asset.href`.
+ * 
+ * @class
+ * @param {Object} data The STAC Asset object
+ * @param {string} key The asset key
+ * @param {Collection|Item} parent The parent object of the asset
+ */
 class Asset {
 
   constructor(data, key, parent) {

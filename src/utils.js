@@ -24,8 +24,8 @@ export function isObject(obj) {
 /**
  * Merges any number of arrays of objects.
  * 
- * @param  {...Array.<object>} bands 
- * @returns {Array.<object>}
+ * @param  {...Array.<Object>} bands 
+ * @returns {Array.<Object>}
  */
 export function mergeArraysOfObjects(...bands) {
   bands = bands.filter(arr => Array.isArray(arr));

@@ -3,6 +3,15 @@ import { canBrowserDisplayImage, geotiffMediaTypes, isMediaType, isStacMediaType
 import { hasText, isObject, mergeArraysOfObjects } from './utils';
 import Asset from './asset';
 
+/**
+ * Base class for STAC entities.
+ * 
+ * Don't instantiate this class!
+ * 
+ * @class STAC
+ * @param {Object} data The STAC object
+ * @param {?string} absoluteUrl Absolute URL of the STAC object
+ */
 class STAC {
 
   constructor(data, absoluteUrl = null) {
@@ -38,22 +47,47 @@ class STAC {
     }
   }
 
+  /**
+   * Check whether this given object is a STAC Item.
+   * 
+   * @returns {boolean} `true` if the object is a STAC Item, `false` otherwise.
+   */
   isItem() {
     return this.type === 'Feature';
   }
 
+  /**
+   * Check whether this given object is a STAC Catalog.
+   * 
+   * @returns {boolean} `true` if the object is a STAC Catalog, `false` otherwise.
+   */
   isCatalog() {
     return this.type === 'Catalog';
   }
 
+  /**
+   * Check whether this given object is "catalog-like", i.e. a Catalog or Collection.
+   * 
+   * @returns {boolean} `true` if the object is a "catalog-like", `false` otherwise.
+   */
   isCatalogLike() {
     return this.isCatalog() || this.isCollection();
   }
 
+  /**
+   * Check whether this given object is a STAC Collection.
+   * 
+   * @returns {boolean} `true` if the object is a STAC Collection, `false` otherwise.
+   */
   isCollection() {
     return this.type === 'Collection';
   }
 
+  /**
+   * Gets the absolute URL of the STAC entity (if provided explicitly or available from the self link).
+   * 
+   * @returns {?string} Absolute URL
+   */
   getAbsoluteUrl() {
     return this._url;
   }
@@ -78,6 +112,11 @@ class STAC {
     return [];
   }
 
+  /**
+   * Returns the self link, if present.
+   * 
+   * @returns {?Link} The self link
+   */
   getSelfLink() {
     return this.getStacLinkWithRel('self');
   }
@@ -111,9 +150,11 @@ class STAC {
   /**
    * Get the thumbnails from the assets and links in a STAC entity.
    * 
+   * All URIs are converted to be absolute.
+   * 
    * @param {boolean} browserOnly - Return only images that can be shown in a browser natively (PNG/JPG/GIF/WEBP + HTTP/S).
    * @param {?string} prefer - If not `null` (default), prefers a role over the other. Either `thumbnail` or `overview`.
-   * @returns {Array.<object>}
+   * @returns {Array.<Object>}
    */
   getThumbnails(browserOnly = true, prefer = null) {
     let thumbnails = this.getAssetsWithRoles(['thumbnail', 'overview'], true);
@@ -134,26 +175,39 @@ class STAC {
   /**
    * Determines the default GeoTiff asset for visualization.
    * 
-   * @returns {Asset}
+   * @returns {Asset} Default GeoTiff asset
+   * @see {rankGeoTIFFs}
    */
   getDefaultGeoTIFF(httpOnly = true) {
     let scores = this.rankGeoTIFFs(httpOnly);
     return scores[0]?.asset;
   }
 
-  rankGeoTIFFs(httpOnly = true) {
-    // Score calculation:
-    // 
-    // Roles:
-    // - overview => 3
-    // - thumbnail => 2
-    // - visual => 1
-    // - data => 0
-    // - none of the above => -1
-    // 
-    // Media Type => COG: +2
-    // Has RGB bands => +1
+  /**
+   * Object with an asset and the corresponding score.
+   * 
+   * @typedef {Object} AssetScore
+   * @property {Asset} asset
+   * @property {integer} score
+   */
 
+  /**
+   * Ranks the GeoTiff assets for visualization purposes.
+   * 
+   * The score factors can be found below:
+   * - Roles:
+   *   - overview => 3
+   *   - thumbnail => 2
+   *   - visual => 1
+   *   - data => 0
+   *   - none of the above => -1
+   * - Other factors:
+   *   - media type is COG: +2
+   *   - has RGB bands: +1
+   * @param {boolean} httpOnly Return only GeoTiffs that can be accessed via HTTP(S)
+   * @returns {Array.<AssetScore>} GeoTiff assets sorted by score in descending order.
+   */
+  rankGeoTIFFs(httpOnly = true) {
     let scores = [];
     let assets = this.getAssetsByTypes(geotiffMediaTypes);
     if (httpOnly) {

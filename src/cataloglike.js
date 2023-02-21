@@ -1,5 +1,15 @@
 import STAC from './stac';
 
+/**
+ * Class for common parts of Catalogs and Collections.
+ * 
+ * Don't instantiate this class!
+ * 
+ * @class
+ * @abstract
+ * @param {Object} data The STAC Catalog or Collection object
+ * @param {?string} absoluteUrl Absolute URL of the STAC Catalog or Collection
+ */
 class CatalogLike extends STAC {
 
   constructor(data, absoluteUrl = null) {
