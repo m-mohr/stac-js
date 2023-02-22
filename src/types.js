@@ -7,3 +7,9 @@
  * @property {?string} type Mediy type of the link
  * @property {?string} title Title of the link
  */
+
+/**
+ * A bounding box.
+ * 
+ * @typedef {Array.<number>} BoundingBox
+ */

@@ -10,11 +10,11 @@ let bands = asset['eo:bands'];
 test('constructor', () => {
   expect(() => new Asset()).toThrow();
   expect(() => new Asset({})).toThrow();
-  expect(() => new Asset({}, "key")).toThrow();
   expect(() => new Asset(null, "key", item)).toThrow();
-  expect(() => new Asset({}, "key", null)).toThrow();
   expect(() => new Asset({}, null, item)).toThrow();
 
+  expect(() => new Asset({}, "key")).not.toThrow();
+  expect(() => new Asset({}, "key", null)).not.toThrow();
   expect(() => new Asset({}, "key", item)).not.toThrow();
 });
 

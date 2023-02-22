@@ -4,7 +4,8 @@ import fs from 'fs';
 let json = JSON.parse(fs.readFileSync('./tests/examples/item.json'));
 let item = new Item(json);
 let bbox = [172.91,1.34,172.95,1.36];
-let dt = "2020-12-14T18:02:31Z";
+let dtStr = "2020-12-14T18:02:31Z";
+let dtDate = new Date(Date.UTC(2020, 11, 14, 18, 2, 31));
 
 test('Basics', () => {
   expect(item.id).toBe("20201211_223832_CS2");
@@ -36,15 +37,19 @@ test('getBoundingBoxes', () => {
 });
 
 test('datetime', () => {
-  expect(item.properties.datetime).toBe(dt);
+  expect(item.properties.datetime).toBe(dtStr);
 });
 
 test('getMetadata', () => {
-  expect(item.getMetadata("datetime")).toBe(dt);
+  expect(item.getMetadata("datetime")).toBe(dtStr);
+});
+
+test('getDateTime', () => {
+  expect(item.getDateTime()).toEqual(dtDate);
 });
 
 test('getTemporalExtent', () => {
-  expect(item.getTemporalExtent()).toEqual([dt, dt]);
+  expect(item.getTemporalExtent()).toEqual([dtDate, dtDate]);
 });
 
 test('rankGeoTIFFs', () => {

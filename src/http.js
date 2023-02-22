@@ -1,5 +1,10 @@
 import URI from 'urijs';
 
+/**
+ * Protocols supported by browsers (http and https).
+ * 
+ * @type {Array.<string>}
+ */
 export const browserProtocols = [
   'http',
   'https'
@@ -17,10 +22,27 @@ export function isGdalVfsUri(href) {
   return typeof href === 'string' && href.startsWith('/vsi') && !href.startsWith('/vsicurl/');
 }
 
+/**
+ * 
+ * @todo
+ * @param {string} href 
+ * @param {string} baseUrl 
+ * @param {boolean} stringify 
+ * @returns {string|URI}
+ */
 export function toAbsolute(href, baseUrl, stringify = true) {
   return normalizeUri(href, baseUrl, false, stringify);
 }
 
+/**
+ * 
+ * @todo
+ * @param {string} href 
+ * @param {?string} baseUrl 
+ * @param {boolean} noParams 
+ * @param {boolean} stringify 
+ * @returns {string|URI}
+ */
 export function normalizeUri(href, baseUrl = null, noParams = false, stringify = true) {
   // Convert vsicurl URLs to normal URLs
   if (typeof href === 'string' && href.startsWith('/vsicurl/')) {

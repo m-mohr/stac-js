@@ -16,10 +16,23 @@ class CatalogLike extends STAC {
     super(data, absoluteUrl);
   }
 
+  /**
+   * Returns metadata from the Item properties for the given field name.
+   * 
+   * @param {string} field Field name
+   * @returns {*} The value of the field
+   */
   getMetadata(field) {
     return this[field];
   }
 
+  /**
+   * Returns the search link, if present.
+   * 
+   * If a specific method is provied, can exclude other methods from being returned.
+   * 
+   * @returns {Link|null} The search link
+   */
   getSearchLink(method = null) {
     let links = this.getStacLinksWithRel('search');
     if (!method) {
@@ -30,18 +43,38 @@ class CatalogLike extends STAC {
     }
   }
 
+  /**
+   * Returns the link for API collections, if present.
+   * 
+   * @returns {Link|null} The API collections link
+   */
   getApiCollectionsLink() {
     return this.getStacLinkWithRel('data');
   }
 
+  /**
+   * Returns the link for API items, if present.
+   * 
+   * @returns {Link|null} The API items link
+   */
   getApiItemsLink() {
     return this.getStacLinkWithRel('items');
   }
 
+  /**
+   * Returns all child links.
+   * 
+   * @returns {Array.<Link>} The child links
+   */
   getChildLinks() {
     return this.getStacLinksWithRel('child');
   }
 
+  /**
+   * Returns all item links.
+   * 
+   * @returns {Array.<Link>} The child links
+   */
   getItemLinks() {
     return this.getStacLinksWithRel('item');
   }

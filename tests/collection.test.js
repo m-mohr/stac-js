@@ -5,7 +5,7 @@ let json = JSON.parse(fs.readFileSync('./tests/examples/collection.json'));
 let url = "https://example.com/api";
 let c = new Collection(json, url);
 let bbox = [172.91,1.34,172.95,1.36];
-let temporal = ["2020-12-11T22:38:32.125Z","2020-12-14T18:02:31.437Z"];
+let temporal = [new Date(Date.UTC(2020, 11, 11, 22, 38, 32, 125)), new Date(Date.UTC(2020, 11, 14, 18, 2, 31, 437))];
 
 test('Basics', () => {
   expect(c.stac_version).toBe("1.0.0");

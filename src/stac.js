@@ -86,28 +86,53 @@ class STAC {
   /**
    * Gets the absolute URL of the STAC entity (if provided explicitly or available from the self link).
    * 
-   * @returns {?string} Absolute URL
+   * @returns {string|null} Absolute URL
    */
   getAbsoluteUrl() {
     return this._url;
   }
 
+  /**
+   * Returns a GeoJSON object for this STAC object.
+   * 
+   * @returns {Object|null} GeoJSON object or `null`
+   */
   toGeoJSON() {
     return null;
   }
 
+  /**
+   * Returns a single bounding box for the STAC entity.
+   * 
+   * @returns {BoundingBox|null}
+   */
   getBoundingBox() {
     return this.getBoundingBoxes()[0] || null;
   }
 
+  /**
+   * Returns a list of bounding boxes for the STAC entity.
+   * 
+   * @returns {Array.<BoundingBox>}
+   */
   getBoundingBoxes() {
     return [];
   }
 
+  /**
+   * Returns a single temporal extent for the STAC entity.
+   * 
+   * @returns {Array.<Date|null>|null}
+   */
   getTemporalExtent() {
     return this.getTemporalExtents()[0] || null;
   }
 
+  /**
+   * Returns the temporal extent(s) for the STAC entity.
+   * 
+   * @returns {Array.<Array.<string|null>>}
+   */
   getTemporalExtents() {
     return [];
   }
@@ -115,20 +140,60 @@ class STAC {
   /**
    * Returns the self link, if present.
    * 
-   * @returns {?Link} The self link
+   * @returns {Link|null} The self link
    */
   getSelfLink() {
     return this.getStacLinkWithRel('self');
   }
 
-  getMetadata(/*field*/) {
-    return;
+  /**
+   * Returns the root link, if present.
+   * 
+   * @returns {Link|null} The root link
+   */
+  getRootLink() {
+    return this.getStacLinkWithRel('root');
   }
 
+  /**
+   * Returns the parent link, if present.
+   * 
+   * @returns {Link|null} The parent link
+   */
+  getParentLink() {
+    return this.getStacLinkWithRel('parent');
+  }
+
+  /**
+   * Returns the metadata for the STAC entity.
+   * 
+   * @param {string} field Field name
+   * @returns {*}
+   * @abstract
+   */
+  // eslint-disable-next-line no-unused-vars
+  getMetadata(field) { //
+    return undefined;
+  }
+
+  /**
+   * Returns the bands.
+   * 
+   * This is usually a merge of eo:bands and raster:bands.
+   * 
+   * @returns {Array.<Object>}
+   */
   getBands() {
     return mergeArraysOfObjects(this.getMetadata('eo:bands'), this.getMetadata('raster:bands'));
   }
 
+  /**
+   * 
+   * @todo
+   * @param {Link|Asset} obj 
+   * @param {boolean} stringify 
+   * @returns {Link|Asset}
+   */
   toAbsolute(obj, stringify = true) {
     if (obj instanceof Asset) {
       // Clone so that we don't alter the href in the original object
@@ -141,9 +206,15 @@ class STAC {
     return obj;
   }
 
-  getIcons(allowEmpty = true) {
+  /**
+   * 
+   * @todo
+   * @param {boolean} allowUndefined 
+   * @returns {Array.<Link>}
+   */
+  getIcons(allowUndefined = true) {
     return this.getLinksWithRels(['icon'])
-      .filter(img => canBrowserDisplayImage(img, allowEmpty))
+      .filter(img => canBrowserDisplayImage(img, allowUndefined))
       .map(img => this.toAbsolute(img));
   }
 
@@ -154,7 +225,7 @@ class STAC {
    * 
    * @param {boolean} browserOnly - Return only images that can be shown in a browser natively (PNG/JPG/GIF/WEBP + HTTP/S).
    * @param {?string} prefer - If not `null` (default), prefers a role over the other. Either `thumbnail` or `overview`.
-   * @returns {Array.<Object>}
+   * @returns {Array.<Asset|Link>}
    */
   getThumbnails(browserOnly = true, prefer = null) {
     let thumbnails = this.getAssetsWithRoles(['thumbnail', 'overview'], true);
@@ -228,11 +299,25 @@ class STAC {
     return scores;
   }
 
+  /**
+   * 
+   * @todo
+   * @param {string} rel 
+   * @param {boolean} allowUndefined 
+   * @returns {Array.<Link>}
+   */
   getStacLinksWithRel(rel, allowUndefined = true) {
     return this.getLinksWithRels([rel])
       .filter(link => isStacMediaType(link.type, allowUndefined));
   }
 
+  /**
+   * 
+   * @todo
+   * @param {string} rel 
+   * @param {boolean} allowUndefined 
+   * @returns {Link} 
+   */
   getStacLinkWithRel(rel, allowUndefined = true) {
     const links = this.getStacLinksWithRel(rel, allowUndefined);
     if (links.length > 0) {
@@ -242,23 +327,51 @@ class STAC {
       return null;
     }
   }
-
+  
+  /**
+   * 
+   * @todo
+   * @returns {Array.<Link>}
+   */
   getLinks() {
     return Array.isArray(this.links) ? this.links.filter(link => isObject(link) && hasText(link.href)) : [];
   }
 
+  /**
+   * 
+   * @todo
+   * @param {string} rel 
+   * @returns {Link} 
+   */
   getLinkWithRel(rel) {
     return this.getLinks().find(link => link.rel === rel) || null;
   }
 
+  /**
+   * 
+   * @todo
+   * @param {Array.<string>} rels 
+   * @returns {Array.<Link>} 
+   */
   getLinksWithRels(rels) {
     return this.getLinks().filter(link => rels.includes(link.rel));
   }
 
+  /**
+   * 
+   * @todo
+   * @param {Array.<string>} rels 
+   * @returns {Array.<Link>} 
+   */
   getLinksWithOtherRels(rels) {
     return this.getLinks().filter(link => !rels.includes(link.rel));
   }
 
+  /**
+   * 
+   * @todo
+   * @returns {Array.<Asset>}
+   */
   getAssets() {
     if (!isObject(this.assets)) {
       return [];
@@ -266,14 +379,33 @@ class STAC {
     return Object.values(this.assets);
   }
 
+  /**
+   * 
+   * @todo
+   * @param {Array.<string>} roles 
+   * @param {boolean} includeKey 
+   * @returns {Array.<Asset>}
+   */
   getAssetsWithRoles(roles, includeKey = false) {
     return this.getAssets().filter(asset => asset.hasRole(roles) || (includeKey && roles.includes(asset.getKey())));
   }
 
+  /**
+   * 
+   * @todo
+   * @param {Array.<string>} types 
+   * @returns {Array.<Asset>}
+   */
   getAssetsByTypes(types) {
     return this.getAssets().filter(asset => isMediaType(asset.type, types));
   }
 
+  /**
+   * 
+   * @todo
+   * @param {*} other 
+   * @returns {boolean}
+   */
   equals(other) {
     if (!isObject(other)) {
       return false;
@@ -287,6 +419,11 @@ class STAC {
     return false;
   }
 
+  /**
+   * Returns a plain object for JSON export.
+   * 
+   * @returns {Object} Plain object
+   */
   toJSON() {
     let obj = {};
     Object.keys(this).forEach(key => {

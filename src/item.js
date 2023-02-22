@@ -1,6 +1,7 @@
+import { centerDateTime, isoToDate } from './datetime';
 import { isBoundingBox } from './geo';
-import STAC from './stac';
 import { hasText } from './utils';
+import STAC from './stac';
 
 /**
  * A STAC Item.
@@ -17,30 +18,87 @@ class Item extends STAC {
     super(data, absoluteUrl);
   }
 
+  /**
+   * Returns a GeoJSON object for this STAC object.
+   * 
+   * @returns {Object|null} GeoJSON object or `null`
+   */
   toGeoJSON() {
     return this.toJSON();
   }
 
+  /**
+   * Returns a single bounding box for the item.
+   * 
+   * @returns {BoundingBox|null}
+   */
   getBoundingBox() {
     return isBoundingBox(this.bbox) ? this.bbox : null;
   }
 
+  /**
+   * Returns bounding boxes for the item.
+   * 
+   * @returns {Array.<BoundingBox>}
+   */
   getBoundingBoxes() {
     return isBoundingBox(this.bbox) ? [this.bbox] : [];
   }
 
-  getTemporalExtents() {
-    if (hasText(this.properties.start_datetime) || hasText(this.properties.end_datetime)) {
-      return [[this.properties.start_datetime || null, this.properties.end_datetime || null]];
+  /**
+   * Returns the datetime of the STAC Item.
+   * 
+   * @param {boolean} force Enforce a datetime by computing the center datetime if needed.
+   * @returns {Date|null}
+   */
+  getDateTime(force = false) {
+    let dt = isoToDate(this.properties.datetime);
+    if (!dt && force) {
+      let start = isoToDate(this.properties.start_datetime);
+      let end = isoToDate(this.properties.end_datetime);
+      if (start && end) {
+        return centerDateTime(start, end);
+      }
+      else {
+        return start || end;
+      }
     }
-    else if (hasText(this.properties.datetime)) {
-      return [[this.properties.datetime, this.properties.datetime]];
-    }
-    return [];
+    return dt;
   }
 
+  /**
+   * Returns the temporal extent(s) for the STAC Item.
+   * 
+   * @returns {Array.<Array.<Date|null>>}
+   */
+  getTemporalExtents() {
+    let dates = [];
+    if (hasText(this.properties.start_datetime) || hasText(this.properties.end_datetime)) {
+      dates = [[this.properties.start_datetime || null, this.properties.end_datetime || null]];
+    }
+    else if (hasText(this.properties.datetime)) {
+      dates = [[this.properties.datetime, this.properties.datetime]];
+    }
+    return dates.map(interval => interval.map(datetime => isoToDate(datetime)));
+  }
+
+  /**
+   * Returns metadata from the Item properties for the given field name.
+   * 
+   * @param {string} field Field name
+   * @returns {*} The value of the field
+   */
   getMetadata(field) {
     return this.properties[field];
+  }
+
+  /**
+   * Returns the collection link, if present.
+   * 
+   * @returns {Link|null} The collection link
+   */
+  getCollectionLink() {
+    return this.getStacLinkWithRel('collection');
   }
 
 }
