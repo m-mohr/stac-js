@@ -78,6 +78,30 @@
                       </a></li>
                       
                       <li><a
+                        href='#assetfindband'
+                        class='regular pre-open'>
+                        #findBand
+                      </a></li>
+                      
+                      <li><a
+                        href='#assetgetband'
+                        class='regular pre-open'>
+                        #getBand
+                      </a></li>
+                      
+                      <li><a
+                        href='#assetgetminmaxvalues'
+                        class='regular pre-open'>
+                        #getMinMaxValues
+                      </a></li>
+                      
+                      <li><a
+                        href='#assetgetnodatavalues'
+                        class='regular pre-open'>
+                        #getNoDataValues
+                      </a></li>
+                      
+                      <li><a
                         href='#assetisdefintion'
                         class='regular pre-open'>
                         #isDefintion
@@ -761,6 +785,16 @@
               
                 
                 <li><a
+                  href='#statistics'
+                  class="">
+                  Statistics
+                  
+                </a>
+                
+                </li>
+              
+                
+                <li><a
                   href='#assetscore'
                   class="">
                   AssetScore
@@ -789,7 +823,7 @@
     </h3>
     
     
-      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/m-mohr/stac-js/blob/3498369f84969671effecbf5491cbcdff5bbd531/src/asset.js#L15-L228'>
+      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/m-mohr/stac-js/blob/0f0bf5fc199b9bd10912f1588c89fdba6a857fa4/src/asset.js#L15-L335'>
       <span>src/asset.js</span>
       </a>
     
@@ -875,7 +909,7 @@
   <div class='clearfix'>
     
     
-      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/m-mohr/stac-js/blob/3498369f84969671effecbf5491cbcdff5bbd531/src/asset.js#L48-L56'>
+      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/m-mohr/stac-js/blob/0f0bf5fc199b9bd10912f1588c89fdba6a857fa4/src/asset.js#L48-L56'>
       <span>src/asset.js</span>
       </a>
     
@@ -954,7 +988,7 @@
   <div class='clearfix'>
     
     
-      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/m-mohr/stac-js/blob/3498369f84969671effecbf5491cbcdff5bbd531/src/asset.js#L63-L65'>
+      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/m-mohr/stac-js/blob/0f0bf5fc199b9bd10912f1588c89fdba6a857fa4/src/asset.js#L63-L65'>
       <span>src/asset.js</span>
       </a>
     
@@ -1020,7 +1054,7 @@
   <div class='clearfix'>
     
     
-      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/m-mohr/stac-js/blob/3498369f84969671effecbf5491cbcdff5bbd531/src/asset.js#L72-L74'>
+      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/m-mohr/stac-js/blob/0f0bf5fc199b9bd10912f1588c89fdba6a857fa4/src/asset.js#L72-L74'>
       <span>src/asset.js</span>
       </a>
     
@@ -1085,7 +1119,7 @@
   <div class='clearfix'>
     
     
-      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/m-mohr/stac-js/blob/3498369f84969671effecbf5491cbcdff5bbd531/src/asset.js#L85-L93'>
+      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/m-mohr/stac-js/blob/0f0bf5fc199b9bd10912f1588c89fdba6a857fa4/src/asset.js#L85-L93'>
       <span>src/asset.js</span>
       </a>
     
@@ -1167,7 +1201,7 @@ Otherwise, returns the metadata from calling <code>getMetadata()</code> for the 
   <div class='clearfix'>
     
     
-      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/m-mohr/stac-js/blob/3498369f84969671effecbf5491cbcdff5bbd531/src/asset.js#L102-L104'>
+      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/m-mohr/stac-js/blob/0f0bf5fc199b9bd10912f1588c89fdba6a857fa4/src/asset.js#L102-L104'>
       <span>src/asset.js</span>
       </a>
     
@@ -1233,7 +1267,7 @@ Otherwise, returns the metadata from calling <code>getMetadata()</code> for the 
   <div class='clearfix'>
     
     
-      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/m-mohr/stac-js/blob/3498369f84969671effecbf5491cbcdff5bbd531/src/asset.js#L128-L144'>
+      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/m-mohr/stac-js/blob/0f0bf5fc199b9bd10912f1588c89fdba6a857fa4/src/asset.js#L128-L144'>
       <span>src/asset.js</span>
       </a>
     
@@ -1285,6 +1319,346 @@ Otherwise, returns the metadata from calling <code>getMetadata()</code> for the 
       </div>
     </div>
   
+    <div class='border-bottom' id='assetfindband'>
+      <div class="clearfix small pointer toggle-sibling">
+        <div class="py1 contain">
+            <a class='icon pin-right py1 dark-link caret-right'>▸</a>
+            <span class='code strong strong truncate'>findBand(value, property)</span>
+        </div>
+      </div>
+      <div class="clearfix display-none toggle-target">
+        <section class='p2 mb2 clearfix bg-white minishadow'>
+
+  
+  <div class='clearfix'>
+    
+    
+      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/m-mohr/stac-js/blob/0f0bf5fc199b9bd10912f1588c89fdba6a857fa4/src/asset.js#L156-L163'>
+      <span>src/asset.js</span>
+      </a>
+    
+  </div>
+  
+
+  <p>Returns the band for the given criteria.</p>
+<p>Searches the given <code>property</code> (default: <code>name</code>) for the given string.</p>
+
+    <div class='pre p1 fill-light mt0'>findBand(value: any, property: <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">string</a>): (<a href="#bandwithindex">BandWithIndex</a> | null)</div>
+  
+  
+
+  
+  
+  
+  
+  
+  
+
+  
+    <div class='py1 quiet mt1 prose-big'>Parameters</div>
+    <div class='prose'>
+      
+        <div class='space-bottom0'>
+          <div>
+            <span class='code bold'>value</span> <code class='quiet'>(any)</code>
+	    
+          </div>
+          
+        </div>
+      
+        <div class='space-bottom0'>
+          <div>
+            <span class='code bold'>property</span> <code class='quiet'>(<a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">string</a>
+            = <code>&#39;name&#39;</code>)</code>
+	    
+          </div>
+          
+        </div>
+      
+    </div>
+  
+
+  
+
+  
+    
+      <div class='py1 quiet mt1 prose-big'>Returns</div>
+      <code>(<a href="#bandwithindex">BandWithIndex</a> | null)</code>:
+        
+      
+    
+  
+
+  
+    <div class='py1 quiet mt1 prose-big'>Related</div>
+    
+      
+        {getBands}
+
+      
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+</section>
+
+      </div>
+    </div>
+  
+    <div class='border-bottom' id='assetgetband'>
+      <div class="clearfix small pointer toggle-sibling">
+        <div class="py1 contain">
+            <a class='icon pin-right py1 dark-link caret-right'>▸</a>
+            <span class='code strong strong truncate'>getBand(band)</span>
+        </div>
+      </div>
+      <div class="clearfix display-none toggle-target">
+        <section class='p2 mb2 clearfix bg-white minishadow'>
+
+  
+  <div class='clearfix'>
+    
+    
+      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/m-mohr/stac-js/blob/0f0bf5fc199b9bd10912f1588c89fdba6a857fa4/src/asset.js#L174-L180'>
+      <span>src/asset.js</span>
+      </a>
+    
+  </div>
+  
+
+  <p>Returns the band for the given band index.</p>
+<p>Passes through the (band) objects.</p>
+
+    <div class='pre p1 fill-light mt0'>getBand(band: (integer | <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object">Object</a>)): (<a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object">Object</a> | null)</div>
+  
+  
+
+  
+  
+  
+  
+  
+  
+
+  
+    <div class='py1 quiet mt1 prose-big'>Parameters</div>
+    <div class='prose'>
+      
+        <div class='space-bottom0'>
+          <div>
+            <span class='code bold'>band</span> <code class='quiet'>((integer | <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object">Object</a>))</code>
+	    
+          </div>
+          
+        </div>
+      
+    </div>
+  
+
+  
+
+  
+    
+      <div class='py1 quiet mt1 prose-big'>Returns</div>
+      <code>(<a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object">Object</a> | null)</code>:
+        
+      
+    
+  
+
+  
+    <div class='py1 quiet mt1 prose-big'>Related</div>
+    
+      
+        {getBands}
+
+      
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+</section>
+
+      </div>
+    </div>
+  
+    <div class='border-bottom' id='assetgetminmaxvalues'>
+      <div class="clearfix small pointer toggle-sibling">
+        <div class="py1 contain">
+            <a class='icon pin-right py1 dark-link caret-right'>▸</a>
+            <span class='code strong strong truncate'>getMinMaxValues(band)</span>
+        </div>
+      </div>
+      <div class="clearfix display-none toggle-target">
+        <section class='p2 mb2 clearfix bg-white minishadow'>
+
+  
+  <div class='clearfix'>
+    
+    
+      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/m-mohr/stac-js/blob/0f0bf5fc199b9bd10912f1588c89fdba6a857fa4/src/asset.js#L196-L207'>
+      <span>src/asset.js</span>
+      </a>
+    
+  </div>
+  
+
+  
+    <div class='pre p1 fill-light mt0'>getMinMaxValues(band: (<a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object">Object</a> | integer)): <a href="#statistics">Statistics</a></div>
+  
+  
+
+  
+  
+  
+  
+  
+  
+
+  
+    <div class='py1 quiet mt1 prose-big'>Parameters</div>
+    <div class='prose'>
+      
+        <div class='space-bottom0'>
+          <div>
+            <span class='code bold'>band</span> <code class='quiet'>((<a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object">Object</a> | integer)
+            = <code>null</code>)</code>
+	    
+          </div>
+          
+        </div>
+      
+    </div>
+  
+
+  
+
+  
+    
+      <div class='py1 quiet mt1 prose-big'>Returns</div>
+      <code><a href="#statistics">Statistics</a></code>:
+        
+      
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+</section>
+
+      </div>
+    </div>
+  
+    <div class='border-bottom' id='assetgetnodatavalues'>
+      <div class="clearfix small pointer toggle-sibling">
+        <div class="py1 contain">
+            <a class='icon pin-right py1 dark-link caret-right'>▸</a>
+            <span class='code strong strong truncate'>getNoDataValues(band)</span>
+        </div>
+      </div>
+      <div class="clearfix display-none toggle-target">
+        <section class='p2 mb2 clearfix bg-white minishadow'>
+
+  
+  <div class='clearfix'>
+    
+    
+      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/m-mohr/stac-js/blob/0f0bf5fc199b9bd10912f1588c89fdba6a857fa4/src/asset.js#L215-L251'>
+      <span>src/asset.js</span>
+      </a>
+    
+  </div>
+  
+
+  <p>Finds no-data values in different extension fields (raster, claasification, file).</p>
+
+    <div class='pre p1 fill-light mt0'>getNoDataValues(band: (<a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object">Object</a> | integer)): <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Array">Array</a>&#x3C;any></div>
+  
+  
+
+  
+  
+  
+  
+  
+  
+
+  
+    <div class='py1 quiet mt1 prose-big'>Parameters</div>
+    <div class='prose'>
+      
+        <div class='space-bottom0'>
+          <div>
+            <span class='code bold'>band</span> <code class='quiet'>((<a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object">Object</a> | integer)
+            = <code>null</code>)</code>
+	    
+          </div>
+          
+        </div>
+      
+    </div>
+  
+
+  
+
+  
+    
+      <div class='py1 quiet mt1 prose-big'>Returns</div>
+      <code><a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Array">Array</a>&#x3C;any></code>:
+        
+      
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+</section>
+
+      </div>
+    </div>
+  
     <div class='border-bottom' id='assetisdefintion'>
       <div class="clearfix small pointer toggle-sibling">
         <div class="py1 contain">
@@ -1299,7 +1673,7 @@ Otherwise, returns the metadata from calling <code>getMetadata()</code> for the 
   <div class='clearfix'>
     
     
-      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/m-mohr/stac-js/blob/3498369f84969671effecbf5491cbcdff5bbd531/src/asset.js#L151-L153'>
+      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/m-mohr/stac-js/blob/0f0bf5fc199b9bd10912f1588c89fdba6a857fa4/src/asset.js#L258-L260'>
       <span>src/asset.js</span>
       </a>
     
@@ -1368,7 +1742,7 @@ Otherwise, returns the metadata from calling <code>getMetadata()</code> for the 
   <div class='clearfix'>
     
     
-      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/m-mohr/stac-js/blob/3498369f84969671effecbf5491cbcdff5bbd531/src/asset.js#L161-L163'>
+      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/m-mohr/stac-js/blob/0f0bf5fc199b9bd10912f1588c89fdba6a857fa4/src/asset.js#L268-L270'>
       <span>src/asset.js</span>
       </a>
     
@@ -1451,7 +1825,7 @@ Otherwise, returns the metadata from calling <code>getMetadata()</code> for the 
   <div class='clearfix'>
     
     
-      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/m-mohr/stac-js/blob/3498369f84969671effecbf5491cbcdff5bbd531/src/asset.js#L170-L172'>
+      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/m-mohr/stac-js/blob/0f0bf5fc199b9bd10912f1588c89fdba6a857fa4/src/asset.js#L277-L279'>
       <span>src/asset.js</span>
       </a>
     
@@ -1520,7 +1894,7 @@ Otherwise, returns the metadata from calling <code>getMetadata()</code> for the 
   <div class='clearfix'>
     
     
-      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/m-mohr/stac-js/blob/3498369f84969671effecbf5491cbcdff5bbd531/src/asset.js#L179-L181'>
+      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/m-mohr/stac-js/blob/0f0bf5fc199b9bd10912f1588c89fdba6a857fa4/src/asset.js#L286-L288'>
       <span>src/asset.js</span>
       </a>
     
@@ -1589,7 +1963,7 @@ Otherwise, returns the metadata from calling <code>getMetadata()</code> for the 
   <div class='clearfix'>
     
     
-      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/m-mohr/stac-js/blob/3498369f84969671effecbf5491cbcdff5bbd531/src/asset.js#L190-L197'>
+      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/m-mohr/stac-js/blob/0f0bf5fc199b9bd10912f1588c89fdba6a857fa4/src/asset.js#L297-L304'>
       <span>src/asset.js</span>
       </a>
     
@@ -1661,7 +2035,7 @@ Otherwise, returns the metadata from calling <code>getMetadata()</code> for the 
   <div class='clearfix'>
     
     
-      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/m-mohr/stac-js/blob/3498369f84969671effecbf5491cbcdff5bbd531/src/asset.js#L205-L210'>
+      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/m-mohr/stac-js/blob/0f0bf5fc199b9bd10912f1588c89fdba6a857fa4/src/asset.js#L312-L317'>
       <span>src/asset.js</span>
       </a>
     
@@ -1744,7 +2118,7 @@ Otherwise, returns the metadata from calling <code>getMetadata()</code> for the 
   <div class='clearfix'>
     
     
-      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/m-mohr/stac-js/blob/3498369f84969671effecbf5491cbcdff5bbd531/src/asset.js#L217-L226'>
+      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/m-mohr/stac-js/blob/0f0bf5fc199b9bd10912f1588c89fdba6a857fa4/src/asset.js#L324-L333'>
       <span>src/asset.js</span>
       </a>
     
@@ -1818,7 +2192,7 @@ Otherwise, returns the metadata from calling <code>getMetadata()</code> for the 
     </h3>
     
     
-      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/m-mohr/stac-js/blob/3498369f84969671effecbf5491cbcdff5bbd531/src/catalog.js#L12-L18'>
+      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/m-mohr/stac-js/blob/0f0bf5fc199b9bd10912f1588c89fdba6a857fa4/src/catalog.js#L12-L18'>
       <span>src/catalog.js</span>
       </a>
     
@@ -1904,7 +2278,7 @@ Otherwise, returns the metadata from calling <code>getMetadata()</code> for the 
     </h3>
     
     
-      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/m-mohr/stac-js/blob/3498369f84969671effecbf5491cbcdff5bbd531/src/cataloglike.js#L13-L82'>
+      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/m-mohr/stac-js/blob/0f0bf5fc199b9bd10912f1588c89fdba6a857fa4/src/cataloglike.js#L13-L82'>
       <span>src/cataloglike.js</span>
       </a>
     
@@ -1988,7 +2362,7 @@ Otherwise, returns the metadata from calling <code>getMetadata()</code> for the 
   <div class='clearfix'>
     
     
-      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/m-mohr/stac-js/blob/3498369f84969671effecbf5491cbcdff5bbd531/src/cataloglike.js#L25-L27'>
+      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/m-mohr/stac-js/blob/0f0bf5fc199b9bd10912f1588c89fdba6a857fa4/src/cataloglike.js#L25-L27'>
       <span>src/cataloglike.js</span>
       </a>
     
@@ -2068,7 +2442,7 @@ Otherwise, returns the metadata from calling <code>getMetadata()</code> for the 
   <div class='clearfix'>
     
     
-      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/m-mohr/stac-js/blob/3498369f84969671effecbf5491cbcdff5bbd531/src/cataloglike.js#L36-L44'>
+      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/m-mohr/stac-js/blob/0f0bf5fc199b9bd10912f1588c89fdba6a857fa4/src/cataloglike.js#L36-L44'>
       <span>src/cataloglike.js</span>
       </a>
     
@@ -2149,7 +2523,7 @@ Otherwise, returns the metadata from calling <code>getMetadata()</code> for the 
   <div class='clearfix'>
     
     
-      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/m-mohr/stac-js/blob/3498369f84969671effecbf5491cbcdff5bbd531/src/cataloglike.js#L51-L53'>
+      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/m-mohr/stac-js/blob/0f0bf5fc199b9bd10912f1588c89fdba6a857fa4/src/cataloglike.js#L51-L53'>
       <span>src/cataloglike.js</span>
       </a>
     
@@ -2215,7 +2589,7 @@ Otherwise, returns the metadata from calling <code>getMetadata()</code> for the 
   <div class='clearfix'>
     
     
-      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/m-mohr/stac-js/blob/3498369f84969671effecbf5491cbcdff5bbd531/src/cataloglike.js#L60-L62'>
+      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/m-mohr/stac-js/blob/0f0bf5fc199b9bd10912f1588c89fdba6a857fa4/src/cataloglike.js#L60-L62'>
       <span>src/cataloglike.js</span>
       </a>
     
@@ -2281,7 +2655,7 @@ Otherwise, returns the metadata from calling <code>getMetadata()</code> for the 
   <div class='clearfix'>
     
     
-      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/m-mohr/stac-js/blob/3498369f84969671effecbf5491cbcdff5bbd531/src/cataloglike.js#L69-L71'>
+      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/m-mohr/stac-js/blob/0f0bf5fc199b9bd10912f1588c89fdba6a857fa4/src/cataloglike.js#L69-L71'>
       <span>src/cataloglike.js</span>
       </a>
     
@@ -2347,7 +2721,7 @@ Otherwise, returns the metadata from calling <code>getMetadata()</code> for the 
   <div class='clearfix'>
     
     
-      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/m-mohr/stac-js/blob/3498369f84969671effecbf5491cbcdff5bbd531/src/cataloglike.js#L78-L80'>
+      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/m-mohr/stac-js/blob/0f0bf5fc199b9bd10912f1588c89fdba6a857fa4/src/cataloglike.js#L78-L80'>
       <span>src/cataloglike.js</span>
       </a>
     
@@ -2421,7 +2795,7 @@ Otherwise, returns the metadata from calling <code>getMetadata()</code> for the 
     </h3>
     
     
-      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/m-mohr/stac-js/blob/3498369f84969671effecbf5491cbcdff5bbd531/src/collection.js#L15-L118'>
+      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/m-mohr/stac-js/blob/0f0bf5fc199b9bd10912f1588c89fdba6a857fa4/src/collection.js#L15-L118'>
       <span>src/collection.js</span>
       </a>
     
@@ -2505,7 +2879,7 @@ Otherwise, returns the metadata from calling <code>getMetadata()</code> for the 
   <div class='clearfix'>
     
     
-      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/m-mohr/stac-js/blob/3498369f84969671effecbf5491cbcdff5bbd531/src/collection.js#L26-L58'>
+      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/m-mohr/stac-js/blob/0f0bf5fc199b9bd10912f1588c89fdba6a857fa4/src/collection.js#L26-L58'>
       <span>src/collection.js</span>
       </a>
     
@@ -2572,7 +2946,7 @@ Otherwise, returns the metadata from calling <code>getMetadata()</code> for the 
   <div class='clearfix'>
     
     
-      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/m-mohr/stac-js/blob/3498369f84969671effecbf5491cbcdff5bbd531/src/collection.js#L65-L71'>
+      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/m-mohr/stac-js/blob/0f0bf5fc199b9bd10912f1588c89fdba6a857fa4/src/collection.js#L65-L71'>
       <span>src/collection.js</span>
       </a>
     
@@ -2637,7 +3011,7 @@ Otherwise, returns the metadata from calling <code>getMetadata()</code> for the 
   <div class='clearfix'>
     
     
-      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/m-mohr/stac-js/blob/3498369f84969671effecbf5491cbcdff5bbd531/src/collection.js#L79-L88'>
+      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/m-mohr/stac-js/blob/0f0bf5fc199b9bd10912f1588c89fdba6a857fa4/src/collection.js#L79-L88'>
       <span>src/collection.js</span>
       </a>
     
@@ -2703,7 +3077,7 @@ without the union bounding box if multiple bounding boxes are given.</p>
   <div class='clearfix'>
     
     
-      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/m-mohr/stac-js/blob/3498369f84969671effecbf5491cbcdff5bbd531/src/collection.js#L95-L101'>
+      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/m-mohr/stac-js/blob/0f0bf5fc199b9bd10912f1588c89fdba6a857fa4/src/collection.js#L95-L101'>
       <span>src/collection.js</span>
       </a>
     
@@ -2768,7 +3142,7 @@ without the union bounding box if multiple bounding boxes are given.</p>
   <div class='clearfix'>
     
     
-      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/m-mohr/stac-js/blob/3498369f84969671effecbf5491cbcdff5bbd531/src/collection.js#L108-L116'>
+      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/m-mohr/stac-js/blob/0f0bf5fc199b9bd10912f1588c89fdba6a857fa4/src/collection.js#L108-L116'>
       <span>src/collection.js</span>
       </a>
     
@@ -2841,7 +3215,7 @@ without the union bounding box if multiple bounding boxes are given.</p>
     </h3>
     
     
-      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/m-mohr/stac-js/blob/3498369f84969671effecbf5491cbcdff5bbd531/src/item.js#L15-L104'>
+      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/m-mohr/stac-js/blob/0f0bf5fc199b9bd10912f1588c89fdba6a857fa4/src/item.js#L15-L104'>
       <span>src/item.js</span>
       </a>
     
@@ -2925,7 +3299,7 @@ without the union bounding box if multiple bounding boxes are given.</p>
   <div class='clearfix'>
     
     
-      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/m-mohr/stac-js/blob/3498369f84969671effecbf5491cbcdff5bbd531/src/item.js#L26-L28'>
+      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/m-mohr/stac-js/blob/0f0bf5fc199b9bd10912f1588c89fdba6a857fa4/src/item.js#L26-L28'>
       <span>src/item.js</span>
       </a>
     
@@ -2992,7 +3366,7 @@ without the union bounding box if multiple bounding boxes are given.</p>
   <div class='clearfix'>
     
     
-      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/m-mohr/stac-js/blob/3498369f84969671effecbf5491cbcdff5bbd531/src/item.js#L35-L37'>
+      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/m-mohr/stac-js/blob/0f0bf5fc199b9bd10912f1588c89fdba6a857fa4/src/item.js#L35-L37'>
       <span>src/item.js</span>
       </a>
     
@@ -3057,7 +3431,7 @@ without the union bounding box if multiple bounding boxes are given.</p>
   <div class='clearfix'>
     
     
-      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/m-mohr/stac-js/blob/3498369f84969671effecbf5491cbcdff5bbd531/src/item.js#L44-L46'>
+      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/m-mohr/stac-js/blob/0f0bf5fc199b9bd10912f1588c89fdba6a857fa4/src/item.js#L44-L46'>
       <span>src/item.js</span>
       </a>
     
@@ -3122,7 +3496,7 @@ without the union bounding box if multiple bounding boxes are given.</p>
   <div class='clearfix'>
     
     
-      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/m-mohr/stac-js/blob/3498369f84969671effecbf5491cbcdff5bbd531/src/item.js#L54-L67'>
+      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/m-mohr/stac-js/blob/0f0bf5fc199b9bd10912f1588c89fdba6a857fa4/src/item.js#L54-L67'>
       <span>src/item.js</span>
       </a>
     
@@ -3202,7 +3576,7 @@ without the union bounding box if multiple bounding boxes are given.</p>
   <div class='clearfix'>
     
     
-      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/m-mohr/stac-js/blob/3498369f84969671effecbf5491cbcdff5bbd531/src/item.js#L74-L83'>
+      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/m-mohr/stac-js/blob/0f0bf5fc199b9bd10912f1588c89fdba6a857fa4/src/item.js#L74-L83'>
       <span>src/item.js</span>
       </a>
     
@@ -3267,7 +3641,7 @@ without the union bounding box if multiple bounding boxes are given.</p>
   <div class='clearfix'>
     
     
-      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/m-mohr/stac-js/blob/3498369f84969671effecbf5491cbcdff5bbd531/src/item.js#L91-L93'>
+      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/m-mohr/stac-js/blob/0f0bf5fc199b9bd10912f1588c89fdba6a857fa4/src/item.js#L91-L93'>
       <span>src/item.js</span>
       </a>
     
@@ -3347,7 +3721,7 @@ without the union bounding box if multiple bounding boxes are given.</p>
   <div class='clearfix'>
     
     
-      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/m-mohr/stac-js/blob/3498369f84969671effecbf5491cbcdff5bbd531/src/item.js#L100-L102'>
+      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/m-mohr/stac-js/blob/0f0bf5fc199b9bd10912f1588c89fdba6a857fa4/src/item.js#L100-L102'>
       <span>src/item.js</span>
       </a>
     
@@ -3421,7 +3795,7 @@ without the union bounding box if multiple bounding boxes are given.</p>
     </h3>
     
     
-      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/m-mohr/stac-js/blob/3498369f84969671effecbf5491cbcdff5bbd531/src/stac.js#L15-L444'>
+      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/m-mohr/stac-js/blob/0f0bf5fc199b9bd10912f1588c89fdba6a857fa4/src/stac.js#L15-L444'>
       <span>src/stac.js</span>
       </a>
     
@@ -3497,7 +3871,7 @@ without the union bounding box if multiple bounding boxes are given.</p>
   <div class='clearfix'>
     
     
-      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/m-mohr/stac-js/blob/3498369f84969671effecbf5491cbcdff5bbd531/src/stac.js#L55-L57'>
+      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/m-mohr/stac-js/blob/0f0bf5fc199b9bd10912f1588c89fdba6a857fa4/src/stac.js#L55-L57'>
       <span>src/stac.js</span>
       </a>
     
@@ -3566,7 +3940,7 @@ without the union bounding box if multiple bounding boxes are given.</p>
   <div class='clearfix'>
     
     
-      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/m-mohr/stac-js/blob/3498369f84969671effecbf5491cbcdff5bbd531/src/stac.js#L64-L66'>
+      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/m-mohr/stac-js/blob/0f0bf5fc199b9bd10912f1588c89fdba6a857fa4/src/stac.js#L64-L66'>
       <span>src/stac.js</span>
       </a>
     
@@ -3635,7 +4009,7 @@ without the union bounding box if multiple bounding boxes are given.</p>
   <div class='clearfix'>
     
     
-      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/m-mohr/stac-js/blob/3498369f84969671effecbf5491cbcdff5bbd531/src/stac.js#L73-L75'>
+      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/m-mohr/stac-js/blob/0f0bf5fc199b9bd10912f1588c89fdba6a857fa4/src/stac.js#L73-L75'>
       <span>src/stac.js</span>
       </a>
     
@@ -3704,7 +4078,7 @@ without the union bounding box if multiple bounding boxes are given.</p>
   <div class='clearfix'>
     
     
-      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/m-mohr/stac-js/blob/3498369f84969671effecbf5491cbcdff5bbd531/src/stac.js#L82-L84'>
+      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/m-mohr/stac-js/blob/0f0bf5fc199b9bd10912f1588c89fdba6a857fa4/src/stac.js#L82-L84'>
       <span>src/stac.js</span>
       </a>
     
@@ -3773,7 +4147,7 @@ without the union bounding box if multiple bounding boxes are given.</p>
   <div class='clearfix'>
     
     
-      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/m-mohr/stac-js/blob/3498369f84969671effecbf5491cbcdff5bbd531/src/stac.js#L91-L93'>
+      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/m-mohr/stac-js/blob/0f0bf5fc199b9bd10912f1588c89fdba6a857fa4/src/stac.js#L91-L93'>
       <span>src/stac.js</span>
       </a>
     
@@ -3839,7 +4213,7 @@ without the union bounding box if multiple bounding boxes are given.</p>
   <div class='clearfix'>
     
     
-      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/m-mohr/stac-js/blob/3498369f84969671effecbf5491cbcdff5bbd531/src/stac.js#L100-L102'>
+      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/m-mohr/stac-js/blob/0f0bf5fc199b9bd10912f1588c89fdba6a857fa4/src/stac.js#L100-L102'>
       <span>src/stac.js</span>
       </a>
     
@@ -3906,7 +4280,7 @@ without the union bounding box if multiple bounding boxes are given.</p>
   <div class='clearfix'>
     
     
-      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/m-mohr/stac-js/blob/3498369f84969671effecbf5491cbcdff5bbd531/src/stac.js#L109-L111'>
+      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/m-mohr/stac-js/blob/0f0bf5fc199b9bd10912f1588c89fdba6a857fa4/src/stac.js#L109-L111'>
       <span>src/stac.js</span>
       </a>
     
@@ -3971,7 +4345,7 @@ without the union bounding box if multiple bounding boxes are given.</p>
   <div class='clearfix'>
     
     
-      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/m-mohr/stac-js/blob/3498369f84969671effecbf5491cbcdff5bbd531/src/stac.js#L118-L120'>
+      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/m-mohr/stac-js/blob/0f0bf5fc199b9bd10912f1588c89fdba6a857fa4/src/stac.js#L118-L120'>
       <span>src/stac.js</span>
       </a>
     
@@ -4036,7 +4410,7 @@ without the union bounding box if multiple bounding boxes are given.</p>
   <div class='clearfix'>
     
     
-      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/m-mohr/stac-js/blob/3498369f84969671effecbf5491cbcdff5bbd531/src/stac.js#L127-L129'>
+      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/m-mohr/stac-js/blob/0f0bf5fc199b9bd10912f1588c89fdba6a857fa4/src/stac.js#L127-L129'>
       <span>src/stac.js</span>
       </a>
     
@@ -4101,7 +4475,7 @@ without the union bounding box if multiple bounding boxes are given.</p>
   <div class='clearfix'>
     
     
-      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/m-mohr/stac-js/blob/3498369f84969671effecbf5491cbcdff5bbd531/src/stac.js#L136-L138'>
+      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/m-mohr/stac-js/blob/0f0bf5fc199b9bd10912f1588c89fdba6a857fa4/src/stac.js#L136-L138'>
       <span>src/stac.js</span>
       </a>
     
@@ -4166,7 +4540,7 @@ without the union bounding box if multiple bounding boxes are given.</p>
   <div class='clearfix'>
     
     
-      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/m-mohr/stac-js/blob/3498369f84969671effecbf5491cbcdff5bbd531/src/stac.js#L145-L147'>
+      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/m-mohr/stac-js/blob/0f0bf5fc199b9bd10912f1588c89fdba6a857fa4/src/stac.js#L145-L147'>
       <span>src/stac.js</span>
       </a>
     
@@ -4232,7 +4606,7 @@ without the union bounding box if multiple bounding boxes are given.</p>
   <div class='clearfix'>
     
     
-      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/m-mohr/stac-js/blob/3498369f84969671effecbf5491cbcdff5bbd531/src/stac.js#L154-L156'>
+      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/m-mohr/stac-js/blob/0f0bf5fc199b9bd10912f1588c89fdba6a857fa4/src/stac.js#L154-L156'>
       <span>src/stac.js</span>
       </a>
     
@@ -4298,7 +4672,7 @@ without the union bounding box if multiple bounding boxes are given.</p>
   <div class='clearfix'>
     
     
-      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/m-mohr/stac-js/blob/3498369f84969671effecbf5491cbcdff5bbd531/src/stac.js#L163-L165'>
+      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/m-mohr/stac-js/blob/0f0bf5fc199b9bd10912f1588c89fdba6a857fa4/src/stac.js#L163-L165'>
       <span>src/stac.js</span>
       </a>
     
@@ -4364,7 +4738,7 @@ without the union bounding box if multiple bounding boxes are given.</p>
   <div class='clearfix'>
     
     
-      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/m-mohr/stac-js/blob/3498369f84969671effecbf5491cbcdff5bbd531/src/stac.js#L175-L177'>
+      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/m-mohr/stac-js/blob/0f0bf5fc199b9bd10912f1588c89fdba6a857fa4/src/stac.js#L175-L177'>
       <span>src/stac.js</span>
       </a>
     
@@ -4443,7 +4817,7 @@ without the union bounding box if multiple bounding boxes are given.</p>
   <div class='clearfix'>
     
     
-      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/m-mohr/stac-js/blob/3498369f84969671effecbf5491cbcdff5bbd531/src/stac.js#L186-L188'>
+      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/m-mohr/stac-js/blob/0f0bf5fc199b9bd10912f1588c89fdba6a857fa4/src/stac.js#L186-L188'>
       <span>src/stac.js</span>
       </a>
     
@@ -4509,7 +4883,7 @@ without the union bounding box if multiple bounding boxes are given.</p>
   <div class='clearfix'>
     
     
-      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/m-mohr/stac-js/blob/3498369f84969671effecbf5491cbcdff5bbd531/src/stac.js#L197-L207'>
+      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/m-mohr/stac-js/blob/0f0bf5fc199b9bd10912f1588c89fdba6a857fa4/src/stac.js#L197-L207'>
       <span>src/stac.js</span>
       </a>
     
@@ -4595,7 +4969,7 @@ without the union bounding box if multiple bounding boxes are given.</p>
   <div class='clearfix'>
     
     
-      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/m-mohr/stac-js/blob/3498369f84969671effecbf5491cbcdff5bbd531/src/stac.js#L215-L219'>
+      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/m-mohr/stac-js/blob/0f0bf5fc199b9bd10912f1588c89fdba6a857fa4/src/stac.js#L215-L219'>
       <span>src/stac.js</span>
       </a>
     
@@ -4673,7 +5047,7 @@ without the union bounding box if multiple bounding boxes are given.</p>
   <div class='clearfix'>
     
     
-      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/m-mohr/stac-js/blob/3498369f84969671effecbf5491cbcdff5bbd531/src/stac.js#L230-L244'>
+      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/m-mohr/stac-js/blob/0f0bf5fc199b9bd10912f1588c89fdba6a857fa4/src/stac.js#L230-L244'>
       <span>src/stac.js</span>
       </a>
     
@@ -4770,7 +5144,7 @@ without the union bounding box if multiple bounding boxes are given.</p>
   <div class='clearfix'>
     
     
-      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/m-mohr/stac-js/blob/3498369f84969671effecbf5491cbcdff5bbd531/src/stac.js#L252-L255'>
+      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/m-mohr/stac-js/blob/0f0bf5fc199b9bd10912f1588c89fdba6a857fa4/src/stac.js#L252-L255'>
       <span>src/stac.js</span>
       </a>
     
@@ -4858,7 +5232,7 @@ without the union bounding box if multiple bounding boxes are given.</p>
   <div class='clearfix'>
     
     
-      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/m-mohr/stac-js/blob/3498369f84969671effecbf5491cbcdff5bbd531/src/stac.js#L281-L300'>
+      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/m-mohr/stac-js/blob/0f0bf5fc199b9bd10912f1588c89fdba6a857fa4/src/stac.js#L281-L300'>
       <span>src/stac.js</span>
       </a>
     
@@ -4957,7 +5331,7 @@ without the union bounding box if multiple bounding boxes are given.</p>
   <div class='clearfix'>
     
     
-      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/m-mohr/stac-js/blob/3498369f84969671effecbf5491cbcdff5bbd531/src/stac.js#L309-L312'>
+      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/m-mohr/stac-js/blob/0f0bf5fc199b9bd10912f1588c89fdba6a857fa4/src/stac.js#L309-L312'>
       <span>src/stac.js</span>
       </a>
     
@@ -5043,7 +5417,7 @@ without the union bounding box if multiple bounding boxes are given.</p>
   <div class='clearfix'>
     
     
-      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/m-mohr/stac-js/blob/3498369f84969671effecbf5491cbcdff5bbd531/src/stac.js#L321-L329'>
+      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/m-mohr/stac-js/blob/0f0bf5fc199b9bd10912f1588c89fdba6a857fa4/src/stac.js#L321-L329'>
       <span>src/stac.js</span>
       </a>
     
@@ -5129,7 +5503,7 @@ without the union bounding box if multiple bounding boxes are given.</p>
   <div class='clearfix'>
     
     
-      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/m-mohr/stac-js/blob/3498369f84969671effecbf5491cbcdff5bbd531/src/stac.js#L336-L338'>
+      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/m-mohr/stac-js/blob/0f0bf5fc199b9bd10912f1588c89fdba6a857fa4/src/stac.js#L336-L338'>
       <span>src/stac.js</span>
       </a>
     
@@ -5193,7 +5567,7 @@ without the union bounding box if multiple bounding boxes are given.</p>
   <div class='clearfix'>
     
     
-      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/m-mohr/stac-js/blob/3498369f84969671effecbf5491cbcdff5bbd531/src/stac.js#L346-L348'>
+      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/m-mohr/stac-js/blob/0f0bf5fc199b9bd10912f1588c89fdba6a857fa4/src/stac.js#L346-L348'>
       <span>src/stac.js</span>
       </a>
     
@@ -5270,7 +5644,7 @@ without the union bounding box if multiple bounding boxes are given.</p>
   <div class='clearfix'>
     
     
-      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/m-mohr/stac-js/blob/3498369f84969671effecbf5491cbcdff5bbd531/src/stac.js#L356-L358'>
+      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/m-mohr/stac-js/blob/0f0bf5fc199b9bd10912f1588c89fdba6a857fa4/src/stac.js#L356-L358'>
       <span>src/stac.js</span>
       </a>
     
@@ -5347,7 +5721,7 @@ without the union bounding box if multiple bounding boxes are given.</p>
   <div class='clearfix'>
     
     
-      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/m-mohr/stac-js/blob/3498369f84969671effecbf5491cbcdff5bbd531/src/stac.js#L366-L368'>
+      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/m-mohr/stac-js/blob/0f0bf5fc199b9bd10912f1588c89fdba6a857fa4/src/stac.js#L366-L368'>
       <span>src/stac.js</span>
       </a>
     
@@ -5424,7 +5798,7 @@ without the union bounding box if multiple bounding boxes are given.</p>
   <div class='clearfix'>
     
     
-      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/m-mohr/stac-js/blob/3498369f84969671effecbf5491cbcdff5bbd531/src/stac.js#L375-L380'>
+      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/m-mohr/stac-js/blob/0f0bf5fc199b9bd10912f1588c89fdba6a857fa4/src/stac.js#L375-L380'>
       <span>src/stac.js</span>
       </a>
     
@@ -5488,7 +5862,7 @@ without the union bounding box if multiple bounding boxes are given.</p>
   <div class='clearfix'>
     
     
-      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/m-mohr/stac-js/blob/3498369f84969671effecbf5491cbcdff5bbd531/src/stac.js#L389-L391'>
+      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/m-mohr/stac-js/blob/0f0bf5fc199b9bd10912f1588c89fdba6a857fa4/src/stac.js#L389-L391'>
       <span>src/stac.js</span>
       </a>
     
@@ -5574,7 +5948,7 @@ without the union bounding box if multiple bounding boxes are given.</p>
   <div class='clearfix'>
     
     
-      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/m-mohr/stac-js/blob/3498369f84969671effecbf5491cbcdff5bbd531/src/stac.js#L399-L401'>
+      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/m-mohr/stac-js/blob/0f0bf5fc199b9bd10912f1588c89fdba6a857fa4/src/stac.js#L399-L401'>
       <span>src/stac.js</span>
       </a>
     
@@ -5651,7 +6025,7 @@ without the union bounding box if multiple bounding boxes are given.</p>
   <div class='clearfix'>
     
     
-      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/m-mohr/stac-js/blob/3498369f84969671effecbf5491cbcdff5bbd531/src/stac.js#L409-L420'>
+      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/m-mohr/stac-js/blob/0f0bf5fc199b9bd10912f1588c89fdba6a857fa4/src/stac.js#L409-L420'>
       <span>src/stac.js</span>
       </a>
     
@@ -5728,7 +6102,7 @@ without the union bounding box if multiple bounding boxes are given.</p>
   <div class='clearfix'>
     
     
-      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/m-mohr/stac-js/blob/3498369f84969671effecbf5491cbcdff5bbd531/src/stac.js#L427-L442'>
+      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/m-mohr/stac-js/blob/0f0bf5fc199b9bd10912f1588c89fdba6a857fa4/src/stac.js#L427-L442'>
       <span>src/stac.js</span>
       </a>
     
@@ -5802,7 +6176,7 @@ without the union bounding box if multiple bounding boxes are given.</p>
     </h3>
     
     
-      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/m-mohr/stac-js/blob/3498369f84969671effecbf5491cbcdff5bbd531/src/http.js#L8-L11'>
+      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/m-mohr/stac-js/blob/0f0bf5fc199b9bd10912f1588c89fdba6a857fa4/src/http.js#L8-L11'>
       <span>src/http.js</span>
       </a>
     
@@ -5861,7 +6235,7 @@ without the union bounding box if multiple bounding boxes are given.</p>
     </h3>
     
     
-      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/m-mohr/stac-js/blob/3498369f84969671effecbf5491cbcdff5bbd531/src/mediatypes.js#L10-L10'>
+      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/m-mohr/stac-js/blob/0f0bf5fc199b9bd10912f1588c89fdba6a857fa4/src/mediatypes.js#L10-L10'>
       <span>src/mediatypes.js</span>
       </a>
     
@@ -5920,7 +6294,7 @@ without the union bounding box if multiple bounding boxes are given.</p>
     </h3>
     
     
-      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/m-mohr/stac-js/blob/3498369f84969671effecbf5491cbcdff5bbd531/src/mediatypes.js#L17-L21'>
+      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/m-mohr/stac-js/blob/0f0bf5fc199b9bd10912f1588c89fdba6a857fa4/src/mediatypes.js#L17-L21'>
       <span>src/mediatypes.js</span>
       </a>
     
@@ -5979,7 +6353,7 @@ without the union bounding box if multiple bounding boxes are given.</p>
     </h3>
     
     
-      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/m-mohr/stac-js/blob/3498369f84969671effecbf5491cbcdff5bbd531/src/mediatypes.js#L28-L34'>
+      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/m-mohr/stac-js/blob/0f0bf5fc199b9bd10912f1588c89fdba6a857fa4/src/mediatypes.js#L28-L34'>
       <span>src/mediatypes.js</span>
       </a>
     
@@ -6038,7 +6412,7 @@ without the union bounding box if multiple bounding boxes are given.</p>
     </h3>
     
     
-      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/m-mohr/stac-js/blob/3498369f84969671effecbf5491cbcdff5bbd531/src/mediatypes.js#L41-L44'>
+      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/m-mohr/stac-js/blob/0f0bf5fc199b9bd10912f1588c89fdba6a857fa4/src/mediatypes.js#L41-L44'>
       <span>src/mediatypes.js</span>
       </a>
     
@@ -6097,7 +6471,7 @@ without the union bounding box if multiple bounding boxes are given.</p>
     </h3>
     
     
-      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/m-mohr/stac-js/blob/3498369f84969671effecbf5491cbcdff5bbd531/src/mediatypes.js#L51-L55'>
+      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/m-mohr/stac-js/blob/0f0bf5fc199b9bd10912f1588c89fdba6a857fa4/src/mediatypes.js#L51-L55'>
       <span>src/mediatypes.js</span>
       </a>
     
@@ -6156,7 +6530,7 @@ without the union bounding box if multiple bounding boxes are given.</p>
     </h3>
     
     
-      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/m-mohr/stac-js/blob/3498369f84969671effecbf5491cbcdff5bbd531/src/mediatypes.js#L62-L62'>
+      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/m-mohr/stac-js/blob/0f0bf5fc199b9bd10912f1588c89fdba6a857fa4/src/mediatypes.js#L62-L62'>
       <span>src/mediatypes.js</span>
       </a>
     
@@ -6215,7 +6589,7 @@ without the union bounding box if multiple bounding boxes are given.</p>
     </h3>
     
     
-      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/m-mohr/stac-js/blob/3498369f84969671effecbf5491cbcdff5bbd531/src/geo.js#L10-L22'>
+      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/m-mohr/stac-js/blob/0f0bf5fc199b9bd10912f1588c89fdba6a857fa4/src/geo.js#L10-L22'>
       <span>src/geo.js</span>
       </a>
     
@@ -6296,7 +6670,7 @@ See the STAC specification for details.</p>
     </h3>
     
     
-      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/m-mohr/stac-js/blob/3498369f84969671effecbf5491cbcdff5bbd531/src/http.js#L21-L23'>
+      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/m-mohr/stac-js/blob/0f0bf5fc199b9bd10912f1588c89fdba6a857fa4/src/http.js#L21-L23'>
       <span>src/http.js</span>
       </a>
     
@@ -6375,7 +6749,7 @@ See the STAC specification for details.</p>
     </h3>
     
     
-      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/m-mohr/stac-js/blob/3498369f84969671effecbf5491cbcdff5bbd531/src/http.js#L33-L35'>
+      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/m-mohr/stac-js/blob/0f0bf5fc199b9bd10912f1588c89fdba6a857fa4/src/http.js#L33-L35'>
       <span>src/http.js</span>
       </a>
     
@@ -6465,7 +6839,7 @@ See the STAC specification for details.</p>
     </h3>
     
     
-      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/m-mohr/stac-js/blob/3498369f84969671effecbf5491cbcdff5bbd531/src/http.js#L46-L70'>
+      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/m-mohr/stac-js/blob/0f0bf5fc199b9bd10912f1588c89fdba6a857fa4/src/http.js#L46-L70'>
       <span>src/http.js</span>
       </a>
     
@@ -6565,7 +6939,7 @@ See the STAC specification for details.</p>
     </h3>
     
     
-      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/m-mohr/stac-js/blob/3498369f84969671effecbf5491cbcdff5bbd531/src/utils.js#L7-L9'>
+      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/m-mohr/stac-js/blob/0f0bf5fc199b9bd10912f1588c89fdba6a857fa4/src/utils.js#L7-L9'>
       <span>src/utils.js</span>
       </a>
     
@@ -6644,7 +7018,7 @@ See the STAC specification for details.</p>
     </h3>
     
     
-      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/m-mohr/stac-js/blob/3498369f84969671effecbf5491cbcdff5bbd531/src/utils.js#L20-L22'>
+      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/m-mohr/stac-js/blob/0f0bf5fc199b9bd10912f1588c89fdba6a857fa4/src/utils.js#L20-L22'>
       <span>src/utils.js</span>
       </a>
     
@@ -6725,7 +7099,7 @@ This function only returns <code>true</code> for real objects and not for arrays
     </h3>
     
     
-      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/m-mohr/stac-js/blob/3498369f84969671effecbf5491cbcdff5bbd531/src/utils.js#L30-L44'>
+      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/m-mohr/stac-js/blob/0f0bf5fc199b9bd10912f1588c89fdba6a857fa4/src/utils.js#L30-L44'>
       <span>src/utils.js</span>
       </a>
     
@@ -6799,7 +7173,7 @@ This function only returns <code>true</code> for real objects and not for arrays
     </h3>
     
     
-      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/m-mohr/stac-js/blob/3498369f84969671effecbf5491cbcdff5bbd531/src/datetime.js#L10-L21'>
+      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/m-mohr/stac-js/blob/0f0bf5fc199b9bd10912f1588c89fdba6a857fa4/src/datetime.js#L10-L21'>
       <span>src/datetime.js</span>
       </a>
     
@@ -6874,7 +7248,7 @@ This function only returns <code>true</code> for real objects and not for arrays
     </h3>
     
     
-      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/m-mohr/stac-js/blob/3498369f84969671effecbf5491cbcdff5bbd531/src/datetime.js#L30-L32'>
+      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/m-mohr/stac-js/blob/0f0bf5fc199b9bd10912f1588c89fdba6a857fa4/src/datetime.js#L30-L32'>
       <span>src/datetime.js</span>
       </a>
     
@@ -6959,7 +7333,7 @@ This function only returns <code>true</code> for real objects and not for arrays
     </h3>
     
     
-      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/m-mohr/stac-js/blob/3498369f84969671effecbf5491cbcdff5bbd531/src/index.js#L19-L32'>
+      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/m-mohr/stac-js/blob/0f0bf5fc199b9bd10912f1588c89fdba6a857fa4/src/index.js#L19-L32'>
       <span>src/index.js</span>
       </a>
     
@@ -7067,7 +7441,7 @@ By default it migrates the data to the latest STAC version, but doesn't update t
     </h3>
     
     
-      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/m-mohr/stac-js/blob/3498369f84969671effecbf5491cbcdff5bbd531/src/mediatypes.js#L72-L86'>
+      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/m-mohr/stac-js/blob/0f0bf5fc199b9bd10912f1588c89fdba6a857fa4/src/mediatypes.js#L72-L86'>
       <span>src/mediatypes.js</span>
       </a>
     
@@ -7173,7 +7547,7 @@ By default it migrates the data to the latest STAC version, but doesn't update t
     </h3>
     
     
-      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/m-mohr/stac-js/blob/3498369f84969671effecbf5491cbcdff5bbd531/src/mediatypes.js#L95-L97'>
+      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/m-mohr/stac-js/blob/0f0bf5fc199b9bd10912f1588c89fdba6a857fa4/src/mediatypes.js#L95-L97'>
       <span>src/mediatypes.js</span>
       </a>
     
@@ -7270,7 +7644,7 @@ By default it migrates the data to the latest STAC version, but doesn't update t
     </h3>
     
     
-      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/m-mohr/stac-js/blob/3498369f84969671effecbf5491cbcdff5bbd531/src/mediatypes.js#L108-L130'>
+      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/m-mohr/stac-js/blob/0f0bf5fc199b9bd10912f1588c89fdba6a857fa4/src/mediatypes.js#L108-L130'>
       <span>src/mediatypes.js</span>
       </a>
     
@@ -7368,7 +7742,7 @@ By default it migrates the data to the latest STAC version, but doesn't update t
     </h3>
     
     
-      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/m-mohr/stac-js/blob/3498369f84969671effecbf5491cbcdff5bbd531/src/types.js#L1-L9'>
+      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/m-mohr/stac-js/blob/0f0bf5fc199b9bd10912f1588c89fdba6a857fa4/src/types.js#L1-L9'>
       <span>src/types.js</span>
       </a>
     
@@ -7460,7 +7834,7 @@ By default it migrates the data to the latest STAC version, but doesn't update t
     </h3>
     
     
-      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/m-mohr/stac-js/blob/3498369f84969671effecbf5491cbcdff5bbd531/src/types.js#L11-L15'>
+      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/m-mohr/stac-js/blob/0f0bf5fc199b9bd10912f1588c89fdba6a857fa4/src/types.js#L11-L15'>
       <span>src/types.js</span>
       </a>
     
@@ -7519,7 +7893,7 @@ By default it migrates the data to the latest STAC version, but doesn't update t
     </h3>
     
     
-      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/m-mohr/stac-js/blob/3498369f84969671effecbf5491cbcdff5bbd531/src/asset.js#L106-L112'>
+      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/m-mohr/stac-js/blob/0f0bf5fc199b9bd10912f1588c89fdba6a857fa4/src/asset.js#L106-L112'>
       <span>src/asset.js</span>
       </a>
     
@@ -7597,7 +7971,7 @@ By default it migrates the data to the latest STAC version, but doesn't update t
     </h3>
     
     
-      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/m-mohr/stac-js/blob/3498369f84969671effecbf5491cbcdff5bbd531/src/asset.js#L114-L121'>
+      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/m-mohr/stac-js/blob/0f0bf5fc199b9bd10912f1588c89fdba6a857fa4/src/asset.js#L114-L121'>
       <span>src/asset.js</span>
       </a>
     
@@ -7677,12 +8051,90 @@ By default it migrates the data to the latest STAC version, but doesn't update t
   
   <div class='clearfix'>
     
+    <h3 class='fl m0' id='statistics'>
+      Statistics
+    </h3>
+    
+    
+      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/m-mohr/stac-js/blob/0f0bf5fc199b9bd10912f1588c89fdba6a857fa4/src/asset.js#L182-L188'>
+      <span>src/asset.js</span>
+      </a>
+    
+  </div>
+  
+
+  <p>Statistics</p>
+
+    <div class='pre p1 fill-light mt0'>Statistics</div>
+  
+    <p>
+      Type:
+      <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object">Object</a>
+    </p>
+  
+  
+
+  
+  
+  
+  
+  
+  
+
+  
+
+  
+    <div class='py1 quiet mt1 prose-big'>Properties</div>
+    <div>
+      
+        <div class='space-bottom0'>
+          <span class='code bold'>minimum</span> <code class='quiet'>((<a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Number">number</a> | null))</code>
+          : Minimum value
+
+          
+        </div>
+      
+        <div class='space-bottom0'>
+          <span class='code bold'>maximum</span> <code class='quiet'>((<a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Number">number</a> | null))</code>
+          : Maximum value
+
+          
+        </div>
+      
+    </div>
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+</section>
+
+          
+        
+          
+          <section class='p2 mb2 clearfix bg-white minishadow'>
+
+  
+  <div class='clearfix'>
+    
     <h3 class='fl m0' id='assetscore'>
       AssetScore
     </h3>
     
     
-      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/m-mohr/stac-js/blob/3498369f84969671effecbf5491cbcdff5bbd531/src/stac.js#L257-L263'>
+      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/m-mohr/stac-js/blob/0f0bf5fc199b9bd10912f1588c89fdba6a857fa4/src/stac.js#L257-L263'>
       <span>src/stac.js</span>
       </a>
     
