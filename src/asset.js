@@ -144,6 +144,113 @@ class Asset {
   }
 
   /**
+   * Returns the band for the given criteria.
+   * 
+   * Searches the given `property` (default: `name`) for the given string.
+   * 
+   * @param {*} value 
+   * @param {string} property
+   * @returns {BandWithIndex|null}
+   * @see {getBands}
+   */
+  findBand(value, property = 'name') {
+    let bands = this.getBands();
+    let index = bands.findIndex(band => isObject(band) && band[property] === value);
+    if (index >= 0) {
+      return { index, band: bands[index] };
+    }
+    return null;
+  }
+
+  /**
+   * Returns the band for the given band index.
+   * 
+   * Passes through the (band) objects.
+   * 
+   * @param {integer|Object} band
+   * @returns {Object|null}
+   * @see {getBands}
+   */
+  getBand(band) {
+    if (isObject(band) || band === null) {
+      return band;
+    }
+    let bands = this.getBands();
+    return bands[band] || null;
+  }
+
+  /**
+   * Statistics
+   * 
+   * @typedef {Object} Statistics
+   * @property {number|null} minimum Minimum value
+   * @property {number|null} maximum Maximum value
+   */
+
+  /**
+   * 
+   * @todo
+   * @param {Object|integer} band
+   * @returns {Statistics}
+   */
+  getMinMaxValues(band = null) {
+    // data sources: raster (statistics, histogram, data_type), classification, file (data_type), data cube?
+    band = this.getBand(band);
+    let stats = {
+      minimum: null,
+      maximum: null
+    };
+    if (band) {
+      throw new Error("Not implemented yet"); // todo
+    }
+    return stats;
+  }
+
+  /**
+   * Finds no-data values in different extension fields (raster, claasification, file).
+   * 
+   * @param {Object|integer} band 
+   * @returns {Array.<*>}
+   */
+  getNoDataValues(band = null) {
+    band = this.getBand(band);
+    // data sources: raster (nodata), classification (nodata flag), file (nodata)
+    let nodata = [];
+    if (band && typeof band.nodata !== 'undefined') {
+      nodata.push(band.nodata);
+    }
+    else {
+      let file = this.getMetadata("file:nodata");
+      if (typeof file !== 'undefined') {
+        nodata = file;
+      }
+      else {
+        let classification = this.getMetadata("classification:classes");
+        if (Array.isArray(classification)) {
+          nodata = classification
+            .filter(cls => Boolean(cls.nodata))
+            .map(cls => cls.value);
+        }
+      }
+    }
+
+    return nodata.map(value => {
+      if (value === "nan") {
+        return NaN;
+      }
+      else if (value === "+inf") {
+        return +Infinity;
+      }
+      else if (value === "-inf") {
+        return -Infinity;
+      }
+      else {
+        return value;
+      }
+    });
+  }
+
+  /**
    * Returns whether this asset is an Item Asset definition (i.e. doesn't have an href) or not.
    * 
    * @returns {boolean} `true` is this asset is an Item Asset definition, `false` otherwise.
