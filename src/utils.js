@@ -42,3 +42,56 @@ export function mergeArraysOfObjects(...bands) {
   }
   return [];
 }
+
+/**
+ * Get minimum values for the STAC data types.
+ * 
+ * Currently only supports int types.
+ * 
+ * @private
+ * @todo Add float support
+ * @param {string} str Data type
+ * @returns {number|null} Minimum value
+ */
+export function getMinForDataType(str) {
+  switch(str) {
+    case "int8":
+      return -128;
+    case "int16":
+      return -32768;
+    case "int32":
+      return -2147483648;
+  }
+  if (str.startsWith("u")) {
+    return 0;
+  }
+  return null;
+}
+
+/**
+ * Get maximum values for the STAC data types.
+ * 
+ * Currently only supports int types.
+ * 
+ * @private
+ * @todo Add float support
+ * @param {string} str Data type
+ * @returns {number|null} Maximum value
+ */
+export function getMaxForDataType(str) {
+  switch(str) {
+    case "int8":
+      return 127;
+    case "uint8":
+      return 255;
+    case "int16":
+      return 32767;
+    case "uint16":
+      return 65535;
+    case "int32":
+      return 2147483647;
+    case "uint32":
+      return 4294967295;
+  }
+  return null;
+}

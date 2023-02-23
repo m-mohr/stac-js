@@ -1,6 +1,6 @@
 import { browserProtocols } from "./http";
 import { cogMediaTypes, geotiffMediaTypes, isMediaType } from "./mediatypes";
-import { hasText, isObject, mergeArraysOfObjects } from "./utils";
+import { getMaxForDataType, getMinForDataType, hasText, isObject, mergeArraysOfObjects } from "./utils";
 
 /**
  * A STAC Asset or Item Asset Definition.
@@ -180,34 +180,95 @@ class Asset {
   }
 
   /**
-   * Statistics
+   * Gets the reported minimum and maximum values for an asset (or band).
    * 
-   * @typedef {Object} Statistics
-   * @property {number|null} minimum Minimum value
-   * @property {number|null} maximum Maximum value
-   */
-
-  /**
+   * Searches through different extension fields in raster, claasification, and file.
    * 
-   * @todo
    * @param {Object|integer} band
    * @returns {Statistics}
    */
   getMinMaxValues(band = null) {
-    // data sources: raster (statistics, histogram, data_type), classification, file (data_type), data cube?
     band = this.getBand(band);
-    let stats = {
+
+    /**
+     * Statistics
+     * 
+     * @typedef {Object} Statistics
+     * @property {number|null} minimum Minimum value
+     * @property {number|null} maximum Maximum value
+     */
+    const stats = {
       minimum: null,
       maximum: null
     };
+
+    // Checks whether the stats object is completely filled
+    const isComplete = obj => obj.minimum !== null && obj.maximum !== null;
+
+    // data sources: raster (statistics, histogram, data_type), classification, file (values, data_type)
     if (band) {
-      throw new Error("Not implemented yet"); // todo
+      if (isObject(band.statistics)) {
+        if (typeof band.statistics.minimum === 'number') {
+          stats.minimum = band.statistics.minimum;
+        }
+        if (typeof band.statistics.maximum === 'number') {
+          stats.maximum = band.statistics.maximum;
+        }
+        if (isComplete(stats)) {
+          return stats;
+        }
+      }
+
+      if (isObject(band.histogram)) {
+        if (typeof band.histogram.min === 'number') {
+          stats.minimum = band.histogram.min;
+        }
+        if (typeof band.histogram.max === 'number') {
+          stats.maximum = band.histogram.max;
+        }
+        if (isComplete(stats)) {
+          return stats;
+        }
+      }
     }
+
+    let classification = this.getMetadata("classification:classes");
+    if (Array.isArray(classification)) {
+      classification.reduce((obj, cls) => {
+        obj.minimum = Math.min(obj.minimum, cls.value);
+        obj.maximum = Math.max(obj.maximum, cls.value);
+        return obj;
+      }, stats);
+      if (isComplete(stats)) {
+        return stats;
+      }
+    }
+
+    let values = this.getMetadata("file:values");
+    if (Array.isArray(values)) {
+      values.reduce((obj, map) => {
+        obj.minimum = Math.min(obj.minimum, ...map.values);
+        obj.maximum = Math.max(obj.maximum, ...map.values);
+        return obj;
+      }, stats);
+      if (isComplete(stats)) {
+        return stats;
+      }
+    }
+
+    let data_type = (isObject(band) && band.data_type) || this.getMetadata("file:data_type");
+    if (data_type) {
+      stats.minimum = getMinForDataType(data_type);
+      stats.maximum = getMaxForDataType(data_type);
+    }
+
     return stats;
   }
 
   /**
-   * Finds no-data values in different extension fields (raster, claasification, file).
+   * Gets the reported no-data values for an asset (or band).
+   * 
+   * Searches through different extension fields in raster, claasification, and file.
    * 
    * @param {Object|integer} band 
    * @returns {Array.<*>}
