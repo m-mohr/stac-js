@@ -10,18 +10,18 @@ import { getMaxForDataType, getMinForDataType, hasText, isObject, mergeArraysOfO
  * @class
  * @param {Object} data The STAC Asset object
  * @param {string} key The asset key
- * @param {Collection|Item|null} parent The parent object of the asset
+ * @param {Collection|Item|null} context The object that contains the asset
  */
 class Asset {
 
-  constructor(data, key, parent = null) {
+  constructor(data, key, context = null) {
     if (data instanceof Asset) {
-      this._parent = data._parent;
+      this._context = data._context;
       this._key = data._key;
       data = data.toJSON();
     }
     else {
-      this._parent = parent;
+      this._context = context;
       this._key = key;
     }
 
@@ -46,8 +46,8 @@ class Asset {
    * @returns {string|null}
    */
   getAbsoluteUrl(stringify = true) {
-    if (!this.isDefintion() && this._parent) {
-      return this._parent.toAbsolute(this, stringify).href;
+    if (!this.isDefintion() && this._context) {
+      return this._context.toAbsolute(this, stringify).href;
     }
     else if (!this.isDefintion() && this.href.includes('://')) {
       return this.href;
@@ -65,19 +65,19 @@ class Asset {
   }
 
   /**
-   * Returns the parent STAC entity for the asset.
+   * Returns the STAC entity that contains the asset.
    * 
    * @returns {Collection|Item|null}
    */
-  getParent() {
-    return this._parent;
+  getContext() {
+    return this._context;
   }
 
   /**
    * Returns the metadata for the given field name.
    * 
    * Returns the metadata from the asset, if present.
-   * Otherwise, returns the metadata from calling `getMetadata()` for the parent.
+   * Otherwise, returns the metadata from calling `getMetadata()` on the STAC entity that contains the asset.
    * 
    * @param {string} field Field name
    * @returns {*} The value of the field
@@ -86,8 +86,8 @@ class Asset {
     if (typeof this[field] !== 'undefined') {
       return this[field];
     }
-    if (this._parent) {
-      return this._parent.getMetadata(field);
+    if (this._context) {
+      return this._context.getMetadata(field);
     }
     return undefined;
   }
@@ -385,7 +385,7 @@ class Asset {
   toJSON() {
     let obj = {};
     Object.keys(this).forEach(key => {
-      if (typeof this[key] === 'function' || key === '_parent' || key === '_key') {
+      if (typeof this[key] === 'function' || key === '_context' || key === '_key') {
         return;
       }
       obj[key] = this[key];

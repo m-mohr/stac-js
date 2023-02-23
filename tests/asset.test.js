@@ -25,7 +25,7 @@ describe('constructor', () => {
     expect(() => new Asset(asset)).not.toThrow();
   
     let cloned = new Asset(asset);
-    expect(cloned.getParent()).toBe(asset.getParent());
+    expect(cloned.getContext()).toBe(asset.getContext());
     expect(cloned.getKey()).toBe(asset.getKey());
     expect(cloned.toJSON()).toEqual(asset.toJSON());
   });
@@ -39,8 +39,8 @@ test('getKey', () => {
   expect(asset.getKey()).toBe("analytic");
 });
 
-test('getParent', () => {
-  expect(asset.getParent()).toBe(item);
+test('getContext', () => {
+  expect(asset.getContext()).toBe(item);
 });
 
 test('getMetadata', () => {
