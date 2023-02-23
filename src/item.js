@@ -1,3 +1,4 @@
+import Asset from './asset';
 import { centerDateTime, isoToDate } from './datetime';
 import { isBoundingBox } from './geo';
 import { hasText } from './utils';
@@ -15,7 +16,10 @@ import STAC from './stac';
 class Item extends STAC {
   
   constructor(data, absoluteUrl = null) {
-    super(data, absoluteUrl);
+    const keyMap = {
+      assets: Asset.fromAssets
+    };
+    super(data, absoluteUrl, keyMap);
   }
 
   /**

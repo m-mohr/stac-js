@@ -25,7 +25,7 @@ const stac = {
 const obj = create(stac); // Migrates data to the latest version
 ```
 
-Directly instantiate through the class constructors:
+Directly instantiate `Asset`, `Catalog`, `Collection`, `Item` or `ItemCollection` through the class constructors:
 ```js
 import { Collection } from 'stac-js'; // or Catalog or Item
 

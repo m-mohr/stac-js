@@ -9,11 +9,12 @@ import STAC from './stac';
  * @abstract
  * @param {Object} data The STAC Catalog or Collection object
  * @param {?string} absoluteUrl Absolute URL of the STAC Catalog or Collection
+ * @param {Object.<string, function>} keyMap Keys and functions that convert the values to stac-js objects.
  */
 class CatalogLike extends STAC {
 
-  constructor(data, absoluteUrl = null) {
-    super(data, absoluteUrl);
+  constructor(data, absoluteUrl = null, keyMap = {}) {
+    super(data, absoluteUrl, keyMap);
   }
 
   /**

@@ -3,6 +3,7 @@ import Asset from './asset';
 import Catalog from './catalog';
 import Collection from './collection';
 import Item from './item';
+import ItemCollection from './itemcollection';
 import STAC from './stac';
 
 /**
@@ -21,7 +22,10 @@ export default function create(data, migrate = true, updateVersionNumber = false
     data = Migrate.stac(data, updateVersionNumber);
   }
   if (data.type === 'Feature') {
-    return new Item(data, migrate);
+    return new Item(data);
+  }
+  else if (data.type === 'FeatureCollection') {
+    return new ItemCollection(data);
   }
   else if (data.type === 'Collection' || typeof data.extent !== 'undefined' || typeof data.license !== 'undefined') {
     return new Collection(data, migrate);
@@ -36,5 +40,6 @@ export {
   Catalog,
   Collection,
   Item,
+  ItemCollection,
   STAC
 };

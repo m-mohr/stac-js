@@ -11,29 +11,31 @@ import Asset from './asset';
  * @class STAC
  * @param {Object} data The STAC object
  * @param {?string} absoluteUrl Absolute URL of the STAC object
+ * @param {Object.<string, function>} keyMap Keys and functions that convert the values to stac-js objects.
  */
 class STAC {
 
-  constructor(data, absoluteUrl = null) {
+  constructor(data, absoluteUrl = null, keyMap = {}) {
     if (data instanceof STAC) {
       this._url = data._url;
+      this._keyMap = data._keyMap;
       data = data.toJSON();
     }
 
     // Assign the data to the object
     for (let key in data) {
       if (typeof this[key] === 'undefined') {
-        if (key === 'assets' || key === 'item_assets') {
-          this[key] = {};
-          for(let key2 in data[key]) {
-            this[key][key2] = new Asset(data[key][key2], key2, this);
-          }
+        if (key in keyMap) {
+          this[key] = keyMap[key](data[key], this);
         }
         else {
           this[key] = data[key];
         }
       }
     }
+
+    // Map with functions that convert properties to stac-js objects
+    this._keyMap = keyMap;
 
     // Set or detect the URL of the STAC entity
     if (!this._url) {
@@ -84,12 +86,30 @@ class STAC {
   }
 
   /**
+   * Check whether this given object is a STAC ItemCollection.
+   * 
+   * @returns {boolean} `true` if the object is a STAC ItemCollection, `false` otherwise.
+   */
+  isItemCollection() {
+    return this.type === 'FeatureCollection';
+  }
+
+  /**
    * Gets the absolute URL of the STAC entity (if provided explicitly or available from the self link).
    * 
    * @returns {string|null} Absolute URL
    */
   getAbsoluteUrl() {
     return this._url;
+  }
+
+  /**
+   * Sets the absolute URL of the STAC entity.
+   * 
+   * @param {string} url Absolute URL
+   */
+  setAbsoluteUrl(url) {
+    this._url = url;
   }
 
   /**
@@ -172,7 +192,7 @@ class STAC {
    * @abstract
    */
   // eslint-disable-next-line no-unused-vars
-  getMetadata(field) { //
+  getMetadata(field) {
     return undefined;
   }
 
@@ -427,14 +447,16 @@ class STAC {
   toJSON() {
     let obj = {};
     Object.keys(this).forEach(key => {
-      if (typeof this[key] === 'function' || key === '_url') {
+      if (typeof this[key] === 'function' || key === '_url' || key === '_keyMap') {
         return;
       }
       let v = this[key];
-      if (key === 'assets' || key === 'item_assets') {
-        let assets = {};
-        Object.keys(v).forEach(key => assets[key] = v[key].toJSON());
-        v = assets;
+      if (key in this._keyMap) {
+        let v2 = Array.isArray(v) ? [] : {};
+        for(let key in v) {
+          v2[key] = v[key].toJSON();
+        }
+        v = v2;
       }
       obj[key] = v;
     });

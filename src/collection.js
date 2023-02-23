@@ -1,3 +1,4 @@
+import Asset from './asset';
 import CatalogLike from './cataloglike';
 import { isoToDate } from './datetime';
 import { isBoundingBox } from './geo';
@@ -15,7 +16,11 @@ import { hasText } from './utils';
 class Collection extends CatalogLike {
 
   constructor(data, absoluteUrl = null) {
-    super(data, absoluteUrl);
+    const keyMap = {
+      assets: Asset.fromAssets,
+      item_assets: Asset.fromAssets
+    };
+    super(data, absoluteUrl, keyMap);
   }
 
   /**

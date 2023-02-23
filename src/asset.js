@@ -390,6 +390,23 @@ class Asset {
     return obj;
   }
 
+  /**
+   * Converts an object of STAC Assets into an object of stac-js Assets.
+   * 
+   * @param {Object.<string, Object>} assets Assets
+   * @param {Collection|Item|null} context The object that contains the assets
+   * @returns {Object.<string, Asset>} Improved Assets
+   */
+  static fromAssets(assets, context = null) {
+    let newAssets = {};
+    if(isObject(assets)) {
+      for(let key in assets) {
+        newAssets[key] = new Asset(assets[key], key, context);
+      }
+    }
+    return newAssets;
+  }
+
 }
 
 export default Asset;
