@@ -14,7 +14,7 @@ import { getMaxForDataType, getMinForDataType, hasText, isObject, mergeArraysOfO
  */
 class Asset {
 
-  constructor(data, key, context = null) {
+  constructor(data, key = null, context = null) {
     if (data instanceof Asset) {
       this._context = data._context;
       this._key = data._key;
@@ -27,9 +27,6 @@ class Asset {
 
     if (!isObject(data)) {
       throw new Error("Asset is not an object");
-    }
-    if (typeof this._key !== 'string') {
-      throw new Error("No valid key specified");
     }
 
     for (let key in data) {
@@ -58,7 +55,7 @@ class Asset {
   /**
    * Returns the key of the asset.
    * 
-   * @returns {string} Key of the asset
+   * @returns {string|null} Key of the asset
    */
   getKey() {
     return this._key;
