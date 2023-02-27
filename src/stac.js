@@ -283,36 +283,70 @@ class STAC {
    */
 
   /**
+   * A function that can influence the score.
+   * 
+   * Returns a relative addition to the score.
+   * Negative values subtract from the score.
+   * 
+   * @callback STAC~rankGeoTIFFs
+   * @param {Asset} asset The asset to calculate the score for.
+   */
+
+  /**
    * Ranks the GeoTiff assets for visualization purposes.
    * 
    * The score factors can be found below:
-   * - Roles:
-   *   - overview => 3
-   *   - thumbnail => 2
-   *   - visual => 1
-   *   - data => 0
-   *   - none of the above => -1
+   * - Roles/Keys (by default) - if multiple roles apply only the highest score is added:
+   *   - overview => +3
+   *   - thumbnail => +2
+   *   - visual => +2
+   *   - data => +1
+   *   - none of the above => no change
    * - Other factors:
    *   - media type is COG: +2
    *   - has RGB bands: +1
+   *   - additionalCriteria: +/- a custom value
+   * 
    * @param {boolean} httpOnly Return only GeoTiffs that can be accessed via HTTP(S)
+   * @param {Object.<string, integer>} roleScores Roles (and keys) considered for the scoring. They key is the role name, the value is the score. Higher is better. Defaults to the roles and scores detailed above. An empty object disables role-based scoring.
+   * @param {STAC~rankGeoTIFFs} additionalCriteria A function to customize the score by adding/subtracting.
    * @returns {Array.<AssetScore>} GeoTiff assets sorted by score in descending order.
    */
-  rankGeoTIFFs(httpOnly = true) {
+  rankGeoTIFFs(httpOnly = true, roleScores = null, additionalCriteria = null) {
+    if (!isObject(roleScores)) {
+      roleScores = {
+        data: 1, 
+        visual: 2,
+        thumbnail: 2,
+        overview: 3
+      };
+    }
     let scores = [];
     let assets = this.getAssetsByTypes(geotiffMediaTypes);
     if (httpOnly) {
       assets = assets.filter(asset => asset.isHTTP());
     }
-    let rolePrio = ["data", "visual", "thumbnail", "overview"]; // low to high
+    let roles = Object.entries(roleScores);
     for(let asset of assets) {
-      let score = rolePrio.findIndex(role => Array.isArray(asset.roles) && asset.roles.includes(role));
+      let score = 0;
+      if (roles.length > 0) {
+        let result = roles
+          .filter(([role]) => asset.hasRole(role, true)) // Remove all roles that don't exist in the asset
+          .map(([,value]) => value); // Map to the scores
+        if (result.length > 0) {
+          score += Math.max(...result); // Add the highest of the scores
+        }
+      }
       if (asset.isCOG()) {
         score += 2;
       }
       if (asset.findVisualBands()) {
         score += 1;
       }
+      if (typeof additionalCriteria === 'function') {
+        score += additionalCriteria(asset);
+      }
+
       scores.push({asset, score});
     }
     scores.sort((a,b) => b.score - a.score);
@@ -400,14 +434,14 @@ class STAC {
   }
 
   /**
+   * Returns all assets that contain at least one of the given roles.
    * 
-   * @todo
-   * @param {Array.<string>} roles 
-   * @param {boolean} includeKey 
-   * @returns {Array.<Asset>}
+   * @param {string|Array.<string>} roles One or more roles.
+   * @param {boolean} includeKey Also returns `true` if the asset key equals to one of the given roles.
+   * @returns {Array.<Asset>} The assets with the given roles.
    */
   getAssetsWithRoles(roles, includeKey = false) {
-    return this.getAssets().filter(asset => asset.hasRole(roles) || (includeKey && roles.includes(asset.getKey())));
+    return this.getAssets().filter(asset => asset.hasRole(roles, includeKey));
   }
 
   /**

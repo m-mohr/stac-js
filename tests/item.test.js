@@ -53,17 +53,41 @@ test('getTemporalExtent', () => {
   expect(item.getTemporalExtent()).toEqual([dtDate, dtDate]);
 });
 
-test('rankGeoTIFFs', () => {
-  let ranks = item.rankGeoTIFFs();
-  expect(ranks.length).toBe(3);
-  expect(ranks.map(r => r.asset.getKey())).toEqual(["visual", "analytic", "udm"]);
-  expect(ranks.map(r => r.score)).toEqual([4, 3, -1]);
+describe('rankGeoTIFFs', () => {
+  test('default', () => {
+    let ranks = item.rankGeoTIFFs();
+    expect(ranks.length).toBe(3);
+    expect(ranks.map(r => r.asset.getKey())).toEqual(["visual", "analytic", "udm"]);
+    expect(ranks.map(r => r.score)).toEqual([5, 4, 0]);
+  });
+
+  test('not httpOnly', () => {
+    let ranks = item.rankGeoTIFFs(false);
+    expect(ranks.length).toBe(4);
+    expect(ranks.map(r => r.asset.getKey())).toEqual(["visual", "analytic", "s3", "udm"]);
+    expect(ranks.map(r => r.score)).toEqual([5, 4, 3, 0]);
+  });
+  
+  test('with different roles', () => {
+    let ranks = item.rankGeoTIFFs(true, {analytic: 5});
+    expect(ranks.length).toBe(3);
+    expect(ranks.map(r => r.asset.getKey())).toEqual(["analytic", "visual", "udm"]);
+    expect(ranks.map(r => r.score)).toEqual([8, 3, 0]);
+  });
+  
+  test('with callback', () => {
+    let ranks = item.rankGeoTIFFs(true, null, asset => Array.isArray(asset['eo:bands']) ? 5 : -5);
+    expect(ranks.length).toBe(3);
+    expect(ranks.map(r => r.asset.getKey())).toEqual(["visual", "analytic", "udm"]);
+    expect(ranks.map(r => r.score)).toEqual([10, 9, -5]);
+  });
+
+  test('getDefaultGeoTIFF', () => {
+    let asset = item.getDefaultGeoTIFF();
+    expect(asset).not.toBeNull();
+    expect(asset.getKey()).toEqual("visual");
+    expect(asset.href).toEqual("./20201211_223832_CS2.tif");
+    expect(asset.getAbsoluteUrl()).toEqual("https://example.com/20201211_223832_CS2/20201211_223832_CS2.tif");
+  });
 });
 
-test('getDefaultGeoTIFF', () => {
-  let asset = item.getDefaultGeoTIFF();
-  expect(asset).not.toBeNull();
-  expect(asset.getKey()).toEqual("visual");
-  expect(asset.href).toEqual("./20201211_223832_CS2.tif");
-  expect(asset.getAbsoluteUrl()).toEqual("https://example.com/20201211_223832_CS2/20201211_223832_CS2.tif");
-});

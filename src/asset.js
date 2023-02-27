@@ -365,13 +365,17 @@ class Asset {
    * Checks whether this asset as a specific role assigned.
    * 
    * @param {string|Array.<string>} roles One or more roles.
-   * @returns {boolean} `true` is this asset is one of the given roles, `false` otherwise.
+   * @param {boolean} includeKey Also returns `true` if the asset key equals to one of the given roles.
+   * @returns {boolean} `true` is this asset is one of the given roles (or key), `false` otherwise.
    */
-  hasRole(roles) { // string or array of strings
+  hasRole(roles, includeKey = false) { // string or array of strings
     if (!Array.isArray(roles)) {
       roles = [roles];
     }
-    return Array.isArray(this.roles) && Boolean(this.roles.find(role => roles.includes(role)));
+    if (includeKey && roles.includes(this.getKey())) {
+      return true;
+    }
+    return Array.isArray(this.roles) && (Boolean(this.roles.find(role => roles.includes(role))));
   }
 
   /**
