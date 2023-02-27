@@ -105,6 +105,7 @@ test('findBand', () => {
   expect(asset.findBand("b2")).toEqual(b2i);
   expect(asset.findBand("blue", "common_name")).toEqual(b2i);
   expect(asset.findBand("red", "common_name")).toEqual(b3i);
+  expect(asset.findBand(["foo", "red", "bar"], "common_name")).toEqual(b3i);
 
   expect(asset.findBand("green", "common_name")).toBeNull();
   expect(asset.findBand("b1", "common_name")).toBeNull();

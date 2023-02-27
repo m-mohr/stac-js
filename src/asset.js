@@ -112,9 +112,9 @@ class Asset {
    * The RGB bands.
    * 
   * @typedef {Object} VisualBands
-  * @property {BandWithIndex} red The URI
-  * @property {BandWithIndex} green The relation type of the link
-  * @property {BandWithIndex} blue Mediy type of the link
+  * @property {BandWithIndex} red The red band with its index
+  * @property {BandWithIndex} green The green band with its index
+  * @property {BandWithIndex} blue The blue band with its index
   */
 
   /**
@@ -143,16 +143,22 @@ class Asset {
   /**
    * Returns the band for the given criteria.
    * 
-   * Searches the given `property` (default: `name`) for the given string.
+   * Searches the given `property` (default: `name`) for the given value(s).
    * 
-   * @param {*} value 
-   * @param {string} property
+   * @param {*} value A single value to find or a list of values to find one of.
+   * @param {string} property The property in the bands to match against.
+   * @param {Array.<Object>} bands For performance reasons you can provide a list of merged bands from `getBands()`.
    * @returns {BandWithIndex|null}
    * @see {getBands}
    */
-  findBand(value, property = 'name') {
-    let bands = this.getBands();
-    let index = bands.findIndex(band => isObject(band) && band[property] === value);
+  findBand(value, property = 'name', bands = null) {
+    if (!Array.isArray(value)) {
+      value = [value];
+    }
+    if (!isObject(bands)) {
+      bands = this.getBands();
+    }
+    let index = bands.findIndex(band => isObject(band) && value.includes(band[property]));
     if (index >= 0) {
       return { index, band: bands[index] };
     }
