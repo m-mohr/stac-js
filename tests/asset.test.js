@@ -251,3 +251,8 @@ describe('getNoDataValues', () => {
     expect(asset.getNoDataValues({"nodata": "+inf"})).toEqual([+Infinity]);
   });
 });
+
+test('canBrowserDisplayImage', () => {
+  expect(item.assets.thumbnail.canBrowserDisplayImage()).toBeTruthy();
+  expect(item.assets.analytic.canBrowserDisplayImage()).toBeFalsy();
+});

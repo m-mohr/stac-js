@@ -413,6 +413,18 @@ class STAC {
   /**
    * 
    * @todo
+   * @param {string} role 
+   * @param {boolean} includeKey 
+   * @returns {Asset|null}
+   */
+  getAssetWithRole(role, includeKey = false) {
+    let assets = this.getAssetsWithRoles([role], includeKey);
+    return assets[0] || null;
+  }
+
+  /**
+   * 
+   * @todo
    * @param {Array.<string>} types 
    * @returns {Array.<Asset>}
    */

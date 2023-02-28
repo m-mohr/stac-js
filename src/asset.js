@@ -1,5 +1,5 @@
 import { browserProtocols } from "./http";
-import { cogMediaTypes, geotiffMediaTypes, isMediaType } from "./mediatypes";
+import { canBrowserDisplayImage, cogMediaTypes, geotiffMediaTypes, isMediaType } from "./mediatypes";
 import { getMaxForDataType, getMinForDataType, hasText, isObject, mergeArraysOfObjects } from "./utils";
 
 /**
@@ -87,6 +87,16 @@ class Asset {
       return this._context.getMetadata(field);
     }
     return undefined;
+  }
+
+  /**
+   * Checks whether the asset can be displayed by a browser.
+   * 
+   * @returns {boolean} `true` if a browser can display the given asset, `false` otherwise.
+   * @see {canBrowserDisplayImage}
+   */
+  canBrowserDisplayImage() {
+    return canBrowserDisplayImage(this);
   }
 
   /**
