@@ -1,8 +1,8 @@
-import Asset from './asset';
-import CatalogLike from './cataloglike';
-import { isoToDate } from './datetime';
-import { isBoundingBox } from './geo';
-import { hasText } from './utils';
+import Asset from './asset.js';
+import CatalogLike from './cataloglike.js';
+import { isoToDate } from './datetime.js';
+import { isBoundingBox } from './geo.js';
+import { hasText } from './utils.js';
 
 /**
  * A STAC Collection.

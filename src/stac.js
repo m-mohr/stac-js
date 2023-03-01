@@ -1,7 +1,7 @@
-import { toAbsolute } from './http';
-import { canBrowserDisplayImage, geotiffMediaTypes, isMediaType, isStacMediaType } from './mediatypes';
-import { hasText, isObject, mergeArraysOfObjects } from './utils';
-import Asset from './asset';
+import { toAbsolute } from './http.js';
+import { canBrowserDisplayImage, geotiffMediaTypes, isMediaType, isStacMediaType } from './mediatypes.js';
+import { hasText, isObject, mergeArraysOfObjects } from './utils.js';
+import Asset from './asset.js';
 
 /**
  * Base class for STAC entities.

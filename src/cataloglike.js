@@ -1,4 +1,4 @@
-import STAC from './stac';
+import STAC from './stac.js';
 
 /**
  * Class for common parts of Catalogs and Collections.

@@ -1,7 +1,7 @@
-import Collection from './collection';
-import { unionDateTime } from './datetime';
-import { unionBoundingBox } from './geo';
-import STAC from './stac';
+import Collection from './collection.js';
+import { unionDateTime } from './datetime.js';
+import { unionBoundingBox } from './geo.js';
+import STAC from './stac.js';
 
 /**
  * Represents an Collections containing Collections.

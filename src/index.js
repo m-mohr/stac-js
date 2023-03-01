@@ -1,11 +1,11 @@
 import Migrate from '@radiantearth/stac-migrate';
-import Asset from './asset';
-import Catalog from './catalog';
-import Collection from './collection';
-import CollectionCollection from './collectioncollection';
-import Item from './item';
-import ItemCollection from './itemcollection';
-import STAC from './stac';
+import Asset from './asset.js';
+import Catalog from './catalog.js';
+import Collection from './collection.js';
+import CollectionCollection from './collectioncollection.js';
+import Item from './item.js';
+import ItemCollection from './itemcollection.js';
+import STAC from './stac.js';
 
 /**
  * Creates the corresponding object for a object that conforms to the STAC specification.

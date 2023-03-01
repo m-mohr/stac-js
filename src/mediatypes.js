@@ -1,6 +1,6 @@
 import URI from 'urijs';
-import { hasText, isObject } from './utils';
-import { browserProtocols } from './http';
+import { hasText, isObject } from './utils.js';
+import { browserProtocols } from './http.js';
 
 /**
  * The GeoJSON media type.

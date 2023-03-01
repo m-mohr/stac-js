@@ -1,6 +1,6 @@
-import { browserProtocols } from "./http";
-import { canBrowserDisplayImage, cogMediaTypes, geotiffMediaTypes, isMediaType } from "./mediatypes";
-import { getMaxForDataType, getMinForDataType, hasText, isObject, mergeArraysOfObjects } from "./utils";
+import { browserProtocols } from "./http.js";
+import { canBrowserDisplayImage, cogMediaTypes, geotiffMediaTypes, isMediaType } from "./mediatypes.js";
+import { getMaxForDataType, getMinForDataType, hasText, isObject, mergeArraysOfObjects } from "./utils.js";
 
 /**
  * A STAC Asset or Item Asset Definition.

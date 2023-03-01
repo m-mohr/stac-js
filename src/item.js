@@ -1,8 +1,8 @@
-import Asset from './asset';
-import { centerDateTime, isoToDate } from './datetime';
-import { isBoundingBox } from './geo';
-import { hasText } from './utils';
-import STAC from './stac';
+import Asset from './asset.js';
+import { centerDateTime, isoToDate } from './datetime.js';
+import { isBoundingBox } from './geo.js';
+import { hasText } from './utils.js';
+import STAC from './stac.js';
 
 /**
  * A STAC Item.

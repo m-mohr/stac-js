@@ -1,4 +1,4 @@
-import CatalogLike from './cataloglike';
+import CatalogLike from './cataloglike.js';
 
 /**
  * A STAC Catalog.

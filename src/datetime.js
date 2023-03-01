@@ -1,4 +1,4 @@
-import { hasText } from "./utils";
+import { hasText } from "./utils.js";
 
 /**
  * Parses a UTC-based ISO8601 date and time string to a Date object.
