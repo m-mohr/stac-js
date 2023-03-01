@@ -24,7 +24,7 @@ class Collection extends CatalogLike {
   }
 
   /**
-   * Returns a GeoJSON (multi-)polygon for this STAC Collection based on the bounding boxes.
+   * Returns a GeoJSON Feature for this STAC Collection, which contains a (multi-)polygon based on the bounding boxes.
    * 
    * @returns {Object|null} GeoJSON object or `null`
    */
@@ -45,19 +45,25 @@ class Collection extends CatalogLike {
         ]
       ];
     });
-    if (coordinates.length === 0) {
-      return null;
-    }
-    else if (coordinates.length === 1) {
-      return {
+    let geometry = null;
+    if (coordinates.length === 1) {
+      geometry = {
         type: "Polygon",
         coordinates: coordinates[0]
       };
     }
-    else {
-      return {
+    else if (coordinates.length > 1) {
+      geometry = {
         type: "MultiPolygon",
         coordinates
+      };
+    }
+    if (geometry) {
+      return {
+        id: this.id,
+        type: "Feature",
+        geometry,
+        properties: {}
       };
     }
   }
@@ -103,6 +109,15 @@ class Collection extends CatalogLike {
       return extents;
     }
     return [];
+  }
+
+  /**
+   * Returns a single temporal extent for the STAC Collection.
+   * 
+   * @returns {Array.<Date|null>|null}
+   */
+  getTemporalExtent() {
+    return this.getTemporalExtents()[0] || null;
   }
 
   /**

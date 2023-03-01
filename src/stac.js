@@ -95,6 +95,15 @@ class STAC {
   }
 
   /**
+   * Check whether this given object is a STAC Collection of Collections (i.e. API Collections).
+   * 
+   * @returns {boolean} `true` if the object is a STAC CollectionCollection, `false` otherwise.
+   */
+  isCollectionCollection() {
+    return false;
+  }
+
+  /**
    * Gets the absolute URL of the STAC entity (if provided explicitly or available from the self link).
    * 
    * @returns {string|null} Absolute URL
@@ -113,7 +122,7 @@ class STAC {
   }
 
   /**
-   * Returns a GeoJSON object for this STAC object.
+   * Returns a GeoJSON Feature or FeatureCollection for this STAC object.
    * 
    * @returns {Object|null} GeoJSON object or `null`
    */
@@ -127,7 +136,7 @@ class STAC {
    * @returns {BoundingBox|null}
    */
   getBoundingBox() {
-    return this.getBoundingBoxes()[0] || null;
+    return null;
   }
 
   /**
@@ -145,13 +154,13 @@ class STAC {
    * @returns {Array.<Date|null>|null}
    */
   getTemporalExtent() {
-    return this.getTemporalExtents()[0] || null;
+    return null;
   }
 
   /**
    * Returns the temporal extent(s) for the STAC entity.
    * 
-   * @returns {Array.<Array.<string|null>>}
+   * @returns {Array.<Array.<Date|null>>}
    */
   getTemporalExtents() {
     return [];
@@ -227,6 +236,9 @@ class STAC {
   }
 
   /**
+   * Get the icons from the links in a STAC entity.
+   * 
+   * All URIs are converted to be absolute.
    * 
    * @todo
    * @param {boolean} allowUndefined 
@@ -241,11 +253,12 @@ class STAC {
   /**
    * Get the thumbnails from the assets and links in a STAC entity.
    * 
+   * All links are converted to Asset objects.
    * All URIs are converted to be absolute.
    * 
    * @param {boolean} browserOnly - Return only images that can be shown in a browser natively (PNG/JPG/GIF/WEBP + HTTP/S).
    * @param {?string} prefer - If not `null` (default), prefers a role over the other. Either `thumbnail` or `overview`.
-   * @returns {Array.<Asset|Link>}
+   * @returns {Array.<Asset>}
    */
   getThumbnails(browserOnly = true, prefer = null) {
     let thumbnails = this.getAssetsWithRoles(['thumbnail', 'overview'], true);
@@ -254,13 +267,13 @@ class STAC {
     }
     // Get from links only if no assets are available as they should usually be the same as in assets
     if (thumbnails.length === 0) {
-      thumbnails = this.getLinksWithRels(['preview']);
+      thumbnails = this.getLinksWithRels(['preview']).map(link => new Asset(link, null, this));
     }
     if (browserOnly) {
       // Remove all images that can't be displayed in a browser
-      thumbnails = thumbnails.filter(img => canBrowserDisplayImage(img));
+      thumbnails = thumbnails.filter(img => img.canBrowserDisplayImage());
     }
-    return thumbnails.map(img => this.toAbsolute(img));
+    return thumbnails;
   }
 
   /**

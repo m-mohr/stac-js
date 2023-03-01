@@ -30,3 +30,34 @@ export function isoToDate(str) {
 export function centerDateTime(start, end) {
   return new Date(start.valueOf() + ((end - start) / 2));
 }
+
+/**
+ * Computes a single interval from multiple temporal intervals.
+ * 
+ * @param {Array.<Array.<Date>>} list A list of temporal intervals
+ * @returns {Array.<Date>} The merged temporal interval
+ */
+export function unionDateTime(list) {
+  if (!Array.isArray(list) || list.length === 0) {
+    return null;
+  }
+
+  let min;
+  let max;
+  const assign = (base, value, fn) => {
+    if (typeof base === 'undefined') {
+      return value;
+    }
+    else if (base === null || value === null) {
+      return null;
+    }
+    else {
+      return fn(base, value);
+    }
+  };
+  list.forEach(([start, end]) => {
+    min = assign(min, start, Math.min);
+    max = assign(max, end, Math.max);
+  });
+  return [new Date(min), new Date(max)];
+}

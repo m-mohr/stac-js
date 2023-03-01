@@ -5,6 +5,7 @@ import fs from 'fs';
 let item = JSON.parse(fs.readFileSync('./tests/examples/item.json'));
 let json = {type: "FeatureCollection", features: [item]};
 let ic = new ItemCollection(json);
+let dt = new Date(Date.UTC(2020, 11, 14, 18, 2, 31));
 
 test('Basics', () => {
   expect(ic.type).toBe("FeatureCollection");
@@ -17,6 +18,7 @@ test('is...', () => {
   expect(ic.isCatalogLike()).toBeFalsy();
   expect(ic.isCollection()).toBeFalsy();
   expect(ic.isItemCollection()).toBeTruthy();
+  expect(ic.isCollectionCollection()).toBeFalsy();
 });
 
 test('toJSON', () => {
@@ -28,11 +30,11 @@ test('toGeoJSON', () => {
 });
 
 test('getBoundingBox', () => {
-  expect(ic.getBoundingBox()).toBeNull();
+  expect(ic.getBoundingBox()).toEqual(item.bbox);
 });
 
 test('getBoundingBoxes', () => {
-  expect(ic.getBoundingBoxes()).toEqual([]);
+  expect(ic.getBoundingBoxes()).toEqual([item.bbox]);
 });
 
 test('getMetadata', () => {
@@ -41,7 +43,11 @@ test('getMetadata', () => {
 });
 
 test('getTemporalExtent', () => {
-  expect(ic.getTemporalExtent()).toBeNull();
+  expect(ic.getTemporalExtent()).toEqual([dt, dt]);
+});
+
+test('getTemporalExtents', () => {
+  expect(ic.getTemporalExtents()).toEqual([[dt, dt]]);
 });
 
 test('getItems', () => {

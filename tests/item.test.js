@@ -19,6 +19,7 @@ test('is...', () => {
   expect(item.isCatalogLike()).toBeFalsy();
   expect(item.isCollection()).toBeFalsy();
   expect(item.isItemCollection()).toBeFalsy();
+  expect(item.isCollectionCollection()).toBeFalsy();
 });
 
 test('toJSON', () => {

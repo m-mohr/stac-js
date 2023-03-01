@@ -23,7 +23,7 @@ class Item extends STAC {
   }
 
   /**
-   * Returns a GeoJSON object for this STAC object.
+   * Returns a GeoJSON Feature for this STAC object.
    * 
    * @returns {Object|null} GeoJSON object or `null`
    */
@@ -68,6 +68,15 @@ class Item extends STAC {
       }
     }
     return dt;
+  }
+
+  /**
+   * Returns a single temporal extent for the STAC Item.
+   * 
+   * @returns {Array.<Date|null>|null}
+   */
+  getTemporalExtent() {
+    return this.getTemporalExtents()[0] || null;
   }
 
   /**

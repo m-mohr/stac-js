@@ -34,7 +34,7 @@
     "jest-html-reporter": "^3.3.0"
   },
   "dependencies": {
-    "@radiantearth/stac-migrate": "^1.4.0",
+    "@radiantearth/stac-migrate": "^1.5.0",
     "urijs": "^1.19.11"
   }
 }
