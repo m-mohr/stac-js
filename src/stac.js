@@ -266,11 +266,13 @@ class STAC {
   /**
    * Determines the default GeoTiff asset for visualization.
    * 
+   * @param {boolean} httpOnly Return only GeoTiffs that can be accessed via HTTP(S)
+   * @param {boolean} cogOnly Return only COGs
    * @returns {Asset} Default GeoTiff asset
    * @see {rankGeoTIFFs}
    */
-  getDefaultGeoTIFF(httpOnly = true) {
-    let scores = this.rankGeoTIFFs(httpOnly);
+  getDefaultGeoTIFF(httpOnly = true, cogOnly = false) {
+    let scores = this.rankGeoTIFFs(httpOnly, cogOnly);
     return scores[0]?.asset;
   }
 
@@ -303,16 +305,17 @@ class STAC {
    *   - data => +1
    *   - none of the above => no change
    * - Other factors:
-   *   - media type is COG: +2
+   *   - media type is COG: +2 (if cogOnly = false)
    *   - has RGB bands: +1
    *   - additionalCriteria: +/- a custom value
    * 
    * @param {boolean} httpOnly Return only GeoTiffs that can be accessed via HTTP(S)
+   * @param {boolean} cogOnly Return only COGs
    * @param {Object.<string, integer>} roleScores Roles (and keys) considered for the scoring. They key is the role name, the value is the score. Higher is better. Defaults to the roles and scores detailed above. An empty object disables role-based scoring.
    * @param {STAC~rankGeoTIFFs} additionalCriteria A function to customize the score by adding/subtracting.
    * @returns {Array.<AssetScore>} GeoTiff assets sorted by score in descending order.
    */
-  rankGeoTIFFs(httpOnly = true, roleScores = null, additionalCriteria = null) {
+  rankGeoTIFFs(httpOnly = true, cogOnly = false, roleScores = null, additionalCriteria = null) {
     if (!isObject(roleScores)) {
       roleScores = {
         data: 1, 
@@ -324,7 +327,7 @@ class STAC {
     let scores = [];
     let assets = this.getAssetsByTypes(geotiffMediaTypes);
     if (httpOnly) {
-      assets = assets.filter(asset => asset.isHTTP());
+      assets = assets.filter(asset => asset.isHTTP() && (!cogOnly || asset.isCOG()));
     }
     let roles = Object.entries(roleScores);
     for(let asset of assets) {
@@ -337,7 +340,7 @@ class STAC {
           score += Math.max(...result); // Add the highest of the scores
         }
       }
-      if (asset.isCOG()) {
+      if (!cogOnly && asset.isCOG()) {
         score += 2;
       }
       if (asset.findVisualBands()) {
