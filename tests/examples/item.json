@@ -182,6 +182,15 @@
       "title": "Unusable Data Mask",
       "type": "image/tiff; application=geotiff"
     },
+    "s3": {
+      "href": "s3://example/20201211_223832_CS2_analytic_udm.tif",
+      "title": "S3 example",
+      "roles": [
+        "overview",
+        "visual"
+      ],
+      "type": "image/tiff; application=geotiff"
+    },
     "json-metadata": {
       "href": "./extended-metadata.json",
       "title": "Extended Metadata",
