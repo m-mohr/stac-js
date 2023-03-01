@@ -43,6 +43,10 @@ test('getContext', () => {
   expect(asset.getContext()).toBe(item);
 });
 
+test('getObjectType', () => {
+  expect(asset.getObjectType()).toBe("Asset");
+});
+
 test('getMetadata', () => {
   // undefined
   expect(asset.getMetadata("foo")).not.toBeDefined();

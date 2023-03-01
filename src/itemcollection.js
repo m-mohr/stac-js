@@ -20,6 +20,15 @@ class ItemCollection extends STAC {
   }
 
   /**
+   * Returns the type of the STAC object.
+   * 
+   * @returns {string}
+   */
+  getObjectType() {
+    return "ItemCollection";
+  }
+
+  /**
    * Returns all items.
    * 
    * @returns {Array.<Item>} All STAC Items

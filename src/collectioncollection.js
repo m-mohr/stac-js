@@ -19,6 +19,20 @@ class CollectionCollection extends STAC {
     super(data, absoluteUrl, keyMap);
   }
 
+  /**
+   * Returns the type of the STAC object.
+   * 
+   * @returns {string}
+   */
+  getObjectType() {
+    return "CollectionCollection";
+  }
+
+  /**
+   * Check whether this given object is a STAC Collection of Collections (i.e. API Collections).
+   * 
+   * @returns {boolean} `true` if the object is a STAC CollectionCollection, `false` otherwise.
+   */
   isCollectionCollection() {
     return true;
   }

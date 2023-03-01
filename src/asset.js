@@ -37,6 +37,15 @@ class Asset {
   }
 
   /**
+   * Returns the type of the STAC object.
+   * 
+   * @returns {string}
+   */
+  getObjectType() {
+    return "Asset";
+  }
+
+  /**
    * Gets the URL of the asset as absolute URL.
    * 
    * @param {boolean} stringify 

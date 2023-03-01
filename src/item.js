@@ -23,6 +23,15 @@ class Item extends STAC {
   }
 
   /**
+   * Returns the type of the STAC object.
+   * 
+   * @returns {string}
+   */
+  getObjectType() {
+    return "Item";
+  }
+
+  /**
    * Returns a GeoJSON Feature for this STAC object.
    * 
    * @returns {Object|null} GeoJSON object or `null`

@@ -22,6 +22,10 @@ test('is...', () => {
   expect(cc.isCollectionCollection()).toBeTruthy();
 });
 
+test('getObjectType', () => {
+  expect(cc.getObjectType()).toBe("CollectionCollection");
+});
+
 test('toJSON', () => {
   expect(cc.toJSON()).toEqual(json);
 });

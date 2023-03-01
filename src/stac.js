@@ -104,6 +104,21 @@ class STAC {
   }
 
   /**
+   * Returns the type of the STAC object.
+   * 
+   * One of:
+   * - Catalog
+   * - Collection
+   * - CollectionCollection
+   * - Item
+   * - ItemCollections
+   * @returns {string}
+   */
+  getObjectType() {
+    return this.type;
+  }
+
+  /**
    * Gets the absolute URL of the STAC entity (if provided explicitly or available from the self link).
    * 
    * @returns {string|null} Absolute URL
