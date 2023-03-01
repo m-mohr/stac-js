@@ -455,6 +455,19 @@ class STAC {
   /**
    * 
    * @todo
+   * @param {string} key
+   * @returns {Asset|null}
+   */
+  getAsset(key) {
+    if (!isObject(this.assets)) {
+      return [];
+    }
+    return this.assets[key] || null;
+  }
+
+  /**
+   * 
+   * @todo
    * @returns {Array.<Asset>}
    */
   getAssets() {
