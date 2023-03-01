@@ -36,7 +36,6 @@ test('canBrowserDisplayImage', () => {
   expect(canBrowserDisplayImage(link(null), true)).toBeFalsy();
   expect(canBrowserDisplayImage(link(""), true)).toBeFalsy();
   expect(canBrowserDisplayImage(link("image/jpg"), true)).toBeFalsy();
-  
 });
 
 test('isMediaType', () => {

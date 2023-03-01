@@ -1,4 +1,4 @@
-import { isBoundingBox } from '../src/geo';
+import { isBoundingBox, unionBoundingBox } from '../src/geo';
 
 test('isBoundingBox', () => {
   expect(isBoundingBox(undefined)).toBeFalsy();
@@ -17,4 +17,10 @@ test('isBoundingBox', () => {
 
   expect(isBoundingBox([172.91,1.34,172.95,1.36])).toBeTruthy();
   expect(isBoundingBox([-180,-90,180,90])).toBeTruthy();
+});
+
+test('unionBoundingBox', () => {
+  let bbox1 = [172.91,1.34,0,172.95,1.36,10];
+  let bbox2 = [-180,-85,180,85];
+  expect(unionBoundingBox([bbox1, bbox2, null])).toEqual(bbox2);
 });

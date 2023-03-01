@@ -2,6 +2,7 @@ import Migrate from '@radiantearth/stac-migrate';
 import Asset from './asset';
 import Catalog from './catalog';
 import Collection from './collection';
+import CollectionCollection from './collectioncollection';
 import Item from './item';
 import ItemCollection from './itemcollection';
 import STAC from './stac';
@@ -15,7 +16,7 @@ import STAC from './stac';
  * @param {Object} data The STAC object
  * @param {boolean} migrate `true` to migrate to the latest version, `false` otherwise
  * @param {boolean} updateVersionNumber `true` to update the version number (to the latest version), `false` otherwise. Only applies if `migrate` is set to `true`.
- * @returns {Catalog|Collection|Item} The created object instance.
+ * @returns {Catalog|Collection|CollectionCollection|Item|ItemCollection} The created object instance.
  */
 export default function create(data, migrate = true, updateVersionNumber = false) {
   if (migrate) {
@@ -27,11 +28,14 @@ export default function create(data, migrate = true, updateVersionNumber = false
   else if (data.type === 'FeatureCollection') {
     return new ItemCollection(data);
   }
-  else if (data.type === 'Collection' || typeof data.extent !== 'undefined' || typeof data.license !== 'undefined') {
-    return new Collection(data, migrate);
+  else if (data.type === 'Collection'|| (!data.type && typeof data.extent !== 'undefined' && typeof data.license !== 'undefined')) {
+    return new Collection(data);
+  }
+  else if (!data.type && Array.isArray(data.collections)) {
+    return new CollectionCollection(data);
   }
   else {
-    return new Catalog(data, migrate);
+    return new Catalog(data);
   }
 }
 
@@ -39,6 +43,7 @@ export {
   Asset,
   Catalog,
   Collection,
+  CollectionCollection,
   Item,
   ItemCollection,
   STAC

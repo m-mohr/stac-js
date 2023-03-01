@@ -43,6 +43,10 @@ test('getContext', () => {
   expect(asset.getContext()).toBe(item);
 });
 
+test('getObjectType', () => {
+  expect(asset.getObjectType()).toBe("Asset");
+});
+
 test('getMetadata', () => {
   // undefined
   expect(asset.getMetadata("foo")).not.toBeDefined();
@@ -251,4 +255,9 @@ describe('getNoDataValues', () => {
     expect(asset.getNoDataValues({"nodata": "-inf"})).toEqual([-Infinity]);
     expect(asset.getNoDataValues({"nodata": "+inf"})).toEqual([+Infinity]);
   });
+});
+
+test('canBrowserDisplayImage', () => {
+  expect(item.assets.thumbnail.canBrowserDisplayImage()).toBeTruthy();
+  expect(item.assets.analytic.canBrowserDisplayImage()).toBeFalsy();
 });

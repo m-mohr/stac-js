@@ -19,6 +19,11 @@ test('is...', () => {
   expect(c.isCatalogLike()).toBeTruthy();
   expect(c.isCollection()).toBeTruthy();
   expect(c.isItemCollection()).toBeFalsy();
+  expect(c.isCollectionCollection()).toBeFalsy();
+});
+
+test('getObjectType', () => {
+  expect(c.getObjectType()).toBe("Collection");
 });
 
 test('toJSON', () => {
@@ -28,8 +33,11 @@ test('toJSON', () => {
 test('toGeoJSON', () => {
   let geojson = c.toGeoJSON();
   expect(geojson).not.toBeNull();
-  expect(geojson.type).toBe("Polygon");
-  expect(geojson.coordinates.length).toBe(1);
+  expect(geojson.id).toBe(c.id);
+  expect(geojson.type).toBe("Feature");
+  expect(geojson.geometry.type).toBe("Polygon");
+  expect(geojson.geometry.coordinates.length).toBe(1);
+  expect(geojson.properties).toEqual({});
 });
 
 test('getBoundingBox', () => {

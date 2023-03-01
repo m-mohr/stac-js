@@ -1,3 +1,5 @@
+import { unionDateTime } from './datetime';
+import { unionBoundingBox } from './geo';
 import Item from './item';
 import STAC from './stac';
 
@@ -18,6 +20,15 @@ class ItemCollection extends STAC {
   }
 
   /**
+   * Returns the type of the STAC object.
+   * 
+   * @returns {string}
+   */
+  getObjectType() {
+    return "ItemCollection";
+  }
+
+  /**
    * Returns all items.
    * 
    * @returns {Array.<Item>} All STAC Items
@@ -27,7 +38,7 @@ class ItemCollection extends STAC {
   }
 
   /**
-   * Returns a GeoJSON object for this STAC object.
+   * Returns a GeoJSON FeatureCollection for this STAC object.
    * 
    * @returns {Object|null} GeoJSON object or `null`
    */
@@ -44,6 +55,42 @@ class ItemCollection extends STAC {
    */
   getMetadata(field) {
     return this[field];
+  }
+
+  /**
+   * Returns a single bounding box for all the STAC items.
+   * 
+   * @returns {BoundingBox|null}
+   */
+  getBoundingBox() {
+    return unionBoundingBox(this.getBoundingBoxes());
+  }
+
+  /**
+   * Returns a list of bounding boxes for all the STAC items.
+   * 
+   * @returns {Array.<BoundingBox>}
+   */
+  getBoundingBoxes() {
+    return this.features.map(item => item.getBoundingBox());
+  }
+
+  /**
+   * Returns a single temporal extent for all the STAC items.
+   * 
+   * @returns {Array.<Date|null>|null}
+   */
+  getTemporalExtent() {
+    return unionDateTime(this.getTemporalExtents());
+  }
+
+  /**
+   * Returns the temporal extent(s) for all the STAC items.
+   * 
+   * @returns {Array.<Array.<string|null>>}
+   */
+  getTemporalExtents() {
+    return this.features.map(item => item.getTemporalExtent());
   }
 
 }

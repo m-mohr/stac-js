@@ -95,6 +95,30 @@ class STAC {
   }
 
   /**
+   * Check whether this given object is a STAC Collection of Collections (i.e. API Collections).
+   * 
+   * @returns {boolean} `true` if the object is a STAC CollectionCollection, `false` otherwise.
+   */
+  isCollectionCollection() {
+    return false;
+  }
+
+  /**
+   * Returns the type of the STAC object.
+   * 
+   * One of:
+   * - Catalog
+   * - Collection
+   * - CollectionCollection
+   * - Item
+   * - ItemCollections
+   * @returns {string}
+   */
+  getObjectType() {
+    return this.type;
+  }
+
+  /**
    * Gets the absolute URL of the STAC entity (if provided explicitly or available from the self link).
    * 
    * @returns {string|null} Absolute URL
@@ -113,7 +137,7 @@ class STAC {
   }
 
   /**
-   * Returns a GeoJSON object for this STAC object.
+   * Returns a GeoJSON Feature or FeatureCollection for this STAC object.
    * 
    * @returns {Object|null} GeoJSON object or `null`
    */
@@ -127,7 +151,7 @@ class STAC {
    * @returns {BoundingBox|null}
    */
   getBoundingBox() {
-    return this.getBoundingBoxes()[0] || null;
+    return null;
   }
 
   /**
@@ -145,13 +169,13 @@ class STAC {
    * @returns {Array.<Date|null>|null}
    */
   getTemporalExtent() {
-    return this.getTemporalExtents()[0] || null;
+    return null;
   }
 
   /**
    * Returns the temporal extent(s) for the STAC entity.
    * 
-   * @returns {Array.<Array.<string|null>>}
+   * @returns {Array.<Array.<Date|null>>}
    */
   getTemporalExtents() {
     return [];
@@ -227,6 +251,9 @@ class STAC {
   }
 
   /**
+   * Get the icons from the links in a STAC entity.
+   * 
+   * All URIs are converted to be absolute.
    * 
    * @todo
    * @param {boolean} allowUndefined 
@@ -241,11 +268,12 @@ class STAC {
   /**
    * Get the thumbnails from the assets and links in a STAC entity.
    * 
+   * All links are converted to Asset objects.
    * All URIs are converted to be absolute.
    * 
    * @param {boolean} browserOnly - Return only images that can be shown in a browser natively (PNG/JPG/GIF/WEBP + HTTP/S).
    * @param {?string} prefer - If not `null` (default), prefers a role over the other. Either `thumbnail` or `overview`.
-   * @returns {Array.<Asset|Link>}
+   * @returns {Array.<Asset>}
    */
   getThumbnails(browserOnly = true, prefer = null) {
     let thumbnails = this.getAssetsWithRoles(['thumbnail', 'overview'], true);
@@ -254,23 +282,25 @@ class STAC {
     }
     // Get from links only if no assets are available as they should usually be the same as in assets
     if (thumbnails.length === 0) {
-      thumbnails = this.getLinksWithRels(['preview']);
+      thumbnails = this.getLinksWithRels(['preview']).map(link => new Asset(link, null, this));
     }
     if (browserOnly) {
       // Remove all images that can't be displayed in a browser
-      thumbnails = thumbnails.filter(img => canBrowserDisplayImage(img));
+      thumbnails = thumbnails.filter(img => img.canBrowserDisplayImage());
     }
-    return thumbnails.map(img => this.toAbsolute(img));
+    return thumbnails;
   }
 
   /**
    * Determines the default GeoTiff asset for visualization.
    * 
+   * @param {boolean} httpOnly Return only GeoTiffs that can be accessed via HTTP(S)
+   * @param {boolean} cogOnly Return only COGs
    * @returns {Asset} Default GeoTiff asset
    * @see {rankGeoTIFFs}
    */
-  getDefaultGeoTIFF(httpOnly = true) {
-    let scores = this.rankGeoTIFFs(httpOnly);
+  getDefaultGeoTIFF(httpOnly = true, cogOnly = false) {
+    let scores = this.rankGeoTIFFs(httpOnly, cogOnly);
     return scores[0]?.asset;
   }
 
@@ -283,36 +313,71 @@ class STAC {
    */
 
   /**
+   * A function that can influence the score.
+   * 
+   * Returns a relative addition to the score.
+   * Negative values subtract from the score.
+   * 
+   * @callback STAC~rankGeoTIFFs
+   * @param {Asset} asset The asset to calculate the score for.
+   */
+
+  /**
    * Ranks the GeoTiff assets for visualization purposes.
    * 
    * The score factors can be found below:
-   * - Roles:
-   *   - overview => 3
-   *   - thumbnail => 2
-   *   - visual => 1
-   *   - data => 0
-   *   - none of the above => -1
+   * - Roles/Keys (by default) - if multiple roles apply only the highest score is added:
+   *   - overview => +3
+   *   - thumbnail => +2
+   *   - visual => +2
+   *   - data => +1
+   *   - none of the above => no change
    * - Other factors:
-   *   - media type is COG: +2
+   *   - media type is COG: +2 (if cogOnly = false)
    *   - has RGB bands: +1
+   *   - additionalCriteria: +/- a custom value
+   * 
    * @param {boolean} httpOnly Return only GeoTiffs that can be accessed via HTTP(S)
+   * @param {boolean} cogOnly Return only COGs
+   * @param {Object.<string, integer>} roleScores Roles (and keys) considered for the scoring. They key is the role name, the value is the score. Higher is better. Defaults to the roles and scores detailed above. An empty object disables role-based scoring.
+   * @param {STAC~rankGeoTIFFs} additionalCriteria A function to customize the score by adding/subtracting.
    * @returns {Array.<AssetScore>} GeoTiff assets sorted by score in descending order.
    */
-  rankGeoTIFFs(httpOnly = true) {
+  rankGeoTIFFs(httpOnly = true, cogOnly = false, roleScores = null, additionalCriteria = null) {
+    if (!isObject(roleScores)) {
+      roleScores = {
+        data: 1, 
+        visual: 2,
+        thumbnail: 2,
+        overview: 3
+      };
+    }
     let scores = [];
     let assets = this.getAssetsByTypes(geotiffMediaTypes);
     if (httpOnly) {
-      assets = assets.filter(asset => asset.isHTTP());
+      assets = assets.filter(asset => asset.isHTTP() && (!cogOnly || asset.isCOG()));
     }
-    let rolePrio = ["data", "visual", "thumbnail", "overview"]; // low to high
+    let roles = Object.entries(roleScores);
     for(let asset of assets) {
-      let score = rolePrio.findIndex(role => Array.isArray(asset.roles) && asset.roles.includes(role));
-      if (asset.isCOG()) {
+      let score = 0;
+      if (roles.length > 0) {
+        let result = roles
+          .filter(([role]) => asset.hasRole(role, true)) // Remove all roles that don't exist in the asset
+          .map(([,value]) => value); // Map to the scores
+        if (result.length > 0) {
+          score += Math.max(...result); // Add the highest of the scores
+        }
+      }
+      if (!cogOnly && asset.isCOG()) {
         score += 2;
       }
       if (asset.findVisualBands()) {
         score += 1;
       }
+      if (typeof additionalCriteria === 'function') {
+        score += additionalCriteria(asset);
+      }
+
       scores.push({asset, score});
     }
     scores.sort((a,b) => b.score - a.score);
@@ -436,14 +501,26 @@ class STAC {
   }
 
   /**
+   * Returns all assets that contain at least one of the given roles.
    * 
-   * @todo
-   * @param {Array.<string>} roles 
-   * @param {boolean} includeKey 
-   * @returns {Array.<Asset>}
+   * @param {string|Array.<string>} roles One or more roles.
+   * @param {boolean} includeKey Also returns `true` if the asset key equals to one of the given roles.
+   * @returns {Array.<Asset>} The assets with the given roles.
    */
   getAssetsWithRoles(roles, includeKey = false) {
-    return this.getAssets().filter(asset => asset.hasRole(roles) || (includeKey && roles.includes(asset.getKey())));
+    return this.getAssets().filter(asset => asset.hasRole(roles, includeKey));
+  }
+
+  /**
+   * 
+   * @todo
+   * @param {string} role 
+   * @param {boolean} includeKey 
+   * @returns {Asset|null}
+   */
+  getAssetWithRole(role, includeKey = false) {
+    let assets = this.getAssetsWithRoles([role], includeKey);
+    return assets[0] || null;
   }
 
   /**

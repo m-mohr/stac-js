@@ -1,5 +1,5 @@
 import { browserProtocols } from "./http";
-import { cogMediaTypes, geotiffMediaTypes, isMediaType } from "./mediatypes";
+import { canBrowserDisplayImage, cogMediaTypes, geotiffMediaTypes, isMediaType } from "./mediatypes";
 import { getMaxForDataType, getMinForDataType, hasText, isObject, mergeArraysOfObjects } from "./utils";
 
 /**
@@ -34,6 +34,15 @@ class Asset {
         this[key] = data[key];
       }
     }
+  }
+
+  /**
+   * Returns the type of the STAC object.
+   * 
+   * @returns {string}
+   */
+  getObjectType() {
+    return "Asset";
   }
 
   /**
@@ -87,6 +96,16 @@ class Asset {
       return this._context.getMetadata(field);
     }
     return undefined;
+  }
+
+  /**
+   * Checks whether the asset can be displayed by a browser.
+   * 
+   * @returns {boolean} `true` if a browser can display the given asset, `false` otherwise.
+   * @see {canBrowserDisplayImage}
+   */
+  canBrowserDisplayImage() {
+    return canBrowserDisplayImage(this);
   }
 
   /**
@@ -371,13 +390,17 @@ class Asset {
    * Checks whether this asset as a specific role assigned.
    * 
    * @param {string|Array.<string>} roles One or more roles.
-   * @returns {boolean} `true` is this asset is one of the given roles, `false` otherwise.
+   * @param {boolean} includeKey Also returns `true` if the asset key equals to one of the given roles.
+   * @returns {boolean} `true` is this asset is one of the given roles (or key), `false` otherwise.
    */
-  hasRole(roles) { // string or array of strings
+  hasRole(roles, includeKey = false) { // string or array of strings
     if (!Array.isArray(roles)) {
       roles = [roles];
     }
-    return Array.isArray(this.roles) && Boolean(this.roles.find(role => roles.includes(role)));
+    if (includeKey && roles.includes(this.getKey())) {
+      return true;
+    }
+    return Array.isArray(this.roles) && (Boolean(this.roles.find(role => roles.includes(role))));
   }
 
   /**
