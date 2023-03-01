@@ -7,6 +7,9 @@ let bbox = [172.91,1.34,172.95,1.36];
 let dtStr = "2020-12-14T18:02:31Z";
 let dtDate = new Date(Date.UTC(2020, 11, 14, 18, 2, 31));
 
+let json2 = JSON.parse(fs.readFileSync('./tests/examples/item-s2.json'));
+let item2 = new Item(json2);
+
 test('Basics', () => {
   expect(item.id).toBe("20201211_223832_CS2");
   expect(item.getMetadata("id")).toBeUndefined();
@@ -103,3 +106,18 @@ describe('rankGeoTIFFs', () => {
   });
 });
 
+describe('findVisualAssets', () => {
+
+  test('item (not found)', () => {
+    expect(item.findVisualAssets()).toBeNull();
+  });
+
+  test('item-s2 (found)', () => {  
+    let assets = item2.findVisualAssets();
+    expect(assets).not.toBeNull();
+    expect(assets.red.getKey()).toBe("B04");
+    expect(assets.blue.getKey()).toBe("B02");
+    expect(assets.green.getKey()).toBe("B03");
+  });
+    
+});

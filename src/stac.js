@@ -385,6 +385,42 @@ class STAC {
   }
 
   /**
+   * The single-band assets for RGB composites.
+   * 
+  * @typedef {Object} VisualAssets
+  * @property {BandWithIndex} red The red band with its index
+  * @property {BandWithIndex} green The green band with its index
+  * @property {BandWithIndex} blue The blue band with its index
+  */
+
+  /**
+   * Find the single-band assets for RGB.
+   * 
+   * @returns {VisualAssets|null} Object with the RGB bands or null
+   */
+  findVisualAssets() {
+    let rgb = {
+      red: false,
+      green: false,
+      blue: false
+    };
+    let names = Object.keys(rgb);
+    let assets = this.getAssets();
+    for(let asset of assets) {
+      let bands = asset.getBands();
+      if (bands.length !== 1) {
+        continue;
+      }
+      let result = asset.findBand(names, 'common_name', bands);
+      if (result) {
+        rgb[result.band.common_name] = asset;
+      }
+    }
+    let complete = Object.values(rgb).every(o => Boolean(o));
+    return complete ? rgb : null;
+  }
+
+  /**
    * 
    * @todo
    * @param {string} rel 
