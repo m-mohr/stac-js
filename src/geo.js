@@ -8,6 +8,62 @@ function toObject(bbox) {
 }
 
 /**
+ * Converts one or more bounding boxes to a GeoJSON Feature.
+ * 
+ * The Feature contains a Polygon or MultiPolygon based on the given number of valid bounding boxes.
+ * 
+ * @todo
+ * @param {BoundingBox|Array.<BoundingBox>} bboxes 
+ * @returns {Object|null}
+ */
+export function toGeoJSON(bboxes) {
+  if (isBoundingBox(bboxes)) {
+    // Wrap a single bounding into an array
+    bboxes = [bboxes];
+  }
+  else if (Array.isArray(bboxes)) {
+    // Remove invalid bounding boxes
+    bboxes = bboxes.filter(bbox => isBoundingBox(bbox));
+  }
+  // Return if no valid bbox is given
+  if (!Array.isArray(bboxes) || bboxes.length === 0) {
+    return null;
+  }
+  let coordinates = bboxes.map(bbox => {
+    let { west, east, south, north } = toObject(bbox);
+    return [
+      [
+        [west, north],
+        [west, south],
+        [east, south],
+        [east, north],
+        [west, north]
+      ]
+    ];
+  });
+  let geometry = null;
+  if (coordinates.length === 1) {
+    geometry = {
+      type: "Polygon",
+      coordinates: coordinates[0]
+    };
+  }
+  else if (coordinates.length > 1) {
+    geometry = {
+      type: "MultiPolygon",
+      coordinates
+    };
+  }
+  if (geometry) {
+    return {
+      type: "Feature",
+      geometry,
+      properties: {}
+    };
+  }
+}
+
+/**
  * Checks whether the given thing is a valid bounding box.
  * 
  * A valid bounding box is an array with 4 or 6 numbers that are valid WGS84 coordinates and span a rectangle.

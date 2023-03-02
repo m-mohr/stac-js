@@ -1,7 +1,7 @@
 import Asset from './asset.js';
 import CatalogLike from './cataloglike.js';
 import { isoToDate } from './datetime.js';
-import { isBoundingBox } from './geo.js';
+import { isBoundingBox, toGeoJSON } from './geo.js';
 import { hasText } from './utils.js';
 
 /**
@@ -24,48 +24,18 @@ class Collection extends CatalogLike {
   }
 
   /**
-   * Returns a GeoJSON Feature for this STAC Collection, which contains a (multi-)polygon based on the bounding boxes.
+   * Returns a GeoJSON Feature for this STAC Collection.
+   * 
+   * The Feature contains a Polygon or MultiPolygon based on the given number of valid bounding boxes.
    * 
    * @returns {Object|null} GeoJSON object or `null`
    */
   toGeoJSON() {
-    let coordinates = this.getBoundingBoxes().map(bbox => {
-      let hasZ = bbox.length > 4;
-      let west = bbox[0];
-      let east = bbox[hasZ ? 3 : 2];
-      let south = bbox[1];
-      let north = bbox[hasZ ? 4 : 3];
-      return [
-        [
-          [west, north],
-          [west, south],
-          [east, south],
-          [east, north],
-          [west, north]
-        ]
-      ];
-    });
-    let geometry = null;
-    if (coordinates.length === 1) {
-      geometry = {
-        type: "Polygon",
-        coordinates: coordinates[0]
-      };
+    let geojson = toGeoJSON(this.getBoundingBoxes());
+    if (geojson) {
+      geojson.id = this.id;
     }
-    else if (coordinates.length > 1) {
-      geometry = {
-        type: "MultiPolygon",
-        coordinates
-      };
-    }
-    if (geometry) {
-      return {
-        id: this.id,
-        type: "Feature",
-        geometry,
-        properties: {}
-      };
-    }
+    return geojson;
   }
 
   /**
