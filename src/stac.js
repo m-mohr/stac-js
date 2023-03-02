@@ -278,7 +278,7 @@ class STAC {
   getThumbnails(browserOnly = true, prefer = null) {
     let thumbnails = this.getAssetsWithRoles(['thumbnail', 'overview'], true);
     if (prefer && thumbnails.length > 1) {
-      thumbnails.sort(a => a.roles.includes(prefer) ? -1 : 1);
+      thumbnails.sort(a => (Array.isArray(a.roles) && a.roles.includes(prefer)) || (a.getKey() === prefer) ? -1 : 1);
     }
     // Get from links only if no assets are available as they should usually be the same as in assets
     if (thumbnails.length === 0) {
