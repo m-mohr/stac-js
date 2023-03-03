@@ -7,6 +7,19 @@ function toObject(bbox) {
   return { west, east, south, north };
 }
 
+function bboxToCoords(bbox) {
+  let { west, east, south, north } = toObject(bbox);
+  return [
+    [
+      [west, north],
+      [west, south],
+      [east, south],
+      [east, north],
+      [west, north]
+    ]
+  ];
+}
+
 /**
  * Converts one or more bounding boxes to a GeoJSON Feature.
  * 
@@ -29,18 +42,20 @@ export function toGeoJSON(bboxes) {
   if (!Array.isArray(bboxes) || bboxes.length === 0) {
     return null;
   }
-  let coordinates = bboxes.map(bbox => {
-    let { west, east, south, north } = toObject(bbox);
-    return [
-      [
-        [west, north],
-        [west, south],
-        [east, south],
-        [east, north],
-        [west, north]
-      ]
-    ];
-  });
+
+  let coordinates = bboxes.reduce((list, bbox) => {
+    if (isAntimeridianBoundingBox(bbox)) {
+      let { west, east, south, north } = toObject(bbox);
+      [179,-1,-179,1]
+      list.push(bboxToCoords([-180, south, east, north]));
+      list.push(bboxToCoords([west, south, 180, north]));
+    }
+    else {
+      list.push(bboxToCoords(bbox));
+    }
+    return list;
+  }, []);
+
   let geometry = null;
   if (coordinates.length === 1) {
     geometry = {
@@ -78,13 +93,21 @@ export function isBoundingBox(bbox) {
   }
   let { west, east, south, north } = toObject(bbox);
   return (
-    west <= east &&
     south <= north &&
-    west >= -180 &&
+    west >= -180 && west <= 180 &&
     south >= -90 &&
-    east <= 180 &&
+    east <= 180 && east >= -180 &&
     north <= 90
   );
+}
+
+export function isAntimeridianBoundingBox(bbox) {
+  if (!isBoundingBox(bbox)) {
+    return false;
+  }
+  
+  let { west, east } = toObject(bbox);
+  return west > east;
 }
 
 /**
