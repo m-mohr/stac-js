@@ -15,7 +15,7 @@ export const browserProtocols = [
  * 
  * Such an URI usually starts with `/vsi` (except for `/vsicurl/`).
  * 
- * @param {sring} href 
+ * @param {string} href 
  * @returns {boolean} `true` if an GDAL Virtual Filesystem URI, `false` otherwise.
  */
 export function isGdalVfsUri(href) {

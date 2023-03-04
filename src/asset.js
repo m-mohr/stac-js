@@ -8,7 +8,13 @@ import STACReference from './reference.js';
  * 
  * You can access all properties of the given STAC Asset object directly, e.g. `asset.href`.
  * 
- * @class Asset
+ * @class
+ * @property {string} href
+ * @property {?string} title
+ * @property {?string} description
+ * @property {?string} type
+ * @property {?Array.<string>} roles
+ * 
  * @param {Object|Asset} data The STAC Asset object
  * @param {string} key The asset key
  * @param {Collection|Item|null} context The object that contains the asset
@@ -44,7 +50,7 @@ class Asset extends STACReference {
    * Gets the URL of the asset as absolute URL.
    * 
    * @param {boolean} stringify 
-   * @returns {string|null}
+   * @returns {URI|string|null}
    */
   getAbsoluteUrl(stringify = true) {
     if (this.isDefintion()) {
@@ -103,21 +109,13 @@ class Asset extends STACReference {
   }
 
   /**
-   * A band with the corresponding index.
-   * 
-  * @typedef {Object} BandWithIndex
-  * @property {integer} index The index in the bands array.
-  * @property {Object} band The band object
-  */
-
-  /**
    * The RGB bands.
    * 
-  * @typedef {Object} VisualBands
-  * @property {BandWithIndex} red The red band with its index
-  * @property {BandWithIndex} green The green band with its index
-  * @property {BandWithIndex} blue The blue band with its index
-  */
+   * @typedef {Object} VisualBands
+   * @property {BandWithIndex} red The red band with its index
+   * @property {BandWithIndex} green The green band with its index
+   * @property {BandWithIndex} blue The blue band with its index
+   */
 
   /**
    * Find the RGB bands.
@@ -126,19 +124,19 @@ class Asset extends STACReference {
    */
   findVisualBands() {
     let rgb = {
-      red: false,
-      green: false,
-      blue: false
+      red: null,
+      green: null,
+      blue: null
     };
     let bands = this.getBands();
-    for(let index in bands) {
-      index = parseInt(index, 10); // findIndex returns number, for loop uses strings?!
+    for(let key in bands) {
+      let index = parseInt(key, 10); // findIndex returns number, for loop uses strings?!
       let band = bands[index];
       if (isObject(band) && hasText(band.common_name) && band.common_name in rgb) {
         rgb[band.common_name] = { index, band };
       }
     }
-    let complete = Object.values(rgb).every(o => Boolean(o));
+    let complete = Object.values(rgb).every(o => o !== null);
     return complete ? rgb : null;
   }
 
@@ -172,7 +170,7 @@ class Asset extends STACReference {
    * 
    * Passes through the (band) objects.
    * 
-   * @param {integer|Object} band
+   * @param {number|Object} band
    * @returns {Object|null}
    * @see {getBands}
    */
@@ -189,7 +187,7 @@ class Asset extends STACReference {
    * 
    * Searches through different extension fields in raster, claasification, and file.
    * 
-   * @param {Object|integer} band
+   * @param {Object|number} band
    * @returns {Statistics}
    */
   getMinMaxValues(band = null) {
@@ -275,7 +273,7 @@ class Asset extends STACReference {
    * 
    * Searches through different extension fields in raster, claasification, and file.
    * 
-   * @param {Object|integer} band 
+   * @param {Object|number} band 
    * @returns {Array.<*>}
    */
   getNoDataValues(band = null) {

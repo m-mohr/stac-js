@@ -107,7 +107,7 @@ class STAC extends STACHypermedia {
    * 
    * @typedef {Object} AssetScore
    * @property {Asset} asset
-   * @property {integer} score
+   * @property {number} score
    */
 
   /**
@@ -137,7 +137,7 @@ class STAC extends STACHypermedia {
    * 
    * @param {boolean} httpOnly Return only GeoTiffs that can be accessed via HTTP(S)
    * @param {boolean} cogOnly Return only COGs
-   * @param {Object.<string, integer>} roleScores Roles (and keys) considered for the scoring. They key is the role name, the value is the score. Higher is better. Defaults to the roles and scores detailed above. An empty object disables role-based scoring.
+   * @param {Object.<string, number>} roleScores Roles (and keys) considered for the scoring. They key is the role name, the value is the score. Higher is better. Defaults to the roles and scores detailed above. An empty object disables role-based scoring.
    * @param {STAC~rankGeoTIFFs} additionalCriteria A function to customize the score by adding/subtracting.
    * @returns {Array.<AssetScore>} GeoTiff assets sorted by score in descending order.
    */
@@ -198,9 +198,9 @@ class STAC extends STACHypermedia {
    */
   findVisualAssets() {
     let rgb = {
-      red: false,
-      green: false,
-      blue: false
+      red: null,
+      green: null,
+      blue: null
     };
     let names = Object.keys(rgb);
     let assets = this.getAssets();
@@ -214,7 +214,7 @@ class STAC extends STACHypermedia {
         rgb[result.band.common_name] = asset;
       }
     }
-    let complete = Object.values(rgb).every(o => Boolean(o));
+    let complete = Object.values(rgb).every(o => o !== null);
     return complete ? rgb : null;
   }
 

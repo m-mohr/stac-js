@@ -1,12 +1,11 @@
-import { isObject } from './utils';
+import { isObject } from './utils.js';
 
 /**
  * Base class for STAC objects.
  * 
  * Don't instantiate this class!
  * 
- * @abstract
- * @class STACObject
+ * @interface
  * @param {Object} data The STAC object
  * @param {Object.<string, function>} keyMap Keys and functions that convert the values to stac-js objects.
  * @param {Array.<string>} privateKeys Keys that are private members of the stac-js objects (for cloning and export).
@@ -126,6 +125,7 @@ class STACObject {
    * - Item
    * - ItemCollection
    * - Link
+   * @abstract
    * @returns {string}
    */
   getObjectType() {
@@ -146,7 +146,6 @@ class STACObject {
    * 
    * @param {string} field Field name
    * @returns {*}
-   * @abstract
    */
   getMetadata(field) {
     return this[field];
