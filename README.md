@@ -58,5 +58,9 @@ The classes are drop-in replacements, which means you can still access the objec
 console.log(stac.id === obj.id);
 ```
 
+To better visualize the available classes (blue), interfaces (yellow) and the inheritance, please consult the simplified class diagram below:
+
+![Class diagram for stac-js](classes.png)
+
 **Note:** This library is purely written based on ES6 classes and doesn't do any transpiling etc.
 If you use this library, your environment either needs to support ES6 classes or you need to take measures yourself to transpile back to whatever is supported by your environment (e.g. through Babel for the browser).
