@@ -106,7 +106,7 @@ class Asset extends STACReference {
    * A band with the corresponding index.
    * 
   * @typedef {Object} BandWithIndex
-  * @property {integer} index The index in the bands array.
+  * @property {number} index The index in the bands array.
   * @property {Object} band The band object
   */
 
@@ -172,7 +172,7 @@ class Asset extends STACReference {
    * 
    * Passes through the (band) objects.
    * 
-   * @param {integer|Object} band
+   * @param {number|Object} band
    * @returns {Object|null}
    * @see {getBands}
    */
@@ -189,7 +189,7 @@ class Asset extends STACReference {
    * 
    * Searches through different extension fields in raster, claasification, and file.
    * 
-   * @param {Object|integer} band
+   * @param {Object|number} band
    * @returns {Statistics}
    */
   getMinMaxValues(band = null) {
@@ -275,7 +275,7 @@ class Asset extends STACReference {
    * 
    * Searches through different extension fields in raster, claasification, and file.
    * 
-   * @param {Object|integer} band 
+   * @param {Object|number} band 
    * @returns {Array.<*>}
    */
   getNoDataValues(band = null) {
