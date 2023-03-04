@@ -7,7 +7,7 @@ import CatalogLike from './cataloglike.js';
  * 
  * @class
  * @param {Object} data The STAC Catalog object
- * @param {?string} absoluteUrl Absolute URL of the STAC Catalog
+ * @param {string|null} absoluteUrl Absolute URL of the STAC Catalog
  */
 class Catalog extends CatalogLike {
 

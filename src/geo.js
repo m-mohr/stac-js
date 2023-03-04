@@ -21,6 +21,12 @@ function bboxToCoords(bbox) {
 }
 
 /**
+ * A bounding box.
+ * 
+ * @typedef {Array.<number>} BoundingBox
+ */
+
+/**
  * Converts one or more bounding boxes to a GeoJSON Feature.
  * 
  * The Feature contains a Polygon or MultiPolygon based on the given number of valid bounding boxes.
@@ -46,7 +52,6 @@ export function toGeoJSON(bboxes) {
   let coordinates = bboxes.reduce((list, bbox) => {
     if (isAntimeridianBoundingBox(bbox)) {
       let { west, east, south, north } = toObject(bbox);
-      [179,-1,-179,1]
       list.push(bboxToCoords([-180, south, east, north]));
       list.push(bboxToCoords([west, south, 180, north]));
     }

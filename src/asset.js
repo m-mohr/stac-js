@@ -1,48 +1,43 @@
 import { browserProtocols } from "./http.js";
 import { canBrowserDisplayImage, cogMediaTypes, geotiffMediaTypes, isMediaType } from "./mediatypes.js";
 import { getMaxForDataType, getMinForDataType, hasText, isObject, mergeArraysOfObjects } from "./utils.js";
+import STACReference from './reference.js';
 
 /**
  * A STAC Asset or Item Asset Definition.
  * 
  * You can access all properties of the given STAC Asset object directly, e.g. `asset.href`.
  * 
- * @class
- * @param {Object} data The STAC Asset object
+ * @class Asset
+ * @param {Object|Asset} data The STAC Asset object
  * @param {string} key The asset key
  * @param {Collection|Item|null} context The object that contains the asset
  */
-class Asset {
+class Asset extends STACReference {
 
   constructor(data, key = null, context = null) {
-    if (data instanceof Asset) {
-      this._context = data._context;
-      this._key = data._key;
-      data = data.toJSON();
-    }
-    else {
-      this._context = context;
+    super(data, context, {}, ['_key']);
+    if (!this._key) {
       this._key = key;
-    }
-
-    if (!isObject(data)) {
-      throw new Error("Asset is not an object");
-    }
-
-    for (let key in data) {
-      if (typeof this[key] === 'undefined') {
-        this[key] = data[key];
-      }
     }
   }
 
   /**
-   * Returns the type of the STAC object.
+   * Returns the type of the STAC object, here: 'Asset'.
    * 
    * @returns {string}
    */
   getObjectType() {
     return "Asset";
+  }
+
+  /**
+   * Check whether this given object is a STAC Asset.
+   * 
+   * @returns {boolean} `true` if the object is a STAC Asset, `false` otherwise.
+   */
+  isAsset() {
+    return true;
   }
 
   /**
@@ -52,13 +47,10 @@ class Asset {
    * @returns {string|null}
    */
   getAbsoluteUrl(stringify = true) {
-    if (!this.isDefintion() && this._context) {
-      return this._context.toAbsolute(this, stringify).href;
+    if (this.isDefintion()) {
+      return null;
     }
-    else if (!this.isDefintion() && this.href.includes('://')) {
-      return this.href;
-    }
-    return null;
+    return super.getAbsoluteUrl(stringify);
   }
 
   /**
@@ -68,15 +60,6 @@ class Asset {
    */
   getKey() {
     return this._key;
-  }
-
-  /**
-   * Returns the STAC entity that contains the asset.
-   * 
-   * @returns {Collection|Item|null}
-   */
-  getContext() {
-    return this._context;
   }
 
   /**
@@ -401,22 +384,6 @@ class Asset {
       return true;
     }
     return Array.isArray(this.roles) && (Boolean(this.roles.find(role => roles.includes(role))));
-  }
-
-  /**
-   * Returns a plain object for JSON export.
-   * 
-   * @returns {Object} Plain object
-   */
-  toJSON() {
-    let obj = {};
-    Object.keys(this).forEach(key => {
-      if (typeof this[key] === 'function' || key === '_context' || key === '_key') {
-        return;
-      }
-      obj[key] = this[key];
-    });
-    return obj;
   }
 
   /**

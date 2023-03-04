@@ -1,166 +1,23 @@
-import { toAbsolute } from './http.js';
-import { canBrowserDisplayImage, geotiffMediaTypes, isMediaType, isStacMediaType } from './mediatypes.js';
-import { hasText, isObject, mergeArraysOfObjects } from './utils.js';
-import Asset from './asset.js';
+import { canBrowserDisplayImage, geotiffMediaTypes, isMediaType } from './mediatypes.js';
+import { isObject, mergeArraysOfObjects } from './utils.js';
+import STACHypermedia from './hypermedia.js';
 
 /**
- * Base class for STAC entities.
+ * Class for STAC spec entities (Item, Catalog and Collection).
  * 
  * Don't instantiate this class!
  * 
+ * @abstract
  * @class STAC
  * @param {Object} data The STAC object
- * @param {?string} absoluteUrl Absolute URL of the STAC object
+ * @param {string|null} absoluteUrl Absolute URL of the STAC object
  * @param {Object.<string, function>} keyMap Keys and functions that convert the values to stac-js objects.
+ * @param {Array.<string>} privateKeys Keys that are private members of the stac-js objects (for cloning and export).
  */
-class STAC {
+class STAC extends STACHypermedia {
 
-  constructor(data, absoluteUrl = null, keyMap = {}) {
-    if (data instanceof STAC) {
-      this._url = data._url;
-      this._keyMap = data._keyMap;
-      data = data.toJSON();
-    }
-
-    // Assign the data to the object
-    for (let key in data) {
-      if (typeof this[key] === 'undefined') {
-        if (key in keyMap) {
-          this[key] = keyMap[key](data[key], this);
-        }
-        else {
-          this[key] = data[key];
-        }
-      }
-    }
-
-    // Map with functions that convert properties to stac-js objects
-    this._keyMap = keyMap;
-
-    // Set or detect the URL of the STAC entity
-    if (!this._url) {
-      this._url = absoluteUrl;
-      if (!this._url) {
-        let self = this.getSelfLink();
-        if (self) {
-          this._url = self.href;
-        }
-      }
-    }
-  }
-
-  /**
-   * Check whether this given object is a STAC Item.
-   * 
-   * @returns {boolean} `true` if the object is a STAC Item, `false` otherwise.
-   */
-  isItem() {
-    return this.type === 'Feature';
-  }
-
-  /**
-   * Check whether this given object is a STAC Catalog.
-   * 
-   * @returns {boolean} `true` if the object is a STAC Catalog, `false` otherwise.
-   */
-  isCatalog() {
-    return this.type === 'Catalog';
-  }
-
-  /**
-   * Check whether this given object is "catalog-like", i.e. a Catalog or Collection.
-   * 
-   * @returns {boolean} `true` if the object is a "catalog-like", `false` otherwise.
-   */
-  isCatalogLike() {
-    return this.isCatalog() || this.isCollection();
-  }
-
-  /**
-   * Check whether this given object is a STAC Collection.
-   * 
-   * @returns {boolean} `true` if the object is a STAC Collection, `false` otherwise.
-   */
-  isCollection() {
-    return this.type === 'Collection';
-  }
-
-  /**
-   * Check whether this given object is a STAC ItemCollection.
-   * 
-   * @returns {boolean} `true` if the object is a STAC ItemCollection, `false` otherwise.
-   */
-  isItemCollection() {
-    return this.type === 'FeatureCollection';
-  }
-
-  /**
-   * Check whether this given object is a STAC Collection of Collections (i.e. API Collections).
-   * 
-   * @returns {boolean} `true` if the object is a STAC CollectionCollection, `false` otherwise.
-   */
-  isCollectionCollection() {
-    return false;
-  }
-
-  /**
-   * Returns the type of the STAC object.
-   * 
-   * One of:
-   * - Catalog
-   * - Collection
-   * - CollectionCollection
-   * - Item
-   * - ItemCollections
-   * @returns {string}
-   */
-  getObjectType() {
-    return this.type;
-  }
-
-  /**
-   * Gets the absolute URL of the STAC entity (if provided explicitly or available from the self link).
-   * 
-   * @returns {string|null} Absolute URL
-   */
-  getAbsoluteUrl() {
-    return this._url;
-  }
-
-  /**
-   * Sets the absolute URL of the STAC entity.
-   * 
-   * @param {string} url Absolute URL
-   */
-  setAbsoluteUrl(url) {
-    this._url = url;
-  }
-
-  /**
-   * Returns a GeoJSON Feature or FeatureCollection for this STAC object.
-   * 
-   * @returns {Object|null} GeoJSON object or `null`
-   */
-  toGeoJSON() {
-    return null;
-  }
-
-  /**
-   * Returns a single bounding box for the STAC entity.
-   * 
-   * @returns {BoundingBox|null}
-   */
-  getBoundingBox() {
-    return null;
-  }
-
-  /**
-   * Returns a list of bounding boxes for the STAC entity.
-   * 
-   * @returns {Array.<BoundingBox>}
-   */
-  getBoundingBoxes() {
-    return [];
+  constructor(data, absoluteUrl = null, keyMap = {}, privateKeys = []) {
+    super(data, absoluteUrl, keyMap, privateKeys);
   }
 
   /**
@@ -182,45 +39,6 @@ class STAC {
   }
 
   /**
-   * Returns the self link, if present.
-   * 
-   * @returns {Link|null} The self link
-   */
-  getSelfLink() {
-    return this.getStacLinkWithRel('self');
-  }
-
-  /**
-   * Returns the root link, if present.
-   * 
-   * @returns {Link|null} The root link
-   */
-  getRootLink() {
-    return this.getStacLinkWithRel('root');
-  }
-
-  /**
-   * Returns the parent link, if present.
-   * 
-   * @returns {Link|null} The parent link
-   */
-  getParentLink() {
-    return this.getStacLinkWithRel('parent');
-  }
-
-  /**
-   * Returns the metadata for the STAC entity.
-   * 
-   * @param {string} field Field name
-   * @returns {*}
-   * @abstract
-   */
-  // eslint-disable-next-line no-unused-vars
-  getMetadata(field) {
-    return undefined;
-  }
-
-  /**
    * Returns the bands.
    * 
    * This is usually a merge of eo:bands and raster:bands.
@@ -229,25 +47,6 @@ class STAC {
    */
   getBands() {
     return mergeArraysOfObjects(this.getMetadata('eo:bands'), this.getMetadata('raster:bands'));
-  }
-
-  /**
-   * 
-   * @todo
-   * @param {Link|Asset} obj 
-   * @param {boolean} stringify 
-   * @returns {Link|Asset}
-   */
-  toAbsolute(obj, stringify = true) {
-    if (obj instanceof Asset) {
-      // Clone so that we don't alter the href in the original object
-      obj = new Asset(obj);
-    }
-    else {
-      obj = Object.assign({}, obj);
-    }
-    obj.href = toAbsolute(obj.href, this._url, stringify);
-    return obj;
   }
 
   /**
@@ -262,18 +61,17 @@ class STAC {
   getIcons(allowUndefined = true) {
     return this.getLinksWithRels(['icon'])
       .filter(img => canBrowserDisplayImage(img, allowUndefined))
-      .map(img => this.toAbsolute(img));
+      .map(img => img.getAbsoluteUrl());
   }
 
   /**
    * Get the thumbnails from the assets and links in a STAC entity.
    * 
-   * All links are converted to Asset objects.
    * All URIs are converted to be absolute.
    * 
    * @param {boolean} browserOnly - Return only images that can be shown in a browser natively (PNG/JPG/GIF/WEBP + HTTP/S).
-   * @param {?string} prefer - If not `null` (default), prefers a role over the other. Either `thumbnail` or `overview`.
-   * @returns {Array.<Asset>}
+   * @param {string|null} prefer - If not `null` (default), prefers a role over the other. Either `thumbnail` or `overview`.
+   * @returns {Array.<STACReference>} Asset or Link
    */
   getThumbnails(browserOnly = true, prefer = null) {
     let thumbnails = this.getAssetsWithRoles(['thumbnail', 'overview'], true);
@@ -282,13 +80,13 @@ class STAC {
     }
     // Get from links only if no assets are available as they should usually be the same as in assets
     if (thumbnails.length === 0) {
-      thumbnails = this.getLinksWithRels(['preview']).map(link => new Asset(link, null, this));
+      thumbnails = this.getLinksWithRels(['preview']);
     }
     if (browserOnly) {
       // Remove all images that can't be displayed in a browser
       thumbnails = thumbnails.filter(img => img.canBrowserDisplayImage());
     }
-    return thumbnails;
+    return thumbnails.map(img => img.getAbsoluteUrl());
   }
 
   /**
@@ -423,74 +221,6 @@ class STAC {
   /**
    * 
    * @todo
-   * @param {string} rel 
-   * @param {boolean} allowUndefined 
-   * @returns {Array.<Link>}
-   */
-  getStacLinksWithRel(rel, allowUndefined = true) {
-    return this.getLinksWithRels([rel])
-      .filter(link => isStacMediaType(link.type, allowUndefined));
-  }
-
-  /**
-   * 
-   * @todo
-   * @param {string} rel 
-   * @param {boolean} allowUndefined 
-   * @returns {Link} 
-   */
-  getStacLinkWithRel(rel, allowUndefined = true) {
-    const links = this.getStacLinksWithRel(rel, allowUndefined);
-    if (links.length > 0) {
-      return links[0];
-    }
-    else {
-      return null;
-    }
-  }
-  
-  /**
-   * 
-   * @todo
-   * @returns {Array.<Link>}
-   */
-  getLinks() {
-    return Array.isArray(this.links) ? this.links.filter(link => isObject(link) && hasText(link.href)) : [];
-  }
-
-  /**
-   * 
-   * @todo
-   * @param {string} rel 
-   * @returns {Link} 
-   */
-  getLinkWithRel(rel) {
-    return this.getLinks().find(link => link.rel === rel) || null;
-  }
-
-  /**
-   * 
-   * @todo
-   * @param {Array.<string>} rels 
-   * @returns {Array.<Link>} 
-   */
-  getLinksWithRels(rels) {
-    return this.getLinks().filter(link => rels.includes(link.rel));
-  }
-
-  /**
-   * 
-   * @todo
-   * @param {Array.<string>} rels 
-   * @returns {Array.<Link>} 
-   */
-  getLinksWithOtherRels(rels) {
-    return this.getLinks().filter(link => !rels.includes(link.rel));
-  }
-
-  /**
-   * 
-   * @todo
    * @param {string} key
    * @returns {Asset|null}
    */
@@ -553,40 +283,19 @@ class STAC {
    * @returns {boolean}
    */
   equals(other) {
-    if (!isObject(other)) {
-      return false;
-    }
     if (this === other) {
       return true;
     }
-    if (this.id === other.id && this.type == other.type) {
+    if (!(other instanceof STAC)) {
+      return false;
+    }
+    if (this.getObjectType() !== other.getObjectType()) {
+      return false;
+    }
+    if (this.id && this.id === other.id) {
       return true;
     }
     return false;
-  }
-
-  /**
-   * Returns a plain object for JSON export.
-   * 
-   * @returns {Object} Plain object
-   */
-  toJSON() {
-    let obj = {};
-    Object.keys(this).forEach(key => {
-      if (typeof this[key] === 'function' || key === '_url' || key === '_keyMap') {
-        return;
-      }
-      let v = this[key];
-      if (key in this._keyMap) {
-        let v2 = Array.isArray(v) ? [] : {};
-        for(let key in v) {
-          v2[key] = v[key].toJSON();
-        }
-        v = v2;
-      }
-      obj[key] = v;
-    });
-    return obj;
   }
 
 }

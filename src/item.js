@@ -11,19 +11,16 @@ import STAC from './stac.js';
  * 
  * @class
  * @param {Object} data The STAC Item object
- * @param {?string} absoluteUrl Absolute URL of the STAC Item
+ * @param {string|null} absoluteUrl Absolute URL of the STAC Item
  */
 class Item extends STAC {
   
   constructor(data, absoluteUrl = null) {
-    const keyMap = {
-      assets: Asset.fromAssets
-    };
-    super(data, absoluteUrl, keyMap);
+    super(data, absoluteUrl, { assets: Asset.fromAssets });
   }
 
   /**
-   * Returns the type of the STAC object.
+   * Returns the type of the STAC object, here: 'Item'.
    * 
    * @returns {string}
    */

@@ -1,16 +1,16 @@
 import Collection from './collection.js';
 import { unionDateTime } from './datetime.js';
 import { unionBoundingBox } from './geo.js';
-import STAC from './stac.js';
+import APICollection from './apicollection.js';
 
 /**
  * Represents an Collections containing Collections.
  * 
  * @class CollectionCollection
  * @param {Object} data The STAC API Collections object
- * @param {?string} absoluteUrl Absolute URL of the STAC Item Collection
+ * @param {string|null} absoluteUrl Absolute URL of the STAC Item Collection
  */
-class CollectionCollection extends STAC {
+class CollectionCollection extends APICollection {
 
   constructor(data, absoluteUrl = null) {
     const keyMap = {
@@ -20,7 +20,7 @@ class CollectionCollection extends STAC {
   }
 
   /**
-   * Returns the type of the STAC object.
+   * Returns the type of the STAC object, here: 'CollectionCollection'.
    * 
    * @returns {string}
    */
@@ -59,17 +59,6 @@ class CollectionCollection extends STAC {
       type: "FeatureCollection",
       features
     };
-  }
-
-  /**
-   * Returns the metadata for the STAC ItemCollection.
-   * 
-   * @param {string} field Field name
-   * @returns {*}
-   * @abstract
-   */
-  getMetadata(field) {
-    return this[field];
   }
 
   /**

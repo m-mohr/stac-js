@@ -38,7 +38,7 @@ export function toAbsolute(href, baseUrl, stringify = true) {
  * 
  * @todo
  * @param {string} href 
- * @param {?string} baseUrl 
+ * @param {string|null} baseUrl 
  * @param {boolean} noParams 
  * @param {boolean} stringify 
  * @returns {string|URI}

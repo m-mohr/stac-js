@@ -8,23 +8,23 @@ import STAC from './stac.js';
  * @class
  * @abstract
  * @param {Object} data The STAC Catalog or Collection object
- * @param {?string} absoluteUrl Absolute URL of the STAC Catalog or Collection
+ * @param {string|null} absoluteUrl Absolute URL of the STAC Catalog or Collection
  * @param {Object.<string, function>} keyMap Keys and functions that convert the values to stac-js objects.
+ * @param {Array.<string>} privateKeys Keys that are private members of the stac-js objects (for cloning and export).
  */
 class CatalogLike extends STAC {
 
-  constructor(data, absoluteUrl = null, keyMap = {}) {
-    super(data, absoluteUrl, keyMap);
+  constructor(data, absoluteUrl = null, keyMap = {}, privateKeys = []) {
+    super(data, absoluteUrl, keyMap, privateKeys);
   }
 
   /**
-   * Returns metadata from the Item properties for the given field name.
+   * Returns the type of the STAC object, here: 'Catalog' or 'Collection'.
    * 
-   * @param {string} field Field name
-   * @returns {*} The value of the field
+   * @returns {string}
    */
-  getMetadata(field) {
-    return this[field];
+  getObjectType() {
+    return this.type;
   }
 
   /**

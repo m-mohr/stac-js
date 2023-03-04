@@ -11,7 +11,7 @@ import { hasText } from './utils.js';
  * 
  * @class
  * @param {Object} data The STAC Collection object
- * @param {?string} absoluteUrl Absolute URL of the STAC Collection
+ * @param {string|null} absoluteUrl Absolute URL of the STAC Collection
  */
 class Collection extends CatalogLike {
 
