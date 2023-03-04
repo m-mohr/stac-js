@@ -6,7 +6,11 @@ import APICollection from './apicollection.js';
 /**
  * Represents an ItemCollection containing Items.
  * 
- * @class ItemCollection
+ * @class
+ * @property {string} type
+ * @property {Array.<Item>} features
+ * @property {Array.<Link>} links
+ * 
  * @param {Object} data The STAC Item Collection object
  * @param {string|null} absoluteUrl Absolute URL of the STAC Item Collection
  */
@@ -76,7 +80,7 @@ class ItemCollection extends APICollection {
   /**
    * Returns the temporal extent(s) for all the STAC items.
    * 
-   * @returns {Array.<Array.<string|null>>}
+   * @returns {Array.<Array.<Date|null>>}
    */
   getTemporalExtents() {
     return this.features.map(item => item.getTemporalExtent());

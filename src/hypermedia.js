@@ -8,8 +8,9 @@ import { hasText, isObject } from './utils.js';
  * 
  * Don't instantiate this class!
  * 
- * @abstract
- * @class STACHypermedia
+ * @interface
+ * @property {Array.<Link>} links
+ * 
  * @param {Object} data The STAC object
  * @param {string|null} absoluteUrl Absolute URL of the STAC object
  * @param {Object.<string, function>} keyMap Keys and functions that convert the values to stac-js objects.

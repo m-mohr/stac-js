@@ -5,11 +5,29 @@ import { hasText } from './utils.js';
 import STAC from './stac.js';
 
 /**
+ * Metadata for an item, the item properties.
+ * 
+ * @typedef {Object} ItemProperties
+ * @property {string} datetime Date and Time
+ */
+
+/**
  * A STAC Item.
  * 
  * You can access all properties of the given STAC Item object directly, e.g. `item.id` or `item.properties.datetime`.
  * 
  * @class
+ * @property {string} stac_version
+ * @property {?Array.<string>} stac_extensions
+ * @property {string} type
+ * @property {string} id
+ * @property {Object|null} geometry
+ * @property {?Array.<number>} bbox
+ * @property {ItemProperties} properties
+ * @property {Array.<Link>} links
+ * @property {Object.<string, Asset>} assets
+ * @property {?string} collection
+ * 
  * @param {Object} data The STAC Item object
  * @param {string|null} absoluteUrl Absolute URL of the STAC Item
  */

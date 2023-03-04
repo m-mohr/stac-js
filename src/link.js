@@ -1,12 +1,21 @@
 import STACReference from './reference.js';
-import { isObject } from './utils';
+import { isObject } from './utils.js';
 
 /**
  * A STAC Link object.
  * 
  * You can access all properties of the given STAC Link object directly, e.g. `link.href`.
  * 
- * @class Link
+ * @class
+ * @property {string} href
+ * @property {string} rel
+ * @property {?string} type
+ * @property {?string} title
+ * @property {?string} method
+ * @property {?Object.<string, string>} headers
+ * @property {?Object} body
+ * @property {?boolean} merge
+ * 
  * @param {Object|Link} data The STAC Link object
  * @param {STAC|null} context The object that contains the link
  */

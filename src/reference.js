@@ -6,8 +6,10 @@ import STACObject from './object.js';
  * 
  * Don't instantiate this class!
  * 
- * @abstract
- * @class STACReference
+ * @interface
+ * @property {string} href
+ * @property {?string} type
+ * 
  * @param {Object} data The STAC API Collection object
  * @param {STAC|null} context The object that contains the link
  * @param {Object.<string, function>} keyMap Keys and functions that convert the values to stac-js objects.

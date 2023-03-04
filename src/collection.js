@@ -5,11 +5,45 @@ import { isBoundingBox, toGeoJSON } from './geo.js';
 import { hasText } from './utils.js';
 
 /**
+ * Extents
+ * 
+ * @typedef {Object} Extent
+ * @property {SpatialExtent} spatial Spatial extents
+ * @property {TemporalExtent} temporal Temporal extents
+ */
+/**
+ * Spatial Extents
+ * 
+ * @typedef {Object} SpatialExtent
+ * @property {Array.<Array<number>>} bbox Bounding boxes
+ */
+/**
+ * Temporal Extents
+ * 
+ * @typedef {Object} TemporalExtent
+ * @property {Array.<Array<string|null>>} interval Intervals
+ */
+
+/**
  * A STAC Collection.
  * 
  * You can access all properties of the given STAC Collection object directly, e.g. `collection.title`.
  * 
  * @class
+ * @property {string} stac_version
+ * @property {?Array.<string>} stac_extensions
+ * @property {string} type
+ * @property {string} id
+ * @property {?string} title
+ * @property {string} description
+ * @property {?Array.<string>} keywords
+ * @property {string} license
+ * @property {Array.<Provider>} providers
+ * @property {Extent} extent
+ * @property {Object.<string, Array|Object>} summaries
+ * @property {Array.<Link>} links
+ * @property {Object.<string, Asset>} assets
+ * 
  * @param {Object} data The STAC Collection object
  * @param {string|null} absoluteUrl Absolute URL of the STAC Collection
  */
