@@ -21,12 +21,6 @@ function bboxToCoords(bbox) {
 }
 
 /**
- * A bounding box.
- * 
- * @typedef {Array.<number>} BoundingBox
- */
-
-/**
  * Converts one or more bounding boxes to a GeoJSON Feature.
  * 
  * The Feature contains a Polygon or MultiPolygon based on the given number of valid bounding boxes.

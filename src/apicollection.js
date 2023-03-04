@@ -7,8 +7,7 @@ import STACHypermedia from './hypermedia.js';
  * 
  * Don't instantiate this class!
  * 
- * @abstract
- * @class APICollection
+ * @interface
  * @param {Object} data The STAC API Collection object
  * @param {string|null} absoluteUrl Absolute URL of the STAC Item Collection
  * @param {Object.<string, function>} keyMap Keys and functions that convert the values to stac-js objects.

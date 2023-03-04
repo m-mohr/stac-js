@@ -5,8 +5,7 @@ import STAC from './stac.js';
  * 
  * Don't instantiate this class!
  * 
- * @class
- * @abstract
+ * @interface
  * @param {Object} data The STAC Catalog or Collection object
  * @param {string|null} absoluteUrl Absolute URL of the STAC Catalog or Collection
  * @param {Object.<string, function>} keyMap Keys and functions that convert the values to stac-js objects.

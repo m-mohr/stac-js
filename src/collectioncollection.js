@@ -6,7 +6,7 @@ import APICollection from './apicollection.js';
 /**
  * Represents an Collections containing Collections.
  * 
- * @class CollectionCollection
+ * @class
  * @param {Object} data The STAC API Collections object
  * @param {string|null} absoluteUrl Absolute URL of the STAC Item Collection
  */

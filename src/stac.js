@@ -198,9 +198,9 @@ class STAC extends STACHypermedia {
    */
   findVisualAssets() {
     let rgb = {
-      red: false,
-      green: false,
-      blue: false
+      red: null,
+      green: null,
+      blue: null
     };
     let names = Object.keys(rgb);
     let assets = this.getAssets();
@@ -214,7 +214,7 @@ class STAC extends STACHypermedia {
         rgb[result.band.common_name] = asset;
       }
     }
-    let complete = Object.values(rgb).every(o => Boolean(o));
+    let complete = Object.values(rgb).every(o => o !== null);
     return complete ? rgb : null;
   }
 
