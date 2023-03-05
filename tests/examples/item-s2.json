@@ -663,6 +663,11 @@
     {
       "rel": "root",
       "href": "https://earth-search.aws.element84.com/v0/"
+    },
+    {
+      "rel": "icon",
+      "href": "./icon.png",
+      "type": "image/png"
     }
   ]
 }

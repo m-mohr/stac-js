@@ -1,5 +1,8 @@
-import { toAbsolute } from './http.js';
+import { browserProtocols, toAbsolute } from './http.js';
+import { hasText } from './utils.js';
 import STACObject from './object.js';
+import URI from 'urijs';
+import { browserImageTypes } from './mediatypes.js';
 
 /**
  * A STAC reference as base for Assets and Links.
@@ -47,6 +50,38 @@ class STACReference extends STACObject {
    */
   getContext() {
     return this._context;
+  }
+
+  /**
+   * Checks whether a given reference can be displayed by a browser.
+   * 
+   * A browser can usually display an image if it is a specific file format (e.g. JPEG, PNG, ...) and is served over HTTP(S).
+   * 
+   * @returns {boolean} `true` if a browser can display the given reference, `false` otherwise.
+   * @see {canBrowserDisplayImage}
+   */
+  canBrowserDisplayImage(allowUndefined = false) {
+    if (typeof this.href !== 'string') {
+      return false;
+    }
+    else if (!allowUndefined && typeof this.type === 'undefined') {
+      return false;
+    }
+    let uri = new URI(this.href);
+    let protocol = uri.protocol().toLowerCase();
+    let extension = uri.suffix().toLowerCase();
+    if (hasText(protocol) && !browserProtocols.includes(protocol)) {
+      return false;
+    }
+    else if (hasText(this.type) && browserImageTypes.includes(this.type.toLowerCase())) {
+      return true;
+    }
+    else if (typeof this.type === 'undefined' && hasText(extension) && (extension === 'jpg' || browserImageTypes.includes('image/' + extension))) {
+      return true;
+    }
+    else {
+      return false;
+    }
   }
   
 }

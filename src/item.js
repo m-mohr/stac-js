@@ -74,14 +74,15 @@ class Item extends STAC {
   }
 
   /**
-   * Returns the datetime of the STAC Item.
+   * Returns a datetime for the STAC Item.
    * 
-   * @param {boolean} force Enforce a datetime by computing the center datetime if needed.
+   * If no datetime but start or end datetime are specified, computes a datetime from them.
+   * 
    * @returns {Date|null}
    */
-  getDateTime(force = false) {
+  getDateTime() {
     let dt = isoToDate(this.properties.datetime);
-    if (!dt && force) {
+    if (!dt) {
       let start = isoToDate(this.properties.start_datetime);
       let end = isoToDate(this.properties.end_datetime);
       if (start && end) {
@@ -127,6 +128,23 @@ class Item extends STAC {
    */
   getMetadata(field) {
     return this.properties[field];
+  }
+
+  /**
+   * Returns the bands.
+   * 
+   * @todo Merge bands from assets
+   * @returns {Array.<Object>}
+   */
+  getBands() {
+    let eo = this.getMetadata('eo:bands');
+    if (Array.isArray(eo)) {
+      return eo;
+    }
+    else {
+      // todo: merge bands from assets?
+      return [];
+    }
   }
 
   /**

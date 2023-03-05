@@ -1,5 +1,5 @@
 import { browserProtocols } from "./http.js";
-import { canBrowserDisplayImage, cogMediaTypes, geotiffMediaTypes, isMediaType } from "./mediatypes.js";
+import { cogMediaTypes, geotiffMediaTypes, isMediaType } from "./mediatypes.js";
 import { getMaxForDataType, getMinForDataType, hasText, isObject, mergeArraysOfObjects } from "./utils.js";
 import STACReference from './reference.js';
 
@@ -85,16 +85,6 @@ class Asset extends STACReference {
       return this._context.getMetadata(field);
     }
     return undefined;
-  }
-
-  /**
-   * Checks whether the asset can be displayed by a browser.
-   * 
-   * @returns {boolean} `true` if a browser can display the given asset, `false` otherwise.
-   * @see {canBrowserDisplayImage}
-   */
-  canBrowserDisplayImage() {
-    return canBrowserDisplayImage(this);
   }
 
   /**

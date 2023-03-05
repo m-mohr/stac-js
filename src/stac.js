@@ -1,5 +1,5 @@
-import { canBrowserDisplayImage, geotiffMediaTypes, isMediaType } from './mediatypes.js';
-import { isObject, mergeArraysOfObjects } from './utils.js';
+import { geotiffMediaTypes, isMediaType } from './mediatypes.js';
+import { isObject } from './utils.js';
 import STACHypermedia from './hypermedia.js';
 
 /**
@@ -38,20 +38,7 @@ class STAC extends STACHypermedia {
   }
 
   /**
-   * Returns the bands.
-   * 
-   * This is usually a merge of eo:bands and raster:bands.
-   * 
-   * @returns {Array.<Object>}
-   */
-  getBands() {
-    return mergeArraysOfObjects(this.getMetadata('eo:bands'), this.getMetadata('raster:bands'));
-  }
-
-  /**
    * Get the icons from the links in a STAC entity.
-   * 
-   * All URIs are converted to be absolute.
    * 
    * @todo
    * @param {boolean} allowUndefined 
@@ -59,14 +46,11 @@ class STAC extends STACHypermedia {
    */
   getIcons(allowUndefined = true) {
     return this.getLinksWithRels(['icon'])
-      .filter(img => canBrowserDisplayImage(img, allowUndefined))
-      .map(img => img.getAbsoluteUrl());
+      .filter(img => img.canBrowserDisplayImage(allowUndefined));
   }
 
   /**
    * Get the thumbnails from the assets and links in a STAC entity.
-   * 
-   * All URIs are converted to be absolute.
    * 
    * @param {boolean} browserOnly - Return only images that can be shown in a browser natively (PNG/JPG/GIF/WEBP + HTTP/S).
    * @param {string|null} prefer - If not `null` (default), prefers a role over the other. Either `thumbnail` or `overview`.
@@ -85,7 +69,7 @@ class STAC extends STACHypermedia {
       // Remove all images that can't be displayed in a browser
       thumbnails = thumbnails.filter(img => img.canBrowserDisplayImage());
     }
-    return thumbnails.map(img => img.getAbsoluteUrl());
+    return thumbnails;
   }
 
   /**
@@ -225,7 +209,7 @@ class STAC extends STACHypermedia {
    */
   getAsset(key) {
     if (!isObject(this.assets)) {
-      return [];
+      return null;
     }
     return this.assets[key] || null;
   }

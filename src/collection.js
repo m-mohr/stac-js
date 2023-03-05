@@ -2,7 +2,7 @@ import Asset from './asset.js';
 import CatalogLike from './cataloglike.js';
 import { isoToDate } from './datetime.js';
 import { isBoundingBox, toGeoJSON } from './geo.js';
-import { hasText } from './utils.js';
+import { hasText, mergeArraysOfObjects } from './utils.js';
 
 /**
  * Extents
@@ -137,6 +137,38 @@ class Collection extends CatalogLike {
         .map(interval => interval.map(datetime => isoToDate(datetime)));
     }
     return [];
+  }
+
+  /**
+   * Returns metadata from the Collection summaries for the given field name.
+   * 
+   * @param {string} field Field name
+   * @returns {Array.<*>|Object} The value of the field
+   */
+  getSummary(field) {
+    return this.summaries[field];
+  }
+
+  /**
+   * Returns the bands.
+   * 
+   * This is usually a merge of eo:bands and raster:bands from the summaries.
+   * 
+   * @returns {Array.<Object>}
+   */
+  getBands() {
+    let eo = this.getSummary('eo:bands');
+    let raster = this.getSummary('raster:bands');
+    let all = [eo, raster].filter(arr => Array.isArray(arr));
+    if (all.length >= 2) {
+      return mergeArraysOfObjects(...all);
+    }
+    else if (all.length === 1) {
+      return all[0];
+    }
+    else {
+      return [];
+    }
   }
   
 }

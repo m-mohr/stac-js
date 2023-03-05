@@ -20,6 +20,8 @@ test('is...', () => {
   expect(cc.isCollection()).toBeFalsy();
   expect(cc.isItemCollection()).toBeFalsy();
   expect(cc.isCollectionCollection()).toBeTruthy();
+  expect(cc.isAsset()).toBeFalsy();
+  expect(cc.isLink()).toBeFalsy();
 });
 
 test('getObjectType', () => {

@@ -20,6 +20,8 @@ test('is...', () => {
   expect(c.isCollection()).toBeTruthy();
   expect(c.isItemCollection()).toBeFalsy();
   expect(c.isCollectionCollection()).toBeFalsy();
+  expect(c.isAsset()).toBeFalsy();
+  expect(c.isLink()).toBeFalsy();
 });
 
 test('getObjectType', () => {
@@ -54,4 +56,12 @@ test('getTemporalExtent', () => {
 
 test('getTemporalExtents', () => {
   expect(c.getTemporalExtents()).toEqual([temporal]);
+});
+
+test('getAsset', () => {
+  expect(c.getAsset("test")).toBeNull();
+});
+
+test('getAssets', () => {
+  expect(c.getAssets()).toEqual([]);
 });

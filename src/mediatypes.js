@@ -1,7 +1,3 @@
-import URI from 'urijs';
-import { hasText, isObject } from './utils.js';
-import { browserProtocols } from './http.js';
-
 /**
  * The GeoJSON media type.
  * 
@@ -94,37 +90,4 @@ export function isMediaType(type, allowedTypes, allowUndefined = false) {
  */
 export function isStacMediaType(type, allowUndefined = false) {
   return isMediaType(type, stacMediaTypes, allowUndefined);
-}
-
-/**
- * Checks whether a given Link or Asset object can be displayed by a browser.
- * 
- * A browser can usually display an image if it is a specific file format (e.g. JPEG, PNG, ...) and is served over HTTP(S).
- * 
- * @param {Link|Asset} img The potential image as Link or Asset object.
- * @param {boolean} allowUndefined If set to `true`, returns `true` if `undefined` is passed as `type`.
- * @returns {boolean} `true` if a browser can display the given thing, `false` otherwise.
- */
-export function canBrowserDisplayImage(img, allowUndefined = false) {
-  if (!isObject(img) || typeof img.href !== 'string') {
-    return false;
-  }
-  else if (!allowUndefined && typeof img.type === 'undefined') {
-    return false;
-  }
-  let uri = new URI(img.href);
-  let protocol = uri.protocol().toLowerCase();
-  let extension = uri.suffix().toLowerCase();
-  if (hasText(protocol) && !browserProtocols.includes(protocol)) {
-    return false;
-  }
-  else if (hasText(img.type) && browserImageTypes.includes(img.type.toLowerCase())) {
-    return true;
-  }
-  else if (typeof img.type === 'undefined' && hasText(extension) && (extension === 'jpg' || browserImageTypes.includes('image/' + extension))) {
-    return true;
-  }
-  else {
-    return false;
-  }
 }

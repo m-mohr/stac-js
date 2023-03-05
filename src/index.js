@@ -1,10 +1,14 @@
 import Migrate from '@radiantearth/stac-migrate';
+import APICollection from './apicollection.js';
 import Asset from './asset.js';
 import Catalog from './catalog.js';
 import Collection from './collection.js';
 import CollectionCollection from './collectioncollection.js';
 import Item from './item.js';
 import ItemCollection from './itemcollection.js';
+import STACHypermedia from './hypermedia.js';
+import STACObject from './object.js';
+import STACReference from './reference.js';
 import STAC from './stac.js';
 
 /**
@@ -40,11 +44,15 @@ export default function create(data, migrate = true, updateVersionNumber = false
 }
 
 export {
+  APICollection,
   Asset,
   Catalog,
   Collection,
   CollectionCollection,
   Item,
   ItemCollection,
-  STAC
+  STAC,
+  STACHypermedia,
+  STACObject,
+  STACReference
 };

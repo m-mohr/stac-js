@@ -1,19 +1,37 @@
 import Item from '../src/item';
 import fs from 'fs';
+import Link from '../src/link';
+import Asset from '../src/asset';
 
 let json = JSON.parse(fs.readFileSync('./tests/examples/item.json'));
 let item = new Item(json);
 let bbox = [172.91,1.34,172.95,1.36];
-let dtStr = "2020-12-14T18:02:31Z";
 let dtDate = new Date(Date.UTC(2020, 11, 14, 18, 2, 31));
+let dtStartDate = new Date(Date.UTC(2020, 11, 14, 18, 1, 31));
+let dtEndDate = new Date(Date.UTC(2020, 11, 14, 18, 3, 31));
+let collectionLink = item.links.find(link => link.rel === 'collection');
+let rootLink = item.links.find(link => link.rel === 'root');
+let parentLink = item.links.find(link => link.rel === 'parent');
 
 let json2 = JSON.parse(fs.readFileSync('./tests/examples/item-s2.json'));
 let item2 = new Item(json2);
+let dtStr2 = "2023-02-27T14:47:44Z";
+let dtDate2 = new Date(Date.UTC(2023, 1, 27, 14, 47, 44));
+
+let url = "https://example.com/20201211_223832_CS2/item.json";
 
 test('Basics', () => {
   expect(item.id).toBe("20201211_223832_CS2");
   expect(item.getMetadata("id")).toBeUndefined();
-  expect(item.getAbsoluteUrl()).toBe("https://example.com/20201211_223832_CS2/item.json");
+  expect(item.getAbsoluteUrl()).toBe(url);
+});
+
+test('get/setAbsoluteUrl', () => {
+  let item2 = new Item(json);
+  expect(item2.getAbsoluteUrl()).toBe(url);
+  let url2 = "https://example.com/20201211_223832_CS2/item2.json";
+  item2.setAbsoluteUrl(url2)
+  expect(item2.getAbsoluteUrl()).toBe(url2);
 });
 
 test('is...', () => {
@@ -23,6 +41,8 @@ test('is...', () => {
   expect(item.isCollection()).toBeFalsy();
   expect(item.isItemCollection()).toBeFalsy();
   expect(item.isCollectionCollection()).toBeFalsy();
+  expect(item.isAsset()).toBeFalsy();
+  expect(item.isLink()).toBeFalsy();
 });
 
 test('getObjectType', () => {
@@ -46,19 +66,80 @@ test('getBoundingBoxes', () => {
 });
 
 test('datetime', () => {
-  expect(item.properties.datetime).toBe(dtStr);
+  expect(item.properties.datetime).toBeNull();
+  expect(item2.properties.datetime).toBe(dtStr2);
 });
 
 test('getMetadata', () => {
-  expect(item.getMetadata("datetime")).toBe(dtStr);
+  expect(item.getMetadata("datetime")).toBeNull();
+  expect(item2.getMetadata("datetime")).toBe(dtStr2);
 });
 
 test('getDateTime', () => {
   expect(item.getDateTime()).toEqual(dtDate);
+  expect(item2.getDateTime()).toEqual(dtDate2);
 });
 
 test('getTemporalExtent', () => {
-  expect(item.getTemporalExtent()).toEqual([dtDate, dtDate]);
+  expect(item.getTemporalExtent()).toEqual([dtStartDate, dtEndDate]);
+  expect(item2.getTemporalExtent()).toEqual([dtDate2, dtDate2]);
+});
+
+test('getIcons', () => {
+  expect(item.getIcons()).toEqual([]);
+  let icons = item2.getIcons();
+
+  expect(icons.length).toBe(1);
+  expect(icons[0].href).toEqual("./icon.png");
+  expect(icons[0].rel).toEqual("icon");
+  expect(icons[0].type).toEqual("image/png");
+});
+
+test('getThumbnails', () => {
+  expect(item.getThumbnails()).toEqual([new Asset(json.assets.thumbnail, "thumbnail", item)]);
+  expect(item2.getThumbnails()).toEqual([new Asset(json2.assets.thumbnail, "thumbnail", item2)]);
+});
+
+test('getAsset', () => {
+  expect(item.getAsset("test")).toBeNull();
+  expect(item.getAsset("thumbnail")).toEqual(new Asset(json.assets.thumbnail, "thumbnail", item));
+});
+
+test('getAssets', () => {
+  expect(item.getAssets()).toEqual(Object.values(item.assets));
+});
+
+describe('links', () => {
+  test('getLinkWithRel > FOUND', () => {
+    let link = item.getLinkWithRel('collection');
+    expect(link instanceof Link).toBeTruthy();
+    expect(link).toEqual(collectionLink);
+  });
+  test('getLinkWithRel > NOT FOUND', () => {
+    expect(item.getLinkWithRel('foo')).toBeNull();
+  });
+  test('getCollectionLink', () => {
+    let link = item.getCollectionLink();
+    expect(link instanceof Link).toBeTruthy();
+    expect(link).toEqual(collectionLink);
+  });
+  test('getCollectionLink', () => {
+    let links = item.getLinksWithOtherRels(['self', 'parent', 'root']);
+    expect(Array.isArray(links)).toBeTruthy();
+    expect(links.length).toBe(1);
+    expect(links[0] instanceof Link).toBeTruthy();
+    expect(links[0]).toEqual(collectionLink);
+  });
+  test('getRootLink', () => {
+    let link = item.getRootLink();
+    expect(link instanceof Link).toBeTruthy();
+    expect(link).toEqual(rootLink);
+  });
+  test('getParentLink', () => {
+    let link = item.getParentLink();
+    expect(link instanceof Link).toBeTruthy();
+    expect(link).toEqual(parentLink);
+  });
 });
 
 describe('rankGeoTIFFs', () => {

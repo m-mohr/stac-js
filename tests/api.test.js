@@ -20,6 +20,8 @@ test('is...', () => {
   expect(c.isCatalogLike()).toBeTruthy();
   expect(c.isCollection()).toBeFalsy();
   expect(c.isCollectionCollection()).toBeFalsy();
+  expect(c.isAsset()).toBeFalsy();
+  expect(c.isLink()).toBeFalsy();
 });
 
 test('getSearchLink', () => {

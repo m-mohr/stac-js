@@ -35,7 +35,7 @@ export function centerDateTime(start, end) {
  * Computes a single interval from multiple temporal intervals.
  * 
  * @param {Array.<Array.<Date>>} list A list of temporal intervals
- * @returns {Array.<Date>} The merged temporal interval
+ * @returns {Array.<Date>|null} The merged temporal interval
  */
 export function unionDateTime(list) {
   if (!Array.isArray(list) || list.length === 0) {
@@ -59,5 +59,8 @@ export function unionDateTime(list) {
     min = assign(min, start, Math.min);
     max = assign(max, end, Math.max);
   });
-  return [new Date(min), new Date(max)];
+  return [
+    min === null ? null : new Date(min),
+    max === null ? null : new Date(max)
+  ];
 }

@@ -6,7 +6,11 @@ import { isObject } from '../src/utils';
 let json = JSON.parse(fs.readFileSync('./tests/examples/item.json'));
 let item = new Item(json);
 let asset = item.assets.analytic;
+let itemAsset = Object.assign({}, json.assets.analytic);
+delete itemAsset.href;
+let def = new Asset(itemAsset, "analytic", item);
 let bands = asset['eo:bands'];
+let url = 'https://example.com/20201211_223832_CS2/20201211_223832_CS2_analytic.tif';
 
 describe('constructor', () => {
   test('normal', () => {
@@ -18,6 +22,8 @@ describe('constructor', () => {
     expect(() => new Asset({}, "key")).not.toThrow();
     expect(() => new Asset({}, "key", null)).not.toThrow();
     expect(() => new Asset({}, "key", item)).not.toThrow();
+
+    expect(() => new Asset(itemAsset)).not.toThrow();
   });
 
   test('clone', () => {
@@ -31,20 +37,41 @@ describe('constructor', () => {
   });
 });
 
+test('getAbsoluteUrl', () => {
+  expect(asset.getAbsoluteUrl()).toBe(url);
+  expect(def.getAbsoluteUrl()).toBeNull();
+});
+
+test('is...', () => {
+  expect(asset.isItem()).toBeFalsy();
+  expect(asset.isCatalog()).toBeFalsy();
+  expect(asset.isCatalogLike()).toBeFalsy();
+  expect(asset.isCollection()).toBeFalsy();
+  expect(asset.isItemCollection()).toBeFalsy();
+  expect(asset.isCollectionCollection()).toBeFalsy();
+  expect(asset.isLink()).toBeFalsy();
+  expect(asset.isAsset()).toBeTruthy();
+  expect(def.isAsset()).toBeTruthy();
+});
+
 test('toJSON', () => {
   expect(asset.toJSON()).toEqual(json.assets.analytic);
+  expect(def.toJSON()).toEqual(itemAsset);
 });
 
 test('getKey', () => {
   expect(asset.getKey()).toBe("analytic");
+  expect(def.getKey()).toBe("analytic");
 });
 
 test('getContext', () => {
   expect(asset.getContext()).toBe(item);
+  expect(def.getContext()).toBe(item);
 });
 
 test('getObjectType', () => {
   expect(asset.getObjectType()).toBe("Asset");
+  expect(def.getObjectType()).toBe("Asset");
 });
 
 test('getMetadata', () => {
@@ -54,40 +81,51 @@ test('getMetadata', () => {
   expect(asset.getMetadata("roles")).toEqual(["data"]);
   // Get from item properties
   expect(asset.getMetadata("proj:epsg")).toBe(32659);
+
+  expect(def.getMetadata("proj:epsg")).toBe(32659);
 });
 
 test('getAbsoluteUrl', () => {
   expect(asset.getAbsoluteUrl()).toBe("https://example.com/20201211_223832_CS2/20201211_223832_CS2_analytic.tif");
+  expect(def.getAbsoluteUrl()).toBeNull();
 });
 
 test('isGeoTIFF', () => {
   expect(asset.isGeoTIFF()).toBeTruthy();
+  expect(def.isGeoTIFF()).toBeTruthy();
 });
 
 test('isCOG', () => {
   expect(asset.isCOG()).toBeTruthy();
+  expect(def.isCOG()).toBeTruthy();
 });
 
-test('isDefintion', () => {
+test('isDefinition', () => {
   expect(asset.isDefintion()).toBeFalsy();
+  expect(def.isDefintion()).toBeTruthy();
 });
 
 test('isType', () => {
   expect(asset.isType("image/tiff")).toBeFalsy();
   expect(asset.isType("image/tiff; application=geotiff; profile=cloud-optimized")).toBeTruthy();
+  expect(def.isType("image/tiff; application=geotiff; profile=cloud-optimized")).toBeTruthy();
 });
 
 test('isHTTP', () => {
   expect(asset.isHTTP()).toBeTruthy();
+  expect(def.isHTTP()).toBeFalsy();
 });
 
 test('getBands', () => {
   expect(asset.getBands()).toEqual(bands);
+  expect(def.getBands()).toEqual(bands);
 });
 
 test('hasRole', () => {
+  expect(def.hasRole("data")).toBeTruthy();
   expect(asset.hasRole("data")).toBeTruthy();
   expect(asset.hasRole(["data", "foo"])).toBeTruthy();
+  expect(def.hasRole("foo")).toBeFalsy();
   expect(asset.hasRole("foo")).toBeFalsy();
   expect(asset.hasRole(["bar"])).toBeFalsy();
 });
