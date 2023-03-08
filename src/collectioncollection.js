@@ -32,21 +32,21 @@ class CollectionCollection extends APICollection {
   }
 
   /**
+   * Returns all collections.
+   * 
+   * @returns {Array.<Collection>} All STAC Collections
+   */
+  getAll() {
+    return data.collections;
+  }
+
+  /**
    * Check whether this given object is a STAC Collection of Collections (i.e. API Collections).
    * 
    * @returns {boolean} `true` if the object is a STAC CollectionCollection, `false` otherwise.
    */
   isCollectionCollection() {
     return true;
-  }
-
-  /**
-   * Returns all collections.
-   * 
-   * @returns {Array.<Collection>} All STAC Collections
-   */
-  getCollections() {
-    return this.collections;
   }
 
   /**

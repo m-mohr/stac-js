@@ -66,6 +66,6 @@ test('getTemporalExtents', () => {
   expect(ic.getTemporalExtents()).toEqual([[item1Date1, item1Date2], [item2Date, item2Date]]);
 });
 
-test('getItems', () => {
-  expect(ic.getItems()).toEqual([new Item(item), new Item(item2)]);
+test('getAll', () => {
+  expect(ic.getAll()).toEqual([new Item(item), new Item(item2)]);
 });

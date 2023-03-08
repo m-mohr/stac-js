@@ -61,6 +61,6 @@ test('getTemporalExtents', () => {
   expect(cc.getTemporalExtents()).toEqual([temporal]);
 });
 
-test('getCollections', () => {
-  expect(cc.getCollections()).toEqual([new Collection(collection)]);
+test('getAll', () => {
+  expect(cc.getAll()).toEqual([new Collection(collection)]);
 });

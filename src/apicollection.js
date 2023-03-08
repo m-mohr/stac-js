@@ -19,6 +19,15 @@ class APICollection extends STACHypermedia {
     super(data, absoluteUrl, keyMap, privateKeys);
   }
 
+  /**
+   * Returns all STAC entities in this list.
+   * 
+   * @returns {Array.<STAC>} All STAC entities
+   */
+  getAll() {
+    return [];
+  }
+
 }
 
 export default APICollection;
