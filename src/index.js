@@ -2,6 +2,7 @@ import Migrate from '@radiantearth/stac-migrate';
 import APICollection from './apicollection.js';
 import Asset from './asset.js';
 import Catalog from './catalog.js';
+import CatalogLike from './cataloglike.js';
 import Collection from './collection.js';
 import CollectionCollection from './collectioncollection.js';
 import Item from './item.js';
@@ -47,6 +48,7 @@ export {
   APICollection,
   Asset,
   Catalog,
+  CatalogLike,
   Collection,
   CollectionCollection,
   Item,
