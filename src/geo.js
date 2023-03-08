@@ -25,7 +25,6 @@ function bboxToCoords(bbox) {
  * 
  * The Feature contains a Polygon or MultiPolygon based on the given number of valid bounding boxes.
  * 
- * @todo
  * @param {BoundingBox|Array.<BoundingBox>} bboxes 
  * @returns {Object|null}
  */

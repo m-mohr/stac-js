@@ -40,7 +40,6 @@ class STAC extends STACHypermedia {
   /**
    * Get the icons from the links in a STAC entity.
    * 
-   * @todo
    * @param {boolean} allowUndefined 
    * @returns {Array.<Link>}
    */
