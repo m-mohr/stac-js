@@ -37,7 +37,7 @@ class CollectionCollection extends APICollection {
    * @returns {Array.<Collection>} All STAC Collections
    */
   getAll() {
-    return data.collections;
+    return this.collections;
   }
 
   /**

@@ -38,7 +38,7 @@ class ItemCollection extends APICollection {
    * @returns {Array.<Item>} All STAC Items
    */
   getAll() {
-    return data.features;
+    return this.features;
   }
 
   /**
