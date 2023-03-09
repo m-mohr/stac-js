@@ -1,4 +1,5 @@
 import { browserProtocols, toAbsolute } from './http.js';
+import { cogMediaTypes, geotiffMediaTypes, isMediaType } from "./mediatypes.js";
 import { hasText } from './utils.js';
 import STACObject from './object.js';
 import URI from 'urijs';
@@ -82,6 +83,47 @@ class STACReference extends STACObject {
     else {
       return false;
     }
+  }
+
+  /**
+   * Checks whether this asset is of a specific type.
+   * 
+   * @param {string|Array.<string>} types One or more media types.
+   * @returns {boolean} `true` is this asset is one of the given types, `false` otherwise.
+   */
+  isType(types) { // string or array of strings
+    return hasText(this.type) && isMediaType(this.type, types);
+  }
+
+  /**
+   * Checks whether this asset is a GeoTiff (including COGs).
+   * 
+   * @returns {boolean} `true` is this asset is a GeoTiff, `false` otherwise.
+   */
+  isGeoTIFF() {
+    return this.isType(geotiffMediaTypes);
+  }
+
+  /**
+   * Checks whether this asset is a COG (excluding pure GeoTiffs).
+   * 
+   * @returns {boolean} `true` is this asset is a COG, `false` otherwise.
+   */
+  isCOG() {
+    return this.isType(cogMediaTypes);
+  }
+
+  /**
+   * Checks whether the asset is accessible via HTTP or HTTPS.
+   * 
+   * Returns `null` for item asset definitions, otherwise a `boolean` value.
+   * 
+   * @returns {boolean|null} `true` is this asset is available via HTTP or HTTPS, `false` or `null` otherwise.
+   */
+  isHTTP() {
+    let uri = this.getAbsoluteUrl(false);
+    let protocol = uri.protocol().toLowerCase();
+    return hasText(protocol) && browserProtocols.includes(protocol);
   }
   
 }
