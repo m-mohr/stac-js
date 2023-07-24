@@ -1,10 +1,15 @@
 function toObject(bbox) {
-  let hasZ = bbox.length > 4;
+  let hasZ = bbox.length >= 6;
   let west = bbox[0];
   let east = bbox[hasZ ? 3 : 2];
   let south = bbox[1];
   let north = bbox[hasZ ? 4 : 3];
-  return { west, east, south, north };
+  let obj = { west, east, south, north };
+  if (hasZ) {
+    obj.base = bbox[2];
+    obj.height = bbox[5];
+  }
+  return obj;
 }
 
 function bboxToCoords(bbox) {
@@ -18,6 +23,35 @@ function bboxToCoords(bbox) {
       [west, north]
     ]
   ];
+}
+
+/**
+ * Returns the center of the STAC entity.
+ * 
+ * @param {BoundingBox|null} bbox 
+ * @returns {Point|null}
+ */
+export function centerOfBoundingBox(bbox) {
+  if (!isBoundingBox(bbox)) {
+    return null;
+  }
+  let obj = toObject(bbox);
+  let point = [];
+  if (isAntimeridianBoundingBox(bbox)) {
+    let x = (obj.west + 360 + obj.east) / 2;
+    if (x > 180) {
+      x -= 360;
+    }
+    point.push(x);
+  }
+  else {
+    point.push((obj.west + obj.east) / 2);
+  }
+  point.push((obj.south + obj.north) / 2); // y
+  if (typeof obj.base !== 'undefined') {
+    point.push((obj.base + obj.height) / 2); // z
+  }
+  return point;
 }
 
 /**

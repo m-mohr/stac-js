@@ -1,3 +1,4 @@
+import { centerOfBoundingBox } from './geo.js';
 import { isObject } from './utils.js';
 
 /**
@@ -167,6 +168,15 @@ class STACObject {
    */
   getBoundingBox() {
     return null;
+  }
+
+  /**
+   * Returns the center of the STAC entity.
+   * 
+   * @returns {BoundingBox|null}
+   */
+  getCenter() {
+    return centerOfBoundingBox(this.getBoundingBox());
   }
 
   /**
