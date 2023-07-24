@@ -7,6 +7,7 @@ import Collection from './collection.js';
 import CollectionCollection from './collectioncollection.js';
 import Item from './item.js';
 import ItemCollection from './itemcollection.js';
+import Link from './link.js';
 import STACHypermedia from './hypermedia.js';
 import STACObject from './object.js';
 import STACReference from './reference.js';
@@ -53,6 +54,7 @@ export {
   CollectionCollection,
   Item,
   ItemCollection,
+  Link,
   STAC,
   STACHypermedia,
   STACObject,
