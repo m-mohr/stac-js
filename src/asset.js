@@ -51,7 +51,7 @@ class Asset extends STACReference {
    * @returns {URI|string|null}
    */
   getAbsoluteUrl(stringify = true) {
-    if (this.isDefintion()) {
+    if (this.isDefinition()) {
       return null;
     }
     return super.getAbsoluteUrl(stringify);
@@ -307,7 +307,7 @@ class Asset extends STACReference {
    * 
    * @returns {boolean} `true` is this asset is an Item Asset definition, `false` otherwise.
    */
-  isDefintion() { // 
+  isDefinition() { // 
     return !hasText(this.href);
   }
 
@@ -319,7 +319,7 @@ class Asset extends STACReference {
    * @returns {boolean|null} `true` is this asset is available via HTTP or HTTPS, `false` or `null` otherwise.
    */
   isHTTP() {
-    if (this.isDefintion()) {
+    if (this.isDefinition()) {
       return null;
     }
     return super.isHTTP();
