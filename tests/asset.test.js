@@ -101,8 +101,8 @@ test('isCOG', () => {
 });
 
 test('isDefinition', () => {
-  expect(asset.isDefintion()).toBeFalsy();
-  expect(def.isDefintion()).toBeTruthy();
+  expect(asset.isDefinition()).toBeFalsy();
+  expect(def.isDefinition()).toBeTruthy();
 });
 
 test('isType', () => {
