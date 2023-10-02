@@ -57,9 +57,6 @@ class STAC extends STACHypermedia {
    */
   getThumbnails(browserOnly = true, prefer = null) {
     let thumbnails = this.getAssetsWithRoles(['thumbnail', 'overview'], true);
-    if (prefer && thumbnails.length > 1) {
-      thumbnails.sort(a => (Array.isArray(a.roles) && a.roles.includes(prefer)) || (a.getKey() === prefer) ? -1 : 1);
-    }
     // Get from links only if no assets are available as they should usually be the same as in assets
     if (thumbnails.length === 0) {
       thumbnails = this.getLinksWithRels(['preview']);
@@ -67,6 +64,15 @@ class STAC extends STACHypermedia {
     if (browserOnly) {
       // Remove all images that can't be displayed in a browser
       thumbnails = thumbnails.filter(img => img.canBrowserDisplayImage());
+    }
+    if (prefer && thumbnails.length > 1) {
+      // Prefer one role over the other.
+      // The two step approach with two filters ensures the same sort bevahiour across all browsers:
+      // see https://github.com/radiantearth/stac-browser/issues/370
+      let filter = img => (Array.isArray(img.roles) && img.roles.includes(prefer)) || (img.getKey() === prefer);
+      thumbnails = thumbnails
+        .filter(filter)
+        .concat(thumbnails.filter(img => !filter(img)));
     }
     return thumbnails;
   }
