@@ -22,6 +22,7 @@ test('is...', () => {
   expect(cc.isCollectionCollection()).toBeTruthy();
   expect(cc.isAsset()).toBeFalsy();
   expect(cc.isLink()).toBeFalsy();
+  expect(cc.isBand()).toBeFalsy();
 });
 
 test('getObjectType', () => {

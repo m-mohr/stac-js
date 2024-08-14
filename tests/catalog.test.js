@@ -7,7 +7,7 @@ let c = new Catalog(json);
 test('Basics', () => {
   expect(c.id).toBe("example");
   expect(c.getMetadata("id")).toBe("example");
-  expect(c.getAbsoluteUrl()).toBe("https://raw.githubusercontent.com/radiantearth/stac-spec/v1.0.0/examples/catalog.json");
+  expect(c.getAbsoluteUrl()).toBe("https://raw.githubusercontent.com/radiantearth/stac-spec/v1.1.0/examples/catalog.json");
 });
 
 test('is...', () => {
@@ -19,6 +19,7 @@ test('is...', () => {
   expect(c.isCollectionCollection()).toBeFalsy();
   expect(c.isAsset()).toBeFalsy();
   expect(c.isLink()).toBeFalsy();
+  expect(c.isBand()).toBeFalsy();
 });
 
 test('getObjectType', () => {

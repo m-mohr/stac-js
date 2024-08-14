@@ -1,5 +1,6 @@
-import { getMaxForDataType, getMinForDataType, hasText, isObject, mergeArraysOfObjects } from "./utils.js";
+import { getMinMaxValues, getNoDataValues, hasText, isObject } from "./utils.js";
 import STACReference from './reference.js';
+import Band from "./band.js";
 
 /**
  * A STAC Asset or Item Asset Definition.
@@ -20,7 +21,7 @@ import STACReference from './reference.js';
 class Asset extends STACReference {
 
   constructor(data, key = null, context = null) {
-    super(data, context, {}, ['_key']);
+    super(data, context, { bands: Band.fromBands }, ['_key']);
     if (!this._key) {
       this._key = key;
     }
@@ -88,21 +89,19 @@ class Asset extends STACReference {
   /**
    * Returns the bands for the asset.
    * 
-   * This is usually a merge of eo:bands and raster:bands.
-   * 
-   * @returns {Array.<Object>}
+   * @returns {Array.<Band>}
    */
   getBands() {
-    return mergeArraysOfObjects(this['eo:bands'], this['raster:bands']);
+    return this.bands || [];
   }
 
   /**
    * The RGB bands.
    * 
    * @typedef {Object} VisualBands
-   * @property {BandWithIndex} red The red band with its index
-   * @property {BandWithIndex} green The green band with its index
-   * @property {BandWithIndex} blue The blue band with its index
+   * @property {Band} red The red band with its index
+   * @property {Band} green The green band with its index
+   * @property {Band} blue The blue band with its index
    */
 
   /**
@@ -111,20 +110,20 @@ class Asset extends STACReference {
    * @returns {VisualBands|null} Object with the RGB bands or null
    */
   findVisualBands() {
-    let rgb = {
+    const rgb = {
       red: null,
       green: null,
       blue: null
     };
-    let bands = this.getBands();
-    for(let key in bands) {
-      let index = parseInt(key, 10); // findIndex returns number, for loop uses strings?!
-      let band = bands[index];
-      if (isObject(band) && hasText(band.common_name) && band.common_name in rgb) {
-        rgb[band.common_name] = { index, band };
+    const bands = this.getBands();
+    for(const key in bands) {
+      const index = parseInt(key, 10); // for loop may return strings as keys
+      const band = bands[index];
+      if (isObject(band) && hasText(band['eo:common_name']) && band['eo:common_name'] in rgb) {
+        rgb[band['eo:common_name']] = band;
       }
     }
-    let complete = Object.values(rgb).every(o => o !== null);
+    const complete = Object.values(rgb).every(o => o !== null);
     return complete ? rgb : null;
   }
 
@@ -135,20 +134,17 @@ class Asset extends STACReference {
    * 
    * @param {*} value A single value to find or a list of values to find one of.
    * @param {string} property The property in the bands to match against.
-   * @param {Array.<Object>} bands For performance reasons you can provide a list of merged bands from `getBands()`.
-   * @returns {BandWithIndex|null}
+   * @returns {Band|null}
    * @see {getBands}
    */
-  findBand(value, property = 'name', bands = null) {
+  findBand(value, property = 'name') {
     if (!Array.isArray(value)) {
       value = [value];
     }
-    if (!isObject(bands)) {
-      bands = this.getBands();
-    }
-    let index = bands.findIndex(band => isObject(band) && value.includes(band[property]));
+    const bands = this.getBands();
+    const index = bands.findIndex(band => isObject(band) && value.includes(band[property]));
     if (index >= 0) {
-      return { index, band: bands[index] };
+      return bands[index];
     }
     return null;
   }
@@ -166,140 +162,30 @@ class Asset extends STACReference {
     if (isObject(band) || band === null) {
       return band;
     }
-    let bands = this.getBands();
+    const bands = this.getBands();
     return bands[band] || null;
   }
 
   /**
-   * Gets the reported minimum and maximum values for an asset (or band).
+   * Gets the reported minimum and maximum values for an asset.
    * 
    * Searches through different extension fields in raster, claasification, and file.
    * 
-   * @param {Object|number} band
    * @returns {Statistics}
    */
-  getMinMaxValues(band = null) {
-    band = this.getBand(band);
-
-    /**
-     * Statistics
-     * 
-     * @typedef {Object} Statistics
-     * @property {number|null} minimum Minimum value
-     * @property {number|null} maximum Maximum value
-     */
-    const stats = {
-      minimum: null,
-      maximum: null
-    };
-
-    // Checks whether the stats object is completely filled
-    const isComplete = obj => obj.minimum !== null && obj.maximum !== null;
-
-    // data sources: raster (statistics, histogram, data_type), classification, file (values, data_type)
-    if (band) {
-      if (isObject(band.statistics)) {
-        if (typeof band.statistics.minimum === 'number') {
-          stats.minimum = band.statistics.minimum;
-        }
-        if (typeof band.statistics.maximum === 'number') {
-          stats.maximum = band.statistics.maximum;
-        }
-        if (isComplete(stats)) {
-          return stats;
-        }
-      }
-
-      if (isObject(band.histogram)) {
-        if (typeof band.histogram.min === 'number') {
-          stats.minimum = band.histogram.min;
-        }
-        if (typeof band.histogram.max === 'number') {
-          stats.maximum = band.histogram.max;
-        }
-        if (isComplete(stats)) {
-          return stats;
-        }
-      }
-    }
-
-    let classification = this.getMetadata("classification:classes");
-    if (Array.isArray(classification)) {
-      classification.reduce((obj, cls) => {
-        obj.minimum = Math.min(obj.minimum, cls.value);
-        obj.maximum = Math.max(obj.maximum, cls.value);
-        return obj;
-      }, stats);
-      if (isComplete(stats)) {
-        return stats;
-      }
-    }
-
-    let values = this.getMetadata("file:values");
-    if (Array.isArray(values)) {
-      values.reduce((obj, map) => {
-        obj.minimum = Math.min(obj.minimum, ...map.values);
-        obj.maximum = Math.max(obj.maximum, ...map.values);
-        return obj;
-      }, stats);
-      if (isComplete(stats)) {
-        return stats;
-      }
-    }
-
-    let data_type = (isObject(band) && band.data_type) || this.getMetadata("file:data_type");
-    if (data_type) {
-      stats.minimum = getMinForDataType(data_type);
-      stats.maximum = getMaxForDataType(data_type);
-    }
-
-    return stats;
+  getMinMaxValues() {
+    return getMinMaxValues(this);
   }
 
   /**
-   * Gets the reported no-data values for an asset (or band).
+   * Gets the reported no-data values for an asset.
    * 
-   * Searches through different extension fields in raster, claasification, and file.
+   * Searches through different extension fields in nodata, classification, and file.
    * 
-   * @param {Object|number} band 
    * @returns {Array.<*>}
    */
-  getNoDataValues(band = null) {
-    band = this.getBand(band);
-    // data sources: raster (nodata), classification (nodata flag), file (nodata)
-    let nodata = [];
-    if (band && typeof band.nodata !== 'undefined') {
-      nodata.push(band.nodata);
-    }
-    else {
-      let file = this.getMetadata("file:nodata");
-      if (typeof file !== 'undefined') {
-        nodata = file;
-      }
-      else {
-        let classification = this.getMetadata("classification:classes");
-        if (Array.isArray(classification)) {
-          nodata = classification
-            .filter(cls => Boolean(cls.nodata))
-            .map(cls => cls.value);
-        }
-      }
-    }
-
-    return nodata.map(value => {
-      if (value === "nan") {
-        return NaN;
-      }
-      else if (value === "+inf") {
-        return +Infinity;
-      }
-      else if (value === "-inf") {
-        return -Infinity;
-      }
-      else {
-        return value;
-      }
-    });
+  getNoDataValues() {
+    return getNoDataValues(this);
   }
 
   /**

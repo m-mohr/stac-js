@@ -8,8 +8,8 @@ let bbox = [172.91,1.34,172.95,1.36];
 let temporal = [new Date(Date.UTC(2020, 11, 11, 22, 38, 32, 125)), new Date(Date.UTC(2020, 11, 14, 18, 2, 31, 437))];
 
 test('Basics', () => {
-  expect(c.stac_version).toBe("1.0.0");
-  expect(c.getMetadata("stac_version")).toBe("1.0.0");
+  expect(c.stac_version).toBe("1.1.0");
+  expect(c.getMetadata("stac_version")).toBe("1.1.0");
   expect(c.getAbsoluteUrl()).toBe(url);
 });
 
@@ -22,6 +22,7 @@ test('is...', () => {
   expect(c.isCollectionCollection()).toBeFalsy();
   expect(c.isAsset()).toBeFalsy();
   expect(c.isLink()).toBeFalsy();
+  expect(c.isBand()).toBeFalsy();
 });
 
 test('getObjectType', () => {

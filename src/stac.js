@@ -174,9 +174,9 @@ class STAC extends STACHypermedia {
    * The single-band assets for RGB composites.
    * 
   * @typedef {Object} VisualAssets
-  * @property {BandWithIndex} red The red band with its index
-  * @property {BandWithIndex} green The green band with its index
-  * @property {BandWithIndex} blue The blue band with its index
+  * @property {Band} red The red band with its index
+  * @property {Band} green The green band with its index
+  * @property {Band} blue The blue band with its index
   */
 
   /**
@@ -193,13 +193,9 @@ class STAC extends STACHypermedia {
     let names = Object.keys(rgb);
     let assets = this.getAssets();
     for(let asset of assets) {
-      let bands = asset.getBands();
-      if (bands.length !== 1) {
-        continue;
-      }
-      let result = asset.findBand(names, 'common_name', bands);
+      let result = asset.findBand(names, 'eo:common_name');
       if (result) {
-        rgb[result.band.common_name] = asset;
+        rgb[result["eo:common_name"]] = asset;
       }
     }
     let complete = Object.values(rgb).every(o => o !== null);

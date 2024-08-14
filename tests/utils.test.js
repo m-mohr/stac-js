@@ -19,7 +19,7 @@ test('isObject', () => {
   expect(isObject(123)).toBe(false); // number
   expect(isObject(Math.min)).toBe(false); // function
   expect(isObject({})).toBe(true); // plain object
-  class Test {};
+  class Test {}
   expect(isObject(new Test())).toBe(true); // object instance
 });
 

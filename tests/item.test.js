@@ -2,6 +2,7 @@ import Item from '../src/item';
 import fs from 'fs';
 import Link from '../src/link';
 import Asset from '../src/asset';
+import create from '../src/index';
 
 let json = JSON.parse(fs.readFileSync('./tests/examples/item.json'));
 let item = new Item(json);
@@ -19,6 +20,24 @@ let dtStr2 = "2023-02-27T14:47:44Z";
 let dtDate2 = new Date(Date.UTC(2023, 1, 27, 14, 47, 44));
 
 let url = "https://example.com/20201211_223832_CS2/item.json";
+
+let json2Old = JSON.parse(fs.readFileSync('./tests/examples/item-s2-old.json'));
+let item2Old = create(json2Old, true, true);
+
+describe('Migration', () => {
+  test('stac_version', () => {
+    expect(item2Old.stac_version).toBe(item2.stac_version);
+  });
+  test('stac_extensions', () => {
+    expect(item2Old.stac_extensions).toEqual(item2.stac_extensions);
+  });
+  test('proj:epsg -> proj:code', () => {
+    expect(item2Old.getMetadata('proj:code')).toBe(item2.getMetadata('proj:code'));
+  });
+  test('eo:bands -> bands', () => {
+    expect(item2Old.getAsset('overview').getBand(0)).toEqual(item2.getAsset('overview').getBand(0));
+  });
+});
 
 test('Basics', () => {
   expect(item.id).toBe("20201211_223832_CS2");
@@ -43,6 +62,7 @@ test('is...', () => {
   expect(item.isCollectionCollection()).toBeFalsy();
   expect(item.isAsset()).toBeFalsy();
   expect(item.isLink()).toBeFalsy();
+  expect(item.isBand()).toBeFalsy();
 });
 
 test('getObjectType', () => {
@@ -93,6 +113,11 @@ test('getIcons', () => {
   expect(icons[0].href).toEqual("./icon.png");
   expect(icons[0].rel).toEqual("icon");
   expect(icons[0].type).toEqual("image/png");
+});
+
+test('getBands', () => {
+  expect(item.getBands()).toEqual([]);
+  expect(item2.getBands()).toEqual([]);
 });
 
 test('getThumbnails', () => {
@@ -172,7 +197,7 @@ describe('rankGeoTIFFs', () => {
   });
   
   test('with callback', () => {
-    let ranks = item.rankGeoTIFFs(true, false, null, asset => Array.isArray(asset['eo:bands']) ? 5 : -5);
+    let ranks = item.rankGeoTIFFs(true, false, null, asset => Array.isArray(asset.bands) ? 5 : -5);
     expect(ranks.length).toBe(3);
     expect(ranks.map(r => r.asset.getKey())).toEqual(["visual", "analytic", "udm"]);
     expect(ranks.map(r => r.score)).toEqual([10, 9, -5]);
@@ -195,6 +220,14 @@ describe('findVisualAssets', () => {
 
   test('item-s2 (found)', () => {  
     let assets = item2.findVisualAssets();
+    expect(assets).not.toBeNull();
+    expect(assets.red.getKey()).toBe("B04");
+    expect(assets.blue.getKey()).toBe("B02");
+    expect(assets.green.getKey()).toBe("B03");
+  });
+
+  test('item-s2-old (found)', () => {  
+    let assets = item2Old.findVisualAssets();
     expect(assets).not.toBeNull();
     expect(assets.red.getKey()).toBe("B04");
     expect(assets.blue.getKey()).toBe("B02");

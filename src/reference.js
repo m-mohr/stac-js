@@ -15,7 +15,7 @@ import { browserImageTypes } from './mediatypes.js';
  * @property {?string} type
  * 
  * @param {Object} data The STAC API Collection object
- * @param {STAC|null} context The object that contains the link
+ * @param {STAC|null} context The object that contains the reference
  * @param {Object.<string, function>} keyMap Keys and functions that convert the values to stac-js objects.
  * @param {Array.<string>} privateKeys Keys that are private members of the stac-js objects (for cloning and export).
  */

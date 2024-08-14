@@ -13,12 +13,13 @@ This library won't help you if you want to create or update a STAC catalog (like
 ## Usage
 
 Automatically instantiate the right class through the factory:
+
 ```js
 import create from 'stac-js';
 // const create = import('stac-js'); // Import for NodeJS
 
 const stac = {
-  stac_version: "1.0.0",
+  stac_version: "1.1.0",
   type: "Collection",
   id: "example",
   // ...
@@ -27,12 +28,13 @@ const obj = create(stac); // Migrates data to the latest version
 ```
 
 Directly instantiate `Asset`, `Catalog`, `Collection`, `CollectionCollection`, `Item` or `ItemCollection` through the class constructors:
+
 ```js
 import { Collection } from 'stac-js'; // or Catalog or Item
 // const { Collection } = import('stac-js'); // Import for NodeJS
 
 const stac = {
-  stac_version: "1.0.0",
+  stac_version: "1.1.0",
   type: "Collection",
   id: "example",
   // ...
@@ -41,6 +43,7 @@ const obj = new Collection(stac); // Does NOT migrate to the latest version
 ```
 
 You can then use the object, check whether it's STAC and call some methods, for example:
+
 ```js
 import { STAC } from 'stac-js';
 // const { STAC } = import('stac-js'); // Import for NodeJS
@@ -57,6 +60,7 @@ if (obj instanceof STAC) {
 ```
 
 The classes are drop-in replacements, which means you can still access the objects as before:
+
 ```js
 console.log(stac.id === obj.id);
 ```

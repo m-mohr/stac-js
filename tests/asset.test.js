@@ -1,5 +1,6 @@
 import Item from '../src/item';
 import Asset from '../src/asset';
+import Band from '../src/band';
 import fs from 'fs';
 import { isObject } from '../src/utils';
 
@@ -9,7 +10,6 @@ let asset = item.assets.analytic;
 let itemAsset = Object.assign({}, json.assets.analytic);
 delete itemAsset.href;
 let def = new Asset(itemAsset, "analytic", item);
-let bands = asset['eo:bands'];
 let url = 'https://example.com/20201211_223832_CS2/20201211_223832_CS2_analytic.tif';
 
 describe('constructor', () => {
@@ -51,6 +51,7 @@ test('is...', () => {
   expect(asset.isCollectionCollection()).toBeFalsy();
   expect(asset.isLink()).toBeFalsy();
   expect(asset.isAsset()).toBeTruthy();
+  expect(asset.isBand()).toBeFalsy();
   expect(def.isAsset()).toBeTruthy();
 });
 
@@ -80,9 +81,9 @@ test('getMetadata', () => {
   // Get from asset
   expect(asset.getMetadata("roles")).toEqual(["data"]);
   // Get from item properties
-  expect(asset.getMetadata("proj:epsg")).toBe(32659);
+  expect(asset.getMetadata("proj:code")).toBe("EPSG:32659");
 
-  expect(def.getMetadata("proj:epsg")).toBe(32659);
+  expect(def.getMetadata("proj:code")).toBe("EPSG:32659");
 });
 
 test('getAbsoluteUrl', () => {
@@ -117,8 +118,11 @@ test('isHTTP', () => {
 });
 
 test('getBands', () => {
-  expect(asset.getBands()).toEqual(bands);
-  expect(def.getBands()).toEqual(bands);
+  expect(asset.getBands().every(band => band instanceof Band)).toBeTruthy();
+  expect(asset.getBands().map(band => band.toJSON())).toEqual(asset.bands.map(band => band.toJSON()));
+
+  expect(def.getBands().every(band => band instanceof Band)).toBeTruthy();
+  expect(def.getBands().map(band => band.toJSON())).toEqual(asset.bands.map(band => band.toJSON()));
 });
 
 test('hasRole', () => {
@@ -132,34 +136,34 @@ test('hasRole', () => {
 
 test('findBand', () => {
   let b1 = { name: "b1" };
-  let b2 = { name: "b2", common_name: "blue" };
-  let b3 = { common_name: "red" };
+  let b2 = { name: "b2", "eo:common_name": "blue" };
+  let b3 = { "eo:common_name": "red" };
   let bands = [b1, b2, b3];
-  let b1i = { index: 0, band: b1 };
-  let b2i = { index: 1, band: b2 };
-  let b3i = { index: 2, band: b3 };
   let asset = new Asset({
     "href": "ex.tif",
-    "eo:bands": bands
+    "bands": bands
   }, "test");
+  let b1i = new Band(b1, 0, asset);
+  let b2i = new Band(b2, 1, asset);
+  let b3i = new Band(b3, 2, asset);
 
   expect(asset.findBand("b1")).toEqual(b1i);
   expect(asset.findBand("b2")).toEqual(b2i);
-  expect(asset.findBand("blue", "common_name")).toEqual(b2i);
-  expect(asset.findBand("red", "common_name")).toEqual(b3i);
-  expect(asset.findBand(["foo", "red", "bar"], "common_name")).toEqual(b3i);
+  expect(asset.findBand("blue", "eo:common_name")).toEqual(b2i);
+  expect(asset.findBand("red", "eo:common_name")).toEqual(b3i);
+  expect(asset.findBand(["foo", "red", "bar"], "eo:common_name")).toEqual(b3i);
 
-  expect(asset.findBand("green", "common_name")).toBeNull();
-  expect(asset.findBand("b1", "common_name")).toBeNull();
+  expect(asset.findBand("green", "eo:common_name")).toBeNull();
+  expect(asset.findBand("b1", "eo:common_name")).toBeNull();
   expect(asset.findBand("red")).toBeNull();
   expect(asset.findBand("b3")).toBeNull();
 });
 
 test('findVisualBands', () => {
   let getBand = name => {
-    let index = bands.findIndex(b => b.common_name === name);
-    let band = bands[index];
-    return { index, band };
+    let index = asset.bands.findIndex(b => b['eo:common_name'] === name);
+    let band = asset.bands[index];
+    return new Band(band, index, asset);
   };
   expect(asset.findVisualBands()).toEqual({
     red: getBand('red'),
@@ -169,24 +173,27 @@ test('findVisualBands', () => {
 });
 
 describe('getMinMaxValues', () => {
-  test('raster:bands -> statistics', () => {
+  test('bands -> statistics', () => {
     let asset = new Asset({
-      "raster:bands": [{
+      "bands": [{
         "statistics": {
-          "minimum": -5.1,
-          "maximum": 5.1,
+          "minimum": -5,
+          "maximum": 5,
           "mean": 0
         },
         "data_type": "uint8"
       }]
     }, "test");
-    let obj = asset.getMinMaxValues(0);
+    let obj = asset.getBand(0).getMinMaxValues();
     expect(isObject(obj)).toBeTruthy();
-    expect(obj.minimum).toBe(-5.1);
-    expect(obj.maximum).toBe(5.1);
+    expect(obj.minimum).toBe(-5);
+    expect(obj.maximum).toBe(5);
     expect(obj.mean).not.toBeDefined();
 
-    let obj2 = asset.getMinMaxValues(1);
+    let asset2 = new Asset({
+      "bands": [{}]
+    }, "test");
+    let obj2 = asset2.getBand(0).getMinMaxValues();
     expect(isObject(obj2)).toBeTruthy();
     expect(obj2.minimum).toBeNull();
     expect(obj2.maximum).toBeNull();
@@ -208,23 +215,14 @@ describe('getMinMaxValues', () => {
     expect(obj.maximum).toBe(2);
   });
 
-  test('file:data_type', () => {
+  test('data_type', () => {
     let asset = new Asset({
-      "file:data_type": "uint8"
+      "data_type": "uint8"
     }, "test");
     let obj = asset.getMinMaxValues();
     expect(isObject(obj)).toBeTruthy();
     expect(obj.minimum).toBe(0);
     expect(obj.maximum).toBe(255);
-  });
-
-  test('raster:bands, pass in as object', () => {
-    let obj = asset.getMinMaxValues({
-      "data_type": "int8"
-    });
-    expect(isObject(obj)).toBeTruthy();
-    expect(obj.minimum).toBe(-128);
-    expect(obj.maximum).toBe(127);
   });
 
   test('classification:classes', () => {
@@ -251,9 +249,16 @@ describe('getMinMaxValues', () => {
 });
 
 describe('getNoDataValues', () => {
-  test('raster:bands', () => {
+  test('asset', () => {
     let asset = new Asset({
-      "raster:bands": [{
+      "nodata": "nan"
+    }, "test");
+    expect(asset.getNoDataValues()).toEqual([NaN]);
+  });
+
+  test('bands', () => {
+    let asset = new Asset({
+      "bands": [{
         "nodata": "nan"
       },{
         "nodata": 0
@@ -262,10 +267,10 @@ describe('getNoDataValues', () => {
       }]
     }, "test");
 
-    expect(asset.getNoDataValues(0)).toEqual([NaN]);
-    expect(asset.getNoDataValues(1)).toEqual([0]);
-    expect(asset.getNoDataValues(2)).toEqual([]);
-    expect(asset.getNoDataValues(3)).toEqual([]);
+    expect(asset.getNoDataValues()).toEqual([]);
+    expect(asset.getBand(0).getNoDataValues()).toEqual([NaN]);
+    expect(asset.getBand(1).getNoDataValues()).toEqual([0]);
+    expect(asset.getBand(2).getNoDataValues()).toEqual([]);
   });
 
   test('classification:classes', () => {
@@ -281,17 +286,11 @@ describe('getNoDataValues', () => {
     expect(asset.getNoDataValues()).toEqual([0]);
   });
 
-  test('file:data_type', () => {
+  test('file:nodata', () => {
     let asset = new Asset({
       "file:nodata": [-1, -3]
     }, "test");
-    expect(asset.getNoDataValues(0)).toEqual([-1, -3]);
-  });
-
-  test('raster:bands, pass in as object', () => {
-    expect(asset.getNoDataValues({})).toEqual([]);
-    expect(asset.getNoDataValues({"nodata": "-inf"})).toEqual([-Infinity]);
-    expect(asset.getNoDataValues({"nodata": "+inf"})).toEqual([+Infinity]);
+    expect(asset.getNoDataValues()).toEqual([-1, -3]);
   });
 });
 

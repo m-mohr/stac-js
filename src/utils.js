@@ -95,3 +95,134 @@ export function getMaxForDataType(str) {
   }
   return null;
 }
+
+
+/**
+ * Gets the reported minimum and maximum values for a STAC object.
+ * 
+ * Searches through different extension fields in raster, claasification, and file.
+ * 
+ * @param {StacObject} object 
+ * @returns {Statistics}
+ */
+export function getMinMaxValues(object) {
+  /**
+   * Statistics
+   * 
+   * @typedef {Object} Statistics
+   * @property {number|null} minimum Minimum value
+   * @property {number|null} maximum Maximum value
+   */
+  const stats = {
+    minimum: null,
+    maximum: null
+  };
+
+  // Checks whether the stats object is completely filled
+  const isComplete = obj => obj.minimum !== null && obj.maximum !== null;
+
+  // data sources: raster (statistics, histogram, data_type), classification, file (values, data_type)
+  const statistics = object.getMetadata("statistics");
+  if (isObject(statistics)) {
+    if (typeof statistics.minimum === 'number') {
+      stats.minimum = statistics.minimum;
+    }
+    if (typeof statistics.maximum === 'number') {
+      stats.maximum = statistics.maximum;
+    }
+    if (isComplete(stats)) {
+      return stats;
+    }
+  }
+
+  const histogram = object.getMetadata("raster:histogram");
+  if (isObject(histogram)) {
+    if (typeof histogram.min === 'number') {
+      stats.minimum = histogram.min;
+    }
+    if (typeof histogram.max === 'number') {
+      stats.maximum = histogram.max;
+    }
+    if (isComplete(stats)) {
+      return stats;
+    }
+  }
+
+  const classification = object.getMetadata("classification:classes");
+  if (Array.isArray(classification)) {
+    classification.reduce((obj, cls) => {
+      obj.minimum = Math.min(obj.minimum, cls.value);
+      obj.maximum = Math.max(obj.maximum, cls.value);
+      return obj;
+    }, stats);
+    if (isComplete(stats)) {
+      return stats;
+    }
+  }
+
+  const values = object.getMetadata("file:values");
+  if (Array.isArray(values)) {
+    values.reduce((obj, map) => {
+      obj.minimum = Math.min(obj.minimum, ...map.values);
+      obj.maximum = Math.max(obj.maximum, ...map.values);
+      return obj;
+    }, stats);
+    if (isComplete(stats)) {
+      return stats;
+    }
+  }
+
+  const data_type = object.getMetadata("data_type");
+  if (data_type) {
+    stats.minimum = getMinForDataType(data_type);
+    stats.maximum = getMaxForDataType(data_type);
+  }
+
+  return stats;
+}
+
+/**
+ * Gets the reported no-data values for a STAC Object.
+ * 
+ * Searches through different extension fields in nodata, classification, and file.
+ * 
+ * @param {StacObject} object 
+ * @returns {Array.<*>}
+ */
+export function getNoDataValues(object) {
+  // data sources: raster (nodata), classification (nodata flag), file (nodata)
+  let nodata = [];
+  const common = object.getMetadata("nodata");
+  if (typeof common !== 'undefined') {
+    nodata.push(common);
+  }
+  else {
+    const file = object.getMetadata("file:nodata");
+    if (typeof file !== 'undefined') {
+      nodata = file;
+    }
+    else {
+      const classification = object.getMetadata("classification:classes");
+      if (Array.isArray(classification)) {
+        nodata = classification
+          .filter(cls => Boolean(cls.nodata))
+          .map(cls => cls.value);
+      }
+    }
+  }
+
+  return nodata.map(value => {
+    if (value === "nan") {
+      return NaN;
+    }
+    else if (value === "+inf") {
+      return +Infinity;
+    }
+    else if (value === "-inf") {
+      return -Infinity;
+    }
+    else {
+      return value;
+    }
+  });
+}

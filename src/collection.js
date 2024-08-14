@@ -1,8 +1,9 @@
 import Asset from './asset.js';
+import Band from './band.js';
 import CatalogLike from './cataloglike.js';
 import { isoToDate } from './datetime.js';
 import { isBoundingBox, toGeoJSON } from './geo.js';
-import { hasText, mergeArraysOfObjects } from './utils.js';
+import { hasText } from './utils.js';
 
 /**
  * Extents
@@ -152,23 +153,17 @@ class Collection extends CatalogLike {
   /**
    * Returns the bands.
    * 
-   * This is usually a merge of eo:bands and raster:bands from the summaries.
-   * 
-   * @returns {Array.<Object>}
+   * @returns {Array.<Band>}
    */
   getBands() {
-    let eo = this.getSummary('eo:bands');
-    let raster = this.getSummary('raster:bands');
-    let all = [eo, raster].filter(arr => Array.isArray(arr));
-    if (all.length >= 2) {
-      return mergeArraysOfObjects(...all);
+    let bands = this.getMetadata('bands');
+    if (!Array.isArray(bands)) {
+      bands = this.getSummary('bands');
     }
-    else if (all.length === 1) {
-      return all[0];
-    }
-    else {
+    if (!Array.isArray(bands)) {
       return [];
     }
+    return Band.fromBands(bands, this);
   }
   
 }

@@ -50,6 +50,7 @@ test('is...', () => {
   expect(link.isCollectionCollection()).toBeFalsy();
   expect(link.isAsset()).toBeFalsy();
   expect(link.isLink()).toBeTruthy();
+  expect(link.isBand()).toBeFalsy();
 });
 
 test('canBrowserDisplayImage', () => {

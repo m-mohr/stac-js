@@ -1,10 +1,10 @@
 {
   "type": "Feature",
-  "stac_version": "1.1.0",
+  "stac_version": "1.0.0-beta.2",
   "stac_extensions": [
-    "https://stac-extensions.github.io/eo/v2.0.0/schema.json",
-    "https://stac-extensions.github.io/projection/v2.0.0/schema.json",
-    "https://stac-extensions.github.io/view/v1.0.0/schema.json"
+    "eo",
+    "projection",
+    "view"
   ],
   "id": "S2A_19KFA_20230227_0_L2A",
   "bbox": [
@@ -49,7 +49,7 @@
     ],
     "gsd": 10,
     "view:off_nadir": 0,
-    "proj:code": "EPSG:32719",
+    "proj:epsg": 32719,
     "sentinel:utm_zone": 19,
     "sentinel:latitude_band": "K",
     "sentinel:grid_square": "FA",
@@ -80,24 +80,24 @@
         "overview"
       ],
       "gsd": 10,
-      "bands": [
+      "eo:bands": [
         {
           "name": "B04",
-          "eo:common_name": "red",
-          "eo:center_wavelength": 0.6645,
-          "eo:full_width_half_max": 0.038
+          "common_name": "red",
+          "center_wavelength": 0.6645,
+          "full_width_half_max": 0.038
         },
         {
           "name": "B03",
-          "eo:common_name": "green",
-          "eo:center_wavelength": 0.56,
-          "eo:full_width_half_max": 0.045
+          "common_name": "green",
+          "center_wavelength": 0.56,
+          "full_width_half_max": 0.045
         },
         {
           "name": "B02",
-          "eo:common_name": "blue",
-          "eo:center_wavelength": 0.4966,
-          "eo:full_width_half_max": 0.098
+          "common_name": "blue",
+          "center_wavelength": 0.4966,
+          "full_width_half_max": 0.098
         }
       ],
       "href": "https://sentinel-cogs.s3.us-west-2.amazonaws.com/sentinel-s2-l2a-cogs/19/K/FA/2023/2/S2A_19KFA_20230227_0_L2A/L2A_PVI.tif",
@@ -140,24 +140,24 @@
         "overview"
       ],
       "gsd": 10,
-      "bands": [
+      "eo:bands": [
         {
           "name": "B04",
-          "eo:common_name": "red",
-          "eo:center_wavelength": 0.6645,
-          "eo:full_width_half_max": 0.038
+          "common_name": "red",
+          "center_wavelength": 0.6645,
+          "full_width_half_max": 0.038
         },
         {
           "name": "B03",
-          "eo:common_name": "green",
-          "eo:center_wavelength": 0.56,
-          "eo:full_width_half_max": 0.045
+          "common_name": "green",
+          "center_wavelength": 0.56,
+          "full_width_half_max": 0.045
         },
         {
           "name": "B02",
-          "eo:common_name": "blue",
-          "eo:center_wavelength": 0.4966,
-          "eo:full_width_half_max": 0.098
+          "common_name": "blue",
+          "center_wavelength": 0.4966,
+          "full_width_half_max": 0.098
         }
       ],
       "href": "https://sentinel-cogs.s3.us-west-2.amazonaws.com/sentinel-s2-l2a-cogs/19/K/FA/2023/2/S2A_19KFA_20230227_0_L2A/TCI.tif",
@@ -184,12 +184,12 @@
         "data"
       ],
       "gsd": 60,
-      "bands": [
+      "eo:bands": [
         {
           "name": "B01",
-          "eo:common_name": "coastal",
-          "eo:center_wavelength": 0.4439,
-          "eo:full_width_half_max": 0.027
+          "common_name": "coastal",
+          "center_wavelength": 0.4439,
+          "full_width_half_max": 0.027
         }
       ],
       "href": "https://sentinel-cogs.s3.us-west-2.amazonaws.com/sentinel-s2-l2a-cogs/19/K/FA/2023/2/S2A_19KFA_20230227_0_L2A/B01.tif",
@@ -216,12 +216,12 @@
         "data"
       ],
       "gsd": 10,
-      "bands": [
+      "eo:bands": [
         {
           "name": "B02",
-          "eo:common_name": "blue",
-          "eo:center_wavelength": 0.4966,
-          "eo:full_width_half_max": 0.098
+          "common_name": "blue",
+          "center_wavelength": 0.4966,
+          "full_width_half_max": 0.098
         }
       ],
       "href": "https://sentinel-cogs.s3.us-west-2.amazonaws.com/sentinel-s2-l2a-cogs/19/K/FA/2023/2/S2A_19KFA_20230227_0_L2A/B02.tif",
@@ -248,12 +248,12 @@
         "data"
       ],
       "gsd": 10,
-      "bands": [
+      "eo:bands": [
         {
           "name": "B03",
-          "eo:common_name": "green",
-          "eo:center_wavelength": 0.56,
-          "eo:full_width_half_max": 0.045
+          "common_name": "green",
+          "center_wavelength": 0.56,
+          "full_width_half_max": 0.045
         }
       ],
       "href": "https://sentinel-cogs.s3.us-west-2.amazonaws.com/sentinel-s2-l2a-cogs/19/K/FA/2023/2/S2A_19KFA_20230227_0_L2A/B03.tif",
@@ -280,12 +280,12 @@
         "data"
       ],
       "gsd": 10,
-      "bands": [
+      "eo:bands": [
         {
           "name": "B04",
-          "eo:common_name": "red",
-          "eo:center_wavelength": 0.6645,
-          "eo:full_width_half_max": 0.038
+          "common_name": "red",
+          "center_wavelength": 0.6645,
+          "full_width_half_max": 0.038
         }
       ],
       "href": "https://sentinel-cogs.s3.us-west-2.amazonaws.com/sentinel-s2-l2a-cogs/19/K/FA/2023/2/S2A_19KFA_20230227_0_L2A/B04.tif",
@@ -312,11 +312,11 @@
         "data"
       ],
       "gsd": 20,
-      "bands": [
+      "eo:bands": [
         {
           "name": "B05",
-          "eo:center_wavelength": 0.7039,
-          "eo:full_width_half_max": 0.019
+          "center_wavelength": 0.7039,
+          "full_width_half_max": 0.019
         }
       ],
       "href": "https://sentinel-cogs.s3.us-west-2.amazonaws.com/sentinel-s2-l2a-cogs/19/K/FA/2023/2/S2A_19KFA_20230227_0_L2A/B05.tif",
@@ -343,11 +343,11 @@
         "data"
       ],
       "gsd": 20,
-      "bands": [
+      "eo:bands": [
         {
           "name": "B06",
-          "eo:center_wavelength": 0.7402,
-          "eo:full_width_half_max": 0.018
+          "center_wavelength": 0.7402,
+          "full_width_half_max": 0.018
         }
       ],
       "href": "https://sentinel-cogs.s3.us-west-2.amazonaws.com/sentinel-s2-l2a-cogs/19/K/FA/2023/2/S2A_19KFA_20230227_0_L2A/B06.tif",
@@ -374,11 +374,11 @@
         "data"
       ],
       "gsd": 20,
-      "bands": [
+      "eo:bands": [
         {
           "name": "B07",
-          "eo:center_wavelength": 0.7825,
-          "eo:full_width_half_max": 0.028
+          "center_wavelength": 0.7825,
+          "full_width_half_max": 0.028
         }
       ],
       "href": "https://sentinel-cogs.s3.us-west-2.amazonaws.com/sentinel-s2-l2a-cogs/19/K/FA/2023/2/S2A_19KFA_20230227_0_L2A/B07.tif",
@@ -405,12 +405,12 @@
         "data"
       ],
       "gsd": 10,
-      "bands": [
+      "eo:bands": [
         {
           "name": "B08",
-          "eo:common_name": "nir",
-          "eo:center_wavelength": 0.8351,
-          "eo:full_width_half_max": 0.145
+          "common_name": "nir",
+          "center_wavelength": 0.8351,
+          "full_width_half_max": 0.145
         }
       ],
       "href": "https://sentinel-cogs.s3.us-west-2.amazonaws.com/sentinel-s2-l2a-cogs/19/K/FA/2023/2/S2A_19KFA_20230227_0_L2A/B08.tif",
@@ -437,11 +437,11 @@
         "data"
       ],
       "gsd": 20,
-      "bands": [
+      "eo:bands": [
         {
           "name": "B8A",
-          "eo:center_wavelength": 0.8648,
-          "eo:full_width_half_max": 0.033
+          "center_wavelength": 0.8648,
+          "full_width_half_max": 0.033
         }
       ],
       "href": "https://sentinel-cogs.s3.us-west-2.amazonaws.com/sentinel-s2-l2a-cogs/19/K/FA/2023/2/S2A_19KFA_20230227_0_L2A/B8A.tif",
@@ -468,11 +468,11 @@
         "data"
       ],
       "gsd": 60,
-      "bands": [
+      "eo:bands": [
         {
           "name": "B09",
-          "eo:center_wavelength": 0.945,
-          "eo:full_width_half_max": 0.026
+          "center_wavelength": 0.945,
+          "full_width_half_max": 0.026
         }
       ],
       "href": "https://sentinel-cogs.s3.us-west-2.amazonaws.com/sentinel-s2-l2a-cogs/19/K/FA/2023/2/S2A_19KFA_20230227_0_L2A/B09.tif",
@@ -499,12 +499,12 @@
         "data"
       ],
       "gsd": 20,
-      "bands": [
+      "eo:bands": [
         {
           "name": "B11",
-          "eo:common_name": "swir16",
-          "eo:center_wavelength": 1.6137,
-          "eo:full_width_half_max": 0.143
+          "common_name": "swir16",
+          "center_wavelength": 1.6137,
+          "full_width_half_max": 0.143
         }
       ],
       "href": "https://sentinel-cogs.s3.us-west-2.amazonaws.com/sentinel-s2-l2a-cogs/19/K/FA/2023/2/S2A_19KFA_20230227_0_L2A/B11.tif",
@@ -531,12 +531,12 @@
         "data"
       ],
       "gsd": 20,
-      "bands": [
+      "eo:bands": [
         {
           "name": "B12",
-          "eo:common_name": "swir22",
-          "eo:center_wavelength": 2.22024,
-          "eo:full_width_half_max": 0.242
+          "common_name": "swir22",
+          "center_wavelength": 2.22024,
+          "full_width_half_max": 0.242
         }
       ],
       "href": "https://sentinel-cogs.s3.us-west-2.amazonaws.com/sentinel-s2-l2a-cogs/19/K/FA/2023/2/S2A_19KFA_20230227_0_L2A/B12.tif",

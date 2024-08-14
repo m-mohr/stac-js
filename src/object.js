@@ -107,11 +107,20 @@ class STACObject {
   }
 
   /**
-   * Check whether this given object is a STAC LInk.
+   * Check whether this given object is a STAC Link.
    * 
    * @returns {boolean} `true` if the object is a STAC Link, `false` otherwise.
    */
   isLink() {
+    return false;
+  }
+
+  /**
+   * Check whether this given object is a STAC Band.
+   * 
+   * @returns {boolean} `true` if the object is a STAC Band, `false` otherwise.
+   */
+  isBand() {
     return false;
   }
 
@@ -126,6 +135,7 @@ class STACObject {
    * - Item
    * - ItemCollection
    * - Link
+   * - Band
    * @abstract
    * @returns {string}
    */

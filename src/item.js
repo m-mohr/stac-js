@@ -3,6 +3,7 @@ import { centerDateTime, isoToDate } from './datetime.js';
 import { isBoundingBox } from './geo.js';
 import { hasText } from './utils.js';
 import STAC from './stac.js';
+import Band from './band.js';
 
 /**
  * Metadata for an item, the item properties.
@@ -134,15 +135,14 @@ class Item extends STAC {
    * Returns the bands.
    * 
    * @todo Merge bands from assets
-   * @returns {Array.<Object>}
+   * @returns {Array.<Band>}
    */
   getBands() {
-    let eo = this.getMetadata('eo:bands');
-    if (Array.isArray(eo)) {
-      return eo;
+    const bands = this.getMetadata('bands');
+    if (Array.isArray(bands)) {
+      return Band.fromBands(bands, this);
     }
     else {
-      // todo: merge bands from assets?
       return [];
     }
   }
