@@ -2,6 +2,15 @@ import { getMinMaxValues, getNoDataValues, hasText, isObject } from "./utils.js"
 import STACReference from './reference.js';
 import Band from "./band.js";
 
+const NO_INHERITANCE = [
+  'created',
+  'updated',
+  'published',
+  'expires',
+  'unpublished',
+  'bands'
+];
+
 /**
  * A STAC Asset or Item Asset Definition.
  * 
@@ -80,7 +89,7 @@ class Asset extends STACReference {
     if (typeof this[field] !== 'undefined') {
       return this[field];
     }
-    if (this._context) {
+    if (this._context && !NO_INHERITANCE.includes(field)) {
       return this._context.getMetadata(field);
     }
     return undefined;
