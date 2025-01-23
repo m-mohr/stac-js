@@ -27,13 +27,16 @@
   "scripts": {
     "docs": "npx documentation build src/** -f html --github -o docs --sort-order kind",
     "docs_lint": "npx documentation lint src/**",
-    "lint": "eslint \"./src/**/*.js\" -c .eslintrc.json",
+    "lint": "eslint \"./src/**/*.js\" -c eslint.config.mjs",
     "test": "node --experimental-vm-modules node_modules/jest/bin/jest.js",
     "check": "npm run docs_lint && npm run lint && npm test"
   },
   "devDependencies": {
-    "eslint": "^8.34.0",
-    "eslint-plugin-jsdoc": "^40.0.0",
+    "@eslint/eslintrc": "^3.2.0",
+    "@eslint/js": "^9.18.0",
+    "eslint": "^9.18.0",
+    "eslint-plugin-jsdoc": "^50.0.0",
+    "globals": "^15.14.0",
     "jest": "^29.0.0",
     "jest-html-reporter": "^3.3.0"
   },

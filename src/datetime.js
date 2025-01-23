@@ -13,7 +13,7 @@ export function isoToDate(str) {
       let strParts = str.match(/^(-?\d{1,})-(\d\d)-(\d\d)[T ](\d\d):(\d\d):(\d\d)(?:\.(\d*))?(?:Z|[+-]00:00)?$/i);
       let dt = strParts.slice(1).map(n => parseInt(n, 10));
       return new Date(Date.UTC(dt[0], dt[1] - 1, dt[2], dt[3], dt[4], dt[5], dt[6] || 0));
-    } catch(error) {
+    } catch {
       return null;
     }
   }
