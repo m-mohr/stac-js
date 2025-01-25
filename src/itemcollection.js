@@ -51,7 +51,7 @@ class ItemCollection extends APICollection {
   }
 
   /**
-   * Returns a single bounding box for all the STAC items.
+   * Returns a single 2D bounding box for all the STAC items.
    * 
    * @returns {BoundingBox|null}
    */
@@ -60,7 +60,7 @@ class ItemCollection extends APICollection {
   }
 
   /**
-   * Returns a list of bounding boxes for all the STAC items.
+   * Returns a list of 2D bounding boxes for all the STAC items.
    * 
    * @returns {Array.<BoundingBox>}
    */

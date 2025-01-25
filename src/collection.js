@@ -2,7 +2,7 @@ import Asset from './asset.js';
 import Band from './band.js';
 import CatalogLike from './cataloglike.js';
 import { isoToDate } from './datetime.js';
-import { isBoundingBox, toGeoJSON } from './geo.js';
+import { bbox2D, isBoundingBox, toGeoJSON } from './geo.js';
 import { hasText } from './utils.js';
 
 /**
@@ -74,33 +74,34 @@ class Collection extends CatalogLike {
   }
 
   /**
-   * Returns a single union bounding box for the whole collection.
+   * Returns a single union 2D bounding box for the whole collection.
    * 
    * @returns {BoundingBox|null}
    */
   getBoundingBox() {
     let bboxes = this.getRawBoundingBoxes();
     if (bboxes.length > 0 && isBoundingBox(bboxes[0])) {
-      return bboxes[0];
+      return bbox2D(bboxes[0]);
     }
     return null;
   }
 
   /**
-   * Returns the individual bounding boxes for the collection,
+   * Returns the individual 2D bounding boxes for the collection,
    * without the union bounding box if multiple bounding boxes are given.
    * 
    * @returns {Array.<BoundingBox>}
    */
   getBoundingBoxes() {
-    let bboxes = this.getRawBoundingBoxes();
-    if (bboxes.length === 1 && isBoundingBox(bboxes[0])) {
-      return bboxes;
+    let raw = this.getRawBoundingBoxes();
+    let bboxes = [];
+    if (raw.length === 1 && isBoundingBox(raw[0])) {
+      bboxes = raw;
     }
-    else if (bboxes.length > 1) {
-      return bboxes.filter((bbox, i) => i > 0 && isBoundingBox(bbox));
+    else if (raw.length > 1) {
+      bboxes = raw.filter((bbox, i) => i > 0 && isBoundingBox(bbox));
     }
-    return [];
+    return bboxes.map(bbox => bbox2D(bbox));
   }
 
   /**

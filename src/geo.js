@@ -111,6 +111,22 @@ export function toGeoJSON(bboxes) {
 }
 
 /**
+ * Converts a bounding box to be two-dimensional.
+ * 
+ * @param {BoundingBox} bbox 
+ * @returns {BoundingBox}
+ */
+export function bbox2D(bbox) {
+  if (bbox.length === 4) {
+    return bbox;
+  }
+  else {
+    let { west, east, south, north } = toObject(bbox);
+    return [west, south, east, north];
+  }
+}
+
+/**
  * Checks whether the given thing is a valid bounding box.
  * 
  * A valid bounding box is an array with 4 or 6 numbers that are valid WGS84 coordinates and span a rectangle.
@@ -133,6 +149,12 @@ export function isBoundingBox(bbox) {
   );
 }
 
+/**
+ * Checks whether the given bounding box crosses the antimeridian.
+ * 
+ * @param {BoundingBox} bbox 
+ * @returns {boolean}
+ */
 export function isAntimeridianBoundingBox(bbox) {
   if (!isBoundingBox(bbox)) {
     return false;

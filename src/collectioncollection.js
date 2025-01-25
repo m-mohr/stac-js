@@ -65,7 +65,7 @@ class CollectionCollection extends APICollection {
   }
 
   /**
-   * Returns a single bounding box for all the STAC collections.
+   * Returns a single 2D bounding box for all the STAC collections.
    * 
    * @returns {BoundingBox|null}
    */
@@ -74,7 +74,7 @@ class CollectionCollection extends APICollection {
   }
 
   /**
-   * Returns a list of bounding boxes for all the STAC collections.
+   * Returns a list of 2D bounding boxes for all the STAC collections.
    * 
    * @returns {Array.<BoundingBox>}
    */

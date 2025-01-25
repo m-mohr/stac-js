@@ -1,4 +1,4 @@
-import { centerOfBoundingBox, isAntimeridianBoundingBox, isBoundingBox, toGeoJSON, unionBoundingBox } from '../src/geo';
+import { bbox2D, centerOfBoundingBox, isAntimeridianBoundingBox, isBoundingBox, toGeoJSON, unionBoundingBox } from '../src/geo';
 
 test('isBoundingBox', () => {
   expect(isBoundingBox(undefined)).toBeFalsy();
@@ -51,6 +51,12 @@ test('unionBoundingBox', () => {
   expect(unionBoundingBox([bbox1, bbox2, null])).toEqual(bbox2);
 });
 
+test('bbox2D', () => {
+  let bbox1 = [172.91,1.34,0,172.95,1.36,10];
+  let bbox2 = [172.91,1.34,172.95,1.36];
+  expect(bbox2D(bbox1)).toEqual(bbox2);
+  expect(bbox2D(bbox2)).toEqual(bbox2);
+});
 
 test('toGeoJSON', () => {
   let make = (type, coordinates) => {
