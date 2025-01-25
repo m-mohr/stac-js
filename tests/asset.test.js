@@ -55,6 +55,14 @@ test('is...', () => {
   expect(def.isAsset()).toBeTruthy();
 });
 
+test('isPreview', () => {
+  expect(asset.isPreview()).toBeFalsy();
+  expect((new Asset({href: 'example.png', roles: ['abc', 'overview']}, 'xxx')).isPreview()).toBeTruthy();
+  expect((new Asset({href: 'example.png', roles: ['thumbnail']}, 'xxx')).isPreview()).toBeTruthy();
+  expect((new Asset({href: 'example.png'}, 'overview')).isPreview()).toBeTruthy();
+  expect((new Asset({href: 'example.png'}, 'thumbnail')).isPreview()).toBeTruthy();
+});
+
 test('toJSON', () => {
   expect(asset.toJSON()).toEqual(json.assets.analytic);
   expect(def.toJSON()).toEqual(itemAsset);

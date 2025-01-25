@@ -86,44 +86,53 @@ class STACReference extends STACObject {
   }
 
   /**
-   * Checks whether this asset is of a specific type.
+   * Checks whether this entity is of a specific type.
    * 
    * @param {string|Array.<string>} types One or more media types.
-   * @returns {boolean} `true` is this asset is one of the given types, `false` otherwise.
+   * @returns {boolean} `true` is this entity is one of the given types, `false` otherwise.
    */
   isType(types) { // string or array of strings
     return hasText(this.type) && isMediaType(this.type, types);
   }
 
   /**
-   * Checks whether this asset is a GeoTiff (including COGs).
+   * Checks whether this entity is a GeoTiff (including COGs).
    * 
-   * @returns {boolean} `true` is this asset is a GeoTiff, `false` otherwise.
+   * @returns {boolean} `true` is this entity is a GeoTiff, `false` otherwise.
    */
   isGeoTIFF() {
     return this.isType(geotiffMediaTypes);
   }
 
   /**
-   * Checks whether this asset is a COG (excluding pure GeoTiffs).
+   * Checks whether this entity is a COG (excluding pure GeoTiffs).
    * 
-   * @returns {boolean} `true` is this asset is a COG, `false` otherwise.
+   * @returns {boolean} `true` is this entity is a COG, `false` otherwise.
    */
   isCOG() {
     return this.isType(cogMediaTypes);
   }
 
   /**
-   * Checks whether the asset is accessible via HTTP or HTTPS.
+   * Checks whether the entity is accessible via HTTP or HTTPS.
    * 
-   * Returns `null` for item asset definitions, otherwise a `boolean` value.
+   * Returns `null` if no URI is available, otherwise a `boolean` value.
    * 
-   * @returns {boolean|null} `true` is this asset is available via HTTP or HTTPS, `false` or `null` otherwise.
+   * @returns {boolean|null} `true` is this entity is available via HTTP or HTTPS, `false` or `null` otherwise.
    */
   isHTTP() {
     let uri = this.getAbsoluteUrl(false);
     let protocol = uri.protocol().toLowerCase();
     return hasText(protocol) && browserProtocols.includes(protocol);
+  }
+
+  /**
+   * Returns whether the entity is a preview image.
+   * 
+   * @returns {boolean} `true` if the entity is a preview, `false` otherwise.
+   */
+  isPreview() {
+    return false;
   }
   
 }

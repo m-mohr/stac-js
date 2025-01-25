@@ -56,10 +56,10 @@ class STAC extends STACHypermedia {
    * @returns {Array.<STACReference>} Asset or Link
    */
   getThumbnails(browserOnly = true, prefer = null) {
-    let thumbnails = this.getAssetsWithRoles(['thumbnail', 'overview'], true);
+    let thumbnails = this.getAssets().filter(asset => asset.isPreview());
     // Get from links only if no assets are available as they should usually be the same as in assets
     if (thumbnails.length === 0) {
-      thumbnails = this.getLinksWithRels(['preview']);
+      thumbnails = this.getLinks().filter(link => link.isPreview());
     }
     if (browserOnly) {
       // Remove all images that can't be displayed in a browser

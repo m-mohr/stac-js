@@ -221,6 +221,22 @@ class Asset extends STACReference {
   }
 
   /**
+   * Returns whether the asset is a preview image (thumbnail / overview).
+   * 
+   * An asset is a preview if one of the roles is 'thumbnail' or 'overview'.
+   * it is also a preview if the key is 'thumbnail' or 'overview'.
+   * 
+   * @returns {boolean} `true` if the asset is a preview, `false` otherwise.
+   */
+  isPreview() {
+    const roles = ['thumbnail', 'overview'];
+    if (roles.includes(this.getKey())) {
+      return true;
+    }
+    return Array.isArray(this.roles) && this.roles.some(role => roles.includes(role));
+  }
+
+  /**
    * Checks whether this asset as a specific role assigned.
    * 
    * @param {string|Array.<string>} roles One or more roles.

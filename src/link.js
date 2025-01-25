@@ -44,6 +44,16 @@ class Link extends STACReference {
   }
 
   /**
+   * Returns whether the link is a preview image.
+   * 
+   * @returns {boolean} `true` if the link is a preview, `false` otherwise.
+   */
+  isPreview() {
+    return this.rel === 'preview';
+  }
+
+
+  /**
    * Converts an array of STAC Links into an array of stac-js Links.
    * 
    * @param {Array.<Object>} links Links

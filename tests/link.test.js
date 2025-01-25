@@ -53,6 +53,11 @@ test('is...', () => {
   expect(link.isBand()).toBeFalsy();
 });
 
+test('isPreview', () => {
+  expect(link.isPreview()).toBeFalsy();
+  expect((new Link({href: 'example.png', rel: 'preview'})).isPreview()).toBeTruthy();
+});
+
 test('canBrowserDisplayImage', () => {
   let link = type => (new Link({href: 'example', type}));
 
