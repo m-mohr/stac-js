@@ -1,0 +1,2444 @@
+{
+  "type": "Feature",
+  "stac_version": "1.1.0",
+  "collection": "sentinel-2-l2a",
+  "id": "S2B_MSIL2A_20240110T100309_N0510_R122_T33UVR_20240110T113053",
+  "properties": {
+    "created": "2024-01-10T12:44:08.553000Z",
+    "updated": "2024-03-13T14:21:49.273493Z",
+    "published": "2024-01-10T12:59:28.028261Z",
+    "datetime": "2024-01-10T10:03:09.024Z",
+    "start_datetime": "2024-01-10T10:03:09.024Z",
+    "end_datetime": "2024-01-10T10:03:09.024Z",
+    "platform": "sentinel-2b",
+    "constellation": "sentinel-2",
+    "instruments": [
+      "msi"
+    ],
+    "gsd": 10,
+    "processing:level": "L2",
+    "processing:facility": "ESA",
+    "processing:datetime": "2024-01-10T11:30:53.000000Z",
+    "processing:version": "05.10",
+    "product:type": "S2MSI2A",
+    "product:timeliness": "PT24H",
+    "product:timeliness_category": "NRT",
+    "eo:cloud_cover": 0.17,
+    "eo:snow_cover": 27.69,
+    "sat:orbit_state": "descending",
+    "sat:relative_orbit": 122,
+    "sat:absolute_orbit": 35755,
+    "sat:platform_international_designator": "2017-013A",
+    "grid:code": "MGRS-33UVR",
+    "view:sun_azimuth": 164.793795789396,
+    "view:sun_elevation": 16.604056360370393,
+    "view:azimuth": 106.53215320566686, 
+    "view:incidence_angle": 8.637205208759218,
+    "statistics": {
+      "nodata": 25.002557,
+      "saturated_defective": 0.0,
+      "dark_area": 6.666911,
+      "cloud_shadow": 0.012537,
+      "vegetation": 7.376051,
+      "not_vegetated": 56.82134,
+      "water": 1.142773,
+      "unclassified": 0.126051,
+      "medium_proba_clouds": 0.028017,
+      "high_proba_clouds": 0.002491,
+      "thin_cirrus": 0.135881
+    },
+    "eopf:datastrip_id": "S2B_OPER_MSI_L2A_DS_2BPS_20240110T113053_S20240110T100306_N05.10",
+    "eopf:datatake_id": "GS2B_20240110T100309_035755_N05.10",
+    "eopf:instrument_mode": "INS-NOBS",
+    "eopf:origin_datetime": "2024-01-10T12:44:08.553000Z",
+    "auth:schemes": {
+      "oidc": {
+        "type": "openIdConnect",
+        "openIdConnectUrl": "https://identity.dataspace.copernicus.eu/auth/realms/CDSE/.well-known/openid-configuration"
+      },
+      "s3": {
+        "type": "s3"
+      }
+    }
+  },
+  "geometry": {
+   "type": "Polygon",
+   "coordinates": [
+      [
+         [
+            13.786500199678873,
+            49.55740332255011
+         ],
+         [
+            13.810118722948728,
+            49.61869236894097
+         ],
+         [
+            13.867196680170755,
+            49.76473897001732
+         ],
+         [
+            13.923905160948518,
+            49.910998484861
+         ],
+         [
+            13.979387787551524,
+            50.05216283042255
+         ],
+         [
+            13.981290520916842,
+            50.05695437267662
+         ],
+         [
+            13.984731458164976,
+            50.06569796632764
+         ],
+         [
+            14.039176462148324,
+            50.20324714126559
+         ],
+         [
+            14.09758552180327,
+            50.34930929067385
+         ],
+         [
+            14.155769013378434,
+            50.49542814986462
+         ],
+         [
+            14.176707980454209,
+            50.54695267108956
+         ],
+         [
+            15.137769755767613,
+            50.552210622261306
+         ],
+         [
+            15.134970502622016,
+            49.56467629785398
+         ],
+         [
+            13.786500199678873,
+            49.55740332255011
+         ]
+      ]
+   ]
+},
+  "links": [
+    {
+      "title": "Product history record from the CDSE traceability service",
+      "rel": "version-history",
+      "href": "https://trace.dataspace.copernicus.eu/api/v1/traces/name/S2B_MSIL2A_20240110T100309_N0510_R122_T33UVR_20240110T113053.SAFE.zip",
+      "type": "application/json"
+    }
+  ],
+  "assets": {
+    "Product": {
+      "href": "https://zipper.dataspace.copernicus.eu/odata/v1/Products(7634aef0-7486-4589-92b2-541e0634c770)/$value",
+      "title": "Zipped product",
+      "type": "application/zip",
+      "auth:refs": ["oidc"],
+      "roles": [
+        "data",
+        "metadata",
+        "archive"
+      ],
+      "alternate:name": "HTTPS",
+      "file:size": 1045107915,
+      "file:checksum": "d50110207b9a38c59c2ee58e495a8de8dda90a",
+      "file:local_path": "S2B_MSIL2A_20240110T100309_N0510_R122_T33UVR_20240110T113053.SAFE.zip",
+      "alternate": {
+        "s3": {
+          "href": "s3://eodata/Sentinel-2/MSI/L2A/2024/01/10/S2B_MSIL2A_20240110T100309_N0510_R122_T33UVR_20240110T113053.SAFE",
+          "alternate:name": "S3",
+          "auth:refs": ["s3"],
+          "description": "S3 storage provided by CloudFerro Cloud and OpenTelekom Cloud (OTC). Use endpoint URL `https://eodata.dataspace.copernicus.eu`."
+        }
+      }
+    },
+    "B01_60m": {
+      "href": "https://zipper.dataspace.copernicus.eu/odata/v1/Products(7634aef0-7486-4589-92b2-541e0634c770)/Nodes(S2B_MSIL2A_20240110T100309_N0510_R122_T33UVR_20240110T113053.SAFE)/Nodes(GRANULE)/Nodes(L2A_T33UVR_A035755_20240110T100306)/Nodes(IMG_DATA)/Nodes(R60m)/Nodes(T33UVR_20240110T100309_B01_60m.jp2)/$value",
+      "type": "image/jp2",
+      "auth:refs": ["oidc"],
+      "alternate:name": "HTTPS",
+      "file:size": 3600831,
+      "file:checksum": "162085da6c45dd2c21d18ded8c2cdb6e860c5793cf8ba51b56a803eff3925ce161f9",
+      "file:local_path": "S2B_MSIL2A_20240110T100309_N0510_R122_T33UVR_20240110T113053.SAFE/GRANULE/L2A_T33UVR_A035755_20240110T100306/IMG_DATA/R60m/T33UVR_20240110T100309_B01_60m.jp2",
+      "title": "Coastal aerosol (band 1) - 60m",
+      "alternate": {
+        "s3": {
+          "href": "s3://eodata/Sentinel-2/MSI/L2A/2024/01/10/S2B_MSIL2A_20240110T100309_N0510_R122_T33UVR_20240110T113053.SAFE/GRANULE/L2A_T33UVR_A035755_20240110T100306/IMG_DATA/R60m/T33UVR_20240110T100309_B01_60m.jp2",
+          "alternate:name": "S3",
+          "auth:refs": ["s3"],
+          "description": "S3 storage provided by CloudFerro Cloud and OpenTelekom Cloud (OTC). Use endpoint URL `https://eodata.dataspace.copernicus.eu`."
+        }
+      },
+      "view:azimuth": 107.008621792959,
+      "view:incidence_angle": 8.72119875266113,
+      "bands": [
+        {
+          "name": "B01",
+          "eo:common_name": "coastal",
+          "eo:center_wavelength": 0.442,
+          "eo:full_width_half_max": 0.228
+        }
+      ],
+      "data_type": "uint16",
+      "nodata": 0,
+      "raster:scale": 0.0001,
+      "raster:offset": -0.1,
+      "gsd": 60,
+      "proj:code": "EPSG:32633",
+      "proj:shape": [
+        1830,
+        1830
+      ],
+      "proj:bbox": [
+        399960.0,
+        5490240.0,
+        509760.0,
+        5600040.0
+      ],
+      "proj:transform": [
+        60.0,
+        0.0,
+        399960.0,
+        0.0,
+        -60.0,
+        5600040.0
+      ],
+      "roles": [
+        "data",
+        "reflectance",
+        "sampling:original",
+        "gsd:60m"
+      ]
+    },
+    "B01_20m": {
+      "href": "https://zipper.dataspace.copernicus.eu/odata/v1/Products(7634aef0-7486-4589-92b2-541e0634c770)/Nodes(S2B_MSIL2A_20240110T100309_N0510_R122_T33UVR_20240110T113053.SAFE)/Nodes(GRANULE)/Nodes(L2A_T33UVR_A035755_20240110T100306)/Nodes(IMG_DATA)/Nodes(R20m)/Nodes(T33UVR_20240110T100309_B01_20m.jp2)/$value",
+      "type": "image/jp2",
+      "auth:refs": ["oidc"],
+      "alternate:name": "HTTPS",
+      "file:size": 20049865,
+      "file:checksum": "16208b990afa6dec626e2a998c6715e6db0193f6bc1210d748fe75fd1bccad6c6b2d",
+      "file:local_path": "S2B_MSIL2A_20240110T100309_N0510_R122_T33UVR_20240110T113053.SAFE/GRANULE/L2A_T33UVR_A035755_20240110T100306/IMG_DATA/R20m/T33UVR_20240110T100309_B01_20m.jp2",
+      "title": "Coastal aerosol (band 1) - 20m",
+      "alternate": {
+        "s3": {
+          "href": "s3://eodata/Sentinel-2/MSI/L2A/2024/01/10/S2B_MSIL2A_20240110T100309_N0510_R122_T33UVR_20240110T113053.SAFE/GRANULE/L2A_T33UVR_A035755_20240110T100306/IMG_DATA/R20m/T33UVR_20240110T100309_B01_20m.jp2",
+          "alternate:name": "S3",
+          "auth:refs": ["s3"],
+          "description": "S3 storage provided by CloudFerro Cloud and OpenTelekom Cloud (OTC). Use endpoint URL `https://eodata.dataspace.copernicus.eu`."
+        }
+      },
+      "view:azimuth": 107.008621792959,
+      "view:incidence_angle": 8.72119875266113,
+      "bands": [
+        {
+          "name": "B01",
+          "eo:common_name": "coastal",
+          "eo:center_wavelength": 0.442,
+          "eo:full_width_half_max": 0.228
+        }
+      ],
+      "data_type": "uint16",
+      "nodata": 0,
+      "raster:scale": 0.0001,
+      "raster:offset": -0.1,
+      "gsd": 20,
+      "proj:code": "EPSG:32633",
+      "proj:shape": [
+        5490,
+        5490
+      ],
+      "proj:bbox": [
+        399960.0,
+        5490240,
+        509760,
+        5600040.0
+      ],
+      "proj:transform": [
+        20.0,
+        0.0,
+        399960.0,
+        0.0,
+        -20.0,
+        5600040.0
+      ],
+      "roles": [
+        "data",
+        "reflectance",
+        "sampling:upsampled",
+        "gsd:20m"
+      ]
+    },
+    "B02_10m": {
+      "href": "https://zipper.dataspace.copernicus.eu/odata/v1/Products(7634aef0-7486-4589-92b2-541e0634c770)/Nodes(S2B_MSIL2A_20240110T100309_N0510_R122_T33UVR_20240110T113053.SAFE)/Nodes(GRANULE)/Nodes(L2A_T33UVR_A035755_20240110T100306)/Nodes(IMG_DATA)/Nodes(R10m)/Nodes(T33UVR_20240110T100309_B02_10m.jp2)/$value",
+      "type": "image/jp2",
+      "auth:refs": ["oidc"],
+      "alternate:name": "HTTPS",
+      "file:size": 102460023,
+      "file:checksum": "16202e99f451ae575cccbfa345dfe62d0567e8c39b2c738b66476054cbfc73d37245",
+      "file:local_path": "S2B_MSIL2A_20240110T100309_N0510_R122_T33UVR_20240110T113053.SAFE/GRANULE/L2A_T33UVR_A035755_20240110T100306/IMG_DATA/R10m/T33UVR_20240110T100309_B02_10m.jp2",
+      "title": "Blue (band 2) - 10m",
+      "alternate": {
+        "s3": {
+          "href": "s3://eodata/Sentinel-2/MSI/L2A/2024/01/10/S2B_MSIL2A_20240110T100309_N0510_R122_T33UVR_20240110T113053.SAFE/GRANULE/L2A_T33UVR_A035755_20240110T100306/IMG_DATA/R10m/T33UVR_20240110T100309_B02_10m.jp2",
+          "alternate:name": "S3",
+          "auth:refs": ["s3"],
+          "description": "S3 storage provided by CloudFerro Cloud and OpenTelekom Cloud (OTC). Use endpoint URL `https://eodata.dataspace.copernicus.eu`."
+        } 
+      },
+      "view:azimuth": 105.836766038257,
+      "view:incidence_angle": 8.54359959983383,
+      "bands": [
+        {
+          "name": "B02",
+          "eo:common_name": "blue",
+          "eo:center_wavelength": 0.492,
+          "eo:full_width_half_max": 0.267
+        }
+      ],
+      "data_type": "uint16",
+      "nodata": 0,
+      "raster:scale": 0.0001,
+      "raster:offset": -0.1,
+      "gsd": 10,
+      "proj:code": "EPSG:32633",
+      "proj:shape": [
+        10980,
+        10980
+      ],
+      "proj:bbox": [
+        399960.0,
+        5490240.0,
+        509760.0,
+        5600040.0
+      ],
+      "proj:transform": [
+        10.0,
+        0.0,
+        399960.0,
+        0.0,
+        -10.0,
+        5600040.0
+      ],
+      "roles": [
+        "data",
+        "reflectance",
+        "sampling:original",
+        "gsd:10m"
+      ]
+    },
+    "B02_20m": {
+      "href": "https://zipper.dataspace.copernicus.eu/odata/v1/Products(7634aef0-7486-4589-92b2-541e0634c770)/Nodes(S2B_MSIL2A_20240110T100309_N0510_R122_T33UVR_20240110T113053.SAFE)/Nodes(GRANULE)/Nodes(L2A_T33UVR_A035755_20240110T100306)/Nodes(IMG_DATA)/Nodes(R20m)/Nodes(T33UVR_20240110T100309_B02_20m.jp2)/$value",
+      "type": "image/jp2",
+      "auth:refs": ["oidc"],
+      "alternate:name": "HTTPS",
+      "file:size": 28959170,
+      "file:checksum": "1620bdb2f3cd65dceb05b96fc5a9431f26418b524996c9b94de9b3bc43cbe08cd22f",
+      "file:local_path": "S2B_MSIL2A_20240110T100309_N0510_R122_T33UVR_20240110T113053.SAFE/GRANULE/L2A_T33UVR_A035755_20240110T100306/IMG_DATA/R20m/T33UVR_20240110T100309_B02_20m.jp2",
+      "title": "Blue (band 2) - 20m",
+      "alternate": {
+        "s3": {
+          "href": "s3://eodata/Sentinel-2/MSI/L2A/2024/01/10/S2B_MSIL2A_20240110T100309_N0510_R122_T33UVR_20240110T113053.SAFE/GRANULE/L2A_T33UVR_A035755_20240110T100306/IMG_DATA/R20m/T33UVR_20240110T100309_B02_20m.jp2",
+          "alternate:name": "S3",
+          "auth:refs": ["s3"],
+          "description": "S3 storage provided by CloudFerro Cloud and OpenTelekom Cloud (OTC). Use endpoint URL `https://eodata.dataspace.copernicus.eu`."
+        } 
+      },
+      "view:azimuth": 105.836766038257,
+      "view:incidence_angle": 8.54359959983383,
+      "bands": [
+        {
+          "name": "B02",
+          "eo:common_name": "blue",
+          "eo:center_wavelength": 0.492,
+          "eo:full_width_half_max": 0.267
+        }
+      ],
+      "data_type": "uint16",
+      "nodata": 0,
+      "raster:scale": 0.0001,
+      "raster:offset": -0.1,
+      "gsd": 20,
+      "proj:code": "EPSG:32633",
+      "proj:shape": [
+        5490,
+        5490
+      ],
+      "proj:bbox": [
+        399960.0,
+        5490240,
+        509760,
+        5600040.0
+      ],
+      "proj:transform": [
+        20.0,
+        0.0,
+        399960.0,
+        0.0,
+        -20.0,
+        5600040.0
+      ],
+      "roles": [
+        "data",
+        "reflectance",
+        "sampling:downsampled",
+        "gsd:20m"
+      ]
+    },
+    "B02_60m": {
+      "href": "https://zipper.dataspace.copernicus.eu/odata/v1/Products(7634aef0-7486-4589-92b2-541e0634c770)/Nodes(S2B_MSIL2A_20240110T100309_N0510_R122_T33UVR_20240110T113053.SAFE)/Nodes(GRANULE)/Nodes(L2A_T33UVR_A035755_20240110T100306)/Nodes(IMG_DATA)/Nodes(R60m)/Nodes(T33UVR_20240110T100309_B02_60m.jp2)/$value",
+      "type": "image/jp2",
+      "auth:refs": ["oidc"],
+      "alternate:name": "HTTPS",
+      "file:size": 3741631,
+      "file:checksum": "1620c9effb1f339486844358e072e56cf154f7342764053f94f98b6af19de41b14ea",
+      "file:local_path": "S2B_MSIL2A_20240110T100309_N0510_R122_T33UVR_20240110T113053.SAFE/GRANULE/L2A_T33UVR_A035755_20240110T100306/IMG_DATA/R60m/T33UVR_20240110T100309_B02_60m.jp2",
+      "title": "Blue (band 2) - 60m",
+      "alternate": {
+        "s3": {
+          "href": "s3://eodata/Sentinel-2/MSI/L2A/2024/01/10/S2B_MSIL2A_20240110T100309_N0510_R122_T33UVR_20240110T113053.SAFE/GRANULE/L2A_T33UVR_A035755_20240110T100306/IMG_DATA/R60m/T33UVR_20240110T100309_B02_60m.jp2",
+          "alternate:name": "S3",
+          "auth:refs": ["s3"],
+          "description": "S3 storage provided by CloudFerro Cloud and OpenTelekom Cloud (OTC). Use endpoint URL `https://eodata.dataspace.copernicus.eu`."
+        } 
+      },
+      "view:azimuth": 105.836766038257,
+      "view:incidence_angle": 8.54359959983383,
+      "bands": [
+        {
+          "name": "B02",
+          "eo:common_name": "blue",
+          "eo:center_wavelength": 0.492,
+          "eo:full_width_half_max": 0.267
+        }
+      ],
+      "data_type": "uint16",
+      "nodata": 0,
+      "raster:scale": 0.0001,
+      "raster:offset": -0.1,
+      "gsd": 60,
+      "proj:code": "EPSG:32633",
+      "proj:shape": [
+        1830,
+        1830
+      ],
+      "proj:bbox": [
+        399960.0,
+        5490240,
+        509760,
+        5600040.0
+      ],
+      "proj:transform": [
+        60.0,
+        0.0,
+        399960.0,
+        0.0,
+        -60.0,
+        5600040.0
+      ],
+      "roles": [
+        "data",
+        "reflectance",
+        "sampling:downsampled",
+        "gsd:60m"
+      ]
+    },
+    "B03_10m": {
+      "href": "https://zipper.dataspace.copernicus.eu/odata/v1/Products(7634aef0-7486-4589-92b2-541e0634c770)/Nodes(S2B_MSIL2A_20240110T100309_N0510_R122_T33UVR_20240110T113053.SAFE)/Nodes(GRANULE)/Nodes(L2A_T33UVR_A035755_20240110T100306)/Nodes(IMG_DATA)/Nodes(R10m)/Nodes(T33UVR_20240110T100309_B03_10m.jp2)/$value",
+      "type": "image/jp2",
+      "auth:refs": ["oidc"],
+      "alternate:name": "HTTPS",
+      "file:size": 102243579,
+      "file:checksum": "162006813859a5f4ef6a20145baff33fae2b22ca00108e8b8409ff03961030cb7534",
+      "file:local_path": "S2B_MSIL2A_20240110T100309_N0510_R122_T33UVR_20240110T113053.SAFE/GRANULE/L2A_T33UVR_A035755_20240110T100306/IMG_DATA/R10m/T33UVR_20240110T100309_B03_10m.jp2",
+      "title": "Green (band 3) - 10m",
+      "alternate": {
+        "s3": {
+          "href": "s3://eodata/Sentinel-2/MSI/L2A/2024/01/10/S2B_MSIL2A_20240110T100309_N0510_R122_T33UVR_20240110T113053.SAFE/GRANULE/L2A_T33UVR_A035755_20240110T100306/IMG_DATA/R10m/T33UVR_20240110T100309_B03_10m.jp2",
+          "alternate:name": "S3",
+          "auth:refs": ["s3"],
+          "description": "S3 storage provided by CloudFerro Cloud and OpenTelekom Cloud (OTC). Use endpoint URL `https://eodata.dataspace.copernicus.eu`."
+        } 
+      },
+      "view:azimuth": 106.097199056632,
+      "view:incidence_angle": 8.56737777493077,
+      "bands": [
+        {
+          "name": "B03",
+          "eo:common_name": "green",
+          "eo:center_wavelength": 0.559,
+          "eo:full_width_half_max": 0.291
+        }
+      ],
+      "data_type": "uint16",
+      "nodata": 0,
+      "raster:scale": 0.0001,
+      "raster:offset": -0.1,
+      "gsd": 10,
+      "proj:code": "EPSG:32633",
+      "proj:shape": [
+        10980,
+        10980
+      ],
+      "proj:bbox": [
+        399960.0,
+        5490240.0,
+        509760.0,
+        5600040.0
+      ],
+      "proj:transform": [
+        10.0,
+        0.0,
+        399960.0,
+        0.0,
+        -10.0,
+        5600040.0
+      ],
+      "roles": [
+        "data",
+        "reflectance",
+        "sampling:original",
+        "gsd:10m"
+      ]
+    },
+    "B03_20m": {
+      "href": "https://zipper.dataspace.copernicus.eu/odata/v1/Products(7634aef0-7486-4589-92b2-541e0634c770)/Nodes(S2B_MSIL2A_20240110T100309_N0510_R122_T33UVR_20240110T113053.SAFE)/Nodes(GRANULE)/Nodes(L2A_T33UVR_A035755_20240110T100306)/Nodes(IMG_DATA)/Nodes(R20m)/Nodes(T33UVR_20240110T100309_B03_20m.jp2)/$value",
+      "type": "image/jp2",
+      "auth:refs": ["oidc"],
+      "alternate:name": "HTTPS",
+      "file:size": 29249670,
+      "file:checksum": "1620fe40c2bcdb50c20c0be8671a4149fc12e4fa5087c56b432479355d4ad9d233bb",
+      "file:local_path": "S2B_MSIL2A_20240110T100309_N0510_R122_T33UVR_20240110T113053.SAFE/GRANULE/L2A_T33UVR_A035755_20240110T100306/IMG_DATA/R20m/T33UVR_20240110T100309_B03_20m.jp2",
+      "title": "Green (band 3) - 20m",
+      "alternate": {
+        "s3": {
+          "href": "s3://eodata/Sentinel-2/MSI/L2A/2024/01/10/S2B_MSIL2A_20240110T100309_N0510_R122_T33UVR_20240110T113053.SAFE/GRANULE/L2A_T33UVR_A035755_20240110T100306/IMG_DATA/R20m/T33UVR_20240110T100309_B03_20m.jp2",
+          "alternate:name": "S3",
+          "auth:refs": ["s3"],
+          "description": "S3 storage provided by CloudFerro Cloud and OpenTelekom Cloud (OTC). Use endpoint URL `https://eodata.dataspace.copernicus.eu`."
+        } 
+      },
+      "view:azimuth": 106.097199056632,
+      "view:incidence_angle": 8.56737777493077,
+      "bands": [
+        {
+          "name": "B03",
+          "eo:common_name": "green",
+          "eo:center_wavelength": 0.559,
+          "eo:full_width_half_max": 0.291
+        }
+      ],
+      "data_type": "uint16",
+      "nodata": 0,
+      "raster:scale": 0.0001,
+      "raster:offset": -0.1,
+      "gsd": 20,
+      "proj:code": "EPSG:32633",
+      "proj:shape": [
+        5490,
+        5490
+      ],
+      "proj:bbox": [
+        399960.0,
+        5490240,
+        509760,
+        5600040.0
+      ],
+      "proj:transform": [
+        20.0,
+        0.0,
+        399960.0,
+        0.0,
+        -20.0,
+        5600040.0
+      ],
+      "roles": [
+        "data",
+        "reflectance",
+        "sampling:downsampled",
+        "gsd:20m"
+      ]
+    },
+    "B03_60m": {
+      "href": "https://zipper.dataspace.copernicus.eu/odata/v1/Products(7634aef0-7486-4589-92b2-541e0634c770)/Nodes(S2B_MSIL2A_20240110T100309_N0510_R122_T33UVR_20240110T113053.SAFE)/Nodes(GRANULE)/Nodes(L2A_T33UVR_A035755_20240110T100306)/Nodes(IMG_DATA)/Nodes(R60m)/Nodes(T33UVR_20240110T100309_B03_60m.jp2)/$value",
+      "type": "image/jp2",
+      "auth:refs": ["oidc"],
+      "alternate:name": "HTTPS",
+      "file:size": 3733704,
+      "file:checksum": "1620d37fab6b04dab6a642b541b4df07811f20ffe6ed78918daf1cb20f9f6d645f60",
+      "file:local_path": "S2B_MSIL2A_20240110T100309_N0510_R122_T33UVR_20240110T113053.SAFE/GRANULE/L2A_T33UVR_A035755_20240110T100306/IMG_DATA/R60m/T33UVR_20240110T100309_B03_60m.jp2",
+      "title": "Green (band 3) - 60m",
+      "alternate": {
+        "s3": {
+          "href": "s3://eodata/Sentinel-2/MSI/L2A/2024/01/10/S2B_MSIL2A_20240110T100309_N0510_R122_T33UVR_20240110T113053.SAFE/GRANULE/L2A_T33UVR_A035755_20240110T100306/IMG_DATA/R60m/T33UVR_20240110T100309_B03_60m.jp2",
+          "alternate:name": "S3",
+          "auth:refs": ["s3"],
+          "description": "S3 storage provided by CloudFerro Cloud and OpenTelekom Cloud (OTC). Use endpoint URL `https://eodata.dataspace.copernicus.eu`."
+        } 
+      },
+      "view:azimuth": 106.097199056632,
+      "view:incidence_angle": 8.56737777493077,
+      "bands": [
+        {
+          "name": "B03",
+          "eo:common_name": "green",
+          "eo:center_wavelength": 0.559,
+          "eo:full_width_half_max": 0.291
+        }
+      ],
+      "data_type": "uint16",
+      "nodata": 0,
+      "raster:scale": 0.0001,
+      "raster:offset": -0.1,
+      "gsd": 60,
+      "proj:code": "EPSG:32633",
+      "proj:shape": [
+        1830,
+        1830
+      ],
+      "proj:bbox": [
+        399960.0,
+        5490240,
+        509760,
+        5600040.0
+      ],
+      "proj:transform": [
+        60.0,
+        0.0,
+        399960.0,
+        0.0,
+        -60.0,
+        5600040.0
+      ],
+      "roles": [
+        "data",
+        "reflectance",
+        "sampling:downsampled",
+        "gsd:60m"
+      ]
+    },
+    "B04_10m": {
+      "href": "https://zipper.dataspace.copernicus.eu/odata/v1/Products(7634aef0-7486-4589-92b2-541e0634c770)/Nodes(S2B_MSIL2A_20240110T100309_N0510_R122_T33UVR_20240110T113053.SAFE)/Nodes(GRANULE)/Nodes(L2A_T33UVR_A035755_20240110T100306)/Nodes(IMG_DATA)/Nodes(R10m)/Nodes(T33UVR_20240110T100309_B04_10m.jp2)/$value",
+      "type": "image/jp2",
+      "auth:refs": ["oidc"],
+      "alternate:name": "HTTPS",
+      "file:size": 103001149,
+      "file:checksum": "162027eb86050cb8e83eaaf599e3a1c45bf8ac169c2808a1ce63d8b77cadd8851962",
+      "file:local_path": "S2B_MSIL2A_20240110T100309_N0510_R122_T33UVR_20240110T113053.SAFE/GRANULE/L2A_T33UVR_A035755_20240110T100306/IMG_DATA/R10m/T33UVR_20240110T100309_B04_10m.jp2",
+      "title": "Red (band 4) - 10m",
+      "alternate": {
+        "s3": {
+          "href": "s3://eodata/Sentinel-2/MSI/L2A/2024/01/10/S2B_MSIL2A_20240110T100309_N0510_R122_T33UVR_20240110T113053.SAFE/GRANULE/L2A_T33UVR_A035755_20240110T100306/IMG_DATA/R10m/T33UVR_20240110T100309_B04_10m.jp2",
+          "alternate:name": "S3",
+          "auth:refs": ["s3"],
+          "description": "S3 storage provided by CloudFerro Cloud and OpenTelekom Cloud (OTC). Use endpoint URL `https://eodata.dataspace.copernicus.eu`."
+        } 
+      },
+      "view:azimuth": 106.34904357283,
+      "view:incidence_angle": 8.59967519446262,
+      "bands": [
+        {
+          "name": "B04",
+          "eo:common_name": "red",
+          "eo:center_wavelength": 0.665,
+          "eo:full_width_half_max": 0.342
+        }
+      ],
+      "data_type": "uint16",
+      "nodata": 0,
+      "raster:scale": 0.0001,
+      "raster:offset": -0.1,
+      "gsd": 10,
+      "proj:code": "EPSG:32633",
+      "proj:shape": [
+        10980,
+        10980
+      ],
+      "proj:bbox": [
+        399960.0,
+        5490240.0,
+        509760.0,
+        5600040.0
+      ],
+      "proj:transform": [
+        10.0,
+        0.0,
+        399960.0,
+        0.0,
+        -10.0,
+        5600040.0
+      ],
+      "roles": [
+        "data",
+        "reflectance",
+        "sampling:original",
+        "gsd:10m"
+      ]
+    },
+    "B04_20m": {
+      "href": "https://zipper.dataspace.copernicus.eu/odata/v1/Products(7634aef0-7486-4589-92b2-541e0634c770)/Nodes(S2B_MSIL2A_20240110T100309_N0510_R122_T33UVR_20240110T113053.SAFE)/Nodes(GRANULE)/Nodes(L2A_T33UVR_A035755_20240110T100306)/Nodes(IMG_DATA)/Nodes(R20m)/Nodes(T33UVR_20240110T100309_B04_20m.jp2)/$value",
+      "type": "image/jp2",
+      "auth:refs": ["oidc"],
+      "alternate:name": "HTTPS",
+      "file:size": 29783414,
+      "file:checksum": "16209347cecdf6c2c2d05d919ad8403abe232e3776f34fae3bcc1d6524faebbd1d93",
+      "file:local_path": "S2B_MSIL2A_20240110T100309_N0510_R122_T33UVR_20240110T113053.SAFE/GRANULE/L2A_T33UVR_A035755_20240110T100306/IMG_DATA/R20m/T33UVR_20240110T100309_B04_20m.jp2",
+      "title": "Red (band 4) - 20m",
+      "alternate": {
+        "s3": {
+          "href": "s3://eodata/Sentinel-2/MSI/L2A/2024/01/10/S2B_MSIL2A_20240110T100309_N0510_R122_T33UVR_20240110T113053.SAFE/GRANULE/L2A_T33UVR_A035755_20240110T100306/IMG_DATA/R20m/T33UVR_20240110T100309_B04_20m.jp2",
+          "alternate:name": "S3",
+          "auth:refs": ["s3"],
+          "description": "S3 storage provided by CloudFerro Cloud and OpenTelekom Cloud (OTC). Use endpoint URL `https://eodata.dataspace.copernicus.eu`."
+        } 
+      },
+      "view:azimuth": 106.34904357283,
+      "view:incidence_angle": 8.59967519446262,
+      "bands": [
+        {
+          "name": "B04",
+          "eo:common_name": "red",
+          "eo:center_wavelength": 0.665,
+          "eo:full_width_half_max": 0.342
+        }
+      ],
+      "data_type": "uint16",
+      "nodata": 0,
+      "raster:scale": 0.0001,
+      "raster:offset": -0.1,
+      "gsd": 20,
+      "proj:code": "EPSG:32633",
+      "proj:shape": [
+        5490,
+        5490
+      ],
+      "proj:bbox": [
+        399960.0,
+        5490240,
+        509760,
+        5600040.0
+      ],
+      "proj:transform": [
+        20.0,
+        0.0,
+        399960.0,
+        0.0,
+        -20.0,
+        5600040.0
+      ],
+      "roles": [
+        "data",
+        "reflectance",
+        "sampling:downsampled",
+        "gsd:20m"
+      ]
+    },
+    "B04_60m": {
+      "href": "https://zipper.dataspace.copernicus.eu/odata/v1/Products(7634aef0-7486-4589-92b2-541e0634c770)/Nodes(S2B_MSIL2A_20240110T100309_N0510_R122_T33UVR_20240110T113053.SAFE)/Nodes(GRANULE)/Nodes(L2A_T33UVR_A035755_20240110T100306)/Nodes(IMG_DATA)/Nodes(R60m)/Nodes(T33UVR_20240110T100309_B04_60m.jp2)/$value",
+      "type": "image/jp2",
+      "auth:refs": ["oidc"],
+      "alternate:name": "HTTPS",
+      "file:size": 3720158,
+      "file:checksum": "162029af6adfac3714dae6d30024c15d181dde1efccb1e1f54449c0633da29b543af",
+      "file:local_path": "S2B_MSIL2A_20240110T100309_N0510_R122_T33UVR_20240110T113053.SAFE/GRANULE/L2A_T33UVR_A035755_20240110T100306/IMG_DATA/R60m/T33UVR_20240110T100309_B04_60m.jp2",
+      "title": "Red (band 4) - 60m",
+      "alternate": {
+        "s3": {
+          "href": "s3://eodata/Sentinel-2/MSI/L2A/2024/01/10/S2B_MSIL2A_20240110T100309_N0510_R122_T33UVR_20240110T113053.SAFE/GRANULE/L2A_T33UVR_A035755_20240110T100306/IMG_DATA/R60m/T33UVR_20240110T100309_B04_60m.jp2",
+          "alternate:name": "S3",
+          "auth:refs": ["s3"],
+          "description": "S3 storage provided by CloudFerro Cloud and OpenTelekom Cloud (OTC). Use endpoint URL `https://eodata.dataspace.copernicus.eu`."
+        } 
+      },
+      "view:azimuth": 106.34904357283,
+      "view:incidence_angle": 8.59967519446262,
+      "bands": [
+        {
+          "name": "B04",
+          "eo:common_name": "red",
+          "eo:center_wavelength": 0.665,
+          "eo:full_width_half_max": 0.342
+        }
+      ],
+      "data_type": "uint16",
+      "nodata": 0,
+      "raster:scale": 0.0001,
+      "raster:offset": -0.1,
+      "gsd": 60,
+      "proj:code": "EPSG:32633",
+      "proj:shape": [
+        1830,
+        1830
+      ],
+      "proj:bbox": [
+        399960.0,
+        5490240,
+        509760,
+        5600040.0
+      ],
+      "proj:transform": [
+        60.0,
+        0.0,
+        399960.0,
+        0.0,
+        -60.0,
+        5600040.0
+      ],
+      "roles": [
+        "data",
+        "reflectance",
+        "sampling:downsampled",
+        "gsd:60m"
+      ]
+    },
+    "B05_20m": {
+      "href": "https://zipper.dataspace.copernicus.eu/odata/v1/Products(7634aef0-7486-4589-92b2-541e0634c770)/Nodes(S2B_MSIL2A_20240110T100309_N0510_R122_T33UVR_20240110T113053.SAFE)/Nodes(GRANULE)/Nodes(L2A_T33UVR_A035755_20240110T100306)/Nodes(IMG_DATA)/Nodes(R20m)/Nodes(T33UVR_20240110T100309_B05_20m.jp2)/$value",
+      "type": "image/jp2",
+      "auth:refs": ["oidc"],
+      "alternate:name": "HTTPS",
+      "file:size": 29699903,
+      "file:checksum": "16202023ded38578eacbfcb4211a1e7eae7a6bf178d024fdc581528454e9dd51835a",
+      "file:local_path": "S2B_MSIL2A_20240110T100309_N0510_R122_T33UVR_20240110T113053.SAFE/GRANULE/L2A_T33UVR_A035755_20240110T100306/IMG_DATA/R20m/T33UVR_20240110T100309_B05_20m.jp2",
+      "title": "Red edge 1 (band 5) - 20m",
+      "alternate": {
+        "s3": {
+          "href": "s3://eodata/Sentinel-2/MSI/L2A/2024/01/10/S2B_MSIL2A_20240110T100309_N0510_R122_T33UVR_20240110T113053.SAFE/GRANULE/L2A_T33UVR_A035755_20240110T100306/IMG_DATA/R20m/T33UVR_20240110T100309_B05_20m.jp2",
+          "alternate:name": "S3",
+          "auth:refs": ["s3"],
+          "description": "S3 storage provided by CloudFerro Cloud and OpenTelekom Cloud (OTC). Use endpoint URL `https://eodata.dataspace.copernicus.eu`."
+        } 
+      },
+      "view:azimuth": 106.461991399526,
+      "view:incidence_angle": 8.62291565806639,
+      "bands": [
+        {
+          "name": "B05",
+          "eo:common_name": "rededge071",
+          "eo:center_wavelength": 0.704,
+          "eo:full_width_half_max": 0.357
+        }
+      ],
+      "data_type": "uint16",
+      "nodata": 0,
+      "raster:scale": 0.0001,
+      "raster:offset": -0.1,
+      "gsd": 20,
+      "proj:code": "EPSG:32633",
+      "proj:shape": [
+        5490,
+        5490
+      ],
+      "proj:bbox": [
+        399960.0,
+        5490240.0,
+        509760.0,
+        5600040.0
+      ],
+      "proj:transform": [
+        20.0,
+        0.0,
+        399960.0,
+        0.0,
+        -20.0,
+        5600040.0
+      ],
+      "roles": [
+        "data",
+        "reflectance",
+        "sampling:original",
+        "gsd:20m"
+      ]
+    },
+    "B05_60m": {
+      "href": "https://zipper.dataspace.copernicus.eu/odata/v1/Products(7634aef0-7486-4589-92b2-541e0634c770)/Nodes(S2B_MSIL2A_20240110T100309_N0510_R122_T33UVR_20240110T113053.SAFE)/Nodes(GRANULE)/Nodes(L2A_T33UVR_A035755_20240110T100306)/Nodes(IMG_DATA)/Nodes(R60m)/Nodes(T33UVR_20240110T100309_B05_60m.jp2)/$value",
+      "type": "image/jp2",
+      "auth:refs": ["oidc"],
+      "alternate:name": "HTTPS",
+      "file:size": 3725924,
+      "file:checksum": "1620ef11170cae59d34f9d19c405fb5b3218c7c1d58aa2ef799b94906b92a4205a19",
+      "file:local_path": "S2B_MSIL2A_20240110T100309_N0510_R122_T33UVR_20240110T113053.SAFE/GRANULE/L2A_T33UVR_A035755_20240110T100306/IMG_DATA/R60m/T33UVR_20240110T100309_B05_60m.jp2",
+      "title": "Red edge 1 (band 5) - 60m",
+      "alternate": {
+        "s3": {
+          "href": "s3://eodata/Sentinel-2/MSI/L2A/2024/01/10/S2B_MSIL2A_20240110T100309_N0510_R122_T33UVR_20240110T113053.SAFE/GRANULE/L2A_T33UVR_A035755_20240110T100306/IMG_DATA/R60m/T33UVR_20240110T100309_B05_60m.jp2",
+          "alternate:name": "S3",
+          "auth:refs": ["s3"],
+          "description": "S3 storage provided by CloudFerro Cloud and OpenTelekom Cloud (OTC). Use endpoint URL `https://eodata.dataspace.copernicus.eu`."
+        } 
+      },
+      "view:azimuth": 106.461991399526,
+      "view:incidence_angle": 8.62291565806639,
+      "bands": [
+        {
+          "name": "B05",
+          "eo:common_name": "rededge071",
+          "eo:center_wavelength": 0.704,
+          "eo:full_width_half_max": 0.357
+        }
+      ],
+      "data_type": "uint16",
+      "nodata": 0,
+      "raster:scale": 0.0001,
+      "raster:offset": -0.1,
+      "gsd": 60,
+      "proj:code": "EPSG:32633",
+      "proj:shape": [
+        1830,
+        1830
+      ],
+      "proj:bbox": [
+        399960.0,
+        5490240,
+        509760,
+        5600040.0
+      ],
+      "proj:transform": [
+        60.0,
+        0.0,
+        399960.0,
+        0.0,
+        -60.0,
+        5600040.0
+      ],
+      "roles": [
+        "data",
+        "reflectance",
+        "sampling:downsampled",
+        "gsd:60m"
+      ]
+    },
+    "B06_20m": {
+      "href": "https://zipper.dataspace.copernicus.eu/odata/v1/Products(7634aef0-7486-4589-92b2-541e0634c770)/Nodes(S2B_MSIL2A_20240110T100309_N0510_R122_T33UVR_20240110T113053.SAFE)/Nodes(GRANULE)/Nodes(L2A_T33UVR_A035755_20240110T100306)/Nodes(IMG_DATA)/Nodes(R20m)/Nodes(T33UVR_20240110T100309_B06_20m.jp2)/$value",
+      "type": "image/jp2",
+      "auth:refs": ["oidc"],
+      "alternate:name": "HTTPS",
+      "file:size": 30862127,
+      "file:checksum": "16206055ecc91a7416724643e8b99d7b3f226e3f59006219f6c9a6a54308fad7e336",
+      "file:local_path": "S2B_MSIL2A_20240110T100309_N0510_R122_T33UVR_20240110T113053.SAFE/GRANULE/L2A_T33UVR_A035755_20240110T100306/IMG_DATA/R20m/T33UVR_20240110T100309_B06_20m.jp2",
+      "title": "Red edge 2 (band 6) - 20m",
+      "alternate": {
+        "s3": {
+          "href": "s3://eodata/Sentinel-2/MSI/L2A/2024/01/10/S2B_MSIL2A_20240110T100309_N0510_R122_T33UVR_20240110T113053.SAFE/GRANULE/L2A_T33UVR_A035755_20240110T100306/IMG_DATA/R20m/T33UVR_20240110T100309_B06_20m.jp2",
+          "alternate:name": "S3",
+          "auth:refs": ["s3"],
+          "description": "S3 storage provided by CloudFerro Cloud and OpenTelekom Cloud (OTC). Use endpoint URL `https://eodata.dataspace.copernicus.eu`."
+        } 
+      },
+      "view:azimuth": 106.594062629484,
+      "view:incidence_angle": 8.64814622724098,
+      "bands": [
+        {
+          "name": "B06",
+          "eo:common_name": "rededge075",
+          "eo:center_wavelength": 0.739,
+          "eo:full_width_half_max": 0.374
+        }
+      ],
+      "data_type": "uint16",
+      "nodata": 0,
+      "raster:scale": 0.0001,
+      "raster:offset": -0.1,
+      "gsd": 20,
+      "proj:code": "EPSG:32633",
+      "proj:shape": [
+        5490,
+        5490
+      ],
+      "proj:bbox": [
+        399960.0,
+        5490240.0,
+        509760.0,
+        5600040.0
+      ],
+      "proj:transform": [
+        20.0,
+        0.0,
+        399960.0,
+        0.0,
+        -20.0,
+        5600040.0
+      ],
+      "roles": [
+        "data",
+        "reflectance",
+        "sampling:original",
+        "gsd:20m"
+      ]
+    },
+    "B06_60m": {
+      "href": "https://zipper.dataspace.copernicus.eu/odata/v1/Products(7634aef0-7486-4589-92b2-541e0634c770)/Nodes(S2B_MSIL2A_20240110T100309_N0510_R122_T33UVR_20240110T113053.SAFE)/Nodes(GRANULE)/Nodes(L2A_T33UVR_A035755_20240110T100306)/Nodes(IMG_DATA)/Nodes(R60m)/Nodes(T33UVR_20240110T100309_B06_60m.jp2)/$value",
+      "type": "image/jp2",
+      "auth:refs": ["oidc"],
+      "alternate:name": "HTTPS",
+      "file:size": 3728100,
+      "file:checksum": "16202ae0eea3c597f779e850fa505447cea1f6457094b7f6fd3c0ef73d14024b6b2e",
+      "file:local_path": "S2B_MSIL2A_20240110T100309_N0510_R122_T33UVR_20240110T113053.SAFE/GRANULE/L2A_T33UVR_A035755_20240110T100306/IMG_DATA/R60m/T33UVR_20240110T100309_B06_60m.jp2",
+      "title": "Red edge 2 (band 6) - 60m",
+      "alternate": {
+        "s3": {
+          "href": "s3://eodata/Sentinel-2/MSI/L2A/2024/01/10/S2B_MSIL2A_20240110T100309_N0510_R122_T33UVR_20240110T113053.SAFE/GRANULE/L2A_T33UVR_A035755_20240110T100306/IMG_DATA/R60m/T33UVR_20240110T100309_B06_60m.jp2",
+          "alternate:name": "S3",
+          "auth:refs": ["s3"],
+          "description": "S3 storage provided by CloudFerro Cloud and OpenTelekom Cloud (OTC). Use endpoint URL `https://eodata.dataspace.copernicus.eu`."
+        } 
+      },
+      "view:azimuth": 106.594062629484,
+      "view:incidence_angle": 8.64814622724098,
+      "bands": [
+        {
+          "name": "B06",
+          "eo:common_name": "rededge075",
+          "eo:center_wavelength": 0.739,
+          "eo:full_width_half_max": 0.374
+        }
+      ],
+      "data_type": "uint16",
+      "nodata": 0,
+      "raster:scale": 0.0001,
+      "raster:offset": -0.1,
+      "gsd": 60,
+      "proj:code": "EPSG:32633",
+      "proj:shape": [
+        1830,
+        1830
+      ],
+      "proj:bbox": [
+        399960.0,
+        5490240,
+        509760,
+        5600040.0
+      ],
+      "proj:transform": [
+        60.0,
+        0.0,
+        399960.0,
+        0.0,
+        -60.0,
+        5600040.0
+      ],
+      "roles": [
+        "data",
+        "reflectance",
+        "sampling:downsampled",
+        "gsd:60m"
+      ]
+    },
+    "B07_20m": {
+      "href": "https://zipper.dataspace.copernicus.eu/odata/v1/Products(7634aef0-7486-4589-92b2-541e0634c770)/Nodes(S2B_MSIL2A_20240110T100309_N0510_R122_T33UVR_20240110T113053.SAFE)/Nodes(GRANULE)/Nodes(L2A_T33UVR_A035755_20240110T100306)/Nodes(IMG_DATA)/Nodes(R20m)/Nodes(T33UVR_20240110T100309_B07_20m.jp2)/$value",
+      "type": "image/jp2",
+      "auth:refs": ["oidc"],
+      "alternate:name": "HTTPS",
+      "file:size": 31136967,
+      "file:checksum": "1620c480e10571a84319811c8c36602c73b7dab088f5fe0b39505042862629b7dbf2",
+      "file:local_path": "S2B_MSIL2A_20240110T100309_N0510_R122_T33UVR_20240110T113053.SAFE/GRANULE/L2A_T33UVR_A035755_20240110T100306/IMG_DATA/R20m/T33UVR_20240110T100309_B07_20m.jp2",
+      "title": "Red edge 3 (band 7) - 20m",
+      "alternate": {
+        "s3": {
+          "href": "s3://eodata/Sentinel-2/MSI/L2A/2024/01/10/S2B_MSIL2A_20240110T100309_N0510_R122_T33UVR_20240110T113053.SAFE/GRANULE/L2A_T33UVR_A035755_20240110T100306/IMG_DATA/R20m/T33UVR_20240110T100309_B07_20m.jp2",
+          "alternate:name": "S3",
+          "auth:refs": ["s3"],
+          "description": "S3 storage provided by CloudFerro Cloud and OpenTelekom Cloud (OTC). Use endpoint URL `https://eodata.dataspace.copernicus.eu`."
+        } 
+      },
+      "view:azimuth": 106.711745039974,
+      "view:incidence_angle": 8.66509914081985,
+      "bands": [
+        {
+          "name": "B07",
+          "eo:common_name": "rededge078",
+          "eo:center_wavelength": 0.780,
+          "eo:full_width_half_max": 0.399
+        }
+      ],
+      "data_type": "uint16",
+      "nodata": 0,
+      "raster:scale": 0.0001,
+      "raster:offset": -0.1,
+      "gsd": 20,
+      "proj:code": "EPSG:32633",
+      "proj:shape": [
+        5490,
+        5490
+      ],
+      "proj:bbox": [
+        399960.0,
+        5490240.0,
+        509760.0,
+        5600040.0
+      ],
+      "proj:transform": [
+        20.0,
+        0.0,
+        399960.0,
+        0.0,
+        -20.0,
+        5600040.0
+      ],
+      "roles": [
+        "data",
+        "reflectance",
+        "sampling:original",
+        "gsd:20m"
+      ]
+    },
+    "B07_60m": {
+      "href": "https://zipper.dataspace.copernicus.eu/odata/v1/Products(7634aef0-7486-4589-92b2-541e0634c770)/Nodes(S2B_MSIL2A_20240110T100309_N0510_R122_T33UVR_20240110T113053.SAFE)/Nodes(GRANULE)/Nodes(L2A_T33UVR_A035755_20240110T100306)/Nodes(IMG_DATA)/Nodes(R60m)/Nodes(T33UVR_20240110T100309_B07_60m.jp2)/$value",
+      "type": "image/jp2",
+      "auth:refs": ["oidc"],
+      "alternate:name": "HTTPS",
+      "file:size": 3734687,
+      "file:checksum": "162079c066c203d855c766d0b0d4715cf6bb192c082d56d8c6cbf66984c4fbf61105",
+      "file:local_path": "S2B_MSIL2A_20240110T100309_N0510_R122_T33UVR_20240110T113053.SAFE/GRANULE/L2A_T33UVR_A035755_20240110T100306/IMG_DATA/R60m/T33UVR_20240110T100309_B07_60m.jp2",
+      "title": "Red edge 3 (band 7) - 60m",
+      "alternate": {
+        "s3": {
+          "href": "s3://eodata/Sentinel-2/MSI/L2A/2024/01/10/S2B_MSIL2A_20240110T100309_N0510_R122_T33UVR_20240110T113053.SAFE/GRANULE/L2A_T33UVR_A035755_20240110T100306/IMG_DATA/R60m/T33UVR_20240110T100309_B07_60m.jp2",
+          "alternate:name": "S3",
+          "auth:refs": ["s3"],
+          "description": "S3 storage provided by CloudFerro Cloud and OpenTelekom Cloud (OTC). Use endpoint URL `https://eodata.dataspace.copernicus.eu`."
+        } 
+      },
+      "view:azimuth": 106.711745039974,
+      "view:incidence_angle": 8.66509914081985,
+      "bands": [
+        {
+          "name": "B07",
+          "eo:common_name": "rededge078",
+          "eo:center_wavelength": 0.780,
+          "eo:full_width_half_max": 0.399
+        }
+      ],
+      "data_type": "uint16",
+      "nodata": 0,
+      "raster:scale": 0.0001,
+      "raster:offset": -0.1,
+      "gsd": 20,
+      "proj:code": "EPSG:32633",
+      "proj:shape": [
+        1830,
+        1830
+      ],
+      "proj:bbox": [
+        399960.0,
+        5490240,
+        509760,
+        5600040.0
+      ],
+      "proj:transform": [
+        20.0,
+        0.0,
+        399960.0,
+        0.0,
+        -20.0,
+        5600040.0
+      ],
+      "roles": [
+        "data",
+        "reflectance",
+        "sampling:downsampled",
+        "gsd:60m"
+      ]
+    },
+    "B08_10m": {
+      "href": "https://zipper.dataspace.copernicus.eu/odata/v1/Products(7634aef0-7486-4589-92b2-541e0634c770)/Nodes(S2B_MSIL2A_20240110T100309_N0510_R122_T33UVR_20240110T113053.SAFE)/Nodes(GRANULE)/Nodes(L2A_T33UVR_A035755_20240110T100306)/Nodes(IMG_DATA)/Nodes(R10m)/Nodes(T33UVR_20240110T100309_B08_10m.jp2)/$value",
+      "type": "image/jp2",
+      "auth:refs": ["oidc"],
+      "alternate:name": "HTTPS",
+      "file:size": 112626455,
+      "file:checksum": "16208c5c5cec4b96d06479e3e42405d647b566bd2d76e38800831fb3007a14441670",
+      "file:local_path": "S2B_MSIL2A_20240110T100309_N0510_R122_T33UVR_20240110T113053.SAFE/GRANULE/L2A_T33UVR_A035755_20240110T100306/IMG_DATA/R10m/T33UVR_20240110T100309_B08_10m.jp2",
+      "title": "NIR 1 (band 8) - 10m",
+      "alternate": {
+        "s3": {
+          "href": "s3://eodata/Sentinel-2/MSI/L2A/2024/01/10/S2B_MSIL2A_20240110T100309_N0510_R122_T33UVR_20240110T113053.SAFE/GRANULE/L2A_T33UVR_A035755_20240110T100306/IMG_DATA/R10m/T33UVR_20240110T100309_B08_10m.jp2",
+          "alternate:name": "S3",
+          "auth:refs": ["s3"],
+          "description": "S3 storage provided by CloudFerro Cloud and OpenTelekom Cloud (OTC). Use endpoint URL `https://eodata.dataspace.copernicus.eu`."
+        } 
+      },
+      "view:azimuth": 105.967932868856,
+      "view:incidence_angle": 8.55426001907521,
+      "bands": [
+        {
+          "name": "B08",
+          "eo:common_name": "nir",
+          "eo:center_wavelength": 0.833,
+          "eo:full_width_half_max": 0.454
+        }
+      ],
+      "data_type": "uint16",
+      "nodata": 0,
+      "raster:scale": 0.0001,
+      "raster:offset": -0.1,
+      "gsd": 10,
+      "proj:code": "EPSG:32633",
+      "proj:shape": [
+        10980,
+        10980
+      ],
+      "proj:bbox": [
+        399960.0,
+        5490240.0,
+        509760.0,
+        5600040.0
+      ],
+      "proj:transform": [
+        10.0,
+        0.0,
+        399960.0,
+        0.0,
+        -10.0,
+        5600040.0
+      ],
+      "roles": [
+        "data",
+        "reflectance",
+        "sampling:original",
+        "gsd:10m"
+      ]
+    },
+    "B8A_20m": {
+      "href": "https://zipper.dataspace.copernicus.eu/odata/v1/Products(7634aef0-7486-4589-92b2-541e0634c770)/Nodes(S2B_MSIL2A_20240110T100309_N0510_R122_T33UVR_20240110T113053.SAFE)/Nodes(GRANULE)/Nodes(L2A_T33UVR_A035755_20240110T100306)/Nodes(IMG_DATA)/Nodes(R20m)/Nodes(T33UVR_20240110T100309_B8A_20m.jp2)/$value",
+      "type": "image/jp2",
+      "auth:refs": ["oidc"],
+      "alternate:name": "HTTPS",
+      "file:size": 31290652,
+      "file:checksum": "1620268813e0d4f4a847cb4acb728d804941496ffdcc7fb70c8760503a4f9dec598d",
+      "file:local_path": "S2B_MSIL2A_20240110T100309_N0510_R122_T33UVR_20240110T113053.SAFE/GRANULE/L2A_T33UVR_A035755_20240110T100306/IMG_DATA/R20m/T33UVR_20240110T100309_B8A_20m.jp2",
+      "title": "NIR 2 (band 8A) - 20m",
+      "alternate": {
+        "s3": {
+          "href": "s3://eodata/Sentinel-2/MSI/L2A/2024/01/10/S2B_MSIL2A_20240110T100309_N0510_R122_T33UVR_20240110T113053.SAFE/GRANULE/L2A_T33UVR_A035755_20240110T100306/IMG_DATA/R20m/T33UVR_20240110T100309_B8A_20m.jp2",
+          "alternate:name": "S3",
+          "auth:refs": ["s3"],
+          "description": "S3 storage provided by CloudFerro Cloud and OpenTelekom Cloud (OTC). Use endpoint URL `https://eodata.dataspace.copernicus.eu`."
+        } 
+      },
+      "view:azimuth": 106.860047191076,
+      "view:incidence_angle": 8.69398100110018,
+      "bands": [
+        {
+          "name": "B8A",
+          "eo:common_name": "nir08",
+          "eo:center_wavelength": 0.864,
+          "eo:full_width_half_max": 0.441
+        }
+      ],
+      "data_type": "uint16",
+      "nodata": 0,
+      "raster:scale": 0.0001,
+      "raster:offset": -0.1,
+      "gsd": 20,
+      "proj:code": "EPSG:32633",
+      "proj:shape": [
+        5490,
+        5490
+      ],
+      "proj:bbox": [
+        399960.0,
+        5490240.0,
+        509760.0,
+        5600040.0
+      ],
+      "proj:transform": [
+        20.0,
+        0.0,
+        399960.0,
+        0.0,
+        -20.0,
+        5600040.0
+      ],
+      "roles": [
+        "data",
+        "reflectance",
+        "sampling:original",
+        "gsd:20m"
+      ]
+    },
+    "B8A_60m": {
+      "href": "https://zipper.dataspace.copernicus.eu/odata/v1/Products(7634aef0-7486-4589-92b2-541e0634c770)/Nodes(S2B_MSIL2A_20240110T100309_N0510_R122_T33UVR_20240110T113053.SAFE)/Nodes(GRANULE)/Nodes(L2A_T33UVR_A035755_20240110T100306)/Nodes(IMG_DATA)/Nodes(R60m)/Nodes(T33UVR_20240110T100309_B8A_60m.jp2)/$value",
+      "type": "image/jp2",
+      "auth:refs": ["oidc"],
+      "alternate:name": "HTTPS",
+      "file:size": 3760205,
+      "file:checksum": "162098c51b4a3a89e111d98f853c6ff8e8ced638545fbab4aab74488c766cc924546",
+      "file:local_path": "S2B_MSIL2A_20240110T100309_N0510_R122_T33UVR_20240110T113053.SAFE/GRANULE/L2A_T33UVR_A035755_20240110T100306/IMG_DATA/R60m/T33UVR_20240110T100309_B8A_60m.jp2",
+      "title": "NIR 2 (band 8A) - 60m",
+      "alternate": {
+        "s3": {
+          "href": "s3://eodata/Sentinel-2/MSI/L2A/2024/01/10/S2B_MSIL2A_20240110T100309_N0510_R122_T33UVR_20240110T113053.SAFE/GRANULE/L2A_T33UVR_A035755_20240110T100306/IMG_DATA/R60m/T33UVR_20240110T100309_B8A_60m.jp2",
+          "alternate:name": "S3",
+          "auth:refs": ["s3"],
+          "description": "S3 storage provided by CloudFerro Cloud and OpenTelekom Cloud (OTC). Use endpoint URL `https://eodata.dataspace.copernicus.eu`."
+        } 
+      },
+      "view:azimuth": 106.860047191076,
+      "view:incidence_angle": 8.69398100110018,
+      "bands": [
+        {
+          "name": "B8A",
+          "eo:common_name": "nir08",
+          "eo:center_wavelength": 0.864,
+          "eo:full_width_half_max": 0.441
+        }
+      ],
+      "data_type": "uint16",
+      "nodata": 0,
+      "raster:scale": 0.0001,
+      "raster:offset": -0.1,
+      "gsd": 60,
+      "proj:code": "EPSG:32633",
+      "proj:shape": [
+        1830,
+        1830
+      ],
+      "proj:bbox": [
+        399960.0,
+        5490240,
+        509760,
+        5600040.0
+      ],
+      "proj:transform": [
+        60.0,
+        0.0,
+        399960.0,
+        0.0,
+        -60.0,
+        5600040.0
+      ],
+      "roles": [
+        "data",
+        "reflectance",
+        "sampling:downsampled",
+        "gsd:60m"
+      ]
+    },
+    "B09_60m": {
+      "href": "https://zipper.dataspace.copernicus.eu/odata/v1/Products(7634aef0-7486-4589-92b2-541e0634c770)/Nodes(S2B_MSIL2A_20240110T100309_N0510_R122_T33UVR_20240110T113053.SAFE)/Nodes(GRANULE)/Nodes(L2A_T33UVR_A035755_20240110T100306)/Nodes(IMG_DATA)/Nodes(R60m)/Nodes(T33UVR_20240110T100309_B09_60m.jp2)/$value",
+      "type": "image/jp2",
+      "auth:refs": ["oidc"],
+      "alternate:name": "HTTPS",
+      "file:size": 3717572,
+      "file:checksum": "1620d161037fb13e65313e269b3dfa923d27c17abc3b1e576049837eca2709dbb9c3",
+      "file:local_path": "S2B_MSIL2A_20240110T100309_N0510_R122_T33UVR_20240110T113053.SAFE/GRANULE/L2A_T33UVR_A035755_20240110T100306/IMG_DATA/R60m/T33UVR_20240110T100309_B09_60m.jp2",
+      "title": "NIR 3 (band 9) - 60m",
+      "alternate": {
+        "s3": {
+          "href": "s3://eodata/Sentinel-2/MSI/L2A/2024/01/10/S2B_MSIL2A_20240110T100309_N0510_R122_T33UVR_20240110T113053.SAFE/GRANULE/L2A_T33UVR_A035755_20240110T100306/IMG_DATA/R60m/T33UVR_20240110T100309_B09_60m.jp2",
+          "alternate:name": "S3",
+          "auth:refs": ["s3"],
+          "description": "S3 storage provided by CloudFerro Cloud and OpenTelekom Cloud (OTC). Use endpoint URL `https://eodata.dataspace.copernicus.eu`."
+        } 
+      },
+      "view:azimuth": 107.127950770088,
+      "view:incidence_angle": 8.75383560306645,
+      "bands": [
+        {
+          "name": "B09",
+          "eo:common_name": "nir09",
+          "eo:center_wavelength": 0.943,
+          "eo:full_width_half_max": 0.479
+        }
+      ],
+      "data_type": "uint16",
+      "nodata": 0,
+      "raster:scale": 0.0001,
+      "raster:offset": -0.1,
+      "gsd": 60,
+      "proj:code": "EPSG:32633",
+      "proj:shape": [
+        1830,
+        1830
+      ],
+      "proj:bbox": [
+        399960.0,
+        5490240.0,
+        509760.0,
+        5600040.0
+      ],
+      "proj:transform": [
+        60.0,
+        0.0,
+        399960.0,
+        0.0,
+        -60.0,
+        5600040.0
+      ],
+      "roles": [
+        "data",
+        "reflectance",
+        "sampling:original",
+        "gsd:60m"
+      ]
+    },
+    "B11_20m": {
+      "href": "https://zipper.dataspace.copernicus.eu/odata/v1/Products(7634aef0-7486-4589-92b2-541e0634c770)/Nodes(S2B_MSIL2A_20240110T100309_N0510_R122_T33UVR_20240110T113053.SAFE)/Nodes(GRANULE)/Nodes(L2A_T33UVR_A035755_20240110T100306)/Nodes(IMG_DATA)/Nodes(R20m)/Nodes(T33UVR_20240110T100309_B11_20m.jp2)/$value",
+      "type": "image/jp2",
+      "auth:refs": ["oidc"],
+      "alternate:name": "HTTPS",
+      "file:size": 27482181,
+      "file:checksum": "1620bc114c051fbf7b5c83b94e984e14395b04d57ab20a3d09774fc287f634f7b38a",
+      "file:local_path": "S2B_MSIL2A_20240110T100309_N0510_R122_T33UVR_20240110T113053.SAFE/GRANULE/L2A_T33UVR_A035755_20240110T100306/IMG_DATA/R20m/T33UVR_20240110T100309_B11_20m.jp2",
+      "title": "SWIR 1 (band 11) - 20m",
+      "alternate": {
+        "s3": {
+          "href": "s3://eodata/Sentinel-2/MSI/L2A/2024/01/10/S2B_MSIL2A_20240110T100309_N0510_R122_T33UVR_20240110T113053.SAFE/GRANULE/L2A_T33UVR_A035755_20240110T100306/IMG_DATA/R20m/T33UVR_20240110T100309_B11_20m.jp2",
+          "alternate:name": "S3",
+          "auth:refs": ["s3"],
+          "description": "S3 storage provided by CloudFerro Cloud and OpenTelekom Cloud (OTC). Use endpoint URL `https://eodata.dataspace.copernicus.eu`."
+        } 
+      },
+      "view:azimuth": 106.626823449345,
+      "view:incidence_angle": 8.63206091067986,
+      "bands": [
+        {
+          "name": "B11",
+          "eo:common_name": "swir16",
+          "eo:center_wavelength": 1.610,
+          "eo:full_width_half_max": 0.841
+        }
+      ],
+      "data_type": "uint16",
+      "nodata": 0,
+      "raster:scale": 0.0001,
+      "raster:offset": -0.1,
+      "gsd": 20,
+      "proj:code": "EPSG:32633",
+      "proj:shape": [
+        5490,
+        5490
+      ],
+      "proj:bbox": [
+        399960.0,
+        5490240.0,
+        509760.0,
+        5600040.0
+      ],
+      "proj:transform": [
+        20.0,
+        0.0,
+        399960.0,
+        0.0,
+        -20.0,
+        5600040.0
+      ],
+      "roles": [
+        "data",
+        "reflectance",
+        "sampling:original",
+        "gsd:20m"
+      ]
+    },
+    "B11_60m": {
+      "href": "https://zipper.dataspace.copernicus.eu/odata/v1/Products(7634aef0-7486-4589-92b2-541e0634c770)/Nodes(S2B_MSIL2A_20240110T100309_N0510_R122_T33UVR_20240110T113053.SAFE)/Nodes(GRANULE)/Nodes(L2A_T33UVR_A035755_20240110T100306)/Nodes(IMG_DATA)/Nodes(R60m)/Nodes(T33UVR_20240110T100309_B11_60m.jp2)/$value",
+      "type": "image/jp2",
+      "auth:refs": ["oidc"],
+      "alternate:name": "HTTPS",
+      "file:size": 3757230,
+      "file:checksum": "1620d293c3ad2ca7cf64f80652242188eee2665ae874229dca7bd15005f0f4c3bba8",
+      "file:local_path": "S2B_MSIL2A_20240110T100309_N0510_R122_T33UVR_20240110T113053.SAFE/GRANULE/L2A_T33UVR_A035755_20240110T100306/IMG_DATA/R60m/T33UVR_20240110T100309_B11_60m.jp2",
+      "title": "SWIR 1 (band 11) - 60m",
+      "alternate": {
+        "s3": {
+          "href": "s3://eodata/Sentinel-2/MSI/L2A/2024/01/10/S2B_MSIL2A_20240110T100309_N0510_R122_T33UVR_20240110T113053.SAFE/GRANULE/L2A_T33UVR_A035755_20240110T100306/IMG_DATA/R60m/T33UVR_20240110T100309_B11_60m.jp2",
+          "alternate:name": "S3",
+          "auth:refs": ["s3"],
+          "description": "S3 storage provided by CloudFerro Cloud and OpenTelekom Cloud (OTC). Use endpoint URL `https://eodata.dataspace.copernicus.eu`."
+        } 
+      },
+      "view:azimuth": 106.626823449345,
+      "view:incidence_angle": 8.63206091067986,
+      "bands": [
+        {
+          "name": "B11",
+          "eo:common_name": "swir16",
+          "eo:center_wavelength": 1.610,
+          "eo:full_width_half_max": 0.841
+        }
+      ],
+      "data_type": "uint16",
+      "nodata": 0,
+      "raster:scale": 0.0001,
+      "raster:offset": -0.1,
+      "gsd": 60,
+      "proj:code": "EPSG:32633",
+      "proj:shape": [
+        1830,
+        1830
+      ],
+      "proj:bbox": [
+        399960.0,
+        5490240,
+        509760,
+        5600040.0
+      ],
+      "proj:transform": [
+        60.0,
+        0.0,
+        399960.0,
+        0.0,
+        -60.0,
+        5600040.0
+      ],
+      "roles": [
+        "data",
+        "reflectance",
+        "sampling:downsampled",
+        "gsd:60m"
+      ]
+    },
+    "B12_20m": {
+      "href": "https://zipper.dataspace.copernicus.eu/odata/v1/Products(7634aef0-7486-4589-92b2-541e0634c770)/Nodes(S2B_MSIL2A_20240110T100309_N0510_R122_T33UVR_20240110T113053.SAFE)/Nodes(GRANULE)/Nodes(L2A_T33UVR_A035755_20240110T100306)/Nodes(IMG_DATA)/Nodes(R20m)/Nodes(T33UVR_20240110T100309_B12_20m.jp2)/$value",
+      "type": "image/jp2",
+      "auth:refs": ["oidc"],
+      "alternate:name": "HTTPS",
+      "file:size": 26767432,
+      "file:checksum": "16204b0f8b4a4917d7dbf7f7abf34c6232050112c82b0dca727df609186c1839ea36",
+      "file:local_path": "S2B_MSIL2A_20240110T100309_N0510_R122_T33UVR_20240110T113053.SAFE/GRANULE/L2A_T33UVR_A035755_20240110T100306/IMG_DATA/R20m/T33UVR_20240110T100309_B12_20m.jp2",
+      "title": "SWIR 2 (band 12) - 20m",
+      "alternate": {
+        "s3": {
+          "href": "s3://eodata/Sentinel-2/MSI/L2A/2024/01/10/S2B_MSIL2A_20240110T100309_N0510_R122_T33UVR_20240110T113053.SAFE/GRANULE/L2A_T33UVR_A035755_20240110T100306/IMG_DATA/R20m/T33UVR_20240110T100309_B12_20m.jp2",
+          "alternate:name": "S3",
+          "auth:refs": ["s3"],
+          "description": "S3 storage provided by CloudFerro Cloud and OpenTelekom Cloud (OTC). Use endpoint URL `https://eodata.dataspace.copernicus.eu`."
+        } 
+      },
+      "view:azimuth": 106.919359585082,
+      "view:incidence_angle": 8.69915671029025,
+      "bands": [
+        {
+          "name": "B12",
+          "eo:common_name": "swir22",
+          "eo:center_wavelength": 2.186,
+          "eo:full_width_half_max": 1.160
+        }
+      ],
+      "data_type": "uint16",
+      "nodata": 0,
+      "raster:scale": 0.0001,
+      "raster:offset": -0.1,
+      "gsd": 20,
+      "proj:code": "EPSG:32633",
+      "proj:shape": [
+        5490,
+        5490
+      ],
+      "proj:bbox": [
+        399960.0,
+        5490240.0,
+        509760.0,
+        5600040.0
+      ],
+      "proj:transform": [
+        20.0,
+        0.0,
+        399960.0,
+        0.0,
+        -20.0,
+        5600040.0
+      ],
+      "roles": [
+        "data",
+        "reflectance",
+        "sampling:original",
+        "gsd:20m"
+      ]
+    },
+    "B12_60m": {
+      "href": "https://zipper.dataspace.copernicus.eu/odata/v1/Products(7634aef0-7486-4589-92b2-541e0634c770)/Nodes(S2B_MSIL2A_20240110T100309_N0510_R122_T33UVR_20240110T113053.SAFE)/Nodes(GRANULE)/Nodes(L2A_T33UVR_A035755_20240110T100306)/Nodes(IMG_DATA)/Nodes(R60m)/Nodes(T33UVR_20240110T100309_B12_60m.jp2)/$value",
+      "type": "image/jp2",
+      "auth:refs": ["oidc"],
+      "alternate:name": "HTTPS",
+      "file:size": 3752955,
+      "file:checksum": "1620bc5bbfb9e1c4b3c9d7671cd163cf789f96c5b17ecc1aa95a6e48043c6cf060db",
+      "file:local_path": "S2B_MSIL2A_20240110T100309_N0510_R122_T33UVR_20240110T113053.SAFE/GRANULE/L2A_T33UVR_A035755_20240110T100306/IMG_DATA/R60m/T33UVR_20240110T100309_B12_60m.jp2",
+      "title": "SWIR 2 (band 12) - 60m",
+      "alternate": {
+        "s3": {
+          "href": "s3://eodata/Sentinel-2/MSI/L2A/2024/01/10/S2B_MSIL2A_20240110T100309_N0510_R122_T33UVR_20240110T113053.SAFE/GRANULE/L2A_T33UVR_A035755_20240110T100306/IMG_DATA/R60m/T33UVR_20240110T100309_B12_60m.jp2",
+          "alternate:name": "S3",
+          "auth:refs": ["s3"],
+          "description": "S3 storage provided by CloudFerro Cloud and OpenTelekom Cloud (OTC). Use endpoint URL `https://eodata.dataspace.copernicus.eu`."
+        } 
+      },
+      "view:azimuth": 106.919359585082,
+      "view:incidence_angle": 8.69915671029025,
+      "bands": [
+        {
+          "name": "B12",
+          "eo:common_name": "swir22",
+          "eo:center_wavelength": 2.186,
+          "eo:full_width_half_max": 1.160
+        }
+      ],
+      "data_type": "uint16",
+      "nodata": 0,
+      "raster:scale": 0.0001,
+      "raster:offset": -0.1,
+      "gsd": 60,
+      "proj:code": "EPSG:32633",
+      "proj:shape": [
+        1830,
+        1830
+      ],
+      "proj:bbox": [
+        399960.0,
+        5490240,
+        509760,
+        5600040.0
+      ],
+      "proj:transform": [
+        60.0,
+        0.0,
+        399960.0,
+        0.0,
+        -60.0,
+        5600040.0
+      ],
+      "roles": [
+        "data",
+        "reflectance",
+        "sampling:downsampled",
+        "gsd:60m"
+      ]
+    },
+    "TCI_10m": {
+      "href": "https://zipper.dataspace.copernicus.eu/odata/v1/Products(7634aef0-7486-4589-92b2-541e0634c770)/Nodes(S2B_MSIL2A_20240110T100309_N0510_R122_T33UVR_20240110T113053.SAFE)/Nodes(GRANULE)/Nodes(L2A_T33UVR_A035755_20240110T100306)/Nodes(IMG_DATA)/Nodes(R10m)/Nodes(T33UVR_20240110T100309_TCI_10m.jp2)/$value",
+      "type": "image/jp2",
+      "auth:refs": ["oidc"],
+      "alternate:name": "HTTPS",
+      "file:size": 135089360,
+      "file:checksum": "1620c07e5e9ce3b563f404712e5971b8937f824138dedee9983fa9a0c26e9bd6eec5",
+      "file:local_path": "S2B_MSIL2A_20240110T100309_N0510_R122_T33UVR_20240110T113053.SAFE/GRANULE/L2A_T33UVR_A035755_20240110T100306/IMG_DATA/R10m/T33UVR_20240110T100309_TCI_10m.jp2",
+      "title": "True color image",
+      "alternate": {
+        "s3": {
+          "href": "s3://eodata/Sentinel-2/MSI/L2A/2024/01/10/S2B_MSIL2A_20240110T100309_N0510_R122_T33UVR_20240110T113053.SAFE/GRANULE/L2A_T33UVR_A035755_20240110T100306/IMG_DATA/R10m/T33UVR_20240110T100309_TCI_10m.jp2",
+          "alternate:name": "S3",
+          "auth:refs": ["s3"],
+          "description": "S3 storage provided by CloudFerro Cloud and OpenTelekom Cloud (OTC). Use endpoint URL `https://eodata.dataspace.copernicus.eu`."
+        } 
+      },
+      "bands": [
+        {
+          "name": "B04",
+          "eo:common_name": "red",
+          "description": "Red (band 4)",
+          "eo:center_wavelength": 0.665,
+          "eo:full_width_half_max": 0.343
+        },
+        {
+          "name": "B03",
+          "eo:common_name": "green",
+          "description": "Green (band 3)",
+          "eo:center_wavelength": 0.559,
+          "eo:full_width_half_max": 0.291
+        },
+        {
+          "name": "B02",
+          "eo:common_name": "blue",
+          "description": "Blue (band 2)",
+          "eo:center_wavelength": 0.492,
+          "eo:full_width_half_max": 0.266
+        }
+      ],
+      "data_type": "uint8",
+      "nodata": 0,
+      "gsd": 10,
+      "proj:code": "EPSG:32633",
+      "proj:shape": [
+        10980,
+        10980
+      ],
+      "proj:bbox": [
+        399960.0,
+        5490240.0,
+        509760.0,
+        5600040.0
+      ],
+      "proj:transform": [
+        10.0,
+        0.0,
+        399960.0,
+        0.0,
+        -10.0,
+        5600040.0
+      ],
+      "roles": [
+        "visual",
+        "sampling:original",
+        "gsd:10m"
+      ]
+    },
+    "TCI_20m": {
+      "href": "https://zipper.dataspace.copernicus.eu/odata/v1/Products(7634aef0-7486-4589-92b2-541e0634c770)/Nodes(S2B_MSIL2A_20240110T100309_N0510_R122_T33UVR_20240110T113053.SAFE)/Nodes(GRANULE)/Nodes(L2A_T33UVR_A035755_20240110T100306)/Nodes(IMG_DATA)/Nodes(R20m)/Nodes(T33UVR_20240110T100309_TCI_20m.jp2)/$value",
+      "type": "image/jp2",
+      "auth:refs": ["oidc"],
+      "alternate:name": "HTTPS",
+      "file:size": 33907494,
+      "file:checksum": "162077e6cd9974cfdbf0d21159b37ea0c87617b8b195b311726914e407d16ac7cc9d",
+      "file:local_path": "S2B_MSIL2A_20240110T100309_N0510_R122_T33UVR_20240110T113053.SAFE/GRANULE/L2A_T33UVR_A035755_20240110T100306/IMG_DATA/R20m/T33UVR_20240110T100309_TCI_20m.jp2",
+      "title": "True color image",
+      "alternate": {
+        "s3": {
+          "href": "s3://eodata/Sentinel-2/MSI/L2A/2024/01/10/S2B_MSIL2A_20240110T100309_N0510_R122_T33UVR_20240110T113053.SAFE/GRANULE/L2A_T33UVR_A035755_20240110T100306/IMG_DATA/R20m/T33UVR_20240110T100309_TCI_20m.jp2",
+          "alternate:name": "S3",
+          "auth:refs": ["s3"],
+          "description": "S3 storage provided by CloudFerro Cloud and OpenTelekom Cloud (OTC). Use endpoint URL `https://eodata.dataspace.copernicus.eu`."
+        } 
+      },
+      "bands": [
+        {
+          "name": "B04",
+          "eo:common_name": "red",
+          "description": "Red (band 4)",
+          "eo:center_wavelength": 0.665,
+          "eo:full_width_half_max": 0.343
+        },
+        {
+          "name": "B03",
+          "eo:common_name": "green",
+          "description": "Green (band 3)",
+          "eo:center_wavelength": 0.559,
+          "eo:full_width_half_max": 0.291
+        },
+        {
+          "name": "B02",
+          "eo:common_name": "blue",
+          "description": "Blue (band 2)",
+          "eo:center_wavelength": 0.492,
+          "eo:full_width_half_max": 0.266
+        }
+      ],
+      "data_type": "uint8",
+      "nodata": 0,
+      "gsd": 20,
+      "proj:code": "EPSG:32633",
+      "proj:shape": [
+        5490,
+        5490
+      ],
+      "proj:bbox": [
+        399960.0,
+        5490240.0,
+        509760.0,
+        5600040.0
+      ],
+      "proj:transform": [
+        20.0,
+        0.0,
+        399960.0,
+        0.0,
+        -20.0,
+        5600040.0
+      ],
+      "roles": [
+        "visual",
+        "sampling:downsampled",
+        "gsd:20m"
+      ]
+    },
+    "TCI_60m": {
+      "href": "https://zipper.dataspace.copernicus.eu/odata/v1/Products(7634aef0-7486-4589-92b2-541e0634c770)/Nodes(S2B_MSIL2A_20240110T100309_N0510_R122_T33UVR_20240110T113053.SAFE)/Nodes(GRANULE)/Nodes(L2A_T33UVR_A035755_20240110T100306)/Nodes(IMG_DATA)/Nodes(R60m)/Nodes(T33UVR_20240110T100309_TCI_60m.jp2)/$value",
+      "type": "image/jp2",
+      "auth:refs": ["oidc"],
+      "alternate:name": "HTTPS",
+      "file:size": 3708732,
+      "file:checksum": "1620f13597953603c4fba0115060f7973a247a7689471555290b6c035c9e8ea46acb",
+      "file:local_path": "S2B_MSIL2A_20240110T100309_N0510_R122_T33UVR_20240110T113053.SAFE/GRANULE/L2A_T33UVR_A035755_20240110T100306/IMG_DATA/R60m/T33UVR_20240110T100309_TCI_60m.jp2",
+      "title": "True color image",
+      "alternate": {
+        "s3": {
+          "href": "s3://eodata/Sentinel-2/MSI/L2A/2024/01/10/S2B_MSIL2A_20240110T100309_N0510_R122_T33UVR_20240110T113053.SAFE/GRANULE/L2A_T33UVR_A035755_20240110T100306/IMG_DATA/R60m/T33UVR_20240110T100309_TCI_60m.jp2",
+          "alternate:name": "S3",
+          "auth:refs": ["s3"],
+          "description": "S3 storage provided by CloudFerro Cloud and OpenTelekom Cloud (OTC). Use endpoint URL `https://eodata.dataspace.copernicus.eu`."
+        } 
+      },
+      "bands": [
+        {
+          "name": "B04",
+          "eo:common_name": "red",
+          "description": "Red (band 4)",
+          "eo:center_wavelength": 0.665,
+          "eo:full_width_half_max": 0.343
+        },
+        {
+          "name": "B03",
+          "eo:common_name": "green",
+          "description": "Green (band 3)",
+          "eo:center_wavelength": 0.559,
+          "eo:full_width_half_max": 0.291
+        },
+        {
+          "name": "B02",
+          "eo:common_name": "blue",
+          "description": "Blue (band 2)",
+          "eo:center_wavelength": 0.492,
+          "eo:full_width_half_max": 0.266
+        }
+      ],
+      "data_type": "uint8",
+      "nodata": 0,
+      "gsd": 60,
+      "proj:code": "EPSG:32633",
+      "proj:shape": [
+        1830,
+        1830
+      ],
+      "proj:bbox": [
+        399960.0,
+        5490240.0,
+        509760.0,
+        5600040.0
+      ],
+      "proj:transform": [
+        60.0,
+        0.0,
+        399960.0,
+        0.0,
+        -60.0,
+        5600040.0
+      ],
+      "roles": [
+        "visual",
+        "sampling:downsampled",
+        "gsd:60m"
+      ]
+    },
+    "AOT_10m": {
+      "href": "https://zipper.dataspace.copernicus.eu/odata/v1/Products(7634aef0-7486-4589-92b2-541e0634c770)/Nodes(S2B_MSIL2A_20240110T100309_N0510_R122_T33UVR_20240110T113053.SAFE)/Nodes(GRANULE)/Nodes(L2A_T33UVR_A035755_20240110T100306)/Nodes(IMG_DATA)/Nodes(R10m)/Nodes(T33UVR_20240110T100309_AOT_10m.jp2)/$value",
+      "type": "image/jp2",
+      "auth:refs": ["oidc"],
+      "alternate:name": "HTTPS",
+      "file:size": 854618,
+      "file:checksum": "1620835ea3ae410acfd192f557bd66685fe1fc625e6b0a47cd0a57de054721afb1a1",
+      "file:local_path": "S2B_MSIL2A_20240110T100309_N0510_R122_T33UVR_20240110T113053.SAFE/GRANULE/L2A_T33UVR_A035755_20240110T100306/IMG_DATA/R10m/T33UVR_20240110T100309_AOT_10m.jp2",
+      "title": "Aerosol optical thickness (AOT) - 10m",
+      "alternate": {
+        "s3": {
+          "href": "s3://eodata/Sentinel-2/MSI/L2A/2024/01/10/S2B_MSIL2A_20240110T100309_N0510_R122_T33UVR_20240110T113053.SAFE/GRANULE/L2A_T33UVR_A035755_20240110T100306/IMG_DATA/R10m/T33UVR_20240110T100309_AOT_10m.jp2",
+          "alternate:name": "S3",
+          "auth:refs": ["s3"],
+          "description": "S3 storage provided by CloudFerro Cloud and OpenTelekom Cloud (OTC). Use endpoint URL `https://eodata.dataspace.copernicus.eu`."
+        }
+      },
+      "nodata": 0,
+      "data_type": "uint16",
+      "raster:scale": 0.0001,
+      "raster:offset": -0.1,
+      "gsd": 10,
+      "proj:code": "EPSG:32633",
+      "proj:shape": [
+        10980,
+        10980
+      ],
+      "proj:bbox": [
+        399960.0,
+        5490240,
+        509760,
+        5600040.0
+      ],
+      "proj:transform": [
+        10.0,
+        0.0,
+        399960.0,
+        0.0,
+        -10.0,
+        5600040.0
+      ],
+      "roles": [
+        "data",
+        "gsd:10m"
+      ]
+    },
+    "AOT_20m": {
+      "href": "https://zipper.dataspace.copernicus.eu/odata/v1/Products(7634aef0-7486-4589-92b2-541e0634c770)/Nodes(S2B_MSIL2A_20240110T100309_N0510_R122_T33UVR_20240110T113053.SAFE)/Nodes(GRANULE)/Nodes(L2A_T33UVR_A035755_20240110T100306)/Nodes(IMG_DATA)/Nodes(R20m)/Nodes(T33UVR_20240110T100309_AOT_20m.jp2)/$value",
+      "type": "image/jp2",
+      "auth:refs": ["oidc"],
+      "alternate:name": "HTTPS",
+      "file:size": 757860,
+      "file:checksum": "1620ee2900a3b51b2b8975b648d754c0e7d6258cd5b1aae3c059458befd049ac4326",
+      "file:local_path": "S2B_MSIL2A_20240110T100309_N0510_R122_T33UVR_20240110T113053.SAFE/GRANULE/L2A_T33UVR_A035755_20240110T100306/IMG_DATA/R20m/T33UVR_20240110T100309_AOT_20m.jp2",
+      "title": "Aerosol optical thickness (AOT) - 20m",
+      "alternate": {
+        "s3": {
+          "href": "s3://eodata/Sentinel-2/MSI/L2A/2024/01/10/S2B_MSIL2A_20240110T100309_N0510_R122_T33UVR_20240110T113053.SAFE/GRANULE/L2A_T33UVR_A035755_20240110T100306/IMG_DATA/R20m/T33UVR_20240110T100309_AOT_20m.jp2",
+          "alternate:name": "S3",
+          "auth:refs": ["s3"],
+          "description": "S3 storage provided by CloudFerro Cloud and OpenTelekom Cloud (OTC). Use endpoint URL `https://eodata.dataspace.copernicus.eu`."
+        }
+      },
+      "nodata": 0,
+      "data_type": "uint16",
+      "raster:scale": 0.0001,
+      "raster:offset": -0.1,
+      "gsd": 20,
+      "proj:code": "EPSG:32633",
+      "proj:shape": [
+        5490,
+        5490
+      ],
+      "proj:bbox": [
+        399960.0,
+        5490240,
+        509760,
+        5600040.0
+      ],
+      "proj:transform": [
+        20.0,
+        0.0,
+        399960.0,
+        0.0,
+        -20.0,
+        5600040.0
+      ],
+      "roles": [
+        "data",
+        "gsd:20m"
+      ]
+    },
+    "AOT_60m": {
+      "href": "https://zipper.dataspace.copernicus.eu/odata/v1/Products(7634aef0-7486-4589-92b2-541e0634c770)/Nodes(S2B_MSIL2A_20240110T100309_N0510_R122_T33UVR_20240110T113053.SAFE)/Nodes(GRANULE)/Nodes(L2A_T33UVR_A035755_20240110T100306)/Nodes(IMG_DATA)/Nodes(R60m)/Nodes(T33UVR_20240110T100309_AOT_60m.jp2)/$value",
+      "type": "image/jp2",
+      "auth:refs": ["oidc"],
+      "alternate:name": "HTTPS",
+      "file:size": 271334,
+      "file:checksum": "16203ff0ce5c86be0f700993768323dd44dd58af30e80e1526fdc185862ae5efddec",
+      "file:local_path": "S2B_MSIL2A_20240110T100309_N0510_R122_T33UVR_20240110T113053.SAFE/GRANULE/L2A_T33UVR_A035755_20240110T100306/IMG_DATA/R60m/T33UVR_20240110T100309_AOT_60m.jp2",
+      "title": "Aerosol optical thickness (AOT) - 60m",
+      "alternate": {
+        "s3": {
+          "href": "s3://eodata/Sentinel-2/MSI/L2A/2024/01/10/S2B_MSIL2A_20240110T100309_N0510_R122_T33UVR_20240110T113053.SAFE/GRANULE/L2A_T33UVR_A035755_20240110T100306/IMG_DATA/R60m/T33UVR_20240110T100309_AOT_60m.jp2",
+          "alternate:name": "S3",
+          "auth:refs": ["s3"],
+          "description": "S3 storage provided by CloudFerro Cloud and OpenTelekom Cloud (OTC). Use endpoint URL `https://eodata.dataspace.copernicus.eu`."
+        }
+      },
+      "nodata": 0,
+      "data_type": "uint16",
+      "raster:scale": 0.0001,
+      "raster:offset": -0.1,
+      "gsd": 60,
+      "proj:code": "EPSG:32633",
+      "proj:shape": [
+        1830,
+        1830
+      ],
+      "proj:bbox": [
+        399960.0,
+        5490240,
+        509760,
+        5600040.0
+      ],
+      "proj:transform": [
+        60.0,
+        0.0,
+        399960.0,
+        0.0,
+        -60.0,
+        5600040.0
+      ],
+      "roles": [
+        "data",
+        "gsd:60m"
+      ]
+    },
+    "SCL_20m": {
+      "href": "https://zipper.dataspace.copernicus.eu/odata/v1/Products(7634aef0-7486-4589-92b2-541e0634c770)/Nodes(S2B_MSIL2A_20240110T100309_N0510_R122_T33UVR_20240110T113053.SAFE)/Nodes(GRANULE)/Nodes(L2A_T33UVR_A035755_20240110T100306)/Nodes(IMG_DATA)/Nodes(R20m)/Nodes(T33UVR_20240110T100309_SCL_20m.jp2)/$value",
+      "type": "image/jp2",
+      "auth:refs": ["oidc"],
+      "alternate:name": "HTTPS",
+      "file:size": 3058387,
+      "file:checksum": "1620b5e0743b3881895113b61e57f9da241b80a015dfc6ba762c1f123e2cfacf1cc4",
+      "file:local_path": "S2B_MSIL2A_20240110T100309_N0510_R122_T33UVR_20240110T113053.SAFE/GRANULE/L2A_T33UVR_A035755_20240110T100306/IMG_DATA/R20m/T33UVR_20240110T100309_SCL_20m.jp2",
+      "title": "Scene classfication map (SCL) - 20m",
+      "alternate": {
+        "s3": {
+          "href": "s3://eodata/Sentinel-2/MSI/L2A/2024/01/10/S2B_MSIL2A_20240110T100309_N0510_R122_T33UVR_20240110T113053.SAFE/GRANULE/L2A_T33UVR_A035755_20240110T100306/IMG_DATA/R20m/T33UVR_20240110T100309_SCL_20m.jp2",
+          "alternate:name": "S3",
+          "auth:refs": ["s3"],
+          "description": "S3 storage provided by CloudFerro Cloud and OpenTelekom Cloud (OTC). Use endpoint URL `https://eodata.dataspace.copernicus.eu`."
+        }
+      },
+      "nodata": 0,
+      "data_type": "uint8",
+      "gsd": 20,
+      "proj:code": "EPSG:32633",
+      "proj:shape": [
+        5490,
+        5490
+      ],
+      "proj:bbox": [
+        399960.0,
+        5490240,
+        509760,
+        5600040.0
+      ],
+      "proj:transform": [
+        20.0,
+        0.0,
+        399960.0,
+        0.0,
+        -20.0,
+        5600040.0
+      ],
+      "roles": [
+        "data",
+        "sampling:original",
+        "gsd:20m"
+      ],
+      "classification:classes": [
+        {
+          "value": 0,
+          "name": "no_data",
+          "nodata": true,
+          "percentage": 25.002557
+        },
+        {
+          "value": 1,
+          "name": "saturated_or_defective",
+          "percentage": 0.0
+        },
+        {
+          "value": 2,
+          "name": "dark_area_pixels",
+          "percentage": 6.666911
+        },
+        {
+          "value": 3,
+          "name": "cloud_shadows",
+          "percentage": 0.012537
+        },
+        {
+          "value": 4,
+          "name": "vegetation",
+          "percentage": 7.376051
+        },
+        {
+          "value": 5,
+          "name": "not_vegetated",
+          "percentage": 56.82134
+        },
+        {
+          "value": 6,
+          "name": "water",
+          "percentage": 1.142773
+        },
+        {
+          "value": 7,
+          "name": "unclassified",
+          "percentage": 0.126051
+        },
+        {
+          "value": 8,
+          "name": "cloud_medium_probability",
+          "percentage": 0.028017
+        },
+        {
+          "value": 9,
+          "name": "cloud_high_probability",
+          "percentage": 0.002491
+        },
+        {
+          "value": 10,
+          "name": "thin_cirrus",
+          "percentage": 0.135881
+        },
+        {
+          "value": 11,
+          "name": "snow",
+          "percentage": 27.687943
+        }
+      ]
+    },
+    "SCL_60m": {
+      "href": "https://zipper.dataspace.copernicus.eu/odata/v1/Products(7634aef0-7486-4589-92b2-541e0634c770)/Nodes(S2B_MSIL2A_20240110T100309_N0510_R122_T33UVR_20240110T113053.SAFE)/Nodes(GRANULE)/Nodes(L2A_T33UVR_A035755_20240110T100306)/Nodes(IMG_DATA)/Nodes(R60m)/Nodes(T33UVR_20240110T100309_SCL_60m.jp2)/$value",
+      "type": "image/jp2",
+      "auth:refs": ["oidc"],
+      "alternate:name": "HTTPS",
+      "file:size": 766756,
+      "file:checksum": "162034b9da2552d53f77b4ba70a2a30dd981024ac7a878f1beed42b392c4e528979b",
+      "file:local_path": "S2B_MSIL2A_20240110T100309_N0510_R122_T33UVR_20240110T113053.SAFE/GRANULE/L2A_T33UVR_A035755_20240110T100306/IMG_DATA/R60m/T33UVR_20240110T100309_SCL_60m.jp2",
+      "title": "Scene classfication map (SCL) - 60m",
+      "alternate": {
+        "s3": {
+          "href": "s3://eodata/Sentinel-2/MSI/L2A/2024/01/10/S2B_MSIL2A_20240110T100309_N0510_R122_T33UVR_20240110T113053.SAFE/GRANULE/L2A_T33UVR_A035755_20240110T100306/IMG_DATA/R60m/T33UVR_20240110T100309_SCL_60m.jp2",
+          "alternate:name": "S3",
+          "auth:refs": ["s3"],
+          "description": "S3 storage provided by CloudFerro Cloud and OpenTelekom Cloud (OTC). Use endpoint URL `https://eodata.dataspace.copernicus.eu`."
+        }
+      },
+      "nodata": 0,
+      "data_type": "uint8",
+      "gsd": 60,
+      "proj:code": "EPSG:32633",
+      "proj:shape": [
+        1830,
+        1830
+      ],
+      "proj:bbox": [
+        399960.0,
+        5490240,
+        509760,
+        5600040.0
+      ],
+      "proj:transform": [
+        60.0,
+        0.0,
+        399960.0,
+        0.0,
+        -60.0,
+        5600040.0
+      ],
+      "roles": [
+        "data",
+        "sampling:downsampled",
+        "gsd:60m"
+      ],
+      "classification:classes": [
+        {
+          "value": 0,
+          "name": "no_data",
+          "nodata": true
+        },
+        {
+          "value": 1,
+          "name": "saturated_or_defective"
+        },
+        {
+          "value": 2,
+          "name": "dark_area_pixels"
+        },
+        {
+          "value": 3,
+          "name": "cloud_shadows"
+        },
+        {
+          "value": 4,
+          "name": "vegetation"
+        },
+        {
+          "value": 5,
+          "name": "not_vegetated"
+        },
+        {
+          "value": 6,
+          "name": "water"
+        },
+        {
+          "value": 7,
+          "name": "unclassified"
+        },
+        {
+          "value": 8,
+          "name": "cloud_medium_probability"
+        },
+        {
+          "value": 9,
+          "name": "cloud_high_probability"
+        },
+        {
+          "value": 10,
+          "name": "thin_cirrus"
+        },
+        {
+          "value": 11,
+          "name": "snow"
+        }
+      ]
+    },
+    "WVP_10m": {
+      "href": "https://zipper.dataspace.copernicus.eu/odata/v1/Products(7634aef0-7486-4589-92b2-541e0634c770)/Nodes(S2B_MSIL2A_20240110T100309_N0510_R122_T33UVR_20240110T113053.SAFE)/Nodes(GRANULE)/Nodes(L2A_T33UVR_A035755_20240110T100306)/Nodes(IMG_DATA)/Nodes(R10m)/Nodes(T33UVR_20240110T100309_WVP_10m.jp2)/$value",
+      "type": "image/jp2",
+      "auth:refs": ["oidc"],
+      "alternate:name": "HTTPS",
+      "file:size": 68251714,
+      "file:checksum": "16202d0460a025a1baeb344cd3f300fb7e95e5192ef610f08578b600e44e6315cdf4",
+      "file:local_path": "S2B_MSIL2A_20240110T100309_N0510_R122_T33UVR_20240110T113053.SAFE/GRANULE/L2A_T33UVR_A035755_20240110T100306/IMG_DATA/R10m/T33UVR_20240110T100309_WVP_10m.jp2",
+      "title": "Water vapour (WVP) - 10m",
+      "alternate": {
+        "s3": {
+          "href": "s3://eodata/Sentinel-2/MSI/L2A/2024/01/10/S2B_MSIL2A_20240110T100309_N0510_R122_T33UVR_20240110T113053.SAFE/GRANULE/L2A_T33UVR_A035755_20240110T100306/IMG_DATA/R10m/T33UVR_20240110T100309_WVP_10m.jp2",
+          "alternate:name": "S3",
+          "auth:refs": ["s3"],
+          "description": "S3 storage provided by CloudFerro Cloud and OpenTelekom Cloud (OTC). Use endpoint URL `https://eodata.dataspace.copernicus.eu`."
+        }
+      },
+      "nodata": 0,
+      "data_type": "uint16",
+      "raster:scale": 0.0001,
+      "raster:offset": -0.1,
+      "gsd": 10,
+      "proj:code": "EPSG:32633",
+      "proj:shape": [
+        10980,
+        10980
+      ],
+      "proj:bbox": [
+        399960.0,
+        5490240,
+        509760,
+        5600040.0
+      ],
+      "proj:transform": [
+        10.0,
+        0.0,
+        399960.0,
+        0.0,
+        -10.0,
+        5600040.0
+      ],
+      "roles": [
+        "data",
+        "gsd:10m"
+      ]
+    },
+    "WVP_20m": {
+      "href": "https://zipper.dataspace.copernicus.eu/odata/v1/Products(7634aef0-7486-4589-92b2-541e0634c770)/Nodes(S2B_MSIL2A_20240110T100309_N0510_R122_T33UVR_20240110T113053.SAFE)/Nodes(GRANULE)/Nodes(L2A_T33UVR_A035755_20240110T100306)/Nodes(IMG_DATA)/Nodes(R20m)/Nodes(T33UVR_20240110T100309_WVP_20m.jp2)/$value",
+      "type": "image/jp2",
+      "auth:refs": ["oidc"],
+      "alternate:name": "HTTPS",
+      "file:size": 22161138,
+      "file:checksum": "1620f86b6ff1653fb537097522f6330858d044739b5e00d9a96b5c872d1d02abd6ba",
+      "file:local_path": "S2B_MSIL2A_20240110T100309_N0510_R122_T33UVR_20240110T113053.SAFE/GRANULE/L2A_T33UVR_A035755_20240110T100306/IMG_DATA/R20m/T33UVR_20240110T100309_WVP_20m.jp2",
+      "title": "Water vapour (WVP) - 20m",
+      "alternate": {
+        "s3": {
+          "href": "s3://eodata/Sentinel-2/MSI/L2A/2024/01/10/S2B_MSIL2A_20240110T100309_N0510_R122_T33UVR_20240110T113053.SAFE/GRANULE/L2A_T33UVR_A035755_20240110T100306/IMG_DATA/R20m/T33UVR_20240110T100309_WVP_20m.jp2",
+          "alternate:name": "S3",
+          "auth:refs": ["s3"],
+          "description": "S3 storage provided by CloudFerro Cloud and OpenTelekom Cloud (OTC). Use endpoint URL `https://eodata.dataspace.copernicus.eu`."
+        }
+      },
+      "nodata": 0,
+      "data_type": "uint16",
+      "raster:scale": 0.0001,
+      "raster:offset": -0.1,
+      "gsd": 20,
+      "proj:code": "EPSG:32633",
+      "proj:shape": [
+        5490,
+        5490
+      ],
+      "proj:bbox": [
+        399960.0,
+        5490240,
+        509760,
+        5600040.0
+      ],
+      "proj:transform": [
+        20.0,
+        0.0,
+        399960.0,
+        0.0,
+        -20.0,
+        5600040.0
+      ],
+      "roles": [
+        "data",
+        "gsd:20m"
+      ]
+    },
+    "WVP_60m": {
+      "href": "https://zipper.dataspace.copernicus.eu/odata/v1/Products(7634aef0-7486-4589-92b2-541e0634c770)/Nodes(S2B_MSIL2A_20240110T100309_N0510_R122_T33UVR_20240110T113053.SAFE)/Nodes(GRANULE)/Nodes(L2A_T33UVR_A035755_20240110T100306)/Nodes(IMG_DATA)/Nodes(R60m)/Nodes(T33UVR_20240110T100309_WVP_60m.jp2)/$value",
+      "type": "image/jp2",
+      "auth:refs": ["oidc"],
+      "alternate:name": "HTTPS",
+      "file:size": 3182995,
+      "file:checksum": "162082a238eb714c9536b379f22b578470879a67e766cee3206a9b86d71c4e8b2c4d",
+      "file:local_path": "S2B_MSIL2A_20240110T100309_N0510_R122_T33UVR_20240110T113053.SAFE/GRANULE/L2A_T33UVR_A035755_20240110T100306/IMG_DATA/R60m/T33UVR_20240110T100309_WVP_60m.jp2",
+      "title": "Water vapour (WVP) - 60m",
+      "alternate": {
+        "s3": {
+          "href": "s3://eodata/Sentinel-2/MSI/L2A/2024/01/10/S2B_MSIL2A_20240110T100309_N0510_R122_T33UVR_20240110T113053.SAFE/GRANULE/L2A_T33UVR_A035755_20240110T100306/IMG_DATA/R60m/T33UVR_20240110T100309_WVP_60m.jp2",
+          "alternate:name": "S3",
+          "auth:refs": ["s3"],
+          "description": "S3 storage provided by CloudFerro Cloud and OpenTelekom Cloud (OTC). Use endpoint URL `https://eodata.dataspace.copernicus.eu`."
+        }
+      },
+      "nodata": 0,
+      "data_type": "uint16",
+      "raster:scale": 0.0001,
+      "raster:offset": -0.1,
+      "gsd": 60,
+      "proj:code": "EPSG:32633",
+      "proj:shape": [
+        1830,
+        1830
+      ],
+      "proj:bbox": [
+        399960.0,
+        5490240,
+        509760,
+        5600040.0
+      ],
+      "proj:transform": [
+        60.0,
+        0.0,
+        399960.0,
+        0.0,
+        -60.0,
+        5600040.0
+      ],
+      "roles": [
+        "data",
+        "gsd:60m"
+      ]
+    },
+    "thumbnail": {
+      "href": "https://datahub.creodias.eu/odata/v1/Assets(d4479e6a-be5a-493c-8983-d8ba88bf4b94)/$value",
+      "type": "image/jpeg",
+      "roles": [
+          "thumbnail", "overview"
+      ],
+      "title": "Quicklook",
+      "proj:code": null,
+      "proj:shape": [343, 343],
+      "alternate:name": "HTTPS",
+      "file:size": 34029,
+      "file:checksum": "d50110252c80f52a64c24db86dc3f22eace72e",
+      "file:local_path": "S2B_MSIL2A_20240110T100309_N0510_R122_T33UVR_20240110T113053.SAFE/S2B_MSIL2A_20240110T100309_N0510_R122_T33UVR_20240110T113053-ql.jpg",
+      "data_type": "uint8",
+      "alternate": {
+        "s3": {
+          "href": "s3://eodata/Sentinel-2/MSI/L2A/2024/01/10/S2B_MSIL2A_20240110T100309_N0510_R122_T33UVR_20240110T113053.SAFE/S2B_MSIL2A_20240110T100309_N0510_R122_T33UVR_20240110T113053-ql.jpg",
+          "alternate:name": "S3",
+          "auth:refs": ["s3"],
+          "description": "S3 storage provided by CloudFerro Cloud and OpenTelekom Cloud (OTC). Use endpoint URL `https://eodata.dataspace.copernicus.eu`."
+        }
+      }
+    },
+    "safe_manifest": {
+      "href": "https://zipper.dataspace.copernicus.eu/odata/v1/Products(7634aef0-7486-4589-92b2-541e0634c770)/Nodes(S2B_MSIL2A_20240110T100309_N0510_R122_T33UVR_20240110T113053.SAFE)/Nodes(manifest.safe)/$value",
+      "type": "application/xml",
+      "auth:refs": ["oidc"],
+      "roles": [
+          "metadata"
+      ],
+      "title": "manifest.safe",
+      "alternate:name": "HTTPS",
+      "file:size": 69241,
+      "file:checksum": "d50110c6c00bd7f6d6c360e789ad3075e271cd",
+      "file:local_path": "S2B_MSIL2A_20240110T100309_N0510_R122_T33UVR_20240110T113053.SAFE/manifest.safe",
+      "alternate": {
+        "s3": {
+          "href": "s3://eodata/Sentinel-2/MSI/L2A/2024/01/10/S2B_MSIL2A_20240110T100309_N0510_R122_T33UVR_20240110T113053.SAFE/manifest.safe",
+          "alternate:name": "S3",
+          "auth:refs": ["s3"],
+          "description": "S3 storage provided by CloudFerro Cloud and OpenTelekom Cloud (OTC). Use endpoint URL `https://eodata.dataspace.copernicus.eu`."
+        }
+      }
+    },
+    "product_metadata": {
+      "href": "https://zipper.dataspace.copernicus.eu/odata/v1/Products(7634aef0-7486-4589-92b2-541e0634c770)/Nodes(S2B_MSIL2A_20240110T100309_N0510_R122_T33UVR_20240110T113053.SAFE)/Nodes(MTD_MSIL2A.xml)/$value",
+      "type": "application/xml",
+      "auth:refs": ["oidc"],
+      "roles": [
+          "metadata"
+      ],
+      "title": "MTD_MSIL2A.xml",
+      "alternate:name": "HTTPS",
+      "file:size": 54688,
+      "file:checksum": "d501204ab6c48954a31de18a0d3ee36218b9f70f1a78d75fad3ac7ec7bf00b02b680b4",
+      "file:local_path": "S2B_MSIL2A_20240110T100309_N0510_R122_T33UVR_20240110T113053.SAFE/MTD_MSIL2A.xml",
+      "alternate": {
+        "s3": {
+          "href": "s3://eodata/Sentinel-2/MSI/L2A/2024/01/10/S2B_MSIL2A_20240110T100309_N0510_R122_T33UVR_20240110T113053.SAFE/MTD_MSIL2A.xml",
+          "alternate:name": "S3",
+          "auth:refs": ["s3"],
+          "description": "S3 storage provided by CloudFerro Cloud and OpenTelekom Cloud (OTC). Use endpoint URL `https://eodata.dataspace.copernicus.eu`."
+        }
+      }
+    },
+    "granule_metadata": {
+      "href": "https://zipper.dataspace.copernicus.eu/odata/v1/Products(7634aef0-7486-4589-92b2-541e0634c770)/Nodes(S2B_MSIL2A_20240110T100309_N0510_R122_T33UVR_20240110T113053.SAFE)/Nodes()/Nodes(GRANULE)/Nodes(L2A_T33UVR_A035755_20240110T100306)/Nodes(MTD_TL.xml)/$value",
+      "type": "application/xml",
+      "auth:refs": ["oidc"],
+      "roles": [
+          "metadata"
+      ],
+      "title": "MTD_TL.xml",
+      "alternate:name": "HTTPS",
+      "file:size": 376593,
+      "file:checksum": "d50120a65b2369443b58772eedc8b47c1235ca775270dca44f5a44c4e4bc90dccfa50f",
+      "file:local_path": "S2B_MSIL2A_20240110T100309_N0510_R122_T33UVR_20240110T113053.SAFE/GRANULE/L2A_T33UVR_A035755_20240110T100306/MTD_TL.xml",
+      "alternate": {
+        "s3": {
+          "href": "s3://eodata/Sentinel-2/MSI/L2A/2024/01/10/S2B_MSIL2A_20240110T100309_N0510_R122_T33UVR_20240110T113053.SAFE/GRANULE/L2A_T33UVR_A035755_20240110T100306/MTD_TL.xml",
+          "alternate:name": "S3",
+          "auth:refs": ["s3"],
+          "description": "S3 storage provided by CloudFerro Cloud and OpenTelekom Cloud (OTC). Use endpoint URL `https://eodata.dataspace.copernicus.eu`."
+        }
+      }
+    },
+    "inspire_metadata": {
+      "href": "https://zipper.dataspace.copernicus.eu/odata/v1/Products(7634aef0-7486-4589-92b2-541e0634c770)/Nodes(S2B_MSIL2A_20240110T100309_N0510_R122_T33UVR_20240110T113053.SAFE)/Nodes(INSPIRE.xml)/$value",
+      "type": "application/xml",
+      "auth:refs": ["oidc"],
+      "roles": [
+          "metadata"
+      ],
+      "title": "INSPIRE.xml",
+      "alternate:name": "HTTPS",
+      "file:size": 18980,
+      "file:checksum": "d50120a1b8caa60ab141e836811cc82818d94360df53eb15b14b0e1b113a54f77b6326",
+      "file:local_path": "S2B_MSIL2A_20240110T100309_N0510_R122_T33UVR_20240110T113053.SAFE/INSPIRE.xml",
+      "alternate": {
+        "s3": {
+          "href": "s3://eodata/Sentinel-2/MSI/L2A/2024/01/10/S2B_MSIL2A_20240110T100309_N0510_R122_T33UVR_20240110T113053.SAFE/INSPIRE.xml",
+          "alternate:name": "S3",
+          "auth:refs": ["s3"],
+          "description": "S3 storage provided by CloudFerro Cloud and OpenTelekom Cloud (OTC). Use endpoint URL `https://eodata.dataspace.copernicus.eu`."
+        }
+      }
+    },
+    "datastrip_metadata": {
+      "href": "https://zipper.dataspace.copernicus.eu/odata/v1/Products(7634aef0-7486-4589-92b2-541e0634c770)/Nodes(S2B_MSIL2A_20240110T100309_N0510_R122_T33UVR_20240110T113053.SAFE)/Nodes()/Nodes(DATASTRIP)/Nodes(DS_2BPS_20240110T113053_S20240110T100306)/Nodes(MTD_DS.xml)/$value",
+      "type": "application/xml",
+      "auth:refs": ["oidc"],
+      "roles": [
+          "metadata"
+      ],
+      "title": "MTD_DS.xml",
+      "alternate:name": "HTTPS",
+      "file:size": 16233495,
+      "file:checksum": "d50120444e253a874131773673404202b2550dc843f5a072e5928d55ea3412ce96f921",
+      "file:local_path": "S2B_MSIL2A_20240110T100309_N0510_R122_T33UVR_20240110T113053.SAFE/DATASTRIP/DS_2BPS_20240110T113053_S20240110T100306/MTD_DS.xml",
+      "alternate": {
+        "s3": {
+          "href": "s3://eodata/Sentinel-2/MSI/L2A/2024/01/10/S2B_MSIL2A_20240110T100309_N0510_R122_T33UVR_20240110T113053.SAFE/DATASTRIP/DS_2BPS_20240110T113053_S20240110T100306/MTD_DS.xml",
+          "alternate:name": "S3",
+          "auth:refs": ["s3"],
+          "description": "S3 storage provided by CloudFerro Cloud and OpenTelekom Cloud (OTC). Use endpoint URL `https://eodata.dataspace.copernicus.eu`."
+        }
+      }
+    }
+  },
+  "bbox": [
+    13.786500,
+    49.557403,
+    15.137770,
+    50.552211
+  ],
+  "stac_extensions": [
+    "https://stac-extensions.github.io/eo/v2.0.0/schema.json",
+    "https://stac-extensions.github.io/raster/v2.0.0/schema.json",
+    "https://stac-extensions.github.io/sat/v1.0.0/schema.json",
+    "https://stac-extensions.github.io/projection/v2.0.0/schema.json",
+    "https://stac-extensions.github.io/grid/v1.1.0/schema.json",
+    "https://stac-extensions.github.io/view/v1.0.0/schema.json",
+    "https://stac-extensions.github.io/file/v2.1.0/schema.json",
+    "https://stac-extensions.github.io/processing/v1.2.0/schema.json",
+    "https://stac-extensions.github.io/alternate-assets/v1.2.0/schema.json",
+    "https://stac-extensions.github.io/timestamps/v1.1.0/schema.json",
+    "https://stac-extensions.github.io/authentication/v1.1.0/schema.json",
+    "https://stac-extensions.github.io/classification/v2.0.0/schema.json",
+    "https://stac-extensions.github.io/product/v0.1.0/schema.json",
+    "https://github.com/CS-SI/eopf-stac-extension/raw/refs/tags/v1.1.0/json-schema/schema.json"
+  ]
+}

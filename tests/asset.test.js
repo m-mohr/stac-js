@@ -94,6 +94,21 @@ test('getMetadata', () => {
   expect(def.getMetadata("proj:code")).toBe("EPSG:32659");
 });
 
+test('alternate assets', () => {
+  let json2 = JSON.parse(fs.readFileSync('./tests/examples/item-cdse.json'));
+  let item2 = new Item(json2);
+  let asset = item2.assets.B01_60m;
+  let altAsset = asset.alternate.s3;
+  // Check container asset
+  expect(asset.getMetadata("alternate:name")).toBe("HTTPS");
+  // Check alternate asset support
+  expect(altAsset instanceof Asset).toBeTruthy();
+  // Check alternate asset metadata, not retrieved from container asset
+  expect(altAsset.getMetadata("alternate:name")).toBe("S3");
+  // Get metadata from container asset of not set in alternate asset
+  expect(altAsset.getMetadata("nodata")).toBe(0);
+});
+
 test('getAbsoluteUrl', () => {
   expect(asset.getAbsoluteUrl()).toBe("https://example.com/20201211_223832_CS2/20201211_223832_CS2_analytic.tif");
   expect(def.getAbsoluteUrl()).toBeNull();

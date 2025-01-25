@@ -30,7 +30,11 @@ const NO_INHERITANCE = [
 class Asset extends STACReference {
 
   constructor(data, key = null, context = null) {
-    super(data, context, { bands: Band.fromBands }, ['_key']);
+    const keyMap = {
+      bands: Band.fromBands,
+      alternate: Asset.fromAssets
+    };
+    super(data, context, keyMap, ['_key']);
     if (!this._key) {
       this._key = key;
     }
@@ -89,6 +93,11 @@ class Asset extends STACReference {
     if (typeof this[field] !== 'undefined') {
       return this[field];
     }
+    // Check whether this is an alternate asset
+    if (this._context instanceof Asset) {
+      return this._context.getMetadata(field);
+    }
+    // This should be a Collection or Item, we can inherit most fields
     if (this._context && !NO_INHERITANCE.includes(field)) {
       return this._context.getMetadata(field);
     }
