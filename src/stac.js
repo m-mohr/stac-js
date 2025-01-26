@@ -282,6 +282,22 @@ class STAC extends STACHypermedia {
     return false;
   }
 
+  /**
+   * Checks whether a specific extension is implemented.
+   * 
+   * The pattern can contain `*` as a wildcard, e.g. for version numbers.
+   * 
+   * @param {string} pattern The extension URI to check for.
+   * @returns {boolean} `true` if the extension is implemented, `false` otherwise.
+   */
+  supportsExtension(pattern) {
+    if (!Array.isArray(this.stac_extensions)) {
+      return false;
+    }
+    let regexp = new RegExp('^' + pattern.replaceAll('*', '[^/]+') + '$');
+    return this.stac_extensions.some(uri => regexp.test(uri));
+  }
+
 }
 
 export default STAC;

@@ -134,6 +134,14 @@ test('getAssets', () => {
   expect(item.getAssets()).toEqual(Object.values(item.assets));
 });
 
+test('supportsExtension', () => {
+  expect(item.supportsExtension("https://stac-extensions.github.io/eo/*/schema.json")).toBeTruthy();
+  expect(item.supportsExtension("https://stac-extensions.github.io/scientific/v1.*/schema.json")).toBeTruthy();
+  expect(item.supportsExtension("https://stac-extensions.github.io/remote-data/v1.0.0/schema.json")).toBeTruthy();
+  expect(item.supportsExtension("https://stac-extensions.github.io/label/v1.*/schema.json")).toBeFalsy();
+  expect(item.supportsExtension("eo")).toBeFalsy();
+});
+
 describe('links', () => {
   test('getLinkWithRel > FOUND', () => {
     let link = item.getLinkWithRel('collection');
