@@ -14,7 +14,7 @@ const NO_INHERITANCE = [
 /**
  * A STAC Asset or Item Asset Definition.
  * 
- * You can access all properties of the given STAC Asset object directly, e.g. `asset.href`.
+ * You can access all properties of the given STAC Asset object directly, e.g., `asset.href`.
  * 
  * @class
  * @property {string} href
@@ -187,7 +187,7 @@ class Asset extends STACReference {
   /**
    * Gets the reported minimum and maximum values for an asset.
    * 
-   * Searches through different extension fields in raster, claasification, and file.
+   * Searches through different extension fields in raster, classification, and file.
    * 
    * @returns {Statistics}
    */
@@ -207,7 +207,7 @@ class Asset extends STACReference {
   }
 
   /**
-   * Returns whether this asset is an Item Asset definition (i.e. doesn't have an href) or not.
+   * Returns whether this asset is an Item Asset definition (i.e., doesn't have an href) or not.
    * 
    * @returns {boolean} `true` is this asset is an Item Asset definition, `false` otherwise.
    */
