@@ -4,7 +4,7 @@ import STACObject from './object.js';
 /**
  * A STAC Band.
  * 
- * You can access all properties of the given STAC Band object directly, e.g. `band.name`.
+ * You can access all properties of the given STAC Band object directly, e.g., `band.name`.
  * 
  * @class
  * @property {string} name
@@ -83,7 +83,7 @@ class Band extends STACObject {
   /**
    * Gets the reported minimum and maximum values for a band.
    * 
-   * Searches through different extension fields in raster, claasification, and file.
+   * Searches through different extension fields in raster, classification, and file.
    * 
    * @returns {Statistics}
    */
@@ -94,7 +94,7 @@ class Band extends STACObject {
   /**
    * Gets the reported no-data values for a band.
    * 
-   * Searches through different extension fields in raster, claasification, and file.
+   * Searches through different extension fields in raster, classification, and file.
    * 
    * @returns {Array.<*>}
    */
