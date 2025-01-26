@@ -1,3 +1,5 @@
+import { ensureNumber, isObject } from "./utils.js";
+
 function toObject(bbox) {
   let hasZ = bbox.length >= 6;
   let west = bbox[0];
@@ -32,11 +34,13 @@ function bboxToCoords(bbox) {
  * @returns {Point|null}
  */
 export function centerOfBoundingBox(bbox) {
-  if (!isBoundingBox(bbox)) {
+  bbox = ensureBoundingBox(bbox, true);
+  if (!bbox) {
     return null;
   }
   let obj = toObject(bbox);
   let point = [];
+  // todo: implement also for bboxes that cross the boundaries at the poles
   if (isAntimeridianBoundingBox(bbox)) {
     let x = (obj.west + 360 + obj.east) / 2;
     if (x > 180) {
@@ -54,6 +58,46 @@ export function centerOfBoundingBox(bbox) {
   return point;
 }
 
+function fixGeoJsonGoordinates(coords) {
+  if (Array.isArray(coords[0])) {
+    // Handle nested coordinates (e.g., MultiPolygons, LineStrings)
+    return coords.map(fixGeoJsonGoordinates);
+  }
+  // Fix individual coordinate [longitude, latitude]
+  const [lon, lat] = coords;
+  return [ensureNumber(lon, -180, 180), ensureNumber(lat, -90, 90)];
+}
+
+/**
+ * Fix coordinates in a GeoJSON object to be within the CRS range.
+ * 
+ * Function works in-place.
+ * 
+ * @param {Object} geojson - The GeoJSON object to be checked.
+ * @returns {Object} The fixed GeoJSON object.
+ */
+export function fixGeoJson(geojson) {
+  if (!isObject(geojson)) {
+    return geojson;
+  }
+  if (geojson.bbox) {
+    geojson.bbox = ensureBoundingBox(geojson.bbox);
+  }
+  if (geojson.type === "FeatureCollection") {
+    geojson.features.forEach((feature) => fixGeoJson(feature));
+  }
+  else if (geojson.type === "Feature") {
+    geojson.geometry = fixGeoJson(geojson.geometry);
+  }
+  else if (geojson.type === "GeometryCollection") {
+    geojson.geometries.forEach((geometry) => fixGeoJson(geometry));
+  }
+  else if (geojson.coordinates) {
+    geojson.coordinates = fixGeoJsonGoordinates(geojson.coordinates);
+  }
+  return geojson;
+}
+
 /**
  * Converts one or more bounding boxes to a GeoJSON Feature.
  * 
@@ -63,13 +107,16 @@ export function centerOfBoundingBox(bbox) {
  * @returns {Object|null}
  */
 export function toGeoJSON(bboxes) {
-  if (isBoundingBox(bboxes)) {
-    // Wrap a single bounding into an array
-    bboxes = [bboxes];
+  const bbox = ensureBoundingBox(bboxes);
+  if (bbox) {
+    // Wrap a single bounding box into an array
+    bboxes = [bbox];
   }
   else if (Array.isArray(bboxes)) {
     // Remove invalid bounding boxes
-    bboxes = bboxes.filter(bbox => isBoundingBox(bbox));
+    bboxes = bboxes
+      .map(bbox => ensureBoundingBox(bbox))
+      .filter(bbox => bbox !== null);
   }
   // Return if no valid bbox is given
   if (!Array.isArray(bboxes) || bboxes.length === 0) {
@@ -77,6 +124,8 @@ export function toGeoJSON(bboxes) {
   }
 
   let coordinates = bboxes.reduce((list, bbox) => {
+    // todo: implement also for bboxes that cross the boundaries at the poles
+    // see https://github.com/DanielJDufour/bbox-fns/blob/main/split.js
     if (isAntimeridianBoundingBox(bbox)) {
       let { west, east, south, north } = toObject(bbox);
       list.push(bboxToCoords([-180, south, east, north]));
@@ -111,42 +160,38 @@ export function toGeoJSON(bboxes) {
 }
 
 /**
- * Converts a bounding box to be two-dimensional.
+ * Ensure this is a valid bounding box.
  * 
- * @param {BoundingBox} bbox 
- * @returns {BoundingBox}
+ * This function will ensure that the given bounding box is valid and otherwise return `null`.
+ * 
+ * If the bounding box is 3D, the function will return `null` unless `allow3D` is set to `true`.
+ * 
+ * @param {BoundingBox|Array.<number>} bbox The bounding box to check.
+ * @param {boolean} allow3D - Whether to allow 3D bounding boxes or not.
+ * @returns {BoundingBox|null}
  */
-export function bbox2D(bbox) {
-  if (bbox.length === 4) {
-    return bbox;
+export function ensureBoundingBox(bbox, allow3D = false) {
+  if (!Array.isArray(bbox) || ![4,6].includes(bbox.length)) {
+    return null;
+  }
+
+  let { west, east, south, north, base, height } = toObject(bbox);
+  // Some bounding boxes are slightly too large (due to floating point errors).
+  // So you may get 90.00000001 instead of 90. To avoid this, we allow for a small delta.
+  west = ensureNumber(west, -180, 180);
+  south = ensureNumber(south, -90, 90);
+  east = ensureNumber(east, -180, 180);
+  north = ensureNumber(north, -90, 90);
+  if (allow3D && bbox.length === 6) {
+    bbox = [west, south, base, east, north, height];
   }
   else {
-    let { west, east, south, north } = toObject(bbox);
-    return [west, south, east, north];
+    bbox = [west, south, east, north];
   }
-}
-
-/**
- * Checks whether the given thing is a valid bounding box.
- * 
- * A valid bounding box is an array with 4 or 6 numbers that are valid WGS84 coordinates and span a rectangle.
- * See the STAC specification for details.
- * 
- * @param {BoundingBox|Array.<number>} bbox A potential bounding box.
- * @returns {boolean} `true` if valid, `false` otherwise
- */
-export function isBoundingBox(bbox) {
-  if (!Array.isArray(bbox) || ![4,6].includes(bbox.length) || bbox.some(n => typeof n !== "number")) {
-    return false;
+  if (bbox.some(n => n === null)) {
+    return null;
   }
-  let { west, east, south, north } = toObject(bbox);
-  return (
-    south <= north &&
-    west >= -180 && west <= 180 &&
-    south >= -90 &&
-    east <= 180 && east >= -180 &&
-    north <= 90
-  );
+  return bbox;
 }
 
 /**
@@ -156,7 +201,8 @@ export function isBoundingBox(bbox) {
  * @returns {boolean}
  */
 export function isAntimeridianBoundingBox(bbox) {
-  if (!isBoundingBox(bbox)) {
+  bbox = ensureBoundingBox(bbox);
+  if (!bbox) {
     return false;
   }
   
@@ -171,7 +217,7 @@ export function isAntimeridianBoundingBox(bbox) {
  * 
  * @param {Array.<BoundingBox|null>} bboxes 
  * @returns {BoundingBox|null}
- * @see {isBoundingBox}
+ * @see {ensureBoundingBox}
  */
 export function unionBoundingBox(bboxes) {
   if (!Array.isArray(bboxes) || bboxes.length === 0) {
@@ -185,7 +231,8 @@ export function unionBoundingBox(bboxes) {
     north: -90,
   };
   bboxes.forEach(bbox => {
-    if (!isBoundingBox(bbox)) {
+    bbox = ensureBoundingBox(bbox);
+    if (!bbox) {
       return;
     }
     let obj = toObject(bbox);
@@ -197,5 +244,5 @@ export function unionBoundingBox(bboxes) {
   });
 
   let bbox = [extrema.west, extrema.south, extrema.east, extrema.north];
-  return isBoundingBox(bbox) ? bbox : null;
+  return ensureBoundingBox(bbox);
 }

@@ -2,7 +2,7 @@ import Asset from './asset.js';
 import Band from './band.js';
 import CatalogLike from './cataloglike.js';
 import { isoToDate } from './datetime.js';
-import { bbox2D, isBoundingBox, toGeoJSON } from './geo.js';
+import { ensureBoundingBox, toGeoJSON } from './geo.js';
 import { hasText } from './utils.js';
 
 /**
@@ -80,8 +80,8 @@ class Collection extends CatalogLike {
    */
   getBoundingBox() {
     let bboxes = this.getRawBoundingBoxes();
-    if (bboxes.length > 0 && isBoundingBox(bboxes[0])) {
-      return bbox2D(bboxes[0]);
+    if (bboxes.length > 0) {
+      return ensureBoundingBox(bboxes[0]);
     }
     return null;
   }
@@ -94,14 +94,13 @@ class Collection extends CatalogLike {
    */
   getBoundingBoxes() {
     let raw = this.getRawBoundingBoxes();
-    let bboxes = [];
-    if (raw.length === 1 && isBoundingBox(raw[0])) {
-      bboxes = raw;
+    if (raw.length === 1) {
+      return [ensureBoundingBox(raw[0])];
     }
     else if (raw.length > 1) {
-      bboxes = raw.filter((bbox, i) => i > 0 && isBoundingBox(bbox));
+      return raw.slice(1).map(ensureBoundingBox);
     }
-    return bboxes.map(bbox => bbox2D(bbox));
+    return null;
   }
 
   /**

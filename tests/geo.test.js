@@ -1,25 +1,8 @@
-import { bbox2D, centerOfBoundingBox, isAntimeridianBoundingBox, isBoundingBox, toGeoJSON, unionBoundingBox } from '../src/geo';
+import fs from 'fs';
+import { centerOfBoundingBox, ensureBoundingBox, fixGeoJson, isAntimeridianBoundingBox, toGeoJSON, unionBoundingBox } from '../src/geo';
 
-test('isBoundingBox', () => {
-  expect(isBoundingBox(undefined)).toBeFalsy();
-  expect(isBoundingBox(null)).toBeFalsy();
-  expect(isBoundingBox({})).toBeFalsy();
-  expect(isBoundingBox(["a"])).toBeFalsy();
-  expect(isBoundingBox(123)).toBeFalsy();
-  expect(isBoundingBox("")).toBeFalsy();
-  expect(isBoundingBox([0,0,0,"0"])).toBeFalsy();
-  expect(isBoundingBox([0,0,0,0,0])).toBeFalsy();
-  expect(isBoundingBox([-180,-91,180,90])).toBeFalsy();
-  expect(isBoundingBox([-180,-90,180,91])).toBeFalsy();
-  expect(isBoundingBox([180,90,-180,-90])).toBeFalsy();
-  expect(isBoundingBox([360,-90,0,90])).toBeFalsy();
-  expect(isBoundingBox([0,-90,360,90])).toBeFalsy();
-
-  expect(isBoundingBox([172.91,1.34,172.95,1.36])).toBeTruthy();
-  expect(isBoundingBox([-180,-90,180,90])).toBeTruthy();
-  expect(isBoundingBox([-179,-1,179,1])).toBeTruthy();
-  expect(isBoundingBox([179,-1,-179,1])).toBeTruthy();
-  expect(isBoundingBox([180,-90,-180,90])).toBeTruthy();
+test('ensureBoundingBox', () => {
+  // also tests ensureBoundingBox implicitly
 });
 
 test('isAntimeridianBoundingBox', () => {
@@ -51,11 +34,52 @@ test('unionBoundingBox', () => {
   expect(unionBoundingBox([bbox1, bbox2, null])).toEqual(bbox2);
 });
 
-test('bbox2D', () => {
-  let bbox1 = [172.91,1.34,0,172.95,1.36,10];
-  let bbox2 = [172.91,1.34,172.95,1.36];
-  expect(bbox2D(bbox1)).toEqual(bbox2);
-  expect(bbox2D(bbox2)).toEqual(bbox2);
+describe('ensureBoundingBox', () => {
+  test('invalid inputs', () => {
+    expect(ensureBoundingBox(undefined)).toBeNull();
+    expect(ensureBoundingBox(null)).toBeNull();
+    expect(ensureBoundingBox({})).toBeNull();
+    expect(ensureBoundingBox(["a"])).toBeNull();
+    expect(ensureBoundingBox(123)).toBeNull();
+    expect(ensureBoundingBox("")).toBeNull();
+    expect(ensureBoundingBox([0,0,0,"0"])).toBeNull();
+    expect(ensureBoundingBox([0,0,0])).toBeNull();
+    expect(ensureBoundingBox([0,0,0,0,0])).toBeNull();
+  });
+
+  test('invalid bbox coords', () => {
+    expect(ensureBoundingBox([-180,-91,180,90])).toBeNull();
+    expect(ensureBoundingBox([-180,-90,180,91])).toBeNull();
+    expect(ensureBoundingBox([360,-90,0,90])).toBeNull();
+    expect(ensureBoundingBox([0,-90,360,90])).toBeNull();
+  });
+
+  test('valid bboxes', () => {
+    const bbox1 = [172.91,1.34,172.95,1.36];
+    expect(ensureBoundingBox(bbox1)).toEqual(bbox1);
+    const bbox2 = [-179,-1,179,1];
+    expect(ensureBoundingBox(bbox2)).toEqual(bbox2);
+    const bbox3 = [179,-1,-179,1];
+    expect(ensureBoundingBox(bbox3)).toEqual(bbox3);
+    const bbox4 = [180,-90,-180,90];
+    expect(ensureBoundingBox(bbox4)).toEqual(bbox4);
+    const bbox5 = [180,90,-180,-90];
+    expect(ensureBoundingBox(bbox5)).toEqual(bbox5);
+  });
+
+  test('must return 2D', () => {
+    let bbox1 = [172.91,1.34,0,172.95,1.36,10];
+    let bbox2 = [172.91,1.34,172.95,1.36];
+    expect(ensureBoundingBox(bbox1)).toEqual(bbox2);
+    expect(ensureBoundingBox(bbox2)).toEqual(bbox2);
+  });
+
+  test('must limit slightly larger bboxes', () => {
+    let input = [-180.0000000000001, -90.0000000000001, 180.0000000000001, 90.0000000000001];
+    let expected = [-180,-90,180,90];
+    expect(ensureBoundingBox(input)).toEqual(expected);
+    expect(ensureBoundingBox(expected)).toEqual(expected);
+  });
 });
 
 test('toGeoJSON', () => {
@@ -82,4 +106,20 @@ test('toGeoJSON', () => {
     "MultiPolygon",
     [[[[-180,1],[-180,-1],[-179,-1],[-179,1],[-180,1]]],[[[179,1],[179,-1],[180,-1],[180,1],[179,1]]]]
   ));
+});
+
+test('fixGeoJson', () => {
+  expect(fixGeoJson(null)).toBeNull();
+  expect(fixGeoJson([])).toEqual([]);
+  expect(fixGeoJson({})).toEqual({});
+
+  const unlocated = {type: "Feature", geometry: null, bbox: null};
+  expect(fixGeoJson(unlocated)).toEqual(unlocated);
+
+  const validItem = JSON.parse(fs.readFileSync('./tests/examples/item.json'));
+  expect(fixGeoJson(validItem)).toEqual(validItem);
+
+  const invalidFeature = JSON.parse(fs.readFileSync('./tests/examples/invalid-feature.json'));
+  const validFeature = JSON.parse(fs.readFileSync('./tests/examples/valid-feature.json'));
+  expect(fixGeoJson(invalidFeature)).toEqual(validFeature);
 });

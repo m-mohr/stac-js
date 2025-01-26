@@ -9,6 +9,28 @@ export function hasText(string) {
 }
 
 /**
+ * Ensures a number is between a minimum and maximum value, but with a delta.
+ * 
+ * @param {number} num The number to check.
+ * @param {number} min The minimum value.
+ * @param {number} max The maximum value.
+ * @param {number} delta The delta that the number is allowed to be larger or smaller.
+ * @returns {number|null}
+ */
+export function ensureNumber(num, min, max, delta = 0.00000001) {
+  if (typeof num !== 'number') {
+    return null;
+  }
+  const min2 = min - delta;
+  const max2 = max + delta;
+  if (num < min2 || num > max2) {
+    return null;
+  }
+
+  return Math.min(Math.max(num, min), max);
+}
+
+/**
  * Checks whether a variable is a real object or not.
  * 
  * This is a more strict version of `typeof x === 'object'` as this example would also succeeds for arrays and `null`.

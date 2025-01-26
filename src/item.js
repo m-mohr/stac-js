@@ -1,6 +1,6 @@
 import Asset from './asset.js';
 import { centerDateTime, isoToDate } from './datetime.js';
-import { bbox2D, isBoundingBox } from './geo.js';
+import { ensureBoundingBox } from './geo.js';
 import { hasText } from './utils.js';
 import STAC from './stac.js';
 import Band from './band.js';
@@ -62,7 +62,7 @@ class Item extends STAC {
    * @returns {BoundingBox|null}
    */
   getBoundingBox() {
-    return isBoundingBox(this.bbox) ? bbox2D(this.bbox) : null;
+    return ensureBoundingBox(this.bbox);
   }
 
   /**
