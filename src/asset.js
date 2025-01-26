@@ -14,7 +14,7 @@ const NO_INHERITANCE = [
 /**
  * A STAC Asset or Item Asset Definition.
  * 
- * You can access all properties of the given STAC Asset object directly, e.g. `asset.href`.
+ * You can access all properties of the given STAC Asset object directly, e.g., `asset.href`.
  * 
  * @class
  * @property {string} href
@@ -187,7 +187,7 @@ class Asset extends STACReference {
   /**
    * Gets the reported minimum and maximum values for an asset.
    * 
-   * Searches through different extension fields in raster, claasification, and file.
+   * Searches through different extension fields in raster, classification, and file.
    * 
    * @returns {Statistics}
    */
@@ -207,9 +207,9 @@ class Asset extends STACReference {
   }
 
   /**
-   * Returns whether this asset is an Item Asset definition (i.e. doesn't have an href) or not.
+   * Returns whether this asset is an Item Asset definition (i.e., doesn't have an href) or not.
    * 
-   * @returns {boolean} `true` is this asset is an Item Asset definition, `false` otherwise.
+   * @returns {boolean} `true` if this asset is an Item Asset definition, `false` otherwise.
    */
   isDefinition() { // 
     return !hasText(this.href);
@@ -220,7 +220,7 @@ class Asset extends STACReference {
    * 
    * Returns `null` for item asset definitions, otherwise a `boolean` value.
    * 
-   * @returns {boolean|null} `true` is this asset is available via HTTP or HTTPS, `false` or `null` otherwise.
+   * @returns {boolean|null} `true` if this asset is available via HTTP or HTTPS, `false` or `null` otherwise.
    */
   isHTTP() {
     if (this.isDefinition()) {
@@ -246,11 +246,11 @@ class Asset extends STACReference {
   }
 
   /**
-   * Checks whether this asset as a specific role assigned.
+   * Checks whether this asset has a specific role assigned.
    * 
    * @param {string|Array.<string>} roles One or more roles.
    * @param {boolean} includeKey Also returns `true` if the asset key equals to one of the given roles.
-   * @returns {boolean} `true` is this asset is one of the given roles (or key), `false` otherwise.
+   * @returns {boolean} `true` if this asset is one of the given roles (or key), `false` otherwise.
    */
   hasRole(roles, includeKey = false) { // string or array of strings
     if (!Array.isArray(roles)) {
