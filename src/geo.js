@@ -107,17 +107,16 @@ export function fixGeoJson(geojson) {
  * @returns {Object|null}
  */
 export function toGeoJSON(bboxes) {
-  const bbox = ensureBoundingBox(bboxes);
-  if (bbox) {
+  if (bboxes.every(c => typeof c === 'number')) {
     // Wrap a single bounding box into an array
-    bboxes = [bbox];
+    bboxes = [bboxes];
   }
-  else if (Array.isArray(bboxes)) {
+
+  bboxes = bboxes
+    .map(bbox => ensureBoundingBox(bbox))
     // Remove invalid bounding boxes
-    bboxes = bboxes
-      .map(bbox => ensureBoundingBox(bbox))
-      .filter(bbox => bbox !== null);
-  }
+    .filter(bbox => bbox !== null);
+
   // Return if no valid bbox is given
   if (!Array.isArray(bboxes) || bboxes.length === 0) {
     return null;
