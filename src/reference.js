@@ -32,7 +32,7 @@ class STACReference extends STACObject {
    * Gets the URL of the reference as absolute URL.
    * 
    * @param {boolean} stringify 
-   * @returns {string|null}
+   * @returns {URI|string|null}
    */
   getAbsoluteUrl(stringify = true) {
     if (this._context) {
