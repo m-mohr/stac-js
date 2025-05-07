@@ -1,6 +1,7 @@
 import { geotiffMediaTypes, isMediaType } from './mediatypes.js';
 import { isObject } from './utils.js';
 import STACHypermedia from './hypermedia.js';
+import { getBest } from './locales.js';
 
 /**
  * Class for STAC spec entities (Item, Catalog and Collection).
@@ -38,6 +39,30 @@ class STAC extends STACHypermedia {
   }
 
   /**
+   * Get the "best" link for a specific locale (with fallback).
+   * 
+   * @param {string} locale 
+   * @param {?string} fallbackLocale 
+   * @returns {Link|null} The link with the given locale or null if not found.
+   * @see {@link getBest}
+   */
+  getLocaleLink(locale, fallbackLocale = null) {
+    let links = this.getStacLinksWithRel('alternate')
+      .filter(link => Utils.hasText(link.hreflang));
+    
+    let available;
+    if (Array.isArray(this.languages)) {
+      available = this.languages.map(l => l.code);
+    }
+    else {
+      available = links.map(link => link.hreflang);
+    }
+    
+    let best = getBest(available, locale, fallbackLocale);
+    return links.find(link => link.hreflang === best) || null;
+  }
+
+  /**
    * Get the icons from the links in a STAC entity.
    * 
    * @param {boolean} allowUndefined 
@@ -64,6 +89,13 @@ class STAC extends STACHypermedia {
     if (browserOnly) {
       // Remove all images that can't be displayed in a browser
       thumbnails = thumbnails.filter(img => img.canBrowserDisplayImage());
+    }
+    // Some old catalogs use just a asset key
+    if (thumbnails.length === 0) {
+      const thumbnail = this.getAsset("thumbnail");
+      if (thumbnail) {
+        thumbnails.push(thumbnail);
+      }
     }
     if (prefer && thumbnails.length > 1) {
       // Prefer one role over the other.
