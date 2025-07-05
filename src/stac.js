@@ -1,5 +1,5 @@
 import { geotiffMediaTypes, isMediaType } from './mediatypes.js';
-import { isObject } from './utils.js';
+import { isObject, hasText } from './utils.js';
 import STACHypermedia from './hypermedia.js';
 import { getBest } from './locales.js';
 
@@ -48,7 +48,7 @@ class STAC extends STACHypermedia {
    */
   getLocaleLink(locale, fallbackLocale = null) {
     let links = this.getStacLinksWithRel('alternate')
-      .filter(link => Utils.hasText(link.hreflang));
+      .filter(link => hasText(link.hreflang));
     
     let available;
     if (Array.isArray(this.languages)) {
