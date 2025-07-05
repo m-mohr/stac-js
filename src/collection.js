@@ -3,7 +3,7 @@ import Band from './band.js';
 import CatalogLike from './cataloglike.js';
 import { isoToDate } from './datetime.js';
 import { ensureBoundingBox, toGeoJSON } from './geo.js';
-import { hasText } from './utils.js';
+import { hasText, isObject } from './utils.js';
 
 /**
  * Extents
@@ -144,10 +144,13 @@ class Collection extends CatalogLike {
    * Returns metadata from the Collection summaries for the given field name.
    * 
    * @param {string} field Field name
-   * @returns {Array.<*>|Object} The value of the field
+   * @returns {Array.<*>|Object|undefined} The value of the field
    */
   getSummary(field) {
-    return this.summaries[field];
+    if (isObject(this.summaries)) {
+      return this.summaries[field];
+    }
+    return undefined;
   }
 
   /**
