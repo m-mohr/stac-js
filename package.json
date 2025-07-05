@@ -7,13 +7,13 @@
   "keywords": [
     "STAC"
   ],
-  "homepage": "https://github.com/m-mohr/stac-js",
+  "homepage": "https://github.com/moregeo-it/stac-js",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/m-mohr/stac-js.git"
+    "url": "git+https://github.com/moregeo-it/stac-js.git"
   },
   "bugs": {
-    "url": "https://github.com/m-mohr/stac-js/issues"
+    "url": "https://github.com/moregeo-it/stac-js/issues"
   },
   "funding": {
     "type": "github",

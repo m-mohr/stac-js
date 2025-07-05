@@ -15,7 +15,7 @@ const config = {
   "reporters": [
     "default",
     ["./node_modules/jest-html-reporter", {
-      "pageTitle": "Test Report for @m-mohr/stac-js",
+      "pageTitle": "Test Report for stac-js",
       "outputPath": "./coverage/test-report.html"
     }]
   ]
